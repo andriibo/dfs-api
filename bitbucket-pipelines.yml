@@ -15,15 +15,15 @@ definitions:
                 git fetch --prune &&
                 git checkout $BITBUCKET_BRANCH &&
                 git pull &&
-                docker-compose exec -T app composer install &&
-                docker-compose exec -T app composer check-build &&
-                docker-compose exec -T app php artisan down &&
-                docker-compose exec -T app php artisan cache:clear &&
-                docker-compose exec -T app php artisan config:cache &&
-                docker-compose exec -T app php artisan route:cache &&
-                docker-compose exec -T app php artisan migrate &&
-                docker-compose exec -T app php artisan up &&
-                docker-compose exec -T app php artisan test
+                docker-compose exec -T api composer install &&
+                docker-compose exec -T api composer check-build &&
+                docker-compose exec -T api php artisan down &&
+                docker-compose exec -T api php artisan cache:clear &&
+                docker-compose exec -T api php artisan config:cache &&
+                docker-compose exec -T api php artisan route:cache &&
+                docker-compose exec -T api php artisan migrate &&
+                docker-compose exec -T api php artisan up &&
+                docker-compose exec -T api php artisan test
 pipelines:
   custom:
     deploy-to-dev:
