@@ -1,0 +1,37 @@
+grumphp:
+  process_timeout: null
+  tasks:
+    git_commit_message:
+      enforce_capitalized_subject: false
+      max_subject_width: 100
+      type_scope_conventions:
+        types:
+          - build
+          - ci
+          - chore
+          - docs
+          - feat
+          - fix
+          - perf
+          - refactor
+          - revert
+          - style
+          - test
+        scopes:
+          - FS-\d+
+    git_blacklist:
+      keywords:
+        - 'dump('
+        - 'die('
+    phpcsfixer:
+      config: ./.php_cs.php
+      verbose: true
+    psalm:
+      config: ./psalm.xml
+      ignore_patterns: [ ]
+      no_cache: false
+      report: ~
+      output_format: null
+      threads: 7
+      triggered_by: [ 'php' ]
+      show_info: false
