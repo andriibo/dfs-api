@@ -8,14 +8,14 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-class ExampleTest extends TestCase
+class ApiDocumentationTest extends TestCase
 {
     /**
      * A basic test example.
      */
-    public function testTheApplicationReturnsASuccessfulResponse()
+    public function testApiDocumentation()
     {
-        $response = $this->get('/');
+        $response = $this->get('/api/documentation');
 
         $response->assertStatus(200);
     }
