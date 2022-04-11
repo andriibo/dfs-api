@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\Users\Get as UserGet;
+use App\Http\Controllers\Api\Leagues\LeaguesGet;
+use App\Http\Controllers\Api\Users\UserGet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
+    /*
+     * #####################
+     * #####  USERS  #####
+     * #####################
+     */
     Route::get('users/{id}', UserGet::class);
+
+    /*
+     * #####################
+     * #####  LEAGUES  #####
+     * #####################
+     */
+    Route::get('leagues', LeaguesGet::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
