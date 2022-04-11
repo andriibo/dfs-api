@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\IsEnabledEnum;
-use App\Enums\LeagueRecentlyEnabledEnum;
+use App\Enums\Leagues\RecentlyEnabledEnum;
 use App\Enums\SportIdEnum;
 use App\Models\League;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -43,7 +43,7 @@ class LeagueFactory extends Factory
             'date_updated' => $this->faker->dateTime(),
             'order' => 0,
             'config_id' => 1,
-            'recently_enabled' => $this->faker->randomElement(LeagueRecentlyEnabledEnum::values()),
+            'recently_enabled' => $this->faker->randomElement(RecentlyEnabledEnum::values()),
         ];
     }
 }

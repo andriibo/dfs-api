@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\Leagues;
 
 use ArchTech\Enums\Values;
 
-enum LeagueRecentlyEnabledEnum: int
+enum RecentlyEnabledEnum: int
 {
     use Values;
 
