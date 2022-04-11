@@ -60,3 +60,11 @@ $ ./vendor/bin/psalm
 ```
 
 See [usage](https://github.com/vimeo/psalm/blob/4.x/docs/running_psalm/command_line_usage.md)
+
+### Swagger
+
+```console
+$ php artisan l5-swagger:generate
+```
+
+See [usage](https://github.com/DarkaOnLine/L5-Swagger)

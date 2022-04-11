@@ -18,6 +18,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Users",
  *     description="API Endpoints of Users"
  * )
+ * @OA\Tag(
+ *     name="Leagues",
+ *     description="API Endpoints of Leagues"
+ * )
  */
 class Controller extends BaseController
 {
