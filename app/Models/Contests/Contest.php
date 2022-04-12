@@ -1,63 +1,68 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Contests;
 
+use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\ContestFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Contest.
  *
- * @property int         $id
- * @property int         $owner_id
- * @property int         $status
- * @property string      $type
- * @property string      $contest_type
- * @property string      $game_type
- * @property string      $title
- * @property int         $league_id
- * @property string      $start_date
- * @property string      $end_date
- * @property string      $form_start_date
- * @property string      $form_end_date
- * @property string      $details
- * @property null|string $password
- * @property int         $entry_fee_type
- * @property string      $entry_fee
- * @property string      $voucher_fee
- * @property string      $badge_id
- * @property null|int    $bonus_drip
- * @property int         $salary_cap
- * @property int         $prize_bank_type
- * @property string      $prize_places
- * @property string      $prize_bank
- * @property int         $payout_type
- * @property null|string $custom_prize_bank
- * @property null|string $expected_payout
- * @property null|string $company_take
- * @property int         $users_limit_type
- * @property int         $min_users
- * @property int         $max_users
- * @property int         $entry_limit
- * @property string      $updated_time
- * @property string      $created_date
- * @property int         $suspended
- * @property int         $news_feed_count
- * @property int         $last_news_feed_id
- * @property int         $is_private
- * @property int         $is_vip
- * @property int         $is_guaranteed
- * @property int         $retain_once_filled
- * @property int         $retain_once_live
- * @property int         $is_fake
- * @property int         $is_salary_available
- * @property int         $is_prize_in_percents
- * @property int         $is_sham
- * @property League      $league
+ * @property int                      $id
+ * @property int                      $owner_id
+ * @property int                      $status
+ * @property string                   $type
+ * @property string                   $contest_type
+ * @property string                   $game_type
+ * @property string                   $title
+ * @property int                      $league_id
+ * @property string                   $start_date
+ * @property string                   $end_date
+ * @property string                   $form_start_date
+ * @property string                   $form_end_date
+ * @property string                   $details
+ * @property null|string              $password
+ * @property int                      $entry_fee_type
+ * @property string                   $entry_fee
+ * @property string                   $voucher_fee
+ * @property string                   $badge_id
+ * @property null|int                 $bonus_drip
+ * @property int                      $salary_cap
+ * @property int                      $prize_bank_type
+ * @property string                   $prize_places
+ * @property string                   $prize_bank
+ * @property int                      $payout_type
+ * @property null|string              $custom_prize_bank
+ * @property null|string              $expected_payout
+ * @property null|string              $company_take
+ * @property int                      $users_limit_type
+ * @property int                      $min_users
+ * @property int                      $max_users
+ * @property int                      $entry_limit
+ * @property string                   $updated_time
+ * @property string                   $created_date
+ * @property int                      $suspended
+ * @property int                      $news_feed_count
+ * @property int                      $last_news_feed_id
+ * @property int                      $is_private
+ * @property int                      $is_vip
+ * @property int                      $is_guaranteed
+ * @property int                      $retain_once_filled
+ * @property int                      $retain_once_live
+ * @property int                      $is_fake
+ * @property int                      $is_salary_available
+ * @property int                      $is_prize_in_percents
+ * @property int                      $is_sham
+ * @property League                   $league
+ * @property Collection|ContestUser[] $contestUsers
+ * @property null|int                 $contest_users_count
  *
  * @method static ContestFactory factory(...$parameters)
  * @method static Builder|Contest newModelQuery()
@@ -168,5 +173,10 @@ class Contest extends Model
     public function league(): BelongsTo
     {
         return $this->belongsTo(League::class);
+    }
+
+    public function contestUsers(): HasMany
+    {
+        return $this->hasMany(ContestUser::class);
     }
 }

@@ -83,6 +83,88 @@
                 },
                 "security": [
                     {
+``                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/contests/lobby": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contests Lobby",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestsLobbyResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string",
+                                            "property": "msg"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "property": "error"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
                         "bearerAuth": []
                     }
                 ]
@@ -263,6 +345,133 @@
     },
     "components": {
         "schemas": {
+            "ContestUsersResource": {
+                "title": "ContestsUsersResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "budget": {
+                        "type": "integer"
+                    },
+                    "date": {
+                        "type": "integer"
+                    },
+                    "is_winner": {
+                        "type": "integer"
+                    },
+                    "place": {
+                        "type": "integer"
+                    },
+                    "prize": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": "object"
+            },
+            "ContestsLobbyResource": {
+                "title": "ContestsLobbyResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "contest_type": {
+                        "type": "string"
+                    },
+                    "expected_payout": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "is_prize_in_percents": {
+                        "type": "integer"
+                    },
+                    "max_entries": {
+                        "type": "integer"
+                    },
+                    "max_users": {
+                        "type": "integer"
+                    },
+                    "min_users": {
+                        "type": "integer"
+                    },
+                    "league_id": {
+                        "type": "integer"
+                    },
+                    "start_date": {
+                        "type": "integer"
+                    },
+                    "end_date": {
+                        "type": "integer"
+                    },
+                    "details": {
+                        "type": "string"
+                    },
+                    "entry_fee": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "salary_cap": {
+                        "type": "integer"
+                    },
+                    "prize_bank": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "prize_bank_type": {
+                        "type": "integer"
+                    },
+                    "custom_prize_bank": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "max_prize_bank": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "suspended": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "num_entries": {
+                        "type": "integer"
+                    },
+                    "num_users": {
+                        "type": "integer"
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestUsersResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "GetContestTypesResource": {
                 "title": "GetContestTypesResource",
                 "properties": {
