@@ -5,6 +5,7 @@ namespace App\Models\Contests;
 use App\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,19 +14,21 @@ use Illuminate\Support\Carbon;
 /**
  * App\Models\ContestUser.
  *
- * @property int     $id
- * @property int     $contest_id
- * @property int     $user_id
- * @property string  $title
- * @property string  $team_score
- * @property int     $place
- * @property string  $prize
- * @property int     $is_winner
- * @property Carbon  $created_at
- * @property Carbon  $updated_at
- * @property string  $barcode
- * @property Contest $contest
- * @property User    $user
+ * @property int                      $id
+ * @property int                      $contest_id
+ * @property int                      $user_id
+ * @property string                   $title
+ * @property string                   $team_score
+ * @property int                      $place
+ * @property string                   $prize
+ * @property int                      $is_winner
+ * @property Carbon                   $created_at
+ * @property Carbon                   $updated_at
+ * @property string                   $barcode
+ * @property Contest                  $contest
+ * @property User                     $user
+ * @property Collection|ContestUnit[] $contestUnits
+ * @property null|int                 $contest_units_count
  *
  * @method static Builder|ContestUser newModelQuery()
  * @method static Builder|ContestUser newQuery()
@@ -42,9 +45,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|ContestUser whereUpdatedAt($value)
  * @method static Builder|ContestUser whereUserId($value)
  * @mixin Eloquent
- *
- * @property \App\Models\Contests\ContestUnit[]|\Illuminate\Database\Eloquent\Collection $contestUnits
- * @property null|int                                                                    $contest_units_count
  */
 class ContestUser extends Model
 {
@@ -73,6 +73,11 @@ class ContestUser extends Model
 
     public function contestUnits(): BelongsToMany
     {
-        return $this->belongsToMany(ContestUnit::class, (new ContestUserUnit())->getTable(), 'contest_user_id', 'contest_unit_id');
+        return $this->belongsToMany(
+            ContestUnit::class,
+            (new ContestUserUnit())->getTable(),
+            'contest_user_id',
+            'contest_unit_id'
+        );
     }
 }
