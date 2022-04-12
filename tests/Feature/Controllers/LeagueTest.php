@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 /**
- * Class LeagueTest.
- *
  * @internal
  * @coversNothing
  */

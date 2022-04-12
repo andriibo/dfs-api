@@ -6,6 +6,88 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/contests/types": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contest Types",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/GetContestTypesResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string",
+                                            "property": "msg"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "property": "error"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/leagues": {
             "get": {
                 "tags": [
@@ -181,6 +263,18 @@
     },
     "components": {
         "schemas": {
+            "GetContestTypesResource": {
+                "title": "GetContestTypesResource",
+                "properties": {
+                    "value": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "GetLeaguesResource": {
                 "title": "GetLeaguesResource",
                 "properties": {
@@ -206,6 +300,10 @@
         {
             "name": "Leagues",
             "description": "API Endpoints of Leagues"
+        },
+        {
+            "name": "Contests",
+            "description": "API Endpoints of Contests"
         }
     ]
 }
