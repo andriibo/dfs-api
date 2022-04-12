@@ -47,6 +47,8 @@ class ContestFactory extends Factory
             'entry_fee_type' => $this->faker->randomElement(EntryFeeTypeEnum::values()),
             'prize_places' => $this->faker->text,
             'payout_type' => $this->faker->randomElement(PayoutTypeEnum::values()),
+            'form_start_date' => $this->faker->date,
+            'form_end_date' => $this->faker->date,
         ];
     }
 }
