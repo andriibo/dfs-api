@@ -3,6 +3,7 @@
 namespace App\Models\Contests;
 
 use App\Models\League;
+use App\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Contests\ContestFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * App\Models\Contests\Contest.
  *
  * @property int                      $id
- * @property int                      $owner_id
+ * @property null|int                 $owner_id
  * @property int                      $status
  * @property string                   $type
  * @property string                   $contest_type
@@ -61,6 +62,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int                      $is_prize_in_percents
  * @property int                      $is_sham
  * @property League                   $league
+ * @property null|League              $owner
  * @property Collection|ContestUser[] $contestUsers
  * @property null|int                 $contest_users_count
  *
@@ -173,6 +175,11 @@ class Contest extends Model
     public function league(): BelongsTo
     {
         return $this->belongsTo(League::class);
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function contestUsers(): HasMany

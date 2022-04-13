@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\Contests\Contest;
 use App\Models\League;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -18,12 +17,10 @@ class LeagueTest extends TestCase
     public function testLeaguesGetEndpoint()
     {
         League::factory()
-            ->count(1)
-            ->has(Contest::factory()->count(3))
             ->create()
         ;
         $response = $this->getJson('/api/v1/leagues');
-
+        $response->assertSuccessful();
         $response->assertJsonStructure([
             'data' => [
                 '*' => [

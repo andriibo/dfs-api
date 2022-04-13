@@ -38,7 +38,6 @@ class ContestFactory extends Factory
     public function definition(): array
     {
         return [
-            'owner_id' => $this->faker->randomDigit(),
             'status' => StatusEnum::ready,
             'type' => $this->faker->randomElement(TypeEnum::names()),
             'contest_type' => $this->faker->randomElement(ContestTypeEnum::values()),
