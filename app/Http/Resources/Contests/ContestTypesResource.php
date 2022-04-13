@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="GetContestTypesResource",
+ *     title="ContestTypesResource",
  *     type="object",
  *     @OA\Property(property="value", type="string"),
  *     @OA\Property(property="label", type="string")

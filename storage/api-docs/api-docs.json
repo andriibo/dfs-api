@@ -346,7 +346,7 @@
     "components": {
         "schemas": {
             "ContestTypesResource": {
-                "title": "GetContestTypesResource",
+                "title": "ContestTypesResource",
                 "properties": {
                     "value": {
                         "type": "string"
