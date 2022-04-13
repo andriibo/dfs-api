@@ -8,7 +8,7 @@ use App\Enums\Contests\GameTypeEnum;
 use App\Enums\Contests\PayoutTypeEnum;
 use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\TypeEnum;
-use App\Models\Contest;
+use App\Models\Contests\Contest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
