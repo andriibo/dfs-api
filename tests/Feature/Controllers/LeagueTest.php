@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\Contest;
+use App\Models\Contests\Contest;
 use App\Models\League;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
