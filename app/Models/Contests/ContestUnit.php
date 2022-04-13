@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * App\Models\ContestUnit.
+ * App\Models\Contests\ContestUnit.
  *
  * @property int         $id
  * @property int         $contest_id

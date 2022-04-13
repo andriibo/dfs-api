@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Contests;
 
 use App\Enums\Contests\ContestTypeEnum;
 use App\Enums\Contests\EntryFeeTypeEnum;

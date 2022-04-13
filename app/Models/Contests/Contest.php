@@ -4,7 +4,7 @@ namespace App\Models\Contests;
 
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\ContestFactory;
+use Database\Factories\Contests\ContestFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class Contest.
+ * App\Models\Contests\Contest.
  *
  * @property int                      $id
  * @property int                      $owner_id

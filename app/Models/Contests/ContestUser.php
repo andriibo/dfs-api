@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
- * App\Models\ContestUser.
+ * App\Models\Contests\ContestUser.
  *
  * @property int                      $id
  * @property int                      $contest_id
