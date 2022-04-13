@@ -22,7 +22,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/GetContestTypesResource"
+                                                "$ref": "#/components/schemas/ContestTypesResource"
                                             }
                                         }
                                     },
@@ -83,7 +83,7 @@
                 },
                 "security": [
                     {
-``                        "bearerAuth": []
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -186,7 +186,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/GetLeaguesResource"
+                                                "$ref": "#/components/schemas/LeaguesResource"
                                             }
                                         }
                                     },
@@ -345,6 +345,18 @@
     },
     "components": {
         "schemas": {
+            "ContestTypesResource": {
+                "title": "GetContestTypesResource",
+                "properties": {
+                    "value": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "ContestUsersResource": {
                 "title": "ContestsUsersResource",
                 "properties": {
@@ -472,20 +484,8 @@
                 },
                 "type": "object"
             },
-            "GetContestTypesResource": {
-                "title": "GetContestTypesResource",
-                "properties": {
-                    "value": {
-                        "type": "string"
-                    },
-                    "label": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "GetLeaguesResource": {
-                "title": "GetLeaguesResource",
+            "LeaguesResource": {
+                "title": "LeaguesResource",
                 "properties": {
                     "id": {
                         "type": "integer"
