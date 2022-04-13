@@ -62,7 +62,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int                      $is_prize_in_percents
  * @property int                      $is_sham
  * @property League                   $league
- * @property null|League              $owner
+ * @property null|User                $owner
  * @property Collection|ContestUser[] $contestUsers
  * @property null|int                 $contest_users_count
  *
