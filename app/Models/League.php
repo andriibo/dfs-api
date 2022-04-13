@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contests\Contest;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\LeagueFactory;
 use Illuminate\Database\Eloquent\Builder;

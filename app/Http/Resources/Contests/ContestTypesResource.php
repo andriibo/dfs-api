@@ -12,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="label", type="string")
  * )
  */
-class GetContestTypesResource extends JsonResource
+class ContestTypesResource extends JsonResource
 {
     public function toArray($request): array
     {

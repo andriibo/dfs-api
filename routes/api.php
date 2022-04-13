@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Contests\ContestsLobbyGet;
 use App\Http\Controllers\Api\Contests\ContestTypesGet;
 use App\Http\Controllers\Api\Leagues\LeaguesGet;
 use App\Http\Controllers\Api\Users\UserGet;
@@ -38,6 +39,7 @@ Route::prefix('v1')->group(function () {
      * #####################
      */
     Route::get('contests/types', ContestTypesGet::class);
+    Route::get('contests/lobby', ContestsLobbyGet::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
