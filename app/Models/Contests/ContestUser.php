@@ -4,8 +4,10 @@ namespace App\Models\Contests;
 
 use App\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\Contests\ContestUserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -30,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @property Collection|ContestUnit[] $contestUnits
  * @property null|int                 $contest_units_count
  *
+ * @method static ContestUserFactory factory(...$parameters)
  * @method static Builder|ContestUser newModelQuery()
  * @method static Builder|ContestUser newQuery()
  * @method static Builder|ContestUser query()
@@ -48,6 +51,8 @@ use Illuminate\Support\Carbon;
  */
 class ContestUser extends Model
 {
+    use HasFactory;
+
     protected $table = 'contest_user';
 
     protected $fillable = [

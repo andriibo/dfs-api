@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
@@ -38,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @property int             $is_sham
  * @property null|FileUpload $avatar
  *
+ * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -70,6 +73,8 @@ use Illuminate\Support\Carbon;
  */
 class User extends Authenticatable
 {
+    use HasFactory;
+
     protected $table = 'user';
 
     /**
