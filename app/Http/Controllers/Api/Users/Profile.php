@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Users\ProfileResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -52,7 +53,7 @@ class Profile extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => auth()->user(),
+            'data' => new ProfileResource(auth()->user()),
         ]);
     }
 }

@@ -79,7 +79,10 @@ class ForgotPassword extends Controller
                 ], Response::HTTP_BAD_REQUEST);
             }
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 }

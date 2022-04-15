@@ -1057,12 +1057,12 @@
                 }
             }
         },
-        "/contests/types": {
+        "/contests/lobby": {
             "get": {
                 "tags": [
                     "Contests"
                 ],
-                "summary": "Get Contest Types",
+                "summary": "Get Contests Lobby",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1073,7 +1073,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/ContestTypesResource"
+                                                "$ref": "#/components/schemas/ContestsLobbyResource"
                                             }
                                         }
                                     },
@@ -1139,12 +1139,12 @@
                 ]
             }
         },
-        "/contests/lobby": {
+        "/contests/types": {
             "get": {
                 "tags": [
                     "Contests"
                 ],
-                "summary": "Get Contests Lobby",
+                "summary": "Get Contest Types",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1155,7 +1155,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/ContestsLobbyResource"
+                                                "$ref": "#/components/schemas/ContestTypesResource"
                                             }
                                         }
                                     },
@@ -1580,11 +1580,49 @@
             "ProfileResource": {
                 "title": "ProfileResource",
                 "properties": {
-                    "name": {
+                    "username": {
                         "type": "string"
                     },
                     "email": {
                         "type": "string"
+                    },
+                    "balance": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "dob": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "country_id": {
+                        "type": "integer"
+                    },
+                    "fav_team_id": {
+                        "type": "integer"
+                    },
+                    "fav_player_id": {
+                        "type": "integer"
+                    },
+                    "language_id": {
+                        "type": "integer"
+                    },
+                    "receive_newsletters": {
+                        "type": "integer"
+                    },
+                    "receive_notifications": {
+                        "type": "integer"
+                    },
+                    "avatar_id": {
+                        "type": "integer"
+                    },
+                    "is_email_confirmed": {
+                        "type": "integer"
+                    },
+                    "invited_by_user": {
+                        "type": "integer"
+                    },
+                    "is_sham": {
+                        "type": "integer"
                     },
                     "created_at": {
                         "type": "string"
