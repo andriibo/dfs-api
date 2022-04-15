@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\Users\RoleEnum;
 use App\Enums\Users\StatusEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -35,11 +34,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'role' => $this->faker->randomElement(RoleEnum::names()),
             'email' => $this->faker->unique()->safeEmail(),
-            'password_hash' => Str::random(500),
-            'access_token' => Str::random(100),
-            'auth_key' => Str::random(100),
+            'password' => Str::random(100),
             'username' => $this->faker->username(),
             'fullname' => $this->faker->name(),
             'status' => $this->faker->randomElement(StatusEnum::values()),

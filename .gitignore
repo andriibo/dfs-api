@@ -1,4 +1,5 @@
 /vendor
+/mailhog
 .env
 .env.backup
 .phpunit.result.cache

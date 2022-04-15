@@ -1,30 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Api\Leagues;
+namespace App\Http\Controllers\Api\Contests;
 
-use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Leagues\LeaguesResource;
-use App\Services\LeagueService;
+use App\Http\Resources\Contests\ContestsLobbyResource;
+use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/leagues",
- *     summary="Get Leagues",
- *     tags={"Leagues"},
+ *     path="/contests/lobby",
+ *     summary="Get Contests Lobby",
+ *     tags={"Contests"},
  *     security={ {"bearerAuth" : {} }},
  *
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(type="object",
+ *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/LeaguesResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestsLobbyResource")
  *             )
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
- *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     ),
@@ -38,18 +36,17 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
  *         @OA\JsonContent(
- *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     )
  * )
  */
-class LeaguesGet extends Controller
+class ContestsLobby extends Controller
 {
-    public function __invoke(LeagueService $leagueService): AnonymousResourceCollection
+    public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
+        $contests = $contestService->getContestsLobby();
 
-        return LeaguesResource::collection($leagues);
+        return ContestsLobbyResource::collection($contests);
     }
 }

@@ -4,21 +4,23 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * App\Models\User.
  *
  * @property int             $id
- * @property string          $role
  * @property string          $email
- * @property string          $password_hash
- * @property string          $access_token
- * @property string          $auth_key
+ * @property null|string     $email_verified_at
+ * @property string          $password
+ * @property null|string     $remember_token
  * @property string          $username
  * @property string          $fullname
  * @property int             $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
@@ -44,14 +46,13 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
- * @method static Builder|User whereAccessToken($value)
- * @method static Builder|User whereAuthKey($value)
  * @method static Builder|User whereAvatarId($value)
  * @method static Builder|User whereBalance($value)
  * @method static Builder|User whereCountryId($value)
  * @method static Builder|User whereCreatedAt($value)
  * @method static Builder|User whereDob($value)
  * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
  * @method static Builder|User whereFavPlayerId($value)
  * @method static Builder|User whereFavTeamId($value)
  * @method static Builder|User whereFullname($value)
@@ -62,17 +63,18 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereIsSham($value)
  * @method static Builder|User whereLanguageId($value)
  * @method static Builder|User whereParentAffiliateId($value)
- * @method static Builder|User wherePasswordHash($value)
+ * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereReceiveNewsletters($value)
  * @method static Builder|User whereReceiveNotifications($value)
- * @method static Builder|User whereRole($value)
+ * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereStatus($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereUsername($value)
  * @mixin Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
+    use Notifiable;
     use HasFactory;
 
     protected $table = 'user';
@@ -83,13 +85,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role',
         'email',
-        'password_hash',
-        'access_token',
-        'auth_key',
         'username',
         'fullname',
+        'password',
         'status',
         'parent_affiliate_id',
         'is_deleted',
@@ -113,12 +112,32 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password_hash',
-        'access_token',
+        'password',
+        'remember_token',
     ];
 
     public function avatar(): BelongsTo
     {
         return $this->belongsTo(FileUpload::class);
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -15,6 +15,10 @@ use Illuminate\Routing\Controller as BaseController;
  * )
  *
  * @OA\Tag(
+ *     name="Auth",
+ *     description="API Endpoints of Auth"
+ * )
+ * @OA\Tag(
  *     name="Users",
  *     description="API Endpoints of Users"
  * )
@@ -25,6 +29,10 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Tag(
  *     name="Contests",
  *     description="API Endpoints of Contests"
+ * )
+ * @OA\Tag(
+ *     name="Users",
+ *     description="API Endpoints of Users"
  * )
  */
 class Controller extends BaseController
