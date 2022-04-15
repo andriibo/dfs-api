@@ -1,10 +1,17 @@
 <?php
 
-use App\Http\Controllers\Api\Contests\ContestsLobbyGet;
-use App\Http\Controllers\Api\Contests\ContestTypesGet;
-use App\Http\Controllers\Api\Leagues\LeaguesGet;
-use App\Http\Controllers\Api\Users\UserGet;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\ForgotPassword;
+use App\Http\Controllers\Api\Auth\Login;
+use App\Http\Controllers\Api\Auth\Logout;
+use App\Http\Controllers\Api\Auth\RefreshToken;
+use App\Http\Controllers\Api\Auth\Register;
+use App\Http\Controllers\Api\Auth\ResetPassword;
+use App\Http\Controllers\Api\Auth\VerifyEmail;
+use App\Http\Controllers\Api\Auth\VerifyResend;
+use App\Http\Controllers\Api\Contests\Lobby;
+use App\Http\Controllers\Api\Contests\Types;
+use App\Http\Controllers\Api\Leagues\Leagues;
+use App\Http\Controllers\Api\Users\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,28 +27,50 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     /*
-     * #####################
-     * #####  USERS  #####
-     * #####################
+     * ##################
+     * #####  AUTH  #####
+     * ##################
      */
-    Route::get('users/{id}', UserGet::class);
+    Route::prefix('auth')->group(function (): void {
+        Route::post('register', Register::class);
+        Route::post('login', Login::class);
+        Route::post('forgot/password', ForgotPassword::class);
+        Route::post('reset/password', ResetPassword::class)->name('password.reset');
+        Route::middleware(['signed', 'throttle:6,1'])->group(function (): void {
+            Route::get('/email/verify/{id}/{hash}', VerifyEmail::class)->name('verification.verify');
+            Route::post('/email/verify/resend', VerifyResend::class)->name('verification.send');
+        });
+        Route::middleware('auth:api')->group(function (): void {
+            Route::post('logout', Logout::class);
+            Route::post('refresh/token', RefreshToken::class);
+        });
+    });
+
+    /*
+     * ###################
+     * #####  USERS  #####
+     * ###################
+     */
+    Route::prefix('users')->group(function (): void {
+        Route::middleware('auth:api')->group(function (): void {
+            Route::get('profile', Profile::class);
+        });
+    });
+
+    /*
+     * ######################
+     * #####  CONTESTS  #####
+     * ######################
+     */
+    Route::prefix('contests')->group(function () {
+        Route::get('types', Types::class);
+        Route::get('lobby', Lobby::class);
+    });
 
     /*
      * #####################
      * #####  LEAGUES  #####
      * #####################
      */
-    Route::get('leagues', LeaguesGet::class);
-
-    /*
-     * #####################
-     * #####  CONTESTS  #####
-     * #####################
-     */
-    Route::get('contests/types', ContestTypesGet::class);
-    Route::get('contests/lobby', ContestsLobbyGet::class);
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('leagues', Leagues::class);
 });

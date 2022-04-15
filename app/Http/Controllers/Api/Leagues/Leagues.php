@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\Users;
+namespace App\Http\Controllers\Api\Leagues;
 
+use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Leagues\LeaguesResource;
+use App\Services\LeagueService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/users/{id}",
- *     summary="Get User",
- *     tags={"Users"},
+ *     path="/leagues",
+ *     summary="Get Leagues",
+ *     tags={"Leagues"},
  *     security={ {"bearerAuth" : {} }},
  *
- *     @OA\Parameter(name="id", in="path"),
- *
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(
- *             @OA\Property(property="id", type="int", example="1"),
- *             @OA\Property(property="username", type="string", example="username")
+ *         @OA\JsonContent(type="object",
+ *             @OA\Property(property="data", type="array",
+ *                 @OA\Items(ref="#/components/schemas/LeaguesResource")
+ *             )
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
@@ -42,13 +44,12 @@ use Illuminate\Http\JsonResponse;
  *     )
  * )
  */
-class UserGet extends Controller
+class Leagues extends Controller
 {
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(LeagueService $leagueService): AnonymousResourceCollection
     {
-        return response()->json([
-            'id' => 1,
-            'username' => 'test',
-        ]);
+        $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
+
+        return LeaguesResource::collection($leagues);
     }
 }

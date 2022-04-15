@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api\Leagues;
+namespace App\Http\Controllers\Api\Contests;
 
-use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Leagues\LeaguesResource;
-use App\Services\LeagueService;
+use App\Http\Resources\Contests\ContestTypesResource;
+use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/leagues",
- *     summary="Get Leagues",
- *     tags={"Leagues"},
+ *     path="/contests/types",
+ *     summary="Get Contest Types",
+ *     tags={"Contests"},
  *     security={ {"bearerAuth" : {} }},
  *
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(type="object",
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/LeaguesResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestTypesResource")
  *             )
  *         )
  *     ),
@@ -44,12 +43,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     )
  * )
  */
-class LeaguesGet extends Controller
+class Types extends Controller
 {
-    public function __invoke(LeagueService $leagueService): AnonymousResourceCollection
+    public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
+        $types = $contestService->getContestTypes();
 
-        return LeaguesResource::collection($leagues);
+        return ContestTypesResource::collection($types);
     }
 }

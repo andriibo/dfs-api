@@ -15,7 +15,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     security={ {"bearerAuth" : {} }},
  *
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(type="object",
+ *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
  *                 @OA\Items(ref="#/components/schemas/ContestsLobbyResource")
  *             )
@@ -23,7 +23,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
- *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     ),
@@ -37,13 +36,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
  *         @OA\JsonContent(
- *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     )
  * )
  */
-class ContestsLobbyGet extends Controller
+class Lobby extends Controller
 {
     public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
