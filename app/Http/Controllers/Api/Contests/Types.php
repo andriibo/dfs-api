@@ -3,26 +3,27 @@
 namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contests\ContestsLobbyResource;
+use App\Http\Resources\Contests\ContestTypesResource;
 use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/contests/lobby",
- *     summary="Get Contests Lobby",
+ *     path="/contests/types",
+ *     summary="Get Contest Types",
  *     tags={"Contests"},
  *     security={ {"bearerAuth" : {} }},
  *
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(
+ *         @OA\JsonContent(type="object",
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestsLobbyResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestTypesResource")
  *             )
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
+ *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     ),
@@ -36,17 +37,18 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
  *         @OA\JsonContent(
+ *            type="object",
  *            @OA\Property(property="error", type="string")
  *         )
  *     )
  * )
  */
-class ContestsLobby extends Controller
+class Types extends Controller
 {
     public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $contests = $contestService->getContestsLobby();
+        $types = $contestService->getContestTypes();
 
-        return ContestsLobbyResource::collection($contests);
+        return ContestTypesResource::collection($types);
     }
 }

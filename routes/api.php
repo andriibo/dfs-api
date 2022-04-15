@@ -8,8 +8,8 @@ use App\Http\Controllers\Api\Auth\Register;
 use App\Http\Controllers\Api\Auth\ResetPassword;
 use App\Http\Controllers\Api\Auth\VerifyEmail;
 use App\Http\Controllers\Api\Auth\VerifyResend;
-use App\Http\Controllers\Api\Contests\ContestsLobby;
-use App\Http\Controllers\Api\Contests\ContestTypes;
+use App\Http\Controllers\Api\Contests\Lobby;
+use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Users\Profile;
 use Illuminate\Support\Facades\Route;
@@ -63,8 +63,8 @@ Route::prefix('v1')->group(function () {
      * ######################
      */
     Route::prefix('contests')->group(function () {
-        Route::get('types', ContestTypes::class);
-        Route::get('lobby', ContestsLobby::class);
+        Route::get('types', Types::class);
+        Route::get('lobby', Lobby::class);
     });
 
     /*
