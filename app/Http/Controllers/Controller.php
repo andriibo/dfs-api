@@ -13,7 +13,22 @@ use Illuminate\Routing\Controller as BaseController;
  *      title="Fantasysports OpenApi Documentation",
  *      description="Fantasysports RESTful API"
  * )
- *
+ * @OA\Server(
+ *      url=L5_SWAGGER_CONST_HOST,
+ *      description="Fantasysports API Server",
+ *      @OA\ServerVariable(
+ *         serverVariable="schema",
+ *         enum={"https", "http"},
+ *         default="https"
+ *      )
+ * )
+ * @OA\SecurityScheme(
+ *      securityScheme="bearerAuth",
+ *      description="Enter your bearer token in the format **Bearer {{token}}**",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="JWT"
+ * ),
  * @OA\Tag(
  *     name="Auth",
  *     description="API Endpoints of Auth"
@@ -29,10 +44,6 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Tag(
  *     name="Contests",
  *     description="API Endpoints of Contests"
- * )
- * @OA\Tag(
- *     name="Users",
- *     description="API Endpoints of Users"
  * )
  */
 class Controller extends BaseController

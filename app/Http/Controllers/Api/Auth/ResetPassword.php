@@ -16,15 +16,21 @@ use Symfony\Component\HttpFoundation\Response;
  *     summary="Reset Password",
  *     tags={"Auth"},
  *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
+ *     @OA\Parameter(
  *        name="token",
  *        required=true,
- *        in="path",
+ *        in="query",
  *        @OA\Schema(type="string")
  *     ),
  *     @OA\Parameter(
  *        name="email",
  *        required=true,
- *        in="path",
+ *        in="query",
  *        @OA\Schema(type="string")
  *     ),
  *     @OA\RequestBody(

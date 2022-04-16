@@ -14,6 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
  *     summary="Verify Email",
  *     tags={"Auth"},
  *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
+ *     @OA\Parameter(
  *        name="id",
  *        required=true,
  *        in="path",

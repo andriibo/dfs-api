@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  *     path="/auth/refresh/token",
  *     summary="Refresh token",
  *     tags={"Auth"},
- *     security={ {"bearerAuth" : {} }},
+ *     security={{"bearerAuth":{}}},
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="success", type="bool", example="true"),
@@ -24,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Unauthorized")
+ *             @OA\Property(property="message", type="string", example="Unauthenticated.")
  *         )
  *     ),
  *     @OA\Response(response=403, description="Forbidden",

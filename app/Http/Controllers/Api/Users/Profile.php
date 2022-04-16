@@ -12,6 +12,12 @@ use Illuminate\Http\JsonResponse;
  *     summary="Get User Profile",
  *     tags={"Users"},
  *     security={ {"bearerAuth" : {} }},
+ *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="success", type="bool", example="true"),

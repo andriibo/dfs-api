@@ -13,6 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/auth/forgot/password",
  *     summary="Forgot Password",
  *     tags={"Auth"},
+ *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
  *             @OA\Property(property="email", type="string", maxLength=50)

@@ -14,6 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/auth/register",
  *     summary="Register User",
  *     tags={"Auth"},
+ *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password","password_confirmation","username","fullname"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),
@@ -31,23 +37,17 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=403, description="Forbidden",
  *         @OA\JsonContent(
- *             oneOf={
- *                @OA\Property(property="msg", type="string"),
- *                @OA\Property(property="error", type="string")
- *             }
+ *             @OA\Property(property="error", type="string")
  *         )
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
  *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
+ *             @OA\Property(property="error", type="string")
  *         )
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             oneOf={
- *                @OA\Property(property="msg", type="string"),
- *                @OA\Property(property="error", type="string")
- *             }
+ *             @OA\Property(property="error", type="string")
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",

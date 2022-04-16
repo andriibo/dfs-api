@@ -12,8 +12,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     path="/contests/lobby",
  *     summary="Get Contests Lobby",
  *     tags={"Contests"},
- *     security={ {"bearerAuth" : {} }},
- *
+ *     @OA\Parameter(
+ *         name="Accept",
+ *         in="header",
+ *         description="Accept header",
+ *         @OA\Schema(type="string", example="application/json")
+ *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
@@ -28,10 +32,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
- *             oneOf={
- *                @OA\Property(property="msg", type="string"),
- *                @OA\Property(property="error", type="string")
- *             }
+ *            @OA\Property(property="error", type="string")
  *         )
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
