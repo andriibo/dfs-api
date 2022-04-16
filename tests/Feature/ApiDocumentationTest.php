@@ -15,8 +15,8 @@ class ApiDocumentationTest extends TestCase
      */
     public function testApiDocumentation()
     {
-        $response = $this->get('/api/documentation');
-
+        $response = $this->get('/api/v1/documentation');
+        $response->assertSuccessful();
         $response->assertStatus(200);
     }
 }
