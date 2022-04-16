@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @OA\Post(
  *     path="/auth/login",
- *     summary="Sign in",
+ *     summary="Login",
  *     tags={"Auth"},
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password"},
- *             @OA\Property(property="email", type="string", maxLength=50),
- *             @OA\Property(property="password", type="string", minLength=6)
+ *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),
+ *             @OA\Property(property="password", type="string", minLength=6, example="password")
  *         ),
  *     ),
  *     @OA\Response(response=200, description="Ok",
