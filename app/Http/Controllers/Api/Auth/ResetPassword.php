@@ -29,8 +29,8 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"password","password_confirmation"},
- *             @OA\Property(property="password", type="string", maxLength=50),
- *             @OA\Property(property="password_confirmation", type="string", maxLength=50)
+ *             @OA\Property(property="password", type="string", maxLength=50, example="password2"),
+ *             @OA\Property(property="password_confirmation", type="string", maxLength=50, example="password2")
  *         ),
  *     ),
  *     @OA\Response(response=200, description="Ok",

@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
  *        name="id",
  *        required=true,
  *        in="path",
- *        @OA\Schema(type="integer")
+ *        @OA\Schema(type="integer", example="11")
  *     ),
  *     @OA\Parameter(
  *        name="hash",
  *        required=true,
  *        in="path",
- *        @OA\Schema(type="string")
+ *        @OA\Schema(type="string", example="12qs850keo23")
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

@@ -715,11 +715,13 @@
                                 "properties": {
                                     "password": {
                                         "type": "string",
-                                        "maxLength": 50
+                                        "maxLength": 50,
+                                        "example": "password2"
                                     },
                                     "password_confirmation": {
                                         "type": "string",
-                                        "maxLength": 50
+                                        "maxLength": 50,
+                                        "example": "password2"
                                     }
                                 },
                                 "type": "object"
@@ -850,7 +852,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "example": "11"
                         }
                     },
                     {
@@ -858,7 +861,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "12qs850keo23"
                         }
                     }
                 ],
@@ -970,7 +974,8 @@
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "maxLength": 50
+                                        "maxLength": 50,
+                                        "example": "john@gmil.com"
                                     }
                                 },
                                 "type": "object"
