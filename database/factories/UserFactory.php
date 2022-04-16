@@ -36,6 +36,8 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Str::random(100),
+            'access_token' => Str::random(100),
+            'auth_key' => Str::random(100),
             'username' => $this->faker->username(),
             'fullname' => $this->faker->name(),
             'status' => $this->faker->randomElement(StatusEnum::values()),
