@@ -20,6 +20,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string          $email
  * @property null|string     $email_verified_at
  * @property string          $password
+ * @property string          $access_token
+ * @property string          $auth_key
  * @property null|string     $remember_token
  * @property string          $username
  * @property string          $fullname
@@ -89,6 +91,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'username',
         'fullname',
         'password',
+        'access_token',
+        'auth_key',
         'status',
         'parent_affiliate_id',
         'is_deleted',
@@ -113,6 +117,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     protected $hidden = [
         'password',
+        'access_token',
+        'auth_key',
         'remember_token',
     ];
 
