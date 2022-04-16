@@ -33,9 +33,9 @@ class ContestUserFactory extends Factory
     {
         return [
             'title' => $this->faker->title,
-            'team_score' => $this->faker->randomFloat(2),
+            'team_score' => $this->faker->randomFloat(2, 0, 10),
             'place' => $this->faker->randomDigit(),
-            'prize' => $this->faker->randomFloat(2),
+            'prize' => $this->faker->randomFloat(2, 0, 10),
             'barcode' => $this->faker->text(30),
         ];
     }

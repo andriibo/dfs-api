@@ -146,7 +146,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Sign in",
+                "summary": "Login",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -158,11 +158,13 @@
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "maxLength": 50
+                                        "maxLength": 50,
+                                        "example": "john@gmil.com"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "minLength": 6
+                                        "minLength": 6,
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
