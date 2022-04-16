@@ -15,11 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
  *     summary="Register User",
  *     tags={"Auth"},
  *     @OA\RequestBody(
- *         @OA\JsonContent(required={"email","password","password_confirmation","name"},
- *             @OA\Property(property="email", type="string", maxLength=50),
- *             @OA\Property(property="password", type="string", minLength=6),
- *             @OA\Property(property="password_confirmation", type="string"),
- *             @OA\Property(property="username", type="string", minLength=2, maxLength=50)
+ *         @OA\JsonContent(required={"email","password","password_confirmation","username","fullname"},
+ *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),
+ *             @OA\Property(property="password", type="string", minLength=6, example="password"),
+ *             @OA\Property(property="password_confirmation", type="string", example="password"),
+ *             @OA\Property(property="username", type="string", minLength=2, maxLength=50, example="john"),
+ *             @OA\Property(property="fullname", type="string", minLength=2, maxLength=50, example="John Doe")
  *         ),
  *     ),
  *     @OA\Response(response=201, description="Created",

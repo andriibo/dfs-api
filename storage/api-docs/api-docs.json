@@ -550,24 +550,35 @@
                                     "email",
                                     "password",
                                     "password_confirmation",
-                                    "name"
+                                    "username",
+                                    "fullname"
                                 ],
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "maxLength": 50
+                                        "maxLength": 50,
+                                        "example": "john@gmil.com"
                                     },
                                     "password": {
                                         "type": "string",
-                                        "minLength": 6
+                                        "minLength": 6,
+                                        "example": "password"
                                     },
                                     "password_confirmation": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "password"
                                     },
                                     "username": {
                                         "type": "string",
                                         "maxLength": 50,
-                                        "minLength": 2
+                                        "minLength": 2,
+                                        "example": "john"
+                                    },
+                                    "fullname": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "minLength": 2,
+                                        "example": "John Doe"
                                     }
                                 },
                                 "type": "object"
