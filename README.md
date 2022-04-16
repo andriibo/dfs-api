@@ -68,3 +68,9 @@ $ php artisan l5-swagger:generate
 ```
 
 See [usage](https://github.com/DarkaOnLine/L5-Swagger)
+
+### JWT
+
+```console
+$ php artisan jwt:secret
+```
