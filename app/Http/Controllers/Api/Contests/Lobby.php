@@ -25,17 +25,17 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *             )
  *         )
  *     ),
- *     @OA\Response(response=500, description="Internal Server Error",
- *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
- *         )
- *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
  *            @OA\Property(property="error", type="string")
  *         )
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
+ *         @OA\JsonContent(
+ *            @OA\Property(property="error", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
  *            @OA\Property(property="error", type="string")
  *         )

@@ -43,7 +43,8 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Unprocessable entity")
+ *             @OA\Property(property="message", type="string", example="Unprocessable entity"),
+ *             @OA\Property(property="errors", type="object")
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
