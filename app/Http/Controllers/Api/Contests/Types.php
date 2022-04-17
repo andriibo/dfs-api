@@ -16,7 +16,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(type="object",

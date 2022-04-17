@@ -15,7 +15,7 @@ use Illuminate\Http\JsonResponse;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
@@ -25,7 +25,7 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Unauthorized")
+ *             @OA\Property(property="message", type="string", example="Unauthenticated.")
  *         )
  *     ),
  *     @OA\Response(response=403, description="Forbidden",
@@ -40,7 +40,7 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Unprocessable entity"),
+ *             @OA\Property(property="message", type="string"),
  *             @OA\Property(property="errors", type="object")
  *         )
  *     ),

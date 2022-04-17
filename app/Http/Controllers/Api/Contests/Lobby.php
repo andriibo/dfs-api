@@ -16,7 +16,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
@@ -30,9 +30,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *            @OA\Property(property="error", type="string")
  *         )
  *     ),
- *     @OA\Response(response=404, description="Resource not found",
+ *     @OA\Response(response=404, description="Not Found",
  *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
+ *            @OA\Property(property="error", type="Resource not found.")
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",

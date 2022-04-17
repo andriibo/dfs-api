@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException && $request->wantsJson()) {
             return response()->json([
-                'error' => 'Resource not found',
+                'error' => 'Resource not found.',
             ], Response::HTTP_NOT_FOUND);
         }
 

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
@@ -41,15 +41,14 @@ use Symfony\Component\HttpFoundation\Response;
  *             @OA\Property(property="error", type="string", example="Forbidden")
  *         )
  *     ),
- *     @OA\Response(response=404, description="Resource not found",
+ *     @OA\Response(response=404, description="Not Found",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="false"),
- *             @OA\Property(property="error", type="string", example="Your email address was not found")
+ *            @OA\Property(property="error", type="Resource not found.")
  *         )
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Unprocessable entity"),
+ *             @OA\Property(property="message", type="string"),
  *             @OA\Property(property="errors", type="object")
  *         )
  *     ),

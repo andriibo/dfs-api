@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password"},
@@ -35,12 +35,6 @@ use Symfony\Component\HttpFoundation\Response;
  *             )
  *         )
  *     ),
- *     @OA\Response(response=401, description="Unauthorized",
- *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="false"),
- *             @OA\Property(property="error", type="string", example="Unauthorized")
- *         )
- *     ),
  *     @OA\Response(response=403, description="Forbidden",
  *         @OA\JsonContent(
  *             @OA\Property(property="success", type="bool", example="false"),
@@ -54,7 +48,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Unprocessable entity"),
+ *             @OA\Property(property="message", type="string"),
  *             @OA\Property(property="errors", type="object")
  *         )
  *     ),

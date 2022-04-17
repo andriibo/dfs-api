@@ -34,7 +34,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -113,18 +113,13 @@
                         }
                     },
                     "404": {
-                        "description": "Resource not found",
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "false"
-                                        },
                                         "error": {
-                                            "type": "string",
-                                            "example": "Your email address was not found"
+                                            "type": "Resource not found."
                                         }
                                     },
                                     "type": "object"
@@ -138,9 +133,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -180,7 +177,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -242,26 +239,6 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "false"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
                     "403": {
                         "description": "Forbidden",
                         "content": {
@@ -304,9 +281,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -346,7 +325,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -377,9 +356,9 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
+                                        "message": {
                                             "type": "string",
-                                            "example": "Unauthorized"
+                                            "example": "Unauthenticated."
                                         }
                                     },
                                     "type": "object"
@@ -425,9 +404,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -465,6 +446,17 @@
                     "Auth"
                 ],
                 "summary": "Refresh token",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Accept header",
+                        "schema": {
+                            "type": "string",
+                            "example": "application/vnd.api+json"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -552,9 +544,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -599,7 +593,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -704,8 +698,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
+                                        "message": {
                                             "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -744,7 +741,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     },
                     {
@@ -872,8 +869,7 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                            "type": "string"
                                         },
                                         "errors": {
                                             "type": "object"
@@ -916,7 +912,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     },
                     {
@@ -1001,9 +997,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1043,7 +1041,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -1129,9 +1127,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1171,7 +1171,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -1187,21 +1187,6 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/ContestsLobbyResource"
                                             }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -1225,7 +1210,22 @@
                         }
                     },
                     "404": {
-                        "description": "Resource not found",
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "Resource not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1255,7 +1255,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -1271,21 +1271,6 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/ContestTypesResource"
                                             }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -1322,6 +1307,21 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1339,7 +1339,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -1423,7 +1423,7 @@
                         "description": "Accept header",
                         "schema": {
                             "type": "string",
-                            "example": "application/json"
+                            "example": "application/vnd.api+json"
                         }
                     }
                 ],
@@ -1456,9 +1456,9 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
+                                        "message": {
                                             "type": "string",
-                                            "example": "Unauthorized"
+                                            "example": "Unauthenticated."
                                         }
                                     },
                                     "type": "object"
@@ -1490,7 +1490,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Resource not found"
+                                            "example": "Resource not found."
                                         }
                                     },
                                     "type": "object"
@@ -1504,9 +1504,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unprocessable entity"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1522,7 +1524,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Internal Server Error"
+                                            "example": "Internal Server Error."
                                         }
                                     },
                                     "type": "object"

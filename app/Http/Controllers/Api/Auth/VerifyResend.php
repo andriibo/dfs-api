@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *         name="Accept",
  *         in="header",
  *         description="Accept header",
- *         @OA\Schema(type="string", example="application/json")
+ *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
@@ -43,7 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Unprocessable entity"),
+ *             @OA\Property(property="message", type="string"),
  *             @OA\Property(property="errors", type="object")
  *         )
  *     ),
