@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Auth\VerifyResend;
 use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Leagues\Leagues;
+use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\Profile;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('users')->group(function (): void {
         Route::middleware('auth:api')->group(function (): void {
             Route::get('profile', Profile::class);
+            Route::get('balance', Balance::class);
         });
     });
 
