@@ -1612,10 +1612,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "data": {
                                             "properties": {
                                                 "balance": {
@@ -1762,10 +1758,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "data": {
                                             "type": "array",
                                             "items": {
@@ -2045,17 +2037,21 @@
                 "title": "ProfileResource",
                 "properties": {
                     "username": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "fantasysports"
                     },
                     "email": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "test@fantasysports.com"
                     },
                     "balance": {
                         "type": "number",
-                        "format": "double"
+                        "format": "double",
+                        "example": "100.23"
                     },
                     "dob": {
                         "type": "string",
+                        "example": "1993-05-23",
                         "nullable": true
                     },
                     "country_id": {
@@ -2089,10 +2085,12 @@
                         "type": "integer"
                     },
                     "created_at": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "2022-04-01 12:00:05"
                     },
                     "updated_at": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "2022-04-02 11:59:41"
                     }
                 },
                 "type": "object"

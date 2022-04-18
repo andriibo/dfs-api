@@ -19,7 +19,6 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="data",
  *                 @OA\Property(property="balance", type="number", format="double", example="100.23")
  *             )
@@ -62,9 +61,6 @@ class Balance extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        return response()->json([
-            'success' => true,
-            'data' => ['balance' => auth()->user()->balance],
-        ]);
+        return response()->json(['data' => ['balance' => auth()->user()->balance]]);
     }
 }
