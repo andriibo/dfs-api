@@ -20,7 +20,7 @@ class LeagueTest extends TestCase
             ->create()
         ;
         $response = $this->getJson('/api/v1/leagues');
-        $response->assertSuccessful();
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 '*' => [

@@ -32,7 +32,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=404, description="Not Found",
  *         @OA\JsonContent(
- *            @OA\Property(property="error", type="Resource not found.")
+ *            @OA\Property(property="error", type="string", example="Resource not found.")
+ *         )
+ *     ),
+ *     @OA\Response(response=405, description="Method Not Allowed",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: GET.")
  *         )
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",

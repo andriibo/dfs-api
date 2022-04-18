@@ -20,7 +20,7 @@ class ContestTest extends TestCase
     public function testContestTypesGetEndpoint()
     {
         $response = $this->getJson('/api/v1/contests/types');
-        $response->assertSuccessful();
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 '*' => [
@@ -53,7 +53,7 @@ class ContestTest extends TestCase
         ;
 
         $response = $this->getJson('/api/v1/contests/lobby');
-        $response->assertSuccessful();
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 '*' => [

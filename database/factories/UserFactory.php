@@ -34,11 +34,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' => Str::random(100),
+            'email' => 'test@fantasysports.com',
+            'email_verified_at' => $this->faker->dateTime(),
+            'password' => bcrypt('password'),
             'access_token' => Str::random(100),
             'auth_key' => Str::random(100),
-            'username' => $this->faker->username(),
+            'username' => 'fantasysports',
             'fullname' => $this->faker->name(),
             'status' => $this->faker->randomElement(StatusEnum::values()),
             'balance' => $this->faker->randomFloat(2, 0, 10),
