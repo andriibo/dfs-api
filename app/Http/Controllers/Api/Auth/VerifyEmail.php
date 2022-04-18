@@ -39,13 +39,18 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=403, description="Forbidden",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Forbidden")
+ *             @OA\Property(property="error", type="string", example="Invalid signature.")
  *         )
  *     ),
  *     @OA\Response(response=404, description="Resource not found",
  *         @OA\JsonContent(
  *             @OA\Property(property="success", type="bool", example="false"),
  *             @OA\Property(property="error", type="string", example="Your email address was not found")
+ *         )
+ *     ),
+ *     @OA\Response(response=405, description="Method Not Allowed",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: GET.")
  *         )
  *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",

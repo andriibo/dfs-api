@@ -41,6 +41,11 @@ use Illuminate\Http\JsonResponse;
  *             @OA\Property(property="error", type="string", example="Resource not found.")
  *         )
  *     ),
+ *     @OA\Response(response=405, description="Method Not Allowed",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: GET.")
+ *         )
+ *     ),
  *     @OA\Response(response=422, description="Unprocessable entity",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string"),
