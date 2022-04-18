@@ -20,7 +20,6 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="data", type="array",
  *                 @OA\Items(ref="#/components/schemas/ProfileResource")
  *             )
@@ -63,9 +62,6 @@ class Profile extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        return response()->json([
-            'success' => true,
-            'data' => new ProfileResource(auth()->user()),
-        ]);
+        return response()->json(['data' => new ProfileResource(auth()->user())]);
     }
 }

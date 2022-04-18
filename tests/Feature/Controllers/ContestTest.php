@@ -17,7 +17,7 @@ class ContestTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testContestTypesGetEndpoint()
+    public function testContestTypesEndpoint()
     {
         $response = $this->getJson('/api/v1/contests/types');
         $response->assertOk();

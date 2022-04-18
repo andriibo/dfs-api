@@ -14,7 +14,7 @@ class LeagueTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testLeaguesGetEndpoint()
+    public function testLeaguesEndpoint()
     {
         League::factory()
             ->create()

@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Testing\TestResponse;
+use Tests\CreatesUser;
 use Tests\TestCase;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * @internal
@@ -23,6 +22,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthTest extends TestCase
 {
     use DatabaseTransactions;
+    use CreatesUser;
 
     public function testAuthRegisterEndpoint()
     {
@@ -129,18 +129,6 @@ class AuthTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
         ]);
         $this->checkResponse($response);
-    }
-
-    private function getTokenForUser(JWTSubject $user): string
-    {
-        return JWTAuth::fromUser($user);
-    }
-
-    private function createUser(): User
-    {
-        return User::factory()
-            ->create()
-        ;
     }
 
     private function checkResponse(TestResponse $response): void
