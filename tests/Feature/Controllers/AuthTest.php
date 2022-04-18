@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -34,8 +35,7 @@ class AuthTest extends TestCase
         ];
 
         $response = $this->postJson('/api/v1/auth/register', $data);
-        $response->assertCreated();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
 
         $user = User::where('email', $data['email'])->first();
         Notification::assertSentTo($user, VerifyEmail::class);
@@ -51,9 +51,7 @@ class AuthTest extends TestCase
         ];
 
         $response = $this->postJson('/api/v1/auth/login', $credentials);
-        $response->assertOk();
-        $response->assertSee(['success', 'data']);
-        $this->assertArrayHasKey('access_token', $response->json()['data']);
+        $this->checkResponseWithToken($response);
     }
 
     public function testAuthRefreshTokenEndpoint()
@@ -64,17 +62,14 @@ class AuthTest extends TestCase
         $response = $this->postJson('/api/v1/auth/refresh/token', [], [
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $response->assertOk();
-        $response->assertSee(['success', 'data']);
-        $this->assertArrayHasKey('access_token', $response->json()['data']);
+        $this->checkResponseWithToken($response);
     }
 
     public function testAuthForgotPasswordEndpoint()
     {
         $user = $this->createUser();
         $response = $this->postJson('/api/v1/auth/forgot/password', ['email' => $user->email]);
-        $response->assertOk();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
 
         Notification::assertSentTo($user, ResetPassword::class);
     }
@@ -90,8 +85,7 @@ class AuthTest extends TestCase
             'password_confirmation' => 'password',
         ];
         $response = $this->postJson($endpoint, $data);
-        $response->assertOk();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
     }
 
     public function testAuthEmailVerifyEndpoint()
@@ -107,8 +101,7 @@ class AuthTest extends TestCase
         );
 
         $response = $this->getJson($endpoint);
-        $response->assertOk();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
     }
 
     public function testAuthEmailVerifyResendEndpoint()
@@ -123,8 +116,7 @@ class AuthTest extends TestCase
             ]
         );
         $response = $this->postJson($endpoint, ['email' => $user->email]);
-        $response->assertOk();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
     }
 
     public function testAuthLogoutEndpoint()
@@ -136,8 +128,7 @@ class AuthTest extends TestCase
             'Accept' => 'application/vnd.api+json',
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $response->assertOk();
-        $response->assertSee(['success', 'message']);
+        $this->checkResponse($response);
     }
 
     private function getTokenForUser(JWTSubject $user): string
@@ -150,5 +141,27 @@ class AuthTest extends TestCase
         return User::factory()
             ->create()
         ;
+    }
+
+    private function checkResponse(TestResponse $response): void
+    {
+        $response->assertSuccessful();
+        $response->assertSee(['success', 'message']);
+        $array = $response->json();
+        $this->assertIsBool($array['success']);
+        $this->assertIsString($array['message']);
+    }
+
+    private function checkResponseWithToken(TestResponse $response): void
+    {
+        $response->assertOk();
+        $response->assertSee(['success', 'data']);
+        $array = $response->json();
+        $this->assertIsBool($array['success']);
+        $this->assertIsArray($array['data']);
+        $data = $array['data'];
+        $this->assertArrayHasKey('access_token', $data);
+        $this->assertArrayHasKey('token_type', $data);
+        $this->assertArrayHasKey('expires_in', $data);
     }
 }
