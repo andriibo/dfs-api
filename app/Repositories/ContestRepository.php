@@ -27,7 +27,7 @@ class ContestRepository
     public function getContestsUpcoming(int $userId): Collection
     {
         return Contest::query()
-            ->where('status', StatusEnum::closed)
+            ->where('status', StatusEnum::ready)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
@@ -43,6 +43,21 @@ class ContestRepository
     {
         return Contest::query()
             ->where('status', StatusEnum::started)
+            ->whereHas('contestUsers', function (Builder $query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->orderBy('start_date')
+            ->get()
+            ;
+    }
+
+    /**
+     * @return Collection|Contest[]
+     */
+    public function getContestsHistory(int $userId): Collection
+    {
+        return Contest::query()
+            ->where('status', StatusEnum::closed)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })

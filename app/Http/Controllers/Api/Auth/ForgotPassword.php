@@ -13,12 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/auth/forgot/password",
  *     summary="Forgot Password",
  *     tags={"Auth"},
- *     @OA\Parameter(
- *         name="Accept",
- *         in="header",
- *         description="Accept header",
- *         @OA\Schema(type="string", example="application/vnd.api+json")
- *     ),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
  *             @OA\Property(property="email", type="string", maxLength=50)
@@ -26,42 +21,15 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="A reset email has been sent! Please check your email.")
  *         )
  *     ),
- *     @OA\Response(response=400, description="Bad Request",
- *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="false"),
- *             @OA\Property(property="error", type="string")
- *         )
- *     ),
- *     @OA\Response(response=403, description="Forbidden",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Forbidden")
- *         )
- *     ),
- *     @OA\Response(response=404, description="Not Found",
- *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string", example="Resource not found.")
- *         )
- *     ),
- *     @OA\Response(response=405, description="Method Not Allowed",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: GET.")
- *         )
- *     ),
- *     @OA\Response(response=422, description="Unprocessable entity",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string"),
- *             @OA\Property(property="errors", type="object")
- *         )
- *     ),
- *     @OA\Response(response=500, description="Internal Server Error",
- *         @OA\JsonContent(
- *            @OA\Property(property="message", type="string", example="Server Error")
- *         )
- *     )
+ *     @OA\Response(response=400, ref="#/components/responses/400"),
+ *     @OA\Response(response=403, ref="#/components/responses/403"),
+ *     @OA\Response(response=404, ref="#/components/responses/404"),
+ *     @OA\Response(response=405, ref="#/components/responses/405"),
+ *     @OA\Response(response=422, ref="#/components/responses/422"),
+ *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
 class ForgotPassword extends Controller
@@ -73,27 +41,15 @@ class ForgotPassword extends Controller
 
             switch ($response) {
                 case Password::RESET_LINK_SENT:
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'A reset email has been sent! Please check your email.',
-                    ]);
+                    return response()->json(['message' => 'A reset email has been sent! Please check your email.']);
 
                 case Password::INVALID_USER:
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Your email address was not found.',
-                    ], Response::HTTP_NOT_FOUND);
+                    return response()->json(['message' => 'Your email address was not found.'], Response::HTTP_NOT_FOUND);
 
-                default: return response()->json([
-                    'success' => false,
-                    'message' => trans($response),
-                ], Response::HTTP_BAD_REQUEST);
+                default: return response()->json(['message' => trans($response)], Response::HTTP_BAD_REQUEST);
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'error' => $e->getMessage(),
-            ], Response::HTTP_BAD_REQUEST);
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 }

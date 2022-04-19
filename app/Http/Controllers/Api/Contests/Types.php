@@ -12,12 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     path="/contests/types",
  *     summary="Get Contest Types",
  *     tags={"Contests"},
- *     @OA\Parameter(
- *         name="Accept",
- *         in="header",
- *         description="Accept header",
- *         @OA\Schema(type="string", example="application/vnd.api+json")
- *     ),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(type="object",
  *             @OA\Property(property="data", type="array",
@@ -25,27 +20,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *             )
  *         )
  *     ),
- *     @OA\Response(response=401, description="Unauthorized",
- *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
- *         )
- *     ),
- *     @OA\Response(response=404, description="Resource not found",
- *         @OA\JsonContent(
- *            type="object",
- *            @OA\Property(property="error", type="string")
- *         )
- *     ),
- *     @OA\Response(response=405, description="Method Not Allowed",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: GET.")
- *         )
- *     ),
- *     @OA\Response(response=500, description="Internal Server Error",
- *         @OA\JsonContent(
- *            @OA\Property(property="message", type="string", example="Server Error")
- *         )
- *     )
+ *     @OA\Response(response=404, ref="#/components/responses/404"),
+ *     @OA\Response(response=405, ref="#/components/responses/405"),
+ *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
 class Types extends Controller

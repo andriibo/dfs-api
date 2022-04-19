@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Auth\Register;
 use App\Http\Controllers\Api\Auth\ResetPassword;
 use App\Http\Controllers\Api\Auth\VerifyEmail;
 use App\Http\Controllers\Api\Auth\VerifyResend;
+use App\Http\Controllers\Api\Contests\History;
 use App\Http\Controllers\Api\Contests\Live;
 use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Types;
@@ -72,6 +73,7 @@ Route::prefix('v1')->group(function () {
         Route::middleware('auth:api')->group(function (): void {
             Route::get('upcoming', Upcoming::class);
             Route::get('live', Live::class);
+            Route::get('history', History::class);
         });
     });
 
