@@ -32,6 +32,11 @@ class ContestService
         return $this->contestRepository->getContestsLobby();
     }
 
+    public function getContestsUpcoming(int $userId): Collection
+    {
+        return $this->contestRepository->getContestsUpcoming($userId);
+    }
+
     public function getExpectedPayout(Contest $contest): float
     {
         $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);

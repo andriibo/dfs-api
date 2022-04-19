@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Auth\VerifyEmail;
 use App\Http\Controllers\Api\Auth\VerifyResend;
 use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Types;
+use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\Profile;
@@ -67,6 +68,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('contests')->group(function () {
         Route::get('types', Types::class);
         Route::get('lobby', Lobby::class);
+        Route::get('upcoming', Upcoming::class);
     });
 
     /*

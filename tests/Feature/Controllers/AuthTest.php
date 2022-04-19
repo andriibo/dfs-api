@@ -24,7 +24,7 @@ class AuthTest extends TestCase
     use DatabaseTransactions;
     use CreatesUser;
 
-    public function testAuthRegisterEndpoint()
+    public function testAuthRegisterEndpoint(): void
     {
         $data = [
             'email' => 'test@fantasysports.com',
@@ -35,13 +35,13 @@ class AuthTest extends TestCase
         ];
 
         $response = $this->postJson('/api/v1/auth/register', $data);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
 
         $user = User::where('email', $data['email'])->first();
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 
-    public function testAuthLoginEndpoint()
+    public function testAuthLoginEndpoint(): void
     {
         $this->createUser();
 
@@ -51,10 +51,10 @@ class AuthTest extends TestCase
         ];
 
         $response = $this->postJson('/api/v1/auth/login', $credentials);
-        $this->checkResponseWithToken($response);
+        $this->assertResponseWithToken($response);
     }
 
-    public function testAuthRefreshTokenEndpoint()
+    public function testAuthRefreshTokenEndpoint(): void
     {
         $user = $this->createUser();
         $token = $this->getTokenForUser($user);
@@ -62,19 +62,19 @@ class AuthTest extends TestCase
         $response = $this->postJson('/api/v1/auth/refresh/token', [], [
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $this->checkResponseWithToken($response);
+        $this->assertResponseWithToken($response);
     }
 
-    public function testAuthForgotPasswordEndpoint()
+    public function testAuthForgotPasswordEndpoint(): void
     {
         $user = $this->createUser();
         $response = $this->postJson('/api/v1/auth/forgot/password', ['email' => $user->email]);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
 
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
-    public function testAuthResetPasswordEndpoint()
+    public function testAuthResetPasswordEndpoint(): void
     {
         $user = $this->createUser();
         $token = Password::broker()->createToken($user);
@@ -85,10 +85,10 @@ class AuthTest extends TestCase
             'password_confirmation' => 'password',
         ];
         $response = $this->postJson($endpoint, $data);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
     }
 
-    public function testAuthEmailVerifyEndpoint()
+    public function testAuthEmailVerifyEndpoint(): void
     {
         $user = $this->createUser();
         $endpoint = URL::temporarySignedRoute(
@@ -101,10 +101,10 @@ class AuthTest extends TestCase
         );
 
         $response = $this->getJson($endpoint);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
     }
 
-    public function testAuthEmailVerifyResendEndpoint()
+    public function testAuthEmailVerifyResendEndpoint(): void
     {
         $user = $this->createUser();
         $endpoint = URL::temporarySignedRoute(
@@ -116,10 +116,10 @@ class AuthTest extends TestCase
             ]
         );
         $response = $this->postJson($endpoint, ['email' => $user->email]);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
     }
 
-    public function testAuthLogoutEndpoint()
+    public function testAuthLogoutEndpoint(): void
     {
         $user = $this->createUser();
         $token = $this->getTokenForUser($user);
@@ -128,10 +128,10 @@ class AuthTest extends TestCase
             'Accept' => 'application/vnd.api+json',
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $this->checkResponse($response);
+        $this->assertResponse($response);
     }
 
-    private function checkResponse(TestResponse $response): void
+    private function assertResponse(TestResponse $response): void
     {
         $response->assertSuccessful();
         $response->assertSee(['success', 'message']);
@@ -140,7 +140,7 @@ class AuthTest extends TestCase
         $this->assertIsString($array['message']);
     }
 
-    private function checkResponseWithToken(TestResponse $response): void
+    private function assertResponseWithToken(TestResponse $response): void
     {
         $response->assertOk();
         $response->assertSee(['success', 'data']);

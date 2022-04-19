@@ -1314,7 +1314,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/ContestsLobbyResource"
+                                                "$ref": "#/components/schemas/ContestResource"
                                             }
                                         }
                                     },
@@ -1415,7 +1415,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/ContestTypesResource"
+                                                "$ref": "#/components/schemas/ContestTypeResource"
                                             }
                                         }
                                     },
@@ -1488,6 +1488,107 @@
                 }
             }
         },
+        "/contests/upcoming": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contests Upcoming",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Accept header",
+                        "schema": {
+                            "type": "string",
+                            "example": "application/vnd.api+json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Resource not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The current method is not supported for this route. Supported methods: GET."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/leagues": {
             "get": {
                 "tags": [
@@ -1515,7 +1616,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/LeaguesResource"
+                                                "$ref": "#/components/schemas/LeagueResource"
                                             }
                                         }
                                     },
@@ -1879,8 +1980,139 @@
     },
     "components": {
         "schemas": {
-            "ContestTypesResource": {
-                "title": "ContestTypesResource",
+            "ContestResource": {
+                "title": "ContestResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Test Contest"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "admin",
+                            "user",
+                            "template"
+                        ]
+                    },
+                    "contest_type": {
+                        "type": "string",
+                        "enum": [
+                            "fifty-fifty",
+                            "head-to-head",
+                            "multiplier",
+                            "wta",
+                            "top-three",
+                            "custom"
+                        ]
+                    },
+                    "expected_payout": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "34.17"
+                    },
+                    "is_prize_in_percents": {
+                        "type": "integer"
+                    },
+                    "max_entries": {
+                        "type": "integer",
+                        "example": "12"
+                    },
+                    "max_users": {
+                        "type": "integer",
+                        "example": "12"
+                    },
+                    "min_users": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "league_id": {
+                        "type": "integer",
+                        "example": "5"
+                    },
+                    "start_date": {
+                        "type": "integer",
+                        "example": "1650112441"
+                    },
+                    "end_date": {
+                        "type": "integer",
+                        "example": "1650122541"
+                    },
+                    "details": {
+                        "type": "string"
+                    },
+                    "entry_fee": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "11.87"
+                    },
+                    "salary_cap": {
+                        "type": "integer",
+                        "example": "7000"
+                    },
+                    "prize_bank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "90.45"
+                    },
+                    "prize_bank_type": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            5
+                        ]
+                    },
+                    "custom_prize_bank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "71.23"
+                    },
+                    "max_prize_bank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "300.99"
+                    },
+                    "suspended": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    "num_entries": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "num_users": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestUserResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ContestTypeResource": {
+                "title": "ContestTypeResource",
                 "properties": {
                     "value": {
                         "type": "string"
@@ -1891,8 +2123,8 @@
                 },
                 "type": "object"
             },
-            "ContestUsersResource": {
-                "title": "ContestsUsersResource",
+            "ContestUserResource": {
+                "title": "ContestUserResource",
                 "properties": {
                     "id": {
                         "type": "integer"
@@ -1904,122 +2136,46 @@
                         "type": "integer"
                     },
                     "username": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "fantasysports"
                     },
                     "avatar": {
                         "type": "string"
                     },
                     "budget": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "1350"
                     },
                     "date": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "1650112441"
                     },
                     "is_winner": {
-                        "type": "integer"
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
                     },
                     "place": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "1"
                     },
                     "prize": {
                         "type": "number",
-                        "format": "double"
+                        "format": "double",
+                        "example": "140.56"
                     },
                     "score": {
                         "type": "number",
-                        "format": "double"
+                        "format": "double",
+                        "example": "23.12"
                     }
                 },
                 "type": "object"
             },
-            "ContestsLobbyResource": {
-                "title": "ContestsLobbyResource",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "status": {
-                        "type": "integer"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "contest_type": {
-                        "type": "string"
-                    },
-                    "expected_payout": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "is_prize_in_percents": {
-                        "type": "integer"
-                    },
-                    "max_entries": {
-                        "type": "integer"
-                    },
-                    "max_users": {
-                        "type": "integer"
-                    },
-                    "min_users": {
-                        "type": "integer"
-                    },
-                    "league_id": {
-                        "type": "integer"
-                    },
-                    "start_date": {
-                        "type": "integer"
-                    },
-                    "end_date": {
-                        "type": "integer"
-                    },
-                    "details": {
-                        "type": "string"
-                    },
-                    "entry_fee": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "salary_cap": {
-                        "type": "integer"
-                    },
-                    "prize_bank": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "prize_bank_type": {
-                        "type": "integer"
-                    },
-                    "custom_prize_bank": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "max_prize_bank": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "suspended": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "num_entries": {
-                        "type": "integer"
-                    },
-                    "num_users": {
-                        "type": "integer"
-                    },
-                    "entries": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ContestUsersResource"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "LeaguesResource": {
-                "title": "LeaguesResource",
+            "LeagueResource": {
+                "title": "LeagueResource",
                 "properties": {
                     "id": {
                         "type": "integer"

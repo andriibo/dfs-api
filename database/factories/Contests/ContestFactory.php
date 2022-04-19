@@ -38,7 +38,7 @@ class ContestFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => StatusEnum::ready,
+            'status' => $this->faker->randomElement(StatusEnum::values()),
             'type' => $this->faker->randomElement(TypeEnum::names()),
             'contest_type' => $this->faker->randomElement(ContestTypeEnum::values()),
             'game_type' => $this->faker->randomElement(GameTypeEnum::values()),

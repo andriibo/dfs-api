@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contests\ContestTypesResource;
+use App\Http\Resources\Contests\ContestTypeResource;
 use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -21,7 +21,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(type="object",
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestTypesResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestTypeResource")
  *             )
  *         )
  *     ),
@@ -55,6 +55,6 @@ class Types extends Controller
     {
         $types = $contestService->getContestTypes();
 
-        return ContestTypesResource::collection($types);
+        return ContestTypeResource::collection($types);
     }
 }

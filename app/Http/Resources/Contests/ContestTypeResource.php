@@ -6,13 +6,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="ContestTypesResource",
+ *     title="ContestTypeResource",
  *     type="object",
  *     @OA\Property(property="value", type="string"),
  *     @OA\Property(property="label", type="string")
  * )
  */
-class ContestTypesResource extends JsonResource
+class ContestTypeResource extends JsonResource
 {
     public function toArray($request): array
     {

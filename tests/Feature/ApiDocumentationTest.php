@@ -13,7 +13,7 @@ class ApiDocumentationTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testApiDocumentation()
+    public function testApiDocumentation(): void
     {
         $response = $this->get('/api/v1/documentation');
         $response->assertOk();
