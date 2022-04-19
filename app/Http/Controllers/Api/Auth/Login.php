@@ -59,7 +59,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Internal Server Error")
+ *            @OA\Property(property="message", type="string", example="Server Error")
  *         )
  *     )
  * )
