@@ -13,12 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/auth/login",
  *     summary="Login",
  *     tags={"Auth"},
- *     @OA\Parameter(
- *         name="Accept",
- *         in="header",
- *         description="Accept header",
- *         @OA\Schema(type="string", example="application/vnd.api+json")
- *     ),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),
@@ -35,33 +30,12 @@ use Symfony\Component\HttpFoundation\Response;
  *             )
  *         )
  *     ),
- *     @OA\Response(response=403, description="Forbidden",
- *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="false"),
- *             @OA\Property(property="error", type="string", example="Forbidden")
- *         )
- *     ),
- *     @OA\Response(response=404, description="Resource not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string", example="Resource not found")
- *         )
- *     ),
- *     @OA\Response(response=405, description="Method Not Allowed",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="The current method is not supported for this route. Supported methods: POST.")
- *         )
- *     ),
- *     @OA\Response(response=422, description="Unprocessable entity",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string"),
- *             @OA\Property(property="errors", type="object")
- *         )
- *     ),
- *     @OA\Response(response=500, description="Internal Server Error",
- *         @OA\JsonContent(
- *            @OA\Property(property="message", type="string", example="Server Error")
- *         )
- *     )
+ *     @OA\Response(response=401, ref="#/components/responses/401"),
+ *     @OA\Response(response=403, ref="#/components/responses/403"),
+ *     @OA\Response(response=404, ref="#/components/responses/404"),
+ *     @OA\Response(response=405, ref="#/components/responses/405"),
+ *     @OA\Response(response=422, ref="#/components/responses/422"),
+ *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
 class Login extends Controller

@@ -9,8 +9,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/contests/live",
- *     summary="Get Contests Live",
+ *     path="/contests/history",
+ *     summary="Get Contests History",
  *     tags={"Contests"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
@@ -27,11 +27,11 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class Live extends Controller
+class History extends Controller
 {
     public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $contests = $contestService->getContestsLive(auth()->user()->id);
+        $contests = $contestService->getContestsHistory(auth()->user()->id);
 
         return ContestResource::collection($contests);
     }
