@@ -2115,10 +2115,24 @@
                 "title": "ContestTypeResource",
                 "properties": {
                     "value": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "wta",
+                            "top-three",
+                            "fifty-fifty",
+                            "head-to-head",
+                            "custom"
+                        ]
                     },
                     "label": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "Featured",
+                            "Top Three",
+                            "50/50",
+                            "H2H",
+                            "Custom"
+                        ]
                     }
                 },
                 "type": "object"
