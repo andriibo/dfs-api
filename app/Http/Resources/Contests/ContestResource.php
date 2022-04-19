@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="ContestResource",
- *     type="object",
  *     @OA\Property(property="id", type="integer"),
  *     @OA\Property(property="name", type="string", example="Test Contest"),
  *     @OA\Property(property="status", type="integer", enum={1,2,3,4,5}),
