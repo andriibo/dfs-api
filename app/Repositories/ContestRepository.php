@@ -35,4 +35,19 @@ class ContestRepository
             ->get()
             ;
     }
+
+    /**
+     * @return Collection|Contest[]
+     */
+    public function getContestsLive(int $userId): Collection
+    {
+        return Contest::query()
+            ->where('status', StatusEnum::started)
+            ->whereHas('contestUsers', function (Builder $query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->orderBy('start_date')
+            ->get()
+            ;
+    }
 }

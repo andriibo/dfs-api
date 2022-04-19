@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api\Leagues;
+namespace App\Http\Controllers\Api\Contests;
 
-use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Leagues\LeagueResource;
-use App\Services\LeagueService;
+use App\Http\Resources\Contests\ContestResource;
+use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Get(
- *     path="/leagues",
- *     summary="Get Leagues",
- *     tags={"Leagues"},
+ *     path="/contests/live",
+ *     summary="Get Contests Live",
+ *     tags={"Contests"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(
  *         name="Accept",
  *         in="header",
@@ -20,20 +20,20 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *         @OA\Schema(type="string", example="application/vnd.api+json")
  *     ),
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(type="object",
+ *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/LeagueResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestResource")
  *             )
  *         )
  *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
+ *            @OA\Property(property="message", type="string", example="Unauthenticated.")
  *         )
  *     ),
- *     @OA\Response(response=404, description="Resource not found",
+ *     @OA\Response(response=404, description="Not Found",
  *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
+ *            @OA\Property(property="error", type="string", example="Resource not found.")
  *         )
  *     ),
  *     @OA\Response(response=405, description="Method Not Allowed",
@@ -48,12 +48,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     )
  * )
  */
-class Leagues extends Controller
+class Live extends Controller
 {
-    public function __invoke(LeagueService $leagueService): AnonymousResourceCollection
+    public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
+        $contests = $contestService->getContestsLive(auth()->user()->id);
 
-        return LeagueResource::collection($leagues);
+        return ContestResource::collection($contests);
     }
 }

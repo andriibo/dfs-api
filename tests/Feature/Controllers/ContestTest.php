@@ -52,6 +52,17 @@ class ContestTest extends TestCase
         $this->assertResponse($response);
     }
 
+    public function testContestsLiveEndpoint(): void
+    {
+        $this->createContests();
+        $user = User::where('email', 'test@fantasysports.com')->first();
+        $token = $this->getTokenForUser($user);
+        $response = $this->getJson('/api/v1/contests/live', [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $this->assertResponse($response);
+    }
+
     private function createContests(): void
     {
         $league = League::factory()

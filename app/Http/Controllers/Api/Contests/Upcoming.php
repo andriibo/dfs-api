@@ -28,7 +28,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=401, description="Unauthorized",
  *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
+ *            @OA\Property(property="message", type="string", example="Unauthenticated.")
  *         )
  *     ),
  *     @OA\Response(response=404, description="Not Found",
@@ -43,7 +43,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     ),
  *     @OA\Response(response=500, description="Internal Server Error",
  *         @OA\JsonContent(
- *            @OA\Property(property="error", type="string")
+ *            @OA\Property(property="message", type="string", example="Server Error")
  *         )
  *     )
  * )
