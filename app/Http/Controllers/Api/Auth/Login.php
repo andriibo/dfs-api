@@ -29,9 +29,9 @@ use Symfony\Component\HttpFoundation\Response;
  *         @OA\JsonContent(
  *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="data", type="object",
- *                 @OA\Property(property="access_token", type="string"),
- *                 @OA\Property(property="token_type", type="string", example="bearer"),
- *                 @OA\Property(property="expires_in", type="integer", example="3600")
+ *                 @OA\Property(property="accessToken", type="string"),
+ *                 @OA\Property(property="tokenType", type="string", example="bearer"),
+ *                 @OA\Property(property="expiresIn", type="integer", example="3600")
  *             )
  *         )
  *     ),

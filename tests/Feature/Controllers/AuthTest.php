@@ -148,8 +148,8 @@ class AuthTest extends TestCase
         $this->assertIsBool($array['success']);
         $this->assertIsArray($array['data']);
         $data = $array['data'];
-        $this->assertArrayHasKey('access_token', $data);
-        $this->assertArrayHasKey('token_type', $data);
-        $this->assertArrayHasKey('expires_in', $data);
+        $this->assertArrayHasKey('accessToken', $data);
+        $this->assertArrayHasKey('tokenType', $data);
+        $this->assertArrayHasKey('expiresIn', $data);
     }
 }

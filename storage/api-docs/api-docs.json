@@ -236,14 +236,14 @@
                                         },
                                         "data": {
                                             "properties": {
-                                                "access_token": {
+                                                "accessToken": {
                                                     "type": "string"
                                                 },
-                                                "token_type": {
+                                                "tokenType": {
                                                     "type": "string",
                                                     "example": "bearer"
                                                 },
-                                                "expires_in": {
+                                                "expiresIn": {
                                                     "type": "integer",
                                                     "example": "3600"
                                                 }
@@ -2008,7 +2008,7 @@
                             "template"
                         ]
                     },
-                    "contest_type": {
+                    "contestType": {
                         "type": "string",
                         "enum": [
                             "fifty-fifty",
@@ -2019,56 +2019,56 @@
                             "custom"
                         ]
                     },
-                    "expected_payout": {
+                    "expectedPayout": {
                         "type": "number",
                         "format": "double",
                         "example": "34.17"
                     },
-                    "is_prize_in_percents": {
+                    "isPrizeInPercents": {
                         "type": "integer"
                     },
-                    "max_entries": {
+                    "maxEntries": {
                         "type": "integer",
                         "example": "12"
                     },
-                    "max_users": {
+                    "maxUsers": {
                         "type": "integer",
                         "example": "12"
                     },
-                    "min_users": {
+                    "minUsers": {
                         "type": "integer",
                         "example": "1"
                     },
-                    "league_id": {
+                    "leagueId": {
                         "type": "integer",
                         "example": "5"
                     },
-                    "start_date": {
+                    "startDate": {
                         "type": "integer",
                         "example": "1650112441"
                     },
-                    "end_date": {
+                    "endDate": {
                         "type": "integer",
                         "example": "1650122541"
                     },
                     "details": {
                         "type": "string"
                     },
-                    "entry_fee": {
+                    "entryFee": {
                         "type": "number",
                         "format": "double",
                         "example": "11.87"
                     },
-                    "salary_cap": {
+                    "salaryCap": {
                         "type": "integer",
                         "example": "7000"
                     },
-                    "prize_bank": {
+                    "prizeBank": {
                         "type": "number",
                         "format": "double",
                         "example": "90.45"
                     },
-                    "prize_bank_type": {
+                    "prizeBankType": {
                         "type": "integer",
                         "enum": [
                             1,
@@ -2077,12 +2077,12 @@
                             5
                         ]
                     },
-                    "custom_prize_bank": {
+                    "customPrizeBank": {
                         "type": "number",
                         "format": "double",
                         "example": "71.23"
                     },
-                    "max_prize_bank": {
+                    "maxPrizeBank": {
                         "type": "number",
                         "format": "double",
                         "example": "300.99"
@@ -2094,11 +2094,11 @@
                             1
                         ]
                     },
-                    "num_entries": {
+                    "numEntries": {
                         "type": "integer",
                         "example": "1"
                     },
-                    "num_users": {
+                    "numUsers": {
                         "type": "integer",
                         "example": "1"
                     },
@@ -2146,7 +2146,7 @@
                     "title": {
                         "type": "string"
                     },
-                    "user_id": {
+                    "userId": {
                         "type": "integer"
                     },
                     "username": {
@@ -2164,7 +2164,7 @@
                         "type": "integer",
                         "example": "1650112441"
                     },
-                    "is_winner": {
+                    "isWinner": {
                         "type": "integer",
                         "enum": [
                             0,
@@ -2224,57 +2224,57 @@
                         "example": "1993-05-23",
                         "nullable": true
                     },
-                    "country_id": {
+                    "countryId": {
                         "type": "integer"
                     },
-                    "fav_team_id": {
+                    "favTeamId": {
                         "type": "integer"
                     },
-                    "fav_player_id": {
+                    "favPlayerId": {
                         "type": "integer"
                     },
-                    "language_id": {
+                    "languageId": {
                         "type": "integer"
                     },
-                    "receive_newsletters": {
+                    "receiveNewsletters": {
                         "type": "integer",
                         "enum": [
                             0,
                             1
                         ]
                     },
-                    "receive_notifications": {
+                    "receiveNotifications": {
                         "type": "integer",
                         "enum": [
                             0,
                             1
                         ]
                     },
-                    "avatar_id": {
+                    "avatarId": {
                         "type": "integer"
                     },
-                    "is_email_confirmed": {
+                    "isEmailConfirmed": {
                         "type": "integer",
                         "enum": [
                             0,
                             1
                         ]
                     },
-                    "invited_by_user": {
+                    "invitedByUser": {
                         "type": "integer"
                     },
-                    "is_sham": {
+                    "isSham": {
                         "type": "integer",
                         "enum": [
                             0,
                             1
                         ]
                     },
-                    "created_at": {
+                    "createdAt": {
                         "type": "string",
                         "example": "2022-04-01 12:00:05"
                     },
-                    "updated_at": {
+                    "updatedAt": {
                         "type": "string",
                         "example": "2022-04-02 11:59:41"
                     }
