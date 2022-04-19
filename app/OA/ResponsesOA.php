@@ -43,6 +43,6 @@ namespace App\OA;
  *    )
  * )
  */
-class OAResponses
+class ResponsesOA
 {
 }

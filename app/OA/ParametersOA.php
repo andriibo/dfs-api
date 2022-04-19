@@ -34,6 +34,6 @@ namespace App\OA;
  *    @OA\Schema(type="string")
  * )
  */
-class OAParameters
+class ParametersOA
 {
 }

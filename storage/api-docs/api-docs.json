@@ -57,10 +57,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "message": {
                                             "type": "string",
                                             "example": "A reset email has been sent! Please check your email."
@@ -135,10 +131,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "data": {
                                             "properties": {
                                                 "accessToken": {
@@ -200,10 +192,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "message": {
                                             "type": "string",
                                             "example": "Successfully logged out"
@@ -252,10 +240,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "data": {
                                             "properties": {
                                                 "access_token": {
@@ -421,10 +405,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "message": {
                                             "type": "string",
                                             "example": "A reset email has been sent! Please check your email."
@@ -480,10 +460,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "message": {
                                             "type": "string",
                                             "example": "Account verified."
@@ -549,10 +525,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": "true"
-                                        },
                                         "message": {
                                             "type": "string",
                                             "example": "Verification link sent"
