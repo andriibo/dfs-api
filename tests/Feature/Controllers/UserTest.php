@@ -15,7 +15,7 @@ class UserTest extends TestCase
     use DatabaseTransactions;
     use CreatesUser;
 
-    public function testProfileEndpoint(): void
+    public function testUsersProfileEndpoint(): void
     {
         $user = $this->createUser();
         $token = $this->getTokenForUser($user);
@@ -46,7 +46,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testBalanceEndpoint(): void
+    public function testUsersBalanceEndpoint(): void
     {
         $user = $this->createUser();
         $token = $this->getTokenForUser($user);

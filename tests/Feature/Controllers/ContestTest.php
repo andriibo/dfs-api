@@ -20,7 +20,7 @@ class ContestTest extends TestCase
     use DatabaseTransactions;
     use CreatesUser;
 
-    public function testContestTypesEndpoint(): void
+    public function testContestsTypesEndpoint(): void
     {
         $response = $this->getJson('/api/v1/contests/types');
         $response->assertOk();
@@ -34,14 +34,14 @@ class ContestTest extends TestCase
         ]);
     }
 
-    public function testContestsLobbyGetEndpoint(): void
+    public function testContestsLobbyEndpoint(): void
     {
         $this->createContests();
         $response = $this->getJson('/api/v1/contests/lobby');
         $this->assertResponse($response);
     }
 
-    public function testContestsUpcomingGetEndpoint(): void
+    public function testContestsUpcomingEndpoint(): void
     {
         $this->createContests();
         $user = User::where('email', 'test@fantasysports.com')->first();
