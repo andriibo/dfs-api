@@ -15,12 +15,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="fav_team_id", type="integer"),
  *     @OA\Property(property="fav_player_id", type="integer"),
  *     @OA\Property(property="language_id", type="integer"),
- *     @OA\Property(property="receive_newsletters", type="integer"),
- *     @OA\Property(property="receive_notifications", type="integer"),
+ *     @OA\Property(property="receive_newsletters", type="integer", enum={0,1}),
+ *     @OA\Property(property="receive_notifications", type="integer", enum={0,1}),
  *     @OA\Property(property="avatar_id", type="integer"),
- *     @OA\Property(property="is_email_confirmed", type="integer"),
+ *     @OA\Property(property="is_email_confirmed", type="integer", enum={0,1}),
  *     @OA\Property(property="invited_by_user", type="integer"),
- *     @OA\Property(property="is_sham", type="integer"),
+ *     @OA\Property(property="is_sham", type="integer", enum={0,1}),
  *     @OA\Property(property="created_at", type="string", example="2022-04-01 12:00:05"),
  *     @OA\Property(property="updated_at", type="string", example="2022-04-02 11:59:41")
  * )

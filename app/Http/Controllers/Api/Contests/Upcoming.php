@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Contests\ContestResource;
 use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Get(
- *     path="/contests/lobby",
- *     summary="Get Contests Lobby",
+ *     path="/contests/upcoming",
+ *     summary="Get Contests Upcoming",
  *     tags={"Contests"},
  *     @OA\Parameter(
  *         name="Accept",
@@ -47,11 +48,11 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     )
  * )
  */
-class Lobby extends Controller
+class Upcoming extends Controller
 {
     public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $contests = $contestService->getContestsLobby();
+        $contests = Auth::check() ? $contestService->getContestsUpcoming(auth()->user()->id) : [];
 
         return ContestResource::collection($contests);
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Leagues;
 
 use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Leagues\LeaguesResource;
+use App\Http\Resources\Leagues\LeagueResource;
 use App\Services\LeagueService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -22,7 +22,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(type="object",
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/LeaguesResource")
+ *                 @OA\Items(ref="#/components/schemas/LeagueResource")
  *             )
  *         )
  *     ),
@@ -55,6 +55,6 @@ class Leagues extends Controller
     {
         $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
 
-        return LeaguesResource::collection($leagues);
+        return LeagueResource::collection($leagues);
     }
 }

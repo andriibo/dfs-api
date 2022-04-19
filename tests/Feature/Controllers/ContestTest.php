@@ -7,6 +7,8 @@ use App\Models\Contests\ContestUser;
 use App\Models\League;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Testing\TestResponse;
+use Tests\CreatesUser;
 use Tests\TestCase;
 
 /**
@@ -16,8 +18,9 @@ use Tests\TestCase;
 class ContestTest extends TestCase
 {
     use DatabaseTransactions;
+    use CreatesUser;
 
-    public function testContestTypesEndpoint()
+    public function testContestTypesEndpoint(): void
     {
         $response = $this->getJson('/api/v1/contests/types');
         $response->assertOk();
@@ -31,7 +34,25 @@ class ContestTest extends TestCase
         ]);
     }
 
-    public function testContestsLobbyGetEndpoint()
+    public function testContestsLobbyGetEndpoint(): void
+    {
+        $this->createContests();
+        $response = $this->getJson('/api/v1/contests/lobby');
+        $this->assertResponse($response);
+    }
+
+    public function testContestsUpcomingGetEndpoint(): void
+    {
+        $this->createContests();
+        $user = User::where('email', 'test@fantasysports.com')->first();
+        $token = $this->getTokenForUser($user);
+        $response = $this->getJson('/api/v1/contests/upcoming', [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $this->assertResponse($response);
+    }
+
+    private function createContests(): void
     {
         $league = League::factory()
             ->create()
@@ -41,18 +62,23 @@ class ContestTest extends TestCase
             ->create()
         ;
 
-        $contest = Contest::factory()
+        $contests = Contest::factory()
+            ->count(10)
             ->for($league)
             ->create()
         ;
 
-        ContestUser::factory()
-            ->for($user)
-            ->for($contest)
-            ->create()
-        ;
+        foreach ($contests as $contest) {
+            ContestUser::factory()
+                ->for($user)
+                ->for($contest)
+                ->create()
+            ;
+        }
+    }
 
-        $response = $this->getJson('/api/v1/contests/lobby');
+    private function assertResponse(TestResponse $response): void
+    {
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
