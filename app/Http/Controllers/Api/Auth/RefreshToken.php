@@ -15,7 +15,6 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="data", type="object",
  *                 @OA\Property(property="access_token", type="string"),
  *                 @OA\Property(property="token_type", type="string", example="bearer"),
@@ -34,9 +33,6 @@ class RefreshToken extends Controller
 {
     public function __invoke(AuthService $authService): JsonResponse
     {
-        return response()->json([
-            'success' => true,
-            'data' => $authService->createNewToken(auth()->refresh()),
-        ]);
+        return response()->json(['data' => $authService->createNewToken(auth()->refresh())]);
     }
 }

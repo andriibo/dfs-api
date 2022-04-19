@@ -14,7 +14,6 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="Successfully logged out")
  *         )
  *     ),
@@ -30,9 +29,6 @@ class Logout extends Controller
     {
         auth()->logout();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Successfully logged out',
-        ]);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }

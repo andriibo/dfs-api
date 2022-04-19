@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="A reset email has been sent! Please check your email.")
  *         )
  *     ),
@@ -48,10 +47,7 @@ class ResetPassword extends Controller
                 event(new PasswordReset($user));
             });
             if ($response == Password::PASSWORD_RESET) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Password reset successfully.',
-                ]);
+                return response()->json(['message' => 'Password reset successfully.']);
             }
 
             return response()->json(['error' => 'Email could not be sent to this email address.'], Response::HTTP_BAD_REQUEST);

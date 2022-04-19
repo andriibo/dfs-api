@@ -135,17 +135,15 @@ class AuthTest extends TestCase
     {
         $response->assertSuccessful();
         $response->assertSee('message');
-        $this->assertIsString($response->json()['message']);
+        $this->assertIsString($response['message']);
     }
 
     private function assertResponseWithToken(TestResponse $response): void
     {
         $response->assertOk();
-        $response->assertSee(['success', 'data']);
-        $array = $response->json();
-        $this->assertIsBool($array['success']);
-        $this->assertIsArray($array['data']);
-        $data = $array['data'];
+        $response->assertSee('data');
+        $this->assertIsArray($response['data']);
+        $data = $response['data'];
         $this->assertArrayHasKey('accessToken', $data);
         $this->assertArrayHasKey('tokenType', $data);
         $this->assertArrayHasKey('expiresIn', $data);

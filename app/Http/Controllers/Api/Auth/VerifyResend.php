@@ -20,7 +20,6 @@ use Illuminate\Http\JsonResponse;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="Verification link sent")
  *         )
  *     ),
@@ -39,9 +38,6 @@ class VerifyResend extends Controller
         $user = $userService->getUserByEmail($verifyResendRequest->email);
         $user->sendEmailVerificationNotification();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Verification link sent.',
-        ]);
+        return response()->json(['message' => 'Verification link sent.']);
     }
 }

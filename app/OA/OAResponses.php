@@ -10,7 +10,7 @@ namespace App\OA;
  *    @OA\JsonContent(
  *       @OA\Property(property="error", type="string", example="Bad request.")
  *    )
- *),
+ * ),
  * @OA\Response(response=401, description="Unauthorized",
  *    @OA\JsonContent(
  *       @OA\Property(property="message", type="string", example="Unauthenticated.")
@@ -41,7 +41,7 @@ namespace App\OA;
  *    @OA\JsonContent(
  *        @OA\Property(property="message", type="string", example="Server Error")
  *    )
- *)
+ * )
  */
 class OAResponses
 {

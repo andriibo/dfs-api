@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="A reset email has been sent! Please check your email.")
  *         )
  *     ),

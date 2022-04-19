@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
  *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="data", type="object",
  *                 @OA\Property(property="accessToken", type="string"),
  *                 @OA\Property(property="tokenType", type="string", example="bearer"),
@@ -43,22 +42,15 @@ class Login extends Controller
     public function __invoke(LoginRequest $authLoginRequest, AuthService $authService): JsonResponse
     {
         if (!$token = auth()->attempt($authLoginRequest->validated())) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Unauthorized',
-            ], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['message' => 'Unauthorized.'], Response::HTTP_UNAUTHORIZED);
         }
 
         if (!auth()->user()->hasVerifiedEmail()) {
             return response()->json([
-                'success' => false,
                 'error' => 'Please verify your email address before logging in. You may request a new link here [xyz.com] if your verification has expired.',
             ], Response::HTTP_FORBIDDEN);
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => $authService->createNewToken($token),
-        ]);
+        return response()->json(['data' => $authService->createNewToken($token)]);
     }
 }

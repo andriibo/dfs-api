@@ -17,7 +17,6 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Parameter(ref="#/components/parameters/hash"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="success", type="bool", example="true"),
  *             @OA\Property(property="message", type="string", example="Account verified.")
  *         )
  *     ),
@@ -35,19 +34,13 @@ class VerifyEmail extends Controller
         $user = $userService->getUserById($userId);
 
         if ($user->hasVerifiedEmail()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Account already verified.',
-            ]);
+            return response()->json(['message' => 'Account already verified.']);
         }
 
         if ($user->markEmailAsVerified()) {
             event(new Verified($user));
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'You have successfully verified your email address.',
-        ]);
+        return response()->json(['message' => 'You have successfully verified your email address.']);
     }
 }
