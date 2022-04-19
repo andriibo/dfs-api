@@ -68,7 +68,9 @@ Route::prefix('v1')->group(function () {
     Route::prefix('contests')->group(function () {
         Route::get('types', Types::class);
         Route::get('lobby', Lobby::class);
-        Route::get('upcoming', Upcoming::class);
+        Route::middleware('auth:api')->group(function (): void {
+            Route::get('upcoming', Upcoming::class);
+        });
     });
 
     /*

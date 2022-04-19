@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Contests\ContestResource;
 use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Get(
  *     path="/contests/upcoming",
  *     summary="Get Contests Upcoming",
  *     tags={"Contests"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(
  *         name="Accept",
  *         in="header",
@@ -52,7 +52,7 @@ class Upcoming extends Controller
 {
     public function __invoke(ContestService $contestService): AnonymousResourceCollection
     {
-        $contests = Auth::check() ? $contestService->getContestsUpcoming(auth()->user()->id) : [];
+        $contests = $contestService->getContestsUpcoming(auth()->user()->id);
 
         return ContestResource::collection($contests);
     }
