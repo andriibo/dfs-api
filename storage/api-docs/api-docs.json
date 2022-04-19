@@ -2237,22 +2237,38 @@
                         "type": "integer"
                     },
                     "receive_newsletters": {
-                        "type": "integer"
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
                     },
                     "receive_notifications": {
-                        "type": "integer"
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
                     },
                     "avatar_id": {
                         "type": "integer"
                     },
                     "is_email_confirmed": {
-                        "type": "integer"
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
                     },
                     "invited_by_user": {
                         "type": "integer"
                     },
                     "is_sham": {
-                        "type": "integer"
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
                     },
                     "created_at": {
                         "type": "string",
