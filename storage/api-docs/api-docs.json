@@ -592,6 +592,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[number]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[size]"
                     }
                 ],
                 "responses": {
@@ -600,15 +606,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
@@ -645,6 +643,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[number]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[size]"
                     }
                 ],
                 "responses": {
@@ -653,15 +657,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
@@ -698,6 +694,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[number]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[size]"
                     }
                 ],
                 "responses": {
@@ -706,15 +708,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
@@ -788,6 +782,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[number]"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page[size]"
                     }
                 ],
                 "responses": {
@@ -796,15 +796,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
@@ -987,6 +979,24 @@
     },
     "components": {
         "schemas": {
+            "ContestCollection": {
+                "title": "ContestCollection",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestResource"
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                    }
+                },
+                "type": "object"
+            },
             "ContestResource": {
                 "title": "ContestResource",
                 "properties": {
@@ -1287,6 +1297,82 @@
                     }
                 },
                 "type": "object"
+            },
+            "PaginationSchemaOA": {
+                "title": "PaginationSchemaOA",
+                "properties": {
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string"
+                            },
+                            "last": {
+                                "type": "string"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": "1"
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": "1"
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": "10"
+                            },
+                            "links": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "url": {
+                                            "type": "string",
+                                            "nullable": true
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "path": {
+                                "type": "string"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": "5"
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": "2"
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": "50"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
             }
         },
         "responses": {
@@ -1465,6 +1551,25 @@
                 "required": true,
                 "schema": {
                     "type": "string"
+                }
+            },
+            "page[number]": {
+                "name": "page[number]",
+                "in": "query",
+                "schema": {
+                    "type": "integer",
+                    "minimum": "1",
+                    "example": "1"
+                }
+            },
+            "page[size]": {
+                "name": "page[size]",
+                "in": "query",
+                "schema": {
+                    "type": "integer",
+                    "maximum": "30",
+                    "minimum": "1",
+                    "example": "10"
                 }
             }
         },

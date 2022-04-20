@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Contests;
 
+use App\Http\Collections\ContestCollection;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contests\ContestResource;
 use App\Services\ContestService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
  * @OA\Get(
@@ -15,12 +15,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/page[number]"),
+ *     @OA\Parameter(ref="#/components/parameters/page[size]"),
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(
- *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestResource")
- *             )
- *         )
+ *         @OA\JsonContent(ref="#/components/schemas/ContestCollection")
  *     ),
  *     @OA\Response(response=401, ref="#/components/responses/401"),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
@@ -30,10 +28,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Upcoming extends Controller
 {
-    public function __invoke(ContestService $contestService): AnonymousResourceCollection
+    public function __invoke(ContestService $contestService): ResourceCollection
     {
         $contests = $contestService->getContestsUpcoming(auth()->user()->id);
 
-        return ContestResource::collection($contests);
+        return new ContestCollection($contests);
     }
 }
