@@ -30,6 +30,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "requestBody": {
@@ -97,6 +100,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "requestBody": {
@@ -183,6 +189,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -231,6 +240,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -294,6 +306,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "requestBody": {
@@ -365,6 +380,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
                         "$ref": "#/components/parameters/token"
@@ -447,6 +465,9 @@
                         "$ref": "#/components/parameters/Accept"
                     },
                     {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
                         "$ref": "#/components/parameters/id"
                     },
                     {
@@ -497,6 +518,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "requestBody": {
@@ -565,6 +589,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -615,6 +642,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -665,6 +695,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -707,6 +740,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -749,6 +785,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -799,6 +838,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -841,6 +883,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -895,6 +940,9 @@
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
@@ -1371,6 +1419,15 @@
                 "name": "Accept",
                 "in": "header",
                 "description": "Accept header",
+                "schema": {
+                    "type": "string",
+                    "example": "application/vnd.api+json"
+                }
+            },
+            "Content-Type": {
+                "name": "Content-Type",
+                "in": "header",
+                "description": "Content-Type header",
                 "schema": {
                     "type": "string",
                     "example": "application/vnd.api+json"

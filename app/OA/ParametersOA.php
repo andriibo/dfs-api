@@ -10,6 +10,12 @@ namespace App\OA;
  *    @OA\Schema(type="string", example="application/vnd.api+json")
  * ),
  * @OA\Parameter(
+ *    name="Content-Type",
+ *    in="header",
+ *    description="Content-Type header",
+ *    @OA\Schema(type="string", example="application/vnd.api+json")
+ * ),
+ * @OA\Parameter(
  *    name="id",
  *    required=true,
  *    in="path",

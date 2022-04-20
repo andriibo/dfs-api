@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
  *     summary="Verify Resend",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com")

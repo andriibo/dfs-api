@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     summary="Register User",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password","password_confirmation","username","fullname"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),

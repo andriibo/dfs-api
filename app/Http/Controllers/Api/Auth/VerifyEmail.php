@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
  *     summary="Verify Email",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Parameter(ref="#/components/parameters/hash"),
  *     @OA\Response(response=200, description="Ok",

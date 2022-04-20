@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     summary="Reset Password",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/token"),
  *     @OA\Parameter(ref="#/components/parameters/email"),
  *     @OA\RequestBody(
