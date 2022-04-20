@@ -4,27 +4,21 @@ namespace App\Repositories;
 
 use App\Enums\Contests\StatusEnum;
 use App\Models\Contests\Contest;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 class ContestRepository
 {
-    /**
-     * @return Collection|Contest[]
-     */
-    public function getContestsLobby(): Collection
+    public function getContestsLobby(): LengthAwarePaginator
     {
         return Contest::query()
             ->whereIn('status', [StatusEnum::ready, StatusEnum::started])
             ->orderBy('start_date')
-            ->get()
+            ->jsonPaginate()
         ;
     }
 
-    /**
-     * @return Collection|Contest[]
-     */
-    public function getContestsUpcoming(int $userId): Collection
+    public function getContestsUpcoming(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::ready)
@@ -32,14 +26,11 @@ class ContestRepository
                 $query->where('user_id', $userId);
             })
             ->orderBy('start_date')
-            ->get()
-            ;
+            ->jsonPaginate()
+        ;
     }
 
-    /**
-     * @return Collection|Contest[]
-     */
-    public function getContestsLive(int $userId): Collection
+    public function getContestsLive(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::started)
@@ -47,14 +38,11 @@ class ContestRepository
                 $query->where('user_id', $userId);
             })
             ->orderBy('start_date')
-            ->get()
-            ;
+            ->jsonPaginate()
+        ;
     }
 
-    /**
-     * @return Collection|Contest[]
-     */
-    public function getContestsHistory(int $userId): Collection
+    public function getContestsHistory(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::closed)
@@ -62,7 +50,7 @@ class ContestRepository
                 $query->where('user_id', $userId);
             })
             ->orderBy('start_date')
-            ->get()
-            ;
+            ->jsonPaginate()
+        ;
     }
 }

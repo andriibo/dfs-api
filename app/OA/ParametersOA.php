@@ -39,6 +39,16 @@ namespace App\OA;
  *    in="query",
  *    @OA\Schema(type="string")
  * )
+ * @OA\Parameter(
+ *    name="page[number]",
+ *    in="query",
+ *    @OA\Schema(type="integer", minimum="1", example="1")
+ * )
+ * @OA\Parameter(
+ *    name="page[size]",
+ *    in="query",
+ *    @OA\Schema(type="integer", minimum="1", maximum="30", example="10")
+ * )
  */
 class ParametersOA
 {

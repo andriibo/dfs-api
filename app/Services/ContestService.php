@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Helpers\ContestHelper;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ContestService
 {
@@ -27,22 +27,22 @@ class ContestService
         }, array_keys($types), $types);
     }
 
-    public function getContestsLobby(): Collection
+    public function getContestsLobby(): LengthAwarePaginator
     {
         return $this->contestRepository->getContestsLobby();
     }
 
-    public function getContestsUpcoming(int $userId): Collection
+    public function getContestsUpcoming(int $userId): LengthAwarePaginator
     {
         return $this->contestRepository->getContestsUpcoming($userId);
     }
 
-    public function getContestsLive(int $userId): Collection
+    public function getContestsLive(int $userId): LengthAwarePaginator
     {
         return $this->contestRepository->getContestsUpcoming($userId);
     }
 
-    public function getContestsHistory(int $userId): Collection
+    public function getContestsHistory(int $userId): LengthAwarePaginator
     {
         return $this->contestRepository->getContestsHistory($userId);
     }
