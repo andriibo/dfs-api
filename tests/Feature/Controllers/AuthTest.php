@@ -3,8 +3,8 @@
 namespace Tests\Feature\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Auth\Notifications\VerifyEmail;
+use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmailNotification;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -38,7 +38,7 @@ class AuthTest extends TestCase
         $this->assertResponse($response);
 
         $user = User::where('email', $data['email'])->first();
-        Notification::assertSentTo($user, VerifyEmail::class);
+        Notification::assertSentTo($user, VerifyEmailNotification::class);
     }
 
     public function testAuthLoginEndpoint(): void
@@ -71,7 +71,7 @@ class AuthTest extends TestCase
         $response = $this->postJson('/api/v1/auth/forgot/password', ['email' => $user->email]);
         $this->assertResponse($response);
 
-        Notification::assertSentTo($user, ResetPassword::class);
+        Notification::assertSentTo($user, ResetPasswordNotification::class);
     }
 
     public function testAuthResetPasswordEndpoint(): void
