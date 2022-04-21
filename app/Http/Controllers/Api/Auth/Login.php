@@ -48,7 +48,7 @@ class Login extends Controller
 
         if (!auth()->user()->hasVerifiedEmail()) {
             return response()->json([
-                'error' => 'Please verify your email address before logging in. You may request a new link here [xyz.com] if your verification has expired.',
+                'error' => 'Please verify your email address before logging in. You may request a new email verify if your verification has expired.',
             ], Response::HTTP_FORBIDDEN);
         }
 
