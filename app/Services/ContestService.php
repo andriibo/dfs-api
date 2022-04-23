@@ -27,6 +27,11 @@ class ContestService
         }, array_keys($types), $types);
     }
 
+    public function getContestById(int $contestId): Contest
+    {
+        return $this->contestRepository->getContestById($contestId);
+    }
+
     public function getContestsLobby(): LengthAwarePaginator
     {
         return $this->contestRepository->getContestsLobby();

@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Models\ActionPoint;
 use App\Models\Contests\Contest;
+use App\Models\Contests\ContestActionPoint;
 use App\Models\Contests\ContestUser;
 use App\Models\League;
 use App\Models\User;
@@ -82,6 +84,124 @@ class ContestTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
         ]);
         $this->assertResponse($response);
+    }
+
+    public function testContestsShowEndpoint(): void
+    {
+        $league = League::factory()
+            ->create()
+        ;
+
+        $user = User::factory()
+            ->create()
+        ;
+
+        $actionPoint = ActionPoint::factory()
+            ->create()
+        ;
+
+        $contest = Contest::factory()
+            ->for($league)
+            ->create()
+        ;
+
+        ContestActionPoint::factory()
+            ->for($contest)
+            ->for($actionPoint)
+            ->create()
+        ;
+
+        ContestUser::factory()
+            ->for($user)
+            ->for($contest)
+            ->create()
+        ;
+
+        $endpoint = '/api/v1/contests/' . $contest->id;
+        $response = $this->getJson($endpoint);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'status',
+                'type',
+                'contestType',
+                'expectedPayout',
+                'isPrizeInPercents',
+                'maxEntries',
+                'maxUsers',
+                'minUsers',
+                'leagueId',
+                'startDate',
+                'endDate',
+                'details',
+                'entryFee',
+                'salaryCap',
+                'prizeBank',
+                'prizeBankType',
+                'customPrizeBank',
+                'maxPrizeBank',
+                'suspended',
+                'name',
+                'numEntries',
+                'numUsers',
+                'users' => [
+                    '*' => [
+                        'id',
+                        'title',
+                        'userId',
+                        'username',
+                        'avatar',
+                        'budget',
+                        'date',
+                        'isWinner',
+                        'place',
+                        'prize',
+                        'score',
+                    ],
+                ],
+                'games' => [
+                    '*' => [
+                        'id',
+                        'startDate',
+                        'awayTeamScore',
+                        'homeTeamScore',
+                        'awayTeam' => [
+                            'id',
+                            'name',
+                            'alias',
+                        ],
+                        'homeTeam' => [
+                            'id',
+                            'name',
+                            'alias',
+                        ],
+                    ],
+                ],
+                'prizes' => [
+                    '*' => [
+                        'places',
+                        'prize',
+                        'voucher',
+                        'badge_id',
+                        'num_badges',
+                        'winners',
+                        'from',
+                        'to',
+                    ],
+                ],
+                'scoring' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'sportId',
+                        'alias',
+                        'gameLogTemplate',
+                        'values',
+                    ],
+                ],
+            ],
+        ]);
     }
 
     private function createContests(): void
