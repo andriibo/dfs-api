@@ -140,7 +140,7 @@ class ContestService
         }
 
         switch ($contest->prize_bank_type) {
-            case PrizeBankTypeEnum::bankTypeTopThree->value:
+            case PrizeBankTypeEnum::topThree->value:
                 $topThree = [];
                 foreach ($prizePercents as $prizePercent) {
                     $prizePlace = new PrizePlace();
@@ -153,7 +153,7 @@ class ContestService
 
                 break;
 
-            case PrizeBankTypeEnum::bankTypeFiftyFifty->value:
+            case PrizeBankTypeEnum::fiftyFifty->value:
                 if (isset($prizes[0])) {
                     $places = $contest->contestUsers()->max('place');
                     $prizes[0]['places'] = $places > 1 ? floor($places / 2) : $places;

@@ -8,11 +8,11 @@ enum PrizeBankTypeEnum: int
 {
     use Values;
 
-    case bankTypeWta = 1;
+    case wta = 1;
 
-    case bankTypeTopThree = 2;
+    case topThree = 2;
 
-    case bankTypeFiftyFifty = 3;
+    case fiftyFifty = 3;
 
-    case bankTypeCustomPayout = 4;
+    case customPayout = 4;
 }
