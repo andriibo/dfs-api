@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Contests;
 
-use App\Helpers\ContestHelper;
 use App\Http\Resources\ActionPoints\ActionPointResource;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
 use App\Services\ContestService;
@@ -71,7 +70,7 @@ class ContestDetailsResource extends JsonResource
             'numUsers' => count($this->contestUsers),
             'users' => ContestUserResource::collection($this->contestUsers),
             'games' => GameScheduleResource::collection($this->gameSchedules),
-            'prizes' => ContestHelper::getPrizePlaces($this->resource),
+            'prizes' => $contestService->getPrizePlaces($this->resource),
             'scoring' => ActionPointResource::collection($this->actionPoints),
         ];
     }
