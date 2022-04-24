@@ -1202,7 +1202,7 @@
                         "type": "integer",
                         "example": "1"
                     },
-                    "entries": {
+                    "users": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ContestUserResource"
