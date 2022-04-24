@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -18,39 +20,43 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * App\Models\User.
  *
- * @property int             $id
- * @property string          $email
- * @property null|string     $email_verified_at
- * @property string          $password
- * @property string          $access_token
- * @property string          $auth_key
- * @property null|string     $remember_token
- * @property string          $username
- * @property string          $fullname
- * @property int             $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
- * @property int             $parent_affiliate_id   Refers to affiliate.id
- * @property Carbon          $updated_at
- * @property Carbon          $created_at
- * @property int             $is_deleted
- * @property string          $balance
- * @property null|string     $dob
- * @property int             $country_id
- * @property int             $fav_team_id
- * @property int             $fav_player_id
- * @property int             $language_id
- * @property int             $receive_newsletters
- * @property int             $receive_notifications
- * @property int             $avatar_id
- * @property int             $is_email_confirmed
- * @property int             $invited_by_user
- * @property int             $is_sham
- * @property null|FileUpload $avatar
+ * @property int                                                   $id
+ * @property string                                                $email
+ * @property null|string                                           $email_verified_at
+ * @property string                                                $password
+ * @property string                                                $access_token
+ * @property string                                                $auth_key
+ * @property null|string                                           $remember_token
+ * @property string                                                $username
+ * @property string                                                $fullname
+ * @property int                                                   $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
+ * @property int                                                   $parent_affiliate_id   Refers to affiliate.id
+ * @property Carbon                                                $updated_at
+ * @property Carbon                                                $created_at
+ * @property int                                                   $is_deleted
+ * @property string                                                $balance
+ * @property null|string                                           $dob
+ * @property int                                                   $country_id
+ * @property int                                                   $fav_team_id
+ * @property int                                                   $fav_player_id
+ * @property int                                                   $language_id
+ * @property int                                                   $receive_newsletters
+ * @property int                                                   $receive_notifications
+ * @property int                                                   $avatar_id
+ * @property int                                                   $is_email_confirmed
+ * @property int                                                   $invited_by_user
+ * @property int                                                   $is_sham
+ * @property null|FileUpload                                       $avatar
+ * @property DatabaseNotification[]|DatabaseNotificationCollection $notifications
+ * @property null|int                                              $notifications_count
  *
  * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
+ * @method static Builder|User whereAccessToken($value)
  * @method static Builder|User whereAvatarId($value)
+ * @method static Builder|User whereAuthKey($value)
  * @method static Builder|User whereBalance($value)
  * @method static Builder|User whereCountryId($value)
  * @method static Builder|User whereCreatedAt($value)
@@ -83,11 +89,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     protected $table = 'user';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'email',
         'username',
@@ -112,16 +113,15 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'is_sham',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'access_token',
         'auth_key',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     public function avatar(): BelongsTo

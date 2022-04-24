@@ -6,9 +6,22 @@ use App\Enums\Contests\StatusEnum;
 use App\Models\Contests\Contest;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContestRepository
 {
+    /**
+     * @throws ModelNotFoundException
+     */
+    public function getContestById(int $contestId): Contest
+    {
+        return Contest::query()
+            ->whereId($contestId)
+            ->with(['contestUsers', 'gameSchedules', 'actionPoints'])
+            ->firstOrFail()
+            ;
+    }
+
     public function getContestsLobby(): LengthAwarePaginator
     {
         return Contest::query()

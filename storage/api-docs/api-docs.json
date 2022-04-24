@@ -725,6 +725,51 @@
                 }
             }
         },
+        "/contests/{id}": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contest",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestDetailsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/contests/types": {
             "get": {
                 "tags": [
@@ -997,6 +1042,172 @@
                 },
                 "type": "object"
             },
+            "ActionPointResource": {
+                "title": "ActionPointResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "sportId": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "alias": {
+                        "type": "string"
+                    },
+                    "gameLogTemplate": {
+                        "type": "string"
+                    },
+                    "values": {
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ContestDetailsResource": {
+                "title": "ContestDetailsResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Test Contest"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "admin",
+                            "user",
+                            "template"
+                        ]
+                    },
+                    "contestType": {
+                        "type": "string",
+                        "enum": [
+                            "fifty-fifty",
+                            "head-to-head",
+                            "multiplier",
+                            "wta",
+                            "top-three",
+                            "custom"
+                        ]
+                    },
+                    "expectedPayout": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "34.17"
+                    },
+                    "isPrizeInPercents": {
+                        "type": "integer"
+                    },
+                    "maxEntries": {
+                        "type": "integer",
+                        "example": "12"
+                    },
+                    "maxUsers": {
+                        "type": "integer",
+                        "example": "12"
+                    },
+                    "minUsers": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "leagueId": {
+                        "type": "integer",
+                        "example": "5"
+                    },
+                    "startDate": {
+                        "type": "integer",
+                        "example": "1650112441"
+                    },
+                    "endDate": {
+                        "type": "integer",
+                        "example": "1650122541"
+                    },
+                    "details": {
+                        "type": "string"
+                    },
+                    "entryFee": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "11.87"
+                    },
+                    "salaryCap": {
+                        "type": "integer",
+                        "example": "7000"
+                    },
+                    "prizeBank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "90.45"
+                    },
+                    "prizeBankType": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            5
+                        ]
+                    },
+                    "customPrizeBank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "71.23"
+                    },
+                    "maxPrizeBank": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "300.99"
+                    },
+                    "suspended": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    "numEntries": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "numUsers": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "entries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestUserResource"
+                        }
+                    },
+                    "games": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GameScheduleResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "ContestResource": {
                 "title": "ContestResource",
                 "properties": {
@@ -1205,6 +1416,35 @@
                 },
                 "type": "object"
             },
+            "GameScheduleResource": {
+                "title": "GameScheduleResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "startDate": {
+                        "type": "integer",
+                        "example": "1650122541"
+                    },
+                    "awayTeamScore": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "21.16"
+                    },
+                    "homeTeamScore": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "14.71"
+                    },
+                    "awayTeam": {
+                        "$ref": "#/components/schemas/TeamResource"
+                    },
+                    "homeTeam": {
+                        "$ref": "#/components/schemas/TeamResource"
+                    }
+                },
+                "type": "object"
+            },
             "LeagueResource": {
                 "title": "LeagueResource",
                 "properties": {
@@ -1216,6 +1456,23 @@
                     },
                     "alias": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TeamResource": {
+                "title": "TeamResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Watford"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "example": "WAT"
                     }
                 },
                 "type": "object"
