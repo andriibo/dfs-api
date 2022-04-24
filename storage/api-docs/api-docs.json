@@ -1049,7 +1049,8 @@
                         "type": "integer"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "goal"
                     },
                     "sportId": {
                         "type": "integer",
@@ -1060,13 +1061,21 @@
                         ]
                     },
                     "alias": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "G"
                     },
                     "gameLogTemplate": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Goal"
                     },
                     "values": {
-                        "type": "object"
+                        "type": "object",
+                        "example": {
+                            "1": "10",
+                            "2": "7",
+                            "3": "30",
+                            "4": "4"
+                        }
                     }
                 },
                 "type": "object"
@@ -1203,6 +1212,18 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/GameScheduleResource"
+                        }
+                    },
+                    "prizes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PrizeResource"
+                        }
+                    },
+                    "scoring": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ActionPointResource"
                         }
                     }
                 },
@@ -1412,6 +1433,45 @@
                         "type": "number",
                         "format": "double",
                         "example": "23.12"
+                    }
+                },
+                "type": "object"
+            },
+            "PrizeResource": {
+                "title": "PrizeResource",
+                "properties": {
+                    "places": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "prize": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "120.75"
+                    },
+                    "voucher": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "badgeId": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "numBadges": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "winners": {
+                        "type": "array",
+                        "items": {},
+                        "example": "[]"
+                    },
+                    "from": {
+                        "type": "integer"
+                    },
+                    "to": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
