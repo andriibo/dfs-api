@@ -8,11 +8,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @OA\Schema(
  *     title="ActionPointResource",
  *     @OA\Property(property="id", type="integer"),
- *     @OA\Property(property="name", type="string"),
+ *     @OA\Property(property="name", type="string", example="goal"),
  *     @OA\Property(property="sportId", type="integer", enum={1,2,3}),
- *     @OA\Property(property="alias", type="string"),
- *     @OA\Property(property="gameLogTemplate", type="string"),
- *     @OA\Property(property="values", type="object")
+ *     @OA\Property(property="alias", type="string", example="G"),
+ *     @OA\Property(property="gameLogTemplate", type="string", example="Goal"),
+ *     @OA\Property(property="values", type="object", example={"1":"10","2":"7","3":"30","4":"4"})
  * )
  */
 class ActionPointResource extends JsonResource

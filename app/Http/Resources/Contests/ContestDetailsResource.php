@@ -34,7 +34,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="numEntries", type="integer", example="1"),
  *     @OA\Property(property="numUsers", type="integer", example="1"),
  *     @OA\Property(property="entries", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource")),
- *     @OA\Property(property="games", type="array", @OA\Items(ref="#/components/schemas/GameScheduleResource"))
+ *     @OA\Property(property="games", type="array", @OA\Items(ref="#/components/schemas/GameScheduleResource")),
+ *     @OA\Property(property="prizes", type="array", @OA\Items(ref="#/components/schemas/PrizeResource")),
+ *     @OA\Property(property="scoring", type="array", @OA\Items(ref="#/components/schemas/ActionPointResource"))
  * )
  */
 class ContestDetailsResource extends JsonResource
