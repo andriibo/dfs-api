@@ -7,9 +7,9 @@ class PrizePlace
     public ?int $places = null;
     public ?float $prize = null;
     public ?float $voucher = null;
-    public ?int $badge_id = null;
-    public ?int $num_badges = null;
-    public ?array $winners = null;
+    public ?int $badgeId = null;
+    public ?int $numBadges = null;
+    public array $winners = [];
     public ?int $from = null;
     public ?int $to = null;
 }
