@@ -28,18 +28,6 @@ namespace App\OA;
  *    @OA\Schema(type="string", example="12qs850keo23")
  * ),
  * @OA\Parameter(
- *    name="token",
- *    required=true,
- *    in="query",
- *    @OA\Schema(type="string")
- * ),
- * @OA\Parameter(
- *    name="email",
- *    required=true,
- *    in="query",
- *    @OA\Schema(type="string")
- * )
- * @OA\Parameter(
  *    name="page[number]",
  *    in="query",
  *    @OA\Schema(type="integer", minimum="1", example="1")

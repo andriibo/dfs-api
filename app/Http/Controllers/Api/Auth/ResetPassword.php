@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\Parameter(ref="#/components/parameters/token"),
- *     @OA\Parameter(ref="#/components/parameters/email"),
+ *     @OA\Parameter(name="token", required=true, in="query", @OA\Schema(type="string")),
+ *     @OA\Parameter(name="email", required=true, in="query", @OA\Schema(type="string"), example="john@gmail.com"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"password","password_confirmation"},
  *             @OA\Property(property="password", type="string", maxLength=50, example="password2"),

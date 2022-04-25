@@ -388,10 +388,21 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/token"
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "$ref": "#/components/parameters/email"
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "john@gmail.com"
                     }
                 ],
                 "requestBody": {
@@ -1890,22 +1901,6 @@
                 "schema": {
                     "type": "string",
                     "example": "12qs850keo23"
-                }
-            },
-            "token": {
-                "name": "token",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "email": {
-                "name": "email",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
                 }
             },
             "page[number]": {
