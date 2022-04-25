@@ -82,7 +82,7 @@ class AuthTest extends TestCase
 
         $data = [
             'password' => 'password',
-            'password_confirmation' => 'password',
+            'passwordConfirmation' => 'password',
         ];
         $response = $this->postJson($endpoint, $data);
         $this->assertResponse($response);

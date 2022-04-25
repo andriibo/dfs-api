@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"password","password_confirmation"},
  *             @OA\Property(property="password", type="string", maxLength=50, example="password2"),
- *             @OA\Property(property="password_confirmation", type="string", maxLength=50, example="password2")
+ *             @OA\Property(property="passwordConfirmation", type="string", maxLength=50, example="password2")
  *         ),
  *     ),
  *     @OA\Response(response=200, description="Ok",
@@ -44,7 +44,7 @@ class ResetPassword extends Controller
     public function __invoke(ResetPasswordRequest $resetPasswordRequest): JsonResponse
     {
         try {
-            $response = Password::reset($resetPasswordRequest->only('email', 'token', 'password', 'password_confirmation'), function ($user, $password) {
+            $response = Password::reset($resetPasswordRequest->only('email', 'token', 'password', 'passwordConfirmation'), function ($user, $password) {
                 $user->forceFill(['password' => Hash::make($password)])->save();
                 event(new PasswordReset($user));
             });

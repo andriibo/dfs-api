@@ -408,7 +408,7 @@
                                         "maxLength": 50,
                                         "example": "password2"
                                     },
-                                    "password_confirmation": {
+                                    "passwordConfirmation": {
                                         "type": "string",
                                         "maxLength": 50,
                                         "example": "password2"
