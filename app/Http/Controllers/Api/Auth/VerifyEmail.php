@@ -16,6 +16,8 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Parameter(ref="#/components/parameters/hash"),
+ *     @OA\Parameter(name="expires", required=true, in="query", @OA\Schema(type="integer"), example="1650560625"),
+ *     @OA\Parameter(name="signature", required=true, in="query", @OA\Schema(type="string")),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="Account verified.")
