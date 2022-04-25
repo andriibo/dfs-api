@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  *         @OA\JsonContent(required={"email","password","password_confirmation","username","fullname"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com"),
  *             @OA\Property(property="password", type="string", minLength=6, example="password"),
- *             @OA\Property(property="password_confirmation", type="string", example="password"),
+ *             @OA\Property(property="passwordConfirmation", type="string", example="password"),
  *             @OA\Property(property="username", type="string", minLength=2, maxLength=50, example="john"),
  *             @OA\Property(property="fullname", type="string", minLength=2, maxLength=50, example="John Doe")
  *         ),
