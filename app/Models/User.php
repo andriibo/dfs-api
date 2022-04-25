@@ -30,21 +30,21 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string                                                $username
  * @property string                                                $fullname
  * @property int                                                   $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
- * @property int                                                   $parent_affiliate_id   Refers to affiliate.id
+ * @property null|int                                              $parent_affiliate_id   Refers to affiliate.id
  * @property Carbon                                                $updated_at
  * @property Carbon                                                $created_at
  * @property int                                                   $is_deleted
  * @property string                                                $balance
  * @property null|string                                           $dob
- * @property int                                                   $country_id
- * @property int                                                   $fav_team_id
- * @property int                                                   $fav_player_id
- * @property int                                                   $language_id
+ * @property null|int                                              $country_id
+ * @property null|int                                              $fav_team_id
+ * @property null|int                                              $fav_player_id
+ * @property null|int                                              $language_id
  * @property int                                                   $receive_newsletters
  * @property int                                                   $receive_notifications
- * @property int                                                   $avatar_id
+ * @property null|int                                              $avatar_id
  * @property int                                                   $is_email_confirmed
- * @property int                                                   $invited_by_user
+ * @property null|int                                              $invited_by_user
  * @property int                                                   $is_sham
  * @property null|FileUpload                                       $avatar
  * @property DatabaseNotification[]|DatabaseNotificationCollection $notifications
