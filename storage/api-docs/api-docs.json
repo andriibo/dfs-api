@@ -117,7 +117,7 @@
                                     "email": {
                                         "type": "string",
                                         "maxLength": 50,
-                                        "example": "john@gmil.com"
+                                        "example": "john@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
@@ -326,7 +326,7 @@
                                     "email": {
                                         "type": "string",
                                         "maxLength": 50,
-                                        "example": "john@gmil.com"
+                                        "example": "john@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
