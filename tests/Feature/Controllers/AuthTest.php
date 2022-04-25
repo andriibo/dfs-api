@@ -29,7 +29,7 @@ class AuthTest extends TestCase
         $data = [
             'email' => 'test@fantasysports.com',
             'password' => 'password',
-            'password_confirmation' => 'password',
+            'passwordConfirmation' => 'password',
             'username' => 'fantasysports',
             'fullname' => 'John Doe',
         ];
