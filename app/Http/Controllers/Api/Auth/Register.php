@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Response(response=201, ref="#/components/responses/201"),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
+ *     @OA\Response(response=422, ref="#/components/responses/422"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */

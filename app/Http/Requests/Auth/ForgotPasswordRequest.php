@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AbstractFormRequest;
 
-class ForgotPasswordRequest extends FormRequest
+class ForgotPasswordRequest extends AbstractFormRequest
 {
     public function rules(): array
     {

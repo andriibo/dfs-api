@@ -33,8 +33,10 @@ namespace App\OA;
  *),
  * @OA\Response(response=422, description="Unprocessable entity",
  *    @OA\JsonContent(
- *        @OA\Property(property="message", type="string"),
- *        @OA\Property(property="errors", type="object")
+ *        @OA\Property(property="errors", type="array", @OA\Items(
+ *             @OA\Property(property="field", type="string", example="email"),
+ *             @OA\Property(property="messages", type="array", @OA\Items(type="string"), example={"Email is not valid"}),
+ *        ))
  *    )
  * ),
  * @OA\Response(response=500, description="Internal Server Error",

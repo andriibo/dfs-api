@@ -365,6 +365,9 @@
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
@@ -447,6 +450,9 @@
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -1788,11 +1794,26 @@
                     "application/json": {
                         "schema": {
                             "properties": {
-                                "message": {
-                                    "type": "string"
-                                },
                                 "errors": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "field": {
+                                                "type": "string",
+                                                "example": "email"
+                                            },
+                                            "messages": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "Email is not valid"
+                                                ]
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
                                 }
                             },
                             "type": "object"

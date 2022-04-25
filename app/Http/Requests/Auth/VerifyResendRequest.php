@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AbstractFormRequest;
 
-class VerifyResendRequest extends FormRequest
+class VerifyResendRequest extends AbstractFormRequest
 {
     public function rules(): array
     {

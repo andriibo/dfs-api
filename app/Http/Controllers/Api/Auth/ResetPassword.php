@@ -35,6 +35,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Response(response=403, ref="#/components/responses/403"),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
+ *     @OA\Response(response=422, ref="#/components/responses/422"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
