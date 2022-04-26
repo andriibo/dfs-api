@@ -628,10 +628,7 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/page[number]"
-                    },
-                    {
-                        "$ref": "#/components/parameters/page[size]"
+                        "$ref": "#/components/parameters/page"
                     }
                 ],
                 "responses": {
@@ -679,10 +676,7 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/page[number]"
-                    },
-                    {
-                        "$ref": "#/components/parameters/page[size]"
+                        "$ref": "#/components/parameters/page"
                     }
                 ],
                 "responses": {
@@ -730,10 +724,7 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/page[number]"
-                    },
-                    {
-                        "$ref": "#/components/parameters/page[size]"
+                        "$ref": "#/components/parameters/page"
                     }
                 ],
                 "responses": {
@@ -771,6 +762,9 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "responses": {
@@ -863,10 +857,7 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/page[number]"
-                    },
-                    {
-                        "$ref": "#/components/parameters/page[size]"
+                        "$ref": "#/components/parameters/page"
                     }
                 ],
                 "responses": {
@@ -1867,6 +1858,28 @@
             }
         },
         "parameters": {
+            "page": {
+                "name": "page",
+                "in": "query",
+                "style": "deepObject",
+                "explode": true,
+                "schema": {
+                    "properties": {
+                        "number": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": "1"
+                        },
+                        "size": {
+                            "type": "integer",
+                            "maximum": 30,
+                            "minimum": 1,
+                            "example": "10"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
             "Accept": {
                 "name": "Accept",
                 "in": "header",
@@ -1901,25 +1914,6 @@
                 "schema": {
                     "type": "string",
                     "example": "12qs850keo23"
-                }
-            },
-            "page[number]": {
-                "name": "page[number]",
-                "in": "query",
-                "schema": {
-                    "type": "integer",
-                    "minimum": "1",
-                    "example": "1"
-                }
-            },
-            "page[size]": {
-                "name": "page[size]",
-                "in": "query",
-                "schema": {
-                    "type": "integer",
-                    "maximum": "30",
-                    "minimum": "1",
-                    "example": "10"
                 }
             }
         },

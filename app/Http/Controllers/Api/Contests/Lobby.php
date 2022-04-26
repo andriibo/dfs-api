@@ -14,8 +14,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     tags={"Contests"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\Parameter(ref="#/components/parameters/page[number]"),
- *     @OA\Parameter(ref="#/components/parameters/page[size]"),
+ *     @OA\Parameter(ref="#/components/parameters/page"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(ref="#/components/schemas/ContestCollection")
  *     ),

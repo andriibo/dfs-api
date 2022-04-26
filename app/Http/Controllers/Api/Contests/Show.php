@@ -14,6 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     tags={"Contests"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
