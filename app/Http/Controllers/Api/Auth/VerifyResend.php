@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\VerifyResendRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Post(
@@ -29,6 +30,7 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Response(response=404, ref="#/components/responses/404"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
  *     @OA\Response(response=422, ref="#/components/responses/422"),
+ *     @OA\Response(response=429, ref="#/components/responses/429"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
@@ -37,6 +39,10 @@ class VerifyResend extends Controller
     public function __invoke(VerifyResendRequest $verifyResendRequest, UserService $userService): JsonResponse
     {
         $user = $userService->getUserByEmail($verifyResendRequest->email);
+        if ($user->hasVerifiedEmail()) {
+            return response()->json(['message' => 'Account already verified.'], Response::HTTP_FORBIDDEN);
+        }
+
         $user->sendEmailVerificationNotification();
 
         return response()->json(['message' => 'Verification link sent.']);
