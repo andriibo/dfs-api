@@ -41,6 +41,22 @@ class AuthTest extends TestCase
         Notification::assertSentTo($user, VerifyEmailNotification::class);
     }
 
+    public function testAuthEmailVerifyEndpoint(): void
+    {
+        $user = $this->createUser();
+        $endpoint = URL::temporarySignedRoute(
+            'verification.verify',
+            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $user->id,
+                'hash' => sha1($user->email),
+            ]
+        );
+
+        $response = $this->getJson($endpoint);
+        $this->assertResponse($response);
+    }
+
     public function testAuthLoginEndpoint(): void
     {
         $this->createUser();
@@ -88,35 +104,13 @@ class AuthTest extends TestCase
         $this->assertResponse($response);
     }
 
-    public function testAuthEmailVerifyEndpoint(): void
-    {
-        $user = $this->createUser();
-        $endpoint = URL::temporarySignedRoute(
-            'verification.verify',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $user->id,
-                'hash' => sha1($user->email),
-            ]
-        );
-
-        $response = $this->getJson($endpoint);
-        $this->assertResponse($response);
-    }
-
     public function testAuthEmailVerifyResendEndpoint(): void
     {
         $user = $this->createUser();
-        $endpoint = URL::temporarySignedRoute(
-            'verification.send',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $user->id,
-                'hash' => sha1($user->email),
-            ]
-        );
-        $response = $this->postJson($endpoint, ['email' => $user->email]);
-        $this->assertResponse($response);
+        $response = $this->postJson('api/v1/auth/email/verify/resend', ['email' => $user->email]);
+        $response->assertForbidden();
+        $response->assertSee('message');
+        $this->assertIsString($response['message']);
     }
 
     public function testAuthLogoutEndpoint(): void
