@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Contests;
 
-use App\Services\Contests\ContestService;
+use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

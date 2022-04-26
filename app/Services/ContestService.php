@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services\Contests;
+namespace App\Services;
 
 use App\Helpers\ContestHelper;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
-use App\Services\SitePreferenceService;
 
 class ContestService
 {

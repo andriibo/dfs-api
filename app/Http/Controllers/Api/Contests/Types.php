@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Contests\ContestTypeResource;
-use App\Services\Contests\ContestService;
+use App\Services\ContestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**

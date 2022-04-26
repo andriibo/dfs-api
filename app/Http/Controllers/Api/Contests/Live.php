@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Collections\ContestCollection;
 use App\Http\Controllers\Controller;
-use App\Services\Contests\ContestLiveService;
+use App\Repositories\ContestRepository;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
@@ -27,9 +27,9 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class Live extends Controller
 {
-    public function __invoke(ContestLiveService $contestLiveService): ResourceCollection
+    public function __invoke(ContestRepository $contestRepository): ResourceCollection
     {
-        $contests = $contestLiveService->handle(auth()->user()->id);
+        $contests = $contestRepository->getContestsLive(auth()->user()->id);
 
         return new ContestCollection($contests);
     }
