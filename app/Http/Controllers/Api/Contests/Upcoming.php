@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Collections\ContestCollection;
 use App\Http\Controllers\Controller;
-use App\Services\ContestService;
+use App\Services\Contests\ContestUpcomingService;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
@@ -27,9 +27,9 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class Upcoming extends Controller
 {
-    public function __invoke(ContestService $contestService): ResourceCollection
+    public function __invoke(ContestUpcomingService $contestUpcomingService): ResourceCollection
     {
-        $contests = $contestService->getContestsUpcoming(auth()->user()->id);
+        $contests = $contestUpcomingService->handle(auth()->user()->id);
 
         return new ContestCollection($contests);
     }

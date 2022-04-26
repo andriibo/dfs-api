@@ -5,7 +5,7 @@ namespace App\Http\Resources\Contests;
 use App\Calculators\PrizePlaceCalculator;
 use App\Http\Resources\ActionPoints\ActionPointResource;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
-use App\Services\ContestService;
+use App\Services\Contests\ContestService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

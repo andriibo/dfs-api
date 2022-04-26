@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Collections\ContestCollection;
 use App\Http\Controllers\Controller;
-use App\Services\ContestService;
+use App\Services\Contests\ContestLobbyService;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
@@ -25,9 +25,9 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class Lobby extends Controller
 {
-    public function __invoke(ContestService $contestService): ResourceCollection
+    public function __invoke(ContestLobbyService $contestLobbyService): ResourceCollection
     {
-        $contests = $contestService->getContestsLobby();
+        $contests = $contestLobbyService->handle();
 
         return new ContestCollection($contests);
     }

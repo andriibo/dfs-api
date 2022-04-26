@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Contests;
 
 use App\Helpers\ContestHelper;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Services\SitePreferenceService;
 
 class ContestService
 {
@@ -30,26 +30,6 @@ class ContestService
     public function getContestById(int $contestId): Contest
     {
         return $this->contestRepository->getContestById($contestId);
-    }
-
-    public function getContestsLobby(): LengthAwarePaginator
-    {
-        return $this->contestRepository->getContestsLobby();
-    }
-
-    public function getContestsUpcoming(int $userId): LengthAwarePaginator
-    {
-        return $this->contestRepository->getContestsUpcoming($userId);
-    }
-
-    public function getContestsLive(int $userId): LengthAwarePaginator
-    {
-        return $this->contestRepository->getContestsUpcoming($userId);
-    }
-
-    public function getContestsHistory(int $userId): LengthAwarePaginator
-    {
-        return $this->contestRepository->getContestsHistory($userId);
     }
 
     public function getExpectedPayout(Contest $contest): float
