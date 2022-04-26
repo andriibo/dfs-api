@@ -22,7 +22,7 @@ class GameScheduleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'startDate' => $this->start_date,
+            'startDate' => strtotime($this->game_date),
             'awayTeamScore' => $this->away_team_score,
             'homeTeamScore' => $this->home_team_score,
             'awayTeam' => new TeamResource($this->awayTeam),

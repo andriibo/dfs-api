@@ -2,7 +2,10 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
+use App\Models\Cricket\CricketGameSchedule;
+use App\Models\Interfaces\IGameSchedule;
 use App\Models\League;
 use App\Models\Soccer\GameSchedule;
 use App\Models\User;
@@ -19,59 +22,59 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * App\Models\Contests\Contest.
  *
- * @property int                       $id
- * @property null|int                  $owner_id
- * @property int                       $status
- * @property string                    $type
- * @property string                    $contest_type
- * @property string                    $game_type
- * @property string                    $title
- * @property int                       $league_id
- * @property string                    $start_date
- * @property string                    $end_date
- * @property string                    $form_start_date
- * @property string                    $form_end_date
- * @property string                    $details
- * @property null|string               $password
- * @property int                       $entry_fee_type
- * @property string                    $entry_fee
- * @property string                    $voucher_fee
- * @property string                    $badge_id
- * @property null|int                  $bonus_drip
- * @property int                       $salary_cap
- * @property int                       $prize_bank_type
- * @property array                     $prize_places
- * @property string                    $prize_bank
- * @property int                       $payout_type
- * @property null|string               $custom_prize_bank
- * @property null|string               $expected_payout
- * @property null|string               $company_take
- * @property int                       $users_limit_type
- * @property int                       $min_users
- * @property int                       $max_users
- * @property int                       $entry_limit
- * @property string                    $updated_time
- * @property string                    $created_date
- * @property int                       $suspended
- * @property int                       $news_feed_count
- * @property int                       $last_news_feed_id
- * @property int                       $is_private
- * @property int                       $is_vip
- * @property int                       $is_guaranteed
- * @property int                       $retain_once_filled
- * @property int                       $retain_once_live
- * @property int                       $is_fake
- * @property int                       $is_salary_available
- * @property int                       $is_prize_in_percents
- * @property int                       $is_sham
- * @property League                    $league
- * @property null|User                 $owner
- * @property Collection|ContestUser[]  $contestUsers
- * @property null|int                  $contest_users_count
- * @property Collection|GameSchedule[] $gameSchedules
- * @property null|int                  $game_schedules_count
- * @property Collection|GameSchedule[] $actionPoints
- * @property null|int                  $action_points_count
+ * @property int                        $id
+ * @property null|int                   $owner_id
+ * @property int                        $status
+ * @property string                     $type
+ * @property string                     $contest_type
+ * @property string                     $game_type
+ * @property string                     $title
+ * @property int                        $league_id
+ * @property string                     $start_date
+ * @property string                     $end_date
+ * @property string                     $form_start_date
+ * @property string                     $form_end_date
+ * @property string                     $details
+ * @property null|string                $password
+ * @property int                        $entry_fee_type
+ * @property string                     $entry_fee
+ * @property string                     $voucher_fee
+ * @property string                     $badge_id
+ * @property null|int                   $bonus_drip
+ * @property int                        $salary_cap
+ * @property int                        $prize_bank_type
+ * @property array                      $prize_places
+ * @property string                     $prize_bank
+ * @property int                        $payout_type
+ * @property null|string                $custom_prize_bank
+ * @property null|string                $expected_payout
+ * @property null|string                $company_take
+ * @property int                        $users_limit_type
+ * @property int                        $min_users
+ * @property int                        $max_users
+ * @property int                        $entry_limit
+ * @property string                     $updated_time
+ * @property string                     $created_date
+ * @property int                        $suspended
+ * @property int                        $news_feed_count
+ * @property int                        $last_news_feed_id
+ * @property int                        $is_private
+ * @property int                        $is_vip
+ * @property int                        $is_guaranteed
+ * @property int                        $retain_once_filled
+ * @property int                        $retain_once_live
+ * @property int                        $is_fake
+ * @property int                        $is_salary_available
+ * @property int                        $is_prize_in_percents
+ * @property int                        $is_sham
+ * @property League                     $league
+ * @property null|User                  $owner
+ * @property Collection|ContestUser[]   $contestUsers
+ * @property null|int                   $contest_users_count
+ * @property Collection|IGameSchedule[] $gameSchedules
+ * @property null|int                   $game_schedules_count
+ * @property ActionPoint[]|Collection   $actionPoints
+ * @property null|int                   $action_points_count
  *
  * @method static ContestFactory factory(...$parameters)
  * @method static Builder|Contest newModelQuery()
@@ -200,8 +203,12 @@ class Contest extends Model
 
     public function gameSchedules(): BelongsToMany
     {
+        $related = $this->league?->sport_id == SportIdEnum::cricket->value
+            ? CricketGameSchedule::class
+            : GameSchedule::class;
+
         return $this->belongsToMany(
-            GameSchedule::class,
+            $related,
             (new ContestGame())->getTable(),
             'contest_id',
             'game_id'
