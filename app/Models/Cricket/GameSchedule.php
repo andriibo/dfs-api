@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Soccer;
+namespace App\Models\Cricket;
 
 use App\Models\Interfaces\IGameSchedule;
 use App\Models\League;
@@ -8,9 +8,10 @@ use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Soccer\GameSchedule.
+ * App\Models\Cricket\GameSchedule.
  *
  * @property int         $id
  * @property string      $feed_id
@@ -20,24 +21,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string      $game_date
  * @property int         $has_final_box
  * @property int         $is_data_confirmed
- * @property int         $home_team_score
- * @property int         $away_team_score
- * @property string      $date_updated
+ * @property string      $home_team_score
+ * @property string      $away_team_score
  * @property int         $is_fake
  * @property int         $is_salary_available
- * @property null|string $starting_lineup
  * @property string      $feed_type
- * @property int         $latest_game_log_id
- * @property Team        $awayTeam
- * @property Team        $homeTeam
+ * @property null|string $status
+ * @property string      $type
+ * @property null|Carbon $created_at
+ * @property null|Carbon $updated_at
  * @property League      $league
+ * @property Team        $homeTeam
+ * @property Team        $awayTeam
  *
  * @method static Builder|GameSchedule newModelQuery()
  * @method static Builder|GameSchedule newQuery()
  * @method static Builder|GameSchedule query()
  * @method static Builder|GameSchedule whereAwayTeamId($value)
  * @method static Builder|GameSchedule whereAwayTeamScore($value)
- * @method static Builder|GameSchedule whereDateUpdated($value)
+ * @method static Builder|GameSchedule whereCreatedAt($value)
  * @method static Builder|GameSchedule whereFeedId($value)
  * @method static Builder|GameSchedule whereFeedType($value)
  * @method static Builder|GameSchedule whereGameDate($value)
@@ -48,16 +50,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|GameSchedule whereIsDataConfirmed($value)
  * @method static Builder|GameSchedule whereIsFake($value)
  * @method static Builder|GameSchedule whereIsSalaryAvailable($value)
- * @method static Builder|GameSchedule whereLatestGameLogId($value)
  * @method static Builder|GameSchedule whereLeagueId($value)
- * @method static Builder|GameSchedule whereStartingLineup($value)
+ * @method static Builder|GameSchedule whereStatus($value)
+ * @method static Builder|GameSchedule whereType($value)
+ * @method static Builder|GameSchedule whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class GameSchedule extends Model implements IGameSchedule
 {
-    public $timestamps = false;
-
-    protected $table = 'game_schedule';
+    protected $table = 'cricket_game_schedule';
 
     protected $fillable = [
         'feed_id',
@@ -69,12 +70,11 @@ class GameSchedule extends Model implements IGameSchedule
         'is_data_confirmed',
         'home_team_score',
         'away_team_score',
-        'date_updated',
         'is_fake',
         'is_salary_available',
-        'starting_lineup',
         'feed_type',
-        'latest_game_log_id',
+        'status',
+        'type',
     ];
 
     public function league(): BelongsTo
