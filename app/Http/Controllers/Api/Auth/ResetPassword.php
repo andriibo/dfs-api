@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(name="token", required=true, in="query", @OA\Schema(type="string")),
  *     @OA\Parameter(name="email", required=true, in="query", @OA\Schema(type="string"), example="john@gmail.com"),
  *     @OA\RequestBody(
- *         @OA\JsonContent(required={"password","password_confirmation"},
+ *         @OA\JsonContent(required={"password","passwordConfirmation"},
  *             @OA\Property(property="password", type="string", maxLength=50, example="password2"),
  *             @OA\Property(property="passwordConfirmation", type="string", maxLength=50, example="password2")
  *         ),
