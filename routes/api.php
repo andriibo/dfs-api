@@ -43,9 +43,11 @@ Route::prefix('v1')->group(function () {
             Route::post('forgot/password', ForgotPassword::class);
             Route::post('reset/password', ResetPassword::class)->name('password.reset');
         });
-        Route::middleware(['signed', 'throttle:6,1'])->group(function (): void {
-            Route::post('/email/verify/resend', VerifyResend::class)->name('verification.send');
+        Route::middleware(['signed'])->group(function (): void {
             Route::get('/email/verify/{id}/{hash}', VerifyEmail::class)->name('verification.verify');
+        });
+        Route::middleware(['throttle:6,1'])->group(function (): void {
+            Route::post('/email/verify/resend', VerifyResend::class)->name('verification.send');
         });
         Route::middleware('auth:api')->group(function (): void {
             Route::post('logout', Logout::class);

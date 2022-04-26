@@ -318,7 +318,7 @@
                                 "required": [
                                     "email",
                                     "password",
-                                    "password_confirmation",
+                                    "passwordConfirmation",
                                     "username",
                                     "fullname"
                                 ],
@@ -411,7 +411,7 @@
                             "schema": {
                                 "required": [
                                     "password",
-                                    "password_confirmation"
+                                    "passwordConfirmation"
                                 ],
                                 "properties": {
                                     "password": {
@@ -607,6 +607,9 @@
                     },
                     "422": {
                         "$ref": "#/components/responses/422"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -1833,6 +1836,22 @@
                                         },
                                         "type": "object"
                                     }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "429": {
+                "description": "Too Many Requests",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Too Many Requests"
                                 }
                             },
                             "type": "object"
