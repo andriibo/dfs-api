@@ -2,7 +2,6 @@
 
 namespace App\Models\Soccer;
 
-use App\Models\Interfaces\ITeam;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -37,7 +36,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|SoccerTeam whereNickname($value)
  * @mixin Eloquent
  */
-class SoccerTeam extends Model implements ITeam
+class SoccerTeam extends Model
 {
     protected $table = 'team';
 

@@ -2,7 +2,6 @@
 
 namespace App\Models\Soccer;
 
-use App\Models\Interfaces\IGameSchedule;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,7 +52,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|SoccerGameSchedule whereStartingLineup($value)
  * @mixin Eloquent
  */
-class SoccerGameSchedule extends Model implements IGameSchedule
+class SoccerGameSchedule extends Model
 {
     public $timestamps = false;
 

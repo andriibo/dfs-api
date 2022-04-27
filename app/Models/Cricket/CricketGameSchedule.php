@@ -2,7 +2,6 @@
 
 namespace App\Models\Cricket;
 
-use App\Models\Interfaces\IGameSchedule;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -56,7 +55,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameSchedule whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class CricketGameSchedule extends Model implements IGameSchedule
+class CricketGameSchedule extends Model
 {
     protected $table = 'cricket_game_schedule';
 
