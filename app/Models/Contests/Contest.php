@@ -2,6 +2,7 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\Contests\StatusEnum;
 use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
 use App\Models\Cricket\CricketGameSchedule;
@@ -199,6 +200,11 @@ class Contest extends Model
     public function contestUsers(): HasMany
     {
         return $this->hasMany(ContestUser::class);
+    }
+
+    public function isStatusClosed(): bool
+    {
+        return $this->status == StatusEnum::closed->value;
     }
 
     public function gameSchedules(): BelongsToMany
