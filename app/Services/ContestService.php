@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\Calculators\PrizePlaceCalculator;
+use App\Enums\SportIdEnum;
 use App\Helpers\ContestHelper;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use App\Repositories\ContestRepository;
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContestService
 {
@@ -28,9 +31,18 @@ class ContestService
         }, array_keys($types), $types);
     }
 
-    public function getContestById(int $contestId): Contest
+    public function getGameSchedules(Contest $contest): Collection
     {
-        return $this->contestRepository->getContestById($contestId);
+        $sportId = $contest->league->sport_id;
+        if ($sportId == SportIdEnum::soccer->value) {
+            return $contest->soccerGameSchedules;
+        }
+
+        if ($sportId == SportIdEnum::cricket->value) {
+            return $contest->cricketGameSchedules;
+        }
+
+        throw new \Exception('Could not found correct schedule for this sport', Response::HTTP_NOT_FOUND);
     }
 
     public function getExpectedPayout(Contest $contest): float
