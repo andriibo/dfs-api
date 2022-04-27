@@ -45,6 +45,9 @@ class PrizePlaceCalculator
         return $prizePlaces;
     }
 
+    /**
+     * @return array<int>
+     */
     private function calculateFromTo(PrizePlace $prizePlace): array
     {
         if ($prizePlace->places == 1) {
