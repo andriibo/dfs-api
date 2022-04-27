@@ -5,8 +5,8 @@ namespace App\Calculators;
 use App\Enums\Contests\PrizeBankTypeEnum;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class PrizePlaceCalculator
 {

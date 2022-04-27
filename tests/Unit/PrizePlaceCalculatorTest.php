@@ -4,8 +4,10 @@ namespace Tests\Unit;
 
 use App\Calculators\PrizePlaceCalculator;
 use App\Models\Contests\Contest;
+use App\Models\Contests\ContestUser;
 use App\Models\League;
 use App\Models\PrizePlace;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -23,14 +25,25 @@ class PrizePlaceCalculatorTest extends TestCase
             ->create()
         ;
 
+        $user = User::factory()
+            ->create()
+        ;
+
         $contest = Contest::factory()
             ->for($league)
             ->create()
         ;
 
+        $contestUsers = ContestUser::factory()
+            ->count(1)
+            ->for($user)
+            ->for($contest)
+            ->create()
+        ;
+
         /* @var $prizePlaceCalculator PrizePlaceCalculator */
         $prizePlaceCalculator = resolve(PrizePlaceCalculator::class);
-        $prizes = $prizePlaceCalculator->handle($contest);
+        $prizes = $prizePlaceCalculator->handle($contest, $contestUsers);
 
         $this->assertIsArray($prizes);
         $this->assertNotEmpty($prizes);

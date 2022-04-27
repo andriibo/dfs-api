@@ -58,7 +58,7 @@ class ContestService
      */
     public function getPrizePlaces(Contest $contest): array
     {
-        $contestUsers = [];
+        $contestUsers = collect();
         if ($contest->isStatusClosed()) {
             $contestUsers = $contest->contestUsers()
                 ->orderBy('place')
