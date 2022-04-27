@@ -3,9 +3,9 @@
 namespace App\Calculators;
 
 use App\Enums\Contests\PrizeBankTypeEnum;
-use App\Enums\Contests\StatusEnum;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
 class PrizePlaceCalculator
@@ -17,21 +17,14 @@ class PrizePlaceCalculator
     /**
      * @return PrizePlace[]
      */
-    public function handle(Contest $contest): array
+    public function handle(Contest $contest, Collection $contestUsers): array
     {
         /**
          * If current contest has a status STATUS_FINISHED or STATUS_CLOSED,
          * show a list of winners near a place.
          * To do this need to get a list of participants and assign their names to appropriate places.
          */
-        $contestUsers = $prizePlaces = [];
-        if ($contest->status == StatusEnum::closed->value) {
-            $contestUsers = $contest->contestUsers()
-                ->orderBy('place')
-                ->get()
-            ;
-        }
-
+        $prizePlaces = [];
         $normalizePrizePlaces = $this->normalizePrizePlaces($contest);
         foreach ($normalizePrizePlaces as $prizePlace) {
             $normal = new PrizePlace();

@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Calculators\PrizePlaceCalculator;
 use App\Helpers\ContestHelper;
 use App\Models\Contests\Contest;
+use App\Models\PrizePlace;
 use App\Repositories\ContestRepository;
 
 class ContestService
@@ -49,5 +51,23 @@ class ContestService
         $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);
 
         return $bank - $bank / 100 * $fee;
+    }
+
+    /**
+     * @return PrizePlace[]
+     */
+    public function getPrizePlaces(Contest $contest): array
+    {
+        $contestUsers = [];
+        if ($contest->isStatusClosed()) {
+            $contestUsers = $contest->contestUsers()
+                ->orderBy('place')
+                ->get()
+            ;
+        }
+
+        $prizePlaceCalculator = new PrizePlaceCalculator();
+
+        return $prizePlaceCalculator->handle($contest, $contestUsers);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Contests;
 
-use App\Calculators\PrizePlaceCalculator;
 use App\Http\Resources\ActionPoints\ActionPointResource;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
 use App\Services\ContestService;
@@ -44,10 +43,8 @@ class ContestDetailsResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /* @var $contestService ContestService
-        * @var $prizePlaceCalculator PrizePlaceCalculator */
+        /* @var $contestService ContestService */
         $contestService = resolve(ContestService::class);
-        $prizePlaceCalculator = resolve(PrizePlaceCalculator::class);
 
         return [
             'id' => $this->id,
@@ -75,7 +72,7 @@ class ContestDetailsResource extends JsonResource
             'numUsers' => count($this->contestUsers),
             'users' => ContestUserResource::collection($this->contestUsers),
             'games' => GameScheduleResource::collection($this->gameSchedules),
-            'prizes' => $prizePlaceCalculator->handle($this->resource),
+            'prizes' => $contestService->getPrizePlaces($this->resource),
             'scoring' => ActionPointResource::collection($this->actionPoints),
         ];
     }
