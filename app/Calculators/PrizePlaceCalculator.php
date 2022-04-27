@@ -19,11 +19,6 @@ class PrizePlaceCalculator
      */
     public function handle(Contest $contest, Collection $contestUsers): array
     {
-        /**
-         * If current contest has a status STATUS_FINISHED or STATUS_CLOSED,
-         * show a list of winners near a place.
-         * To do this need to get a list of participants and assign their names to appropriate places.
-         */
         $prizePlaces = [];
         $normalizePrizePlaces = $this->normalizePrizePlaces($contest);
         foreach ($normalizePrizePlaces as $prizePlace) {

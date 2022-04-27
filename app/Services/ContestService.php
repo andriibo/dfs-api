@@ -59,6 +59,11 @@ class ContestService
     public function getPrizePlaces(Contest $contest): array
     {
         $contestUsers = collect();
+        /*
+         * If current contest has a status STATUS_FINISHED or STATUS_CLOSED,
+         * show a list of winners near a place.
+         * To do this need to get a list of participants and assign their names to appropriate places.
+         */
         if ($contest->isStatusClosed()) {
             $contestUsers = $contest->contestUsers()
                 ->orderBy('place')
