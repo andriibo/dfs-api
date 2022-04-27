@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property int     $contest_id
  * @property int     $game_id
+ * @property int     $sport_id   1 - Soccer; 2 - Footbal, 3 - Cricket
  * @property Contest $contest
  *
  * @method static \Illuminate\Database\Eloquent\Builder|ContestGame newModelQuery()
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|ContestGame query()
  * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereContestId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereGameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereSportId($value)
  * @mixin Eloquent
  */
 class ContestGame extends Model
@@ -29,6 +31,7 @@ class ContestGame extends Model
     protected $fillable = [
         'contest_id',
         'game_id',
+        'sport_id',
     ];
 
     public function contest(): BelongsTo

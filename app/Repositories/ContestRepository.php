@@ -17,7 +17,7 @@ class ContestRepository
     {
         return Contest::query()
             ->whereId($contestId)
-            ->with(['contestUsers', 'gameSchedules', 'actionPoints'])
+            ->with(['contestUsers', 'actionPoints'])
             ->firstOrFail()
             ;
     }

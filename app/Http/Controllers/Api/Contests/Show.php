@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Contests\ContestDetailsResource;
-use App\Services\ContestService;
+use App\Repositories\ContestRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -29,9 +29,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class Show extends Controller
 {
-    public function __invoke(int $contestId, ContestService $contestService): JsonResource
+    public function __invoke(int $contestId, ContestRepository $contestRepository): JsonResource
     {
-        $contest = $contestService->getContestById($contestId);
+        $contest = $contestRepository->getContestById($contestId);
 
         return new ContestDetailsResource($contest);
     }
