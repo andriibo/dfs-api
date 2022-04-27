@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * App\Models\Soccer\Team.
+ * App\Models\Soccer\SoccerTeam.
  *
  * @property int    $id
  * @property string $feed_id
@@ -23,21 +23,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $feed_type
  * @property League $league
  *
- * @method static Builder|Team newModelQuery()
- * @method static Builder|Team newQuery()
- * @method static Builder|Team query()
- * @method static Builder|Team whereAlias($value)
- * @method static Builder|Team whereCountryId($value)
- * @method static Builder|Team whereFeedId($value)
- * @method static Builder|Team whereFeedType($value)
- * @method static Builder|Team whereId($value)
- * @method static Builder|Team whereLeagueId($value)
- * @method static Builder|Team whereLogoId($value)
- * @method static Builder|Team whereName($value)
- * @method static Builder|Team whereNickname($value)
+ * @method static Builder|SoccerTeam newModelQuery()
+ * @method static Builder|SoccerTeam newQuery()
+ * @method static Builder|SoccerTeam query()
+ * @method static Builder|SoccerTeam whereAlias($value)
+ * @method static Builder|SoccerTeam whereCountryId($value)
+ * @method static Builder|SoccerTeam whereFeedId($value)
+ * @method static Builder|SoccerTeam whereFeedType($value)
+ * @method static Builder|SoccerTeam whereId($value)
+ * @method static Builder|SoccerTeam whereLeagueId($value)
+ * @method static Builder|SoccerTeam whereLogoId($value)
+ * @method static Builder|SoccerTeam whereName($value)
+ * @method static Builder|SoccerTeam whereNickname($value)
  * @mixin Eloquent
  */
-class Team extends Model implements ITeam
+class SoccerTeam extends Model implements ITeam
 {
     protected $table = 'team';
 

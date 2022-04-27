@@ -3,12 +3,10 @@
 namespace App\Models\Contests;
 
 use App\Enums\Contests\StatusEnum;
-use App\Enums\SportIdEnum;
+use App\Factories\GameScheduleFactory;
 use App\Models\ActionPoint;
-use App\Models\Cricket\CricketGameSchedule;
 use App\Models\Interfaces\IGameSchedule;
 use App\Models\League;
-use App\Models\Soccer\GameSchedule;
 use App\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Contests\ContestFactory;
@@ -207,18 +205,16 @@ class Contest extends Model
         return $this->status == StatusEnum::closed->value;
     }
 
-    public function gameSchedules(): BelongsToMany
+    public function gameSchedules(?int $sportId): BelongsToMany
     {
-        $related = $this->league?->sport_id == SportIdEnum::cricket->value
-            ? CricketGameSchedule::class
-            : GameSchedule::class;
+        $related = GameScheduleFactory::getClassName($sportId);
 
         return $this->belongsToMany(
             $related,
             (new ContestGame())->getTable(),
             'contest_id',
             'game_id'
-        );
+        )->wherePivot('sport_id', $sportId);
     }
 
     public function actionPoints(): BelongsToMany

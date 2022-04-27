@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * App\Models\Soccer\GameSchedule.
+ * App\Models\Soccer\SoccerGameSchedule.
  *
  * @property int         $id
  * @property string      $feed_id
@@ -28,32 +28,32 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property null|string $starting_lineup
  * @property string      $feed_type
  * @property int         $latest_game_log_id
- * @property Team        $awayTeam
- * @property Team        $homeTeam
+ * @property SoccerTeam  $awayTeam
+ * @property SoccerTeam  $homeTeam
  * @property League      $league
  *
- * @method static Builder|GameSchedule newModelQuery()
- * @method static Builder|GameSchedule newQuery()
- * @method static Builder|GameSchedule query()
- * @method static Builder|GameSchedule whereAwayTeamId($value)
- * @method static Builder|GameSchedule whereAwayTeamScore($value)
- * @method static Builder|GameSchedule whereDateUpdated($value)
- * @method static Builder|GameSchedule whereFeedId($value)
- * @method static Builder|GameSchedule whereFeedType($value)
- * @method static Builder|GameSchedule whereGameDate($value)
- * @method static Builder|GameSchedule whereHasFinalBox($value)
- * @method static Builder|GameSchedule whereHomeTeamId($value)
- * @method static Builder|GameSchedule whereHomeTeamScore($value)
- * @method static Builder|GameSchedule whereId($value)
- * @method static Builder|GameSchedule whereIsDataConfirmed($value)
- * @method static Builder|GameSchedule whereIsFake($value)
- * @method static Builder|GameSchedule whereIsSalaryAvailable($value)
- * @method static Builder|GameSchedule whereLatestGameLogId($value)
- * @method static Builder|GameSchedule whereLeagueId($value)
- * @method static Builder|GameSchedule whereStartingLineup($value)
+ * @method static Builder|SoccerGameSchedule newModelQuery()
+ * @method static Builder|SoccerGameSchedule newQuery()
+ * @method static Builder|SoccerGameSchedule query()
+ * @method static Builder|SoccerGameSchedule whereAwayTeamId($value)
+ * @method static Builder|SoccerGameSchedule whereAwayTeamScore($value)
+ * @method static Builder|SoccerGameSchedule whereDateUpdated($value)
+ * @method static Builder|SoccerGameSchedule whereFeedId($value)
+ * @method static Builder|SoccerGameSchedule whereFeedType($value)
+ * @method static Builder|SoccerGameSchedule whereGameDate($value)
+ * @method static Builder|SoccerGameSchedule whereHasFinalBox($value)
+ * @method static Builder|SoccerGameSchedule whereHomeTeamId($value)
+ * @method static Builder|SoccerGameSchedule whereHomeTeamScore($value)
+ * @method static Builder|SoccerGameSchedule whereId($value)
+ * @method static Builder|SoccerGameSchedule whereIsDataConfirmed($value)
+ * @method static Builder|SoccerGameSchedule whereIsFake($value)
+ * @method static Builder|SoccerGameSchedule whereIsSalaryAvailable($value)
+ * @method static Builder|SoccerGameSchedule whereLatestGameLogId($value)
+ * @method static Builder|SoccerGameSchedule whereLeagueId($value)
+ * @method static Builder|SoccerGameSchedule whereStartingLineup($value)
  * @mixin Eloquent
  */
-class GameSchedule extends Model implements IGameSchedule
+class SoccerGameSchedule extends Model implements IGameSchedule
 {
     public $timestamps = false;
 
@@ -84,11 +84,11 @@ class GameSchedule extends Model implements IGameSchedule
 
     public function homeTeam(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(SoccerTeam::class);
     }
 
     public function awayTeam(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(SoccerTeam::class);
     }
 }
