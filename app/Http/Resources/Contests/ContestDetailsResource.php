@@ -71,7 +71,7 @@ class ContestDetailsResource extends JsonResource
             'numEntries' => count($this->contestUsers),
             'numUsers' => count($this->contestUsers),
             'users' => ContestUserResource::collection($this->contestUsers),
-            'games' => $contestService->getGameSchedules($this->resource),
+            'games' => GameScheduleResource::collection($contestService->getGameSchedules($this->resource)),
             'prizes' => $contestService->getPrizePlaces($this->resource),
             'scoring' => ActionPointResource::collection($this->actionPoints),
         ];
