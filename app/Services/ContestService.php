@@ -42,7 +42,7 @@ class ContestService
             return $contest->cricketGameSchedules;
         }
 
-        throw new \Exception('Could not found correct schedule for this sport', Response::HTTP_NOT_FOUND);
+        throw new \Exception('Could not find schedule for this sport', Response::HTTP_NOT_FOUND);
     }
 
     public function getExpectedPayout(Contest $contest): float
