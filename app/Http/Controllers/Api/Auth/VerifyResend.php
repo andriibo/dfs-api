@@ -45,6 +45,6 @@ class VerifyResend extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        return response()->json(['message' => 'Verification link sent.']);
+        return response()->json(['message' => "We just sent you the verification link at your email ({$user->email}) again, please check it."]);
     }
 }
