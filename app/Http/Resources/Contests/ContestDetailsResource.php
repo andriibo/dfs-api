@@ -35,7 +35,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="numUsers", type="integer", example="1"),
  *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource")),
  *     @OA\Property(property="games", type="array", @OA\Items(ref="#/components/schemas/GameScheduleResource")),
- *     @OA\Property(property="prizes", type="array", @OA\Items(ref="#/components/schemas/PrizeResource")),
+ *     @OA\Property(property="prizes", type="array", @OA\Items(ref="#/components/schemas/PrizePlaceResource")),
  *     @OA\Property(property="scoring", type="array", @OA\Items(ref="#/components/schemas/ActionPointResource"))
  * )
  */
@@ -72,7 +72,7 @@ class ContestDetailsResource extends JsonResource
             'numUsers' => count($this->contestUsers),
             'users' => ContestUserResource::collection($this->contestUsers),
             'games' => GameScheduleResource::collection($contestService->getGameSchedules($this->resource)),
-            'prizes' => $contestService->getPrizePlaces($this->resource),
+            'prizes' => PrizePlaceResource::collection($contestService->getPrizePlaces($this->resource)),
             'scoring' => ActionPointResource::collection($this->actionPoints),
         ];
     }

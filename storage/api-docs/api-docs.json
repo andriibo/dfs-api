@@ -1245,7 +1245,7 @@
                     "prizes": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/PrizeResource"
+                            "$ref": "#/components/schemas/PrizePlaceResource"
                         }
                     },
                     "scoring": {
@@ -1465,8 +1465,8 @@
                 },
                 "type": "object"
             },
-            "PrizeResource": {
-                "title": "PrizeResource",
+            "PrizePlaceResource": {
+                "title": "PrizePlaceResource",
                 "properties": {
                     "places": {
                         "type": "integer",
@@ -1492,8 +1492,9 @@
                     },
                     "winners": {
                         "type": "array",
-                        "items": {},
-                        "example": "[]"
+                        "items": {
+                            "$ref": "#/components/schemas/ContestUserResource"
+                        }
                     },
                     "from": {
                         "type": "integer"
