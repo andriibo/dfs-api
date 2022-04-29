@@ -18,7 +18,7 @@ namespace App\OA;
  * )
  * @OA\Response(response=403, description="Forbidden",
  *    @OA\JsonContent(
- *        @OA\Property(property="error", type="string", example="Invalid signature.")
+ *        @OA\Property(property="error", type="string")
  *    )
  * )
  * @OA\Response(response=404, description="Not Found",
