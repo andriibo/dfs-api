@@ -22,7 +22,7 @@ class SitePreferenceService
             : $this->getSettingByName('site_fee');
     }
 
-    private function getSettingByName(string $name): string
+    public function getSettingByName(string $name): string
     {
         $setting = $this->sitePreferenceRepository->getSetting();
 
