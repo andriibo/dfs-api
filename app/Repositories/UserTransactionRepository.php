@@ -7,10 +7,7 @@ use Carbon\Carbon;
 
 class UserTransactionRepository
 {
-    /**
-     * @return null|UserTransaction
-     */
-    public function getDailyBonusDepositByUserId(int $userId)
+    public function getDailyBonusDepositByUserId(int $userId): ?UserTransaction
     {
         return UserTransaction::query()
             ->where('user_id', $userId)

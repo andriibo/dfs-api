@@ -16,10 +16,7 @@ class CreateDailyBonusDepositService
     ) {
     }
 
-    /**
-     * @return null|UserTransaction
-     */
-    public function handle(int $userId)
+    public function handle(int $userId): ?UserTransaction
     {
         $userTransaction = $this->userTransactionRepository->getDailyBonusDepositByUserId($userId);
 
