@@ -568,7 +568,7 @@
                                     "email": {
                                         "type": "string",
                                         "maxLength": 50,
-                                        "example": "john@gmil.com"
+                                        "example": "john@gmail.com"
                                     }
                                 },
                                 "type": "object"
