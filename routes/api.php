@@ -90,7 +90,7 @@ Route::prefix('v1')->group(function () {
      * ########################
      */
     Route::prefix('transactions')->group(function (): void {
-        Route::middleware('auth:api')->group(function (): void {
+        Route::middleware(['throttle:6,1', 'auth:api'])->group(function (): void {
             Route::get('daily-bonus', DailyBonus::class);
         });
     });
