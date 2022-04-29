@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\UserTransaction;
-use Carbon\Carbon;
 
 class UserTransactionRepository
 {
@@ -11,7 +10,7 @@ class UserTransactionRepository
     {
         return UserTransaction::query()
             ->where('user_id', $userId)
-            ->where('created_at', Carbon::today())
+            ->whereDay('created_at', date('d'))
             ->first()
             ;
     }
