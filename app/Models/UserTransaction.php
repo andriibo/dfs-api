@@ -42,8 +42,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class UserTransaction extends Model
 {
-    public $timestamps = false;
-
     protected $table = 'user_transaction';
 
     protected $fillable = [
