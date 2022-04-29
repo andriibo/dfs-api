@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string      $score
  * @property null|int    $starting_position
  * @property string      $injury_status
+ * @property int         $sport_id                1 - Soccer; 2 - Football, 3 - Cricket
  * @property Contest     $contest
  *
  * @method static Builder|ContestUnit newModelQuery()
@@ -56,6 +57,7 @@ class ContestUnit extends Model
         'score',
         'starting_position',
         'injury_status',
+        'sport_id',
     ];
 
     public function contest(): BelongsTo

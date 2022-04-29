@@ -203,6 +203,11 @@ class Contest extends Model
         return $this->hasMany(ContestUser::class);
     }
 
+    public function contest(): HasMany
+    {
+        return $this->hasMany(ContestUnit::class);
+    }
+
     public function isStatusClosed(): bool
     {
         return $this->status == StatusEnum::closed->value;

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property int     $contest_id
  * @property int     $game_id
- * @property int     $sport_id   1 - Soccer; 2 - Footbal, 3 - Cricket
+ * @property int     $sport_id   1 - Soccer; 2 - Football, 3 - Cricket
  * @property Contest $contest
  *
  * @method static \Illuminate\Database\Eloquent\Builder|ContestGame newModelQuery()
