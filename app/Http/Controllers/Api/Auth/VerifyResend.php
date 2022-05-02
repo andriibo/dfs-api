@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email"},
- *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmil.com")
+ *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com")
  *         ),
  *     ),
  *     @OA\Response(response=200, description="Ok",

@@ -568,7 +568,7 @@
                                     "email": {
                                         "type": "string",
                                         "maxLength": 50,
-                                        "example": "john@gmil.com"
+                                        "example": "john@gmail.com"
                                     }
                                 },
                                 "type": "object"
@@ -932,6 +932,58 @@
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/transactions/daily-bonus": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get Daily Bonus",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You have successfully received daily bonus!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "429": {
+                        "$ref": "#/components/responses/429"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -1770,8 +1822,7 @@
                         "schema": {
                             "properties": {
                                 "error": {
-                                    "type": "string",
-                                    "example": "Invalid signature."
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -1962,6 +2013,10 @@
         {
             "name": "Contests",
             "description": "API Endpoints of Contests"
+        },
+        {
+            "name": "Transactions",
+            "description": "API Endpoints of Transactions"
         }
     ]
 }

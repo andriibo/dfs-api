@@ -45,6 +45,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Contests",
  *     description="API Endpoints of Contests"
  * )
+ * @OA\Tag(
+ *     name="Transactions",
+ *     description="API Endpoints of Transactions"
+ * )
  */
 class Controller extends BaseController
 {

@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Contests\Show;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\Leagues\Leagues;
+use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\Profile;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,17 @@ Route::prefix('v1')->group(function () {
             Route::get('upcoming', Upcoming::class);
             Route::get('live', Live::class);
             Route::get('history', History::class);
+        });
+    });
+
+    /*
+     * ########################
+     * ##### TRANSACTIONS #####
+     * ########################
+     */
+    Route::prefix('transactions')->group(function (): void {
+        Route::middleware(['throttle:6,1', 'auth:api'])->group(function (): void {
+            Route::get('daily-bonus', DailyBonus::class);
         });
     });
 
