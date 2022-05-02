@@ -1041,7 +1041,12 @@
                     "500": {
                         "$ref": "#/components/responses/500"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/users/balance": {

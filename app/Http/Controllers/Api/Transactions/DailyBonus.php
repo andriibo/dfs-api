@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/transactions/daily-bonus",
  *     summary="Get Daily Bonus",
  *     tags={"Transactions"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Response(response=200, description="Ok",
