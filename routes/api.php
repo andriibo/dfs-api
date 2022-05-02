@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Auth\VerifyResend;
 use App\Http\Controllers\Api\Contests\History;
 use App\Http\Controllers\Api\Contests\Live;
 use App\Http\Controllers\Api\Contests\Lobby;
+use App\Http\Controllers\Api\Contests\Players;
 use App\Http\Controllers\Api\Contests\Show;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Upcoming;
@@ -77,10 +78,12 @@ Route::prefix('v1')->group(function () {
         Route::get('{id}', Show::class)->where('id', '[0-9]+');
         Route::get('types', Types::class);
         Route::get('lobby', Lobby::class);
+        Route::get('{id}/players', Players::class);
         Route::middleware('auth:api')->group(function (): void {
             Route::get('upcoming', Upcoming::class);
             Route::get('live', Live::class);
             Route::get('history', History::class);
+            // Route::get('{id}/players', Players::class);
         });
     });
 

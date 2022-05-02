@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contests\ContestDetailsResource;
+use App\Http\Resources\ContestUnits\ContestUnitResource;
 use App\Repositories\ContestUnitRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -33,6 +33,6 @@ class Players extends Controller
     {
         $contestUnits = $contestUnitRepository->getContestUnitsByContestId($contestId);
 
-        return ContestDetailsResource::collection($contestUnits);
+        return ContestUnitResource::collection($contestUnits);
     }
 }

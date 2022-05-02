@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\ContestUnits;
 
+use App\Services\ContestUnitService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -22,15 +23,19 @@ class ContestUnitResource extends JsonResource
 {
     public function toArray($request): array
     {
+        /* @var $contestUnitService ContestUnitService */
+        $contestUnitService = resolve(ContestUnitService::class);
+        $unit = $contestUnitService->getUnit($this->resource);
+
         return [
             'id' => $this->id,
-            'playerId' => $this->unit->player->id,
-            'totalFantasyPointsPerGame' => $this->unit->player->total_fantasy_points_per_game,
+            'playerId' => $unit->player->id,
+            'totalFantasyPointsPerGame' => $unit->player->total_fantasy_points_per_game,
             'salary' => $this->salary,
             'score' => $this->score,
-            'fullname' => $this->unit->player->getFullName(),
-            'position' => $this->unit->position,
-            'photo' => $this->unit->player->getPhoto(),
+            'fullname' => $unit->player->getFullName(),
+            'position' => $unit->position,
+            'photo' => $unit->player->photo?->getFileUrl(),
             'teamId' => $this->team_id,
         ];
     }

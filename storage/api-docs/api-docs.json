@@ -753,6 +753,54 @@
                 }
             }
         },
+        "/contests/{id}/players": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contest Players",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestDetailsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/contests/{id}": {
             "get": {
                 "tags": [
@@ -1156,6 +1204,46 @@
                             "3": "30",
                             "4": "4"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "ContestUnitResource": {
+                "title": "ContestUnitResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "playerId": {
+                        "type": "integer"
+                    },
+                    "totalFantasyPointsPerGame": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "11.16"
+                    },
+                    "salary": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "5000.45"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "50.45"
+                    },
+                    "fullname": {
+                        "type": "string",
+                        "example": "David Olatukunbo Alaba"
+                    },
+                    "position": {
+                        "type": "integer"
+                    },
+                    "photo": {
+                        "type": "string"
+                    },
+                    "teamId": {
+                        "type": "number"
                     }
                 },
                 "type": "object"

@@ -77,6 +77,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property null|int                         $soccer_game_schedules_count
  * @property ActionPoint[]|Collection         $actionPoints
  * @property null|int                         $action_points_count
+ * @property Collection|ContestUnit[]         $contestUnits
+ * @property null|int                         $contest_units_count
  *
  * @method static ContestFactory factory(...$parameters)
  * @method static Builder|Contest newModelQuery()
@@ -203,7 +205,7 @@ class Contest extends Model
         return $this->hasMany(ContestUser::class);
     }
 
-    public function contest(): HasMany
+    public function contestUnits(): HasMany
     {
         return $this->hasMany(ContestUnit::class);
     }
