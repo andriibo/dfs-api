@@ -4,9 +4,10 @@ namespace App\Services;
 
 use App\Exceptions\UnitServiceException;
 use App\Models\Contests\ContestUnit;
+use App\Models\Cricket\CricketUnit;
+use App\Models\Soccer\SoccerUnit;
 use App\Repositories\Cricket\CricketUnitRepository;
 use App\Repositories\Soccer\SoccerUnitRepository;
-use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
 
 class UnitService
@@ -17,7 +18,10 @@ class UnitService
     ) {
     }
 
-    public function getUnit(ContestUnit $contestUnit): Model
+    /**
+     * @throws UnitServiceException
+     */
+    public function getUnit(ContestUnit $contestUnit): CricketUnit|SoccerUnit
     {
         if ($contestUnit->isSportSoccer()) {
             return $this->soccerUnitRepository->getUnitById($contestUnit->unit_id);
