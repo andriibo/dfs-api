@@ -190,6 +190,16 @@ class Contest extends Model
         'prize_places' => 'array',
     ];
 
+    public function isSportSoccer(): bool
+    {
+        return $this->league?->sport_id == SportIdEnum::soccer->value;
+    }
+
+    public function isSportCricket(): bool
+    {
+        return $this->league?->sport_id == SportIdEnum::cricket->value;
+    }
+
     public function league(): BelongsTo
     {
         return $this->belongsTo(League::class);

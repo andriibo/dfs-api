@@ -5,6 +5,7 @@ namespace App\Http\Resources\Contests;
 use App\Http\Resources\ActionPoints\ActionPointResource;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
 use App\Services\ContestService;
+use App\Services\GameScheduleService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -43,8 +44,10 @@ class ContestDetailsResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /* @var $contestService ContestService */
+        /* @var $contestService ContestService
+        * @var $gameScheduleService GameScheduleService */
         $contestService = resolve(ContestService::class);
+        $gameScheduleService = resolve(GameScheduleService::class);
 
         return [
             'id' => $this->id,
@@ -71,7 +74,7 @@ class ContestDetailsResource extends JsonResource
             'numEntries' => count($this->contestUsers),
             'numUsers' => count($this->contestUsers),
             'users' => ContestUserResource::collection($this->contestUsers),
-            'games' => GameScheduleResource::collection($contestService->getGameSchedules($this->resource)),
+            'games' => GameScheduleResource::collection($gameScheduleService->getGameSchedules($this->resource)),
             'prizes' => PrizePlaceResource::collection($contestService->getPrizePlaces($this->resource)),
             'scoring' => ActionPointResource::collection($this->actionPoints),
         ];
