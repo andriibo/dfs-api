@@ -70,4 +70,22 @@ class CricketPlayer extends Model
     {
         return $this->hasMany(CricketUnit::class);
     }
+
+    /**
+     * @todo finish the uploading photo in DAS
+     */
+    public function getPhoto()
+    {
+        return null;
+    }
+
+    public function getFullName(): string
+    {
+        $name = array_filter([
+            $this->first_name,
+            $this->last_name,
+        ]);
+
+        return implode(' ', $name);
+    }
 }

@@ -5,8 +5,11 @@ namespace Tests\Feature\Controllers;
 use App\Models\ActionPoint;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestActionPoint;
+use App\Models\Contests\ContestUnit;
 use App\Models\Contests\ContestUser;
 use App\Models\League;
+use App\Models\Soccer\SoccerPlayer;
+use App\Models\Soccer\SoccerUnit;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -199,6 +202,57 @@ class ContestTest extends TestCase
                         'gameLogTemplate',
                         'values',
                     ],
+                ],
+            ],
+        ]);
+    }
+
+    public function testContestPlayersEndpoint(): void
+    {
+        $league = League::factory()
+            ->create()
+        ;
+
+        $contest = Contest::factory()
+            ->for($league)
+            ->create()
+        ;
+
+        $soccerPlayer = SoccerPlayer::factory()
+            ->create()
+        ;
+
+        $soccerUnit = SoccerUnit::factory()
+            ->for($soccerPlayer, 'player')
+            ->create()
+        ;
+
+        ContestUnit::factory()
+            ->for($soccerUnit)
+            ->for($contest)
+            ->create()
+        ;
+
+        $this->createUser();
+        $user = $this->userService->getUserByEmail('test@fantasysports.com');
+        $token = $this->getTokenForUser($user);
+        $endpoint = "/api/v1/contests/{$contest->id}/players";
+        $response = $this->getJson($endpoint, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'playerId',
+                    'totalFantasyPointsPerGame',
+                    'salary',
+                    'score',
+                    'fullname',
+                    'position',
+                    'photo',
+                    'teamId',
                 ],
             ],
         ]);
