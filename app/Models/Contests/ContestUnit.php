@@ -2,6 +2,7 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketUnit;
 use App\Models\Soccer\SoccerUnit;
 use Barryvdh\LaravelIdeHelper\Eloquent;
@@ -69,6 +70,16 @@ class ContestUnit extends Model
         'injury_status',
         'sport_id',
     ];
+
+    public function isSportSoccer(): bool
+    {
+        return $this->sport_id == SportIdEnum::soccer->value;
+    }
+
+    public function isSportCricket(): bool
+    {
+        return $this->sport_id == SportIdEnum::cricket->value;
+    }
 
     public function contest(): BelongsTo
     {

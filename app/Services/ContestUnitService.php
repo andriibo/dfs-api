@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\SportIdEnum;
 use App\Models\Contests\ContestUnit;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,12 +10,11 @@ class ContestUnitService
 {
     public function getUnit(ContestUnit $contestUnit): Model
     {
-        $sportId = $contestUnit->sport_id;
-        if ($sportId == SportIdEnum::soccer->value) {
+        if ($contestUnit->isSportSoccer()) {
             return $contestUnit->soccerUnit;
         }
 
-        if ($sportId == SportIdEnum::cricket->value) {
+        if ($contestUnit->isSportCricket()) {
             return $contestUnit->cricketUnit;
         }
 
