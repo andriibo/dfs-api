@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\ContestUnitServiceException;
 use App\Models\Contests\ContestUnit;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,6 @@ class ContestUnitService
             return $contestUnit->cricketUnit;
         }
 
-        throw new \Exception('Could not find unit for this sport', Response::HTTP_NOT_FOUND);
+        throw new ContestUnitServiceException('Could not find unit for this sport', Response::HTTP_NOT_FOUND);
     }
 }
