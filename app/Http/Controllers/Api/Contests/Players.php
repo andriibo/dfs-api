@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     path="/contests/{id}/players",
  *     summary="Get Contest Players",
  *     tags={"Contests"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
