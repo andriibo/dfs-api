@@ -82,7 +82,7 @@ Route::prefix('v1')->group(function () {
             Route::get('upcoming', Upcoming::class);
             Route::get('live', Live::class);
             Route::get('history', History::class);
-            Route::get('{id}/players', Players::class);
+            Route::get('{id}/players', Players::class)->where('id', '[0-9]+');
         });
     });
 
