@@ -2,16 +2,16 @@
 
 namespace App\Repositories\Soccer;
 
-use App\Models\Soccer\SoccerPlayer;
+use App\Models\Soccer\SoccerUnit;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class SoccerPlayerRepository
+class SoccerUnitRepository
 {
     /**
      * @throws ModelNotFoundException
      */
-    public function getPlayerById(int $id): SoccerPlayer
+    public function getUnitById(int $id): SoccerUnit
     {
-        return SoccerPlayer::findOrFail($id);
+        return SoccerUnit::findOrFail($id);
     }
 }
