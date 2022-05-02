@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Exceptions\ContestUnitServiceException;
+use App\Exceptions\UnitServiceException;
 use App\Models\Contests\ContestUnit;
 use App\Repositories\Cricket\CricketUnitRepository;
 use App\Repositories\Soccer\SoccerUnitRepository;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
 
-class ContestUnitService
+class UnitService
 {
     public function __construct(
         private readonly SoccerUnitRepository $soccerUnitRepository,
@@ -27,6 +27,6 @@ class ContestUnitService
             return $this->cricketUnitRepository->getUnitById($contestUnit->unit_id);
         }
 
-        throw new ContestUnitServiceException('Could not find unit for this sport', Response::HTTP_NOT_FOUND);
+        throw new UnitServiceException('Could not find unit for this sport', Response::HTTP_NOT_FOUND);
     }
 }

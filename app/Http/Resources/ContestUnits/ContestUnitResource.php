@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\ContestUnits;
 
-use App\Services\ContestUnitService;
+use App\Services\UnitService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -23,9 +23,9 @@ class ContestUnitResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /* @var $contestUnitService ContestUnitService */
-        $contestUnitService = resolve(ContestUnitService::class);
-        $unit = $contestUnitService->getUnit($this->resource);
+        /* @var $unitService UnitService */
+        $unitService = resolve(UnitService::class);
+        $unit = $unitService->getUnit($this->resource);
 
         return [
             'id' => $this->id,

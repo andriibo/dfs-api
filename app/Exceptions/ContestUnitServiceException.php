@@ -2,6 +2,6 @@
 
 namespace App\Exceptions;
 
-class ContestUnitServiceException extends \Exception
+class UnitServiceException extends \Exception
 {
 }
