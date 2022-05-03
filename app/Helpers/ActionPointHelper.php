@@ -8,6 +8,8 @@ class ActionPointHelper
 {
     public static function getScore(int $gameLogValue, array $actionPointValues, int $unitPosition): float
     {
-        return $gameLogValue * Arr::get($actionPointValues, $unitPosition, 0);
+        $unitValue = Arr::get($actionPointValues, $unitPosition, 0);
+
+        return $gameLogValue * $unitValue;
     }
 }
