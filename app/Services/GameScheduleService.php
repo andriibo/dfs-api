@@ -20,7 +20,7 @@ class GameScheduleService
     }
 
     /**
-     * @throws \Exception
+     * @throws GameScheduleServiceException
      *
      * @return Collection|CricketGameSchedule[]|SoccerGameSchedule[]
      */

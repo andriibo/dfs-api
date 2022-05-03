@@ -646,7 +646,7 @@
                         }
                     },
                     "403": {
-                        "$ref": "#/components/responses/404"
+                        "$ref": "#/components/responses/403"
                     },
                     "404": {
                         "$ref": "#/components/responses/404"

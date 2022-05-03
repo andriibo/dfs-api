@@ -18,7 +18,7 @@ class GameLogService
     }
 
     /**
-     * @throws \Exception
+     * @throws GameLogServiceException
      */
     public function getGameLogs(Contest $contest): LengthAwarePaginator
     {
