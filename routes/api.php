@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Auth\Register;
 use App\Http\Controllers\Api\Auth\ResetPassword;
 use App\Http\Controllers\Api\Auth\VerifyEmail;
 use App\Http\Controllers\Api\Auth\VerifyResend;
+use App\Http\Controllers\Api\Contests\GameLogs;
 use App\Http\Controllers\Api\Contests\History;
 use App\Http\Controllers\Api\Contests\Live;
 use App\Http\Controllers\Api\Contests\Lobby;
@@ -83,6 +84,7 @@ Route::prefix('v1')->group(function () {
             Route::get('live', Live::class);
             Route::get('history', History::class);
             Route::get('{id}/players', Players::class);
+            Route::get('{id}/game-logs', GameLogs::class);
         });
     });
 

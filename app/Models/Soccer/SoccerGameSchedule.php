@@ -5,31 +5,35 @@ namespace App\Models\Soccer;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Soccer\SoccerGameSchedule.
  *
- * @property int         $id
- * @property string      $feed_id
- * @property int         $league_id
- * @property int         $home_team_id
- * @property int         $away_team_id
- * @property string      $game_date
- * @property int         $has_final_box
- * @property int         $is_data_confirmed
- * @property int         $home_team_score
- * @property int         $away_team_score
- * @property string      $date_updated
- * @property int         $is_fake
- * @property int         $is_salary_available
- * @property null|string $starting_lineup
- * @property string      $feed_type
- * @property int         $latest_game_log_id
- * @property SoccerTeam  $awayTeam
- * @property SoccerTeam  $homeTeam
- * @property League      $league
+ * @property int                        $id
+ * @property string                     $feed_id
+ * @property int                        $league_id
+ * @property int                        $home_team_id
+ * @property int                        $away_team_id
+ * @property string                     $game_date
+ * @property int                        $has_final_box
+ * @property int                        $is_data_confirmed
+ * @property int                        $home_team_score
+ * @property int                        $away_team_score
+ * @property string                     $date_updated
+ * @property int                        $is_fake
+ * @property int                        $is_salary_available
+ * @property null|string                $starting_lineup
+ * @property string                     $feed_type
+ * @property int                        $latest_game_log_id
+ * @property SoccerTeam                 $awayTeam
+ * @property SoccerTeam                 $homeTeam
+ * @property League                     $league
+ * @property Collection|SoccerGameLog[] $gameLogs
+ * @property null|int                   $game_logs_count
  *
  * @method static Builder|SoccerGameSchedule newModelQuery()
  * @method static Builder|SoccerGameSchedule newQuery()
@@ -89,5 +93,10 @@ class SoccerGameSchedule extends Model
     public function awayTeam(): BelongsTo
     {
         return $this->belongsTo(SoccerTeam::class);
+    }
+
+    public function gameLogs(): HasMany
+    {
+        return $this->hasMany(SoccerGameLog::class);
     }
 }

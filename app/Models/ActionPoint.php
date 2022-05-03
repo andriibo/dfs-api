@@ -54,4 +54,8 @@ class ActionPoint extends Model
         'alias',
         'game_log_template',
     ];
+
+    protected $casts = [
+        'values' => 'array',
+    ];
 }
