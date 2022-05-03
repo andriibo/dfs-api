@@ -27,11 +27,11 @@ class GameScheduleService
     public function getGameSchedules(Contest $contest): Collection
     {
         if ($contest->isSportSoccer()) {
-            return $this->cricketGameScheduleRepository->getGameSchedulesByContestId($contest->id);
+            return $this->soccerGameScheduleRepository->getGameSchedulesByContestId($contest->id);
         }
 
         if ($contest->isSportCricket()) {
-            return $this->soccerGameScheduleRepository->getGameSchedulesByContestId($contest->id);
+            return $this->cricketGameScheduleRepository->getGameSchedulesByContestId($contest->id);
         }
 
         throw new GameScheduleServiceException('Could not find game schedule for this sport', Response::HTTP_NOT_FOUND);
