@@ -25,7 +25,7 @@ class ActionPointResource extends JsonResource
             'sportId' => $this->sport_id,
             'alias' => $this->alias,
             'gameLogTemplate' => $this->game_log_template,
-            'values' => json_decode($this->values),
+            'values' => (object) $this->values,
         ];
     }
 }
