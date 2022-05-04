@@ -28,6 +28,7 @@ class UserTest extends TestCase
             'data' => [
                 'username',
                 'email',
+                'fullname',
                 'balance',
                 'dob',
                 'countryId',

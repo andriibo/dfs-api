@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     title="ProfileResource",
  *     @OA\Property(property="username", type="string", example="fantasysports"),
  *     @OA\Property(property="email", type="string", example="test@fantasysports.com"),
+ *     @OA\Property(property="fullname", type="string", example="john Doe"),
  *     @OA\Property(property="balance", type="number", format="double", example="100.23"),
  *     @OA\Property(property="dob", type="string", nullable=true, example="1993-05-23"),
  *     @OA\Property(property="countryId", type="integer"),
@@ -32,6 +33,7 @@ class ProfileResource extends JsonResource
         return [
             'username' => $this->username,
             'email' => $this->email,
+            'fullname' => $this->fullname,
             'balance' => $this->balance,
             'dob' => $this->dob,
             'countryId' => $this->country_id,

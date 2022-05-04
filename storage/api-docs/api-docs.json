@@ -1822,6 +1822,10 @@
                         "type": "string",
                         "example": "test@fantasysports.com"
                     },
+                    "fullname": {
+                        "type": "string",
+                        "example": "john Doe"
+                    },
                     "balance": {
                         "type": "number",
                         "format": "double",
