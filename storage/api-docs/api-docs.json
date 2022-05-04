@@ -123,6 +123,10 @@
                                         "type": "string",
                                         "minLength": 6,
                                         "example": "password"
+                                    },
+                                    "rememberMe": {
+                                        "type": "boolean",
+                                        "example": "true"
                                     }
                                 },
                                 "type": "object"
