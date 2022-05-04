@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ContestRepository;
 use App\Services\GameLogService;
 use App\Specifications\UserInContestSpecification;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -29,10 +30,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GameLogs extends Controller
 {
-    public function __invoke(int $contestId, GameLogService $gameLogService, ContestRepository $contestRepository)
-    {
+    public function __invoke(
+        int $contestId,
+        GameLogService $gameLogService,
+        ContestRepository $contestRepository,
+        UserInContestSpecification $userInContestSpecification
+    ): GameLogCollection|JsonResponse {
         $userId = auth()->user()->id;
-        if (!(new UserInContestSpecification($contestId, $userId))->isSatisfiedBy()) {
+        if (!$userInContestSpecification->isSatisfiedBy($contestId, $userId)) {
             return response()->json(['message' => 'You are not in contest'], Response::HTTP_FORBIDDEN);
         }
 
