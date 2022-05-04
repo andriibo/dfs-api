@@ -1266,9 +1266,7 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/users/update": {
+            },
             "put": {
                 "tags": [
                     "Users"

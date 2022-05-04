@@ -9,8 +9,8 @@ class UpdateUserProfileRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:user|max:50',
-            'username' => 'required|string|unique:user|between:2,50',
+            'email' => 'required|email|unique:user,' . $this->id . ',id|max:50',
+            'username' => 'required|string|unique:user,' . $this->id . ',id|between:2,50',
             'dob' => 'required|date',
             'fullname' => 'required|string|between:2,50',
         ];
