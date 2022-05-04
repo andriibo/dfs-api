@@ -126,7 +126,7 @@
                                     },
                                     "rememberMe": {
                                         "type": "boolean",
-                                        "example": "true"
+                                        "example": "false"
                                     }
                                 },
                                 "type": "object"
