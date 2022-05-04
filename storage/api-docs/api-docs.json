@@ -636,6 +636,9 @@
                     },
                     {
                         "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
                     }
                 ],
                 "responses": {
@@ -2133,7 +2136,7 @@
                         },
                         "size": {
                             "type": "integer",
-                            "maximum": 30,
+                            "maximum": 100,
                             "minimum": 1,
                             "example": "10"
                         }

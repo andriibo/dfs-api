@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
+ *     @OA\Parameter(ref="#/components/parameters/page"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(ref="#/components/schemas/GameLogCollection")
  *     ),

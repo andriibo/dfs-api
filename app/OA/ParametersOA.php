@@ -10,7 +10,7 @@ namespace App\OA;
  *    explode=true,
  *    @OA\Schema(type="object",
  *       @OA\Property(property="number", type="integer", minimum=1, example="1"),
- *       @OA\Property(property="size", type="integer", minimum=1, maximum=30, example="10")
+ *       @OA\Property(property="size", type="integer", minimum=1, maximum=100, example="10")
  *    )
  * ),
  * @OA\Parameter(
