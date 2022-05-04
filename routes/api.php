@@ -13,10 +13,11 @@ use App\Http\Controllers\Api\Contests\History;
 use App\Http\Controllers\Api\Contests\Live;
 use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Players;
-use App\Http\Controllers\Api\Contests\Show;
+use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\Leagues\Leagues;
+use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\Profile;
@@ -76,7 +77,7 @@ Route::prefix('v1')->group(function () {
      * ######################
      */
     Route::prefix('contests')->group(function () {
-        Route::get('{id}', Show::class)->where('id', '[0-9]+');
+        Route::get('{id}', ContestShow::class)->where('id', '[0-9]+');
         Route::get('types', Types::class);
         Route::get('lobby', Lobby::class);
         Route::middleware('auth:api')->group(function (): void {
@@ -105,4 +106,11 @@ Route::prefix('v1')->group(function () {
      * #####################
      */
     Route::get('leagues', Leagues::class);
+
+    /*
+     * ########################
+     * ##### Static Pages #####
+     * ########################
+     */
+    Route::get('static-pages/{name}', StaticPageShow::class);
 });

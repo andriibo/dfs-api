@@ -1047,6 +1047,60 @@
                 }
             }
         },
+        "/static-pages/{name}": {
+            "get": {
+                "tags": [
+                    "Static Pages"
+                ],
+                "summary": "Get Static Page",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "faq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/StaticPageResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/transactions/daily-bonus": {
             "get": {
                 "tags": [
@@ -1794,6 +1848,32 @@
                 },
                 "type": "object"
             },
+            "StaticPageResource": {
+                "title": "StaticPageResource",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "privacy"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Privacy Policy"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "keywords": {
+                        "type": "string"
+                    },
+                    "linkText": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "TeamResource": {
                 "title": "TeamResource",
                 "properties": {
@@ -2210,6 +2290,10 @@
         {
             "name": "Transactions",
             "description": "API Endpoints of Transactions"
+        },
+        {
+            "name": "Static Pages",
+            "description": "API Endpoints of Static Pages"
         }
     ]
 }

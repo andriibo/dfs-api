@@ -49,6 +49,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Transactions",
  *     description="API Endpoints of Transactions"
  * )
+ * @OA\Tag(
+ *     name="Static Pages",
+ *     description="API Endpoints of Static Pages"
+ * )
  */
 class Controller extends BaseController
 {
