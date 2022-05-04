@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\VerifyResendRequest;
-use App\Services\UserService;
+use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class VerifyResend extends Controller
 {
-    public function __invoke(VerifyResendRequest $verifyResendRequest, UserService $userService): JsonResponse
+    public function __invoke(VerifyResendRequest $verifyResendRequest, UserRepository $userRepository): JsonResponse
     {
-        $user = $userService->getUserByEmail($verifyResendRequest->email);
+        $user = $userRepository->getUserByEmail($verifyResendRequest->email);
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Account already verified.'], Response::HTTP_FORBIDDEN);
         }

@@ -11,7 +11,6 @@ use App\Models\League;
 use App\Models\Soccer\SoccerPlayer;
 use App\Models\Soccer\SoccerUnit;
 use App\Models\User;
-use App\Services\UserService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\TestResponse;
 use Tests\CreatesUser;
@@ -25,15 +24,6 @@ class ContestTest extends TestCase
 {
     use DatabaseTransactions;
     use CreatesUser;
-
-    private readonly UserService $userService;
-
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        $this->userService = resolve(UserService::class);
-
-        parent::__construct($name, $data, $dataName);
-    }
 
     public function testContestsTypesEndpoint(): void
     {
@@ -59,7 +49,7 @@ class ContestTest extends TestCase
     public function testContestsUpcomingEndpoint(): void
     {
         $this->createContests();
-        $user = $this->userService->getUserByEmail('test@fantasysports.com');
+        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/upcoming', [
             'Authorization' => 'Bearer ' . $token,
@@ -70,7 +60,7 @@ class ContestTest extends TestCase
     public function testContestsLiveEndpoint(): void
     {
         $this->createContests();
-        $user = $this->userService->getUserByEmail('test@fantasysports.com');
+        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/live', [
             'Authorization' => 'Bearer ' . $token,
@@ -81,7 +71,7 @@ class ContestTest extends TestCase
     public function testContestsHistoryEndpoint(): void
     {
         $this->createContests();
-        $user = $this->userService->getUserByEmail('test@fantasysports.com');
+        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/history', [
             'Authorization' => 'Bearer ' . $token,
@@ -234,7 +224,7 @@ class ContestTest extends TestCase
         ;
 
         $this->createUser();
-        $user = $this->userService->getUserByEmail('test@fantasysports.com');
+        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
         $token = $this->getTokenForUser($user);
         $endpoint = "/api/v1/contests/{$contest->id}/players";
         $response = $this->getJson($endpoint, [

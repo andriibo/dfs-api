@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Transactions;
 
 use App\Http\Controllers\Controller;
 use App\Services\Transactions\CreateDailyBonusDepositService;
-use App\Services\UserService;
+use App\Services\Users\UpdateBalanceService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DailyBonus extends Controller
 {
-    public function __invoke(CreateDailyBonusDepositService $createDailyBonusDepositService, UserService $userService): JsonResponse
+    public function __invoke(CreateDailyBonusDepositService $createDailyBonusDepositService, UpdateBalanceService $updateBalanceService): JsonResponse
     {
         $user = auth()->user();
         $userTransaction = $createDailyBonusDepositService->handle($user->id);
@@ -40,7 +40,7 @@ class DailyBonus extends Controller
             return response()->json(['message' => 'You have already received the daily bonus today!'], Response::HTTP_FORBIDDEN);
         }
 
-        $userService->updateBalance($user, $userTransaction->amount);
+        $updateBalanceService->updateBalance($user, $userTransaction->amount);
 
         return response()->json(['message' => 'You have successfully received daily bonus!']);
     }

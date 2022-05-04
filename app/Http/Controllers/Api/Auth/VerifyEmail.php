@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
+use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\JsonResponse;
 
@@ -32,9 +32,9 @@ use Illuminate\Http\JsonResponse;
  */
 class VerifyEmail extends Controller
 {
-    public function __invoke(int $userId, UserService $userService): JsonResponse
+    public function __invoke(int $userId, UserRepository $userRepository): JsonResponse
     {
-        $user = $userService->getUserById($userId);
+        $user = $userRepository->getUserById($userId);
 
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Account already verified.']);
