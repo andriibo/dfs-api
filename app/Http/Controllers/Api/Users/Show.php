@@ -7,9 +7,9 @@ use App\Http\Resources\Users\ProfileResource;
 use Illuminate\Http\JsonResponse;
 
 /**
- * @OA\Patch(
- *     path="/users/update",
- *     summary="Update User Profile",
+ * @OA\Get(
+ *     path="/users/profile",
+ *     summary="Get User Profile",
  *     tags={"Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
@@ -27,7 +27,7 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class UpdateProfile extends Controller
+class Show extends Controller
 {
     public function __invoke(): JsonResponse
     {

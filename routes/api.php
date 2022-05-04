@@ -19,7 +19,8 @@ use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Users\Balance;
-use App\Http\Controllers\Api\Users\Profile;
+use App\Http\Controllers\Api\Users\Show as Profile;
+use App\Http\Controllers\Api\Users\Update as ProfileUpdate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,7 @@ Route::prefix('v1')->group(function () {
         Route::middleware('auth:api')->group(function (): void {
             Route::get('profile', Profile::class);
             Route::get('balance', Balance::class);
+            Route::put('profile', ProfileUpdate::class);
         });
     });
 
