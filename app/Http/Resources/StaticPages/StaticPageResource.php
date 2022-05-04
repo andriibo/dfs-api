@@ -21,11 +21,11 @@ class StaticPageResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'title' => $this->title,
-            'content' => $this->content,
-            'description' => $this->description,
-            'keywords' => $this->keywords,
-            'linkText' => $this->link_text,
+            'title' => $this->title_en,
+            'content' => $this->content_en,
+            'description' => $this->description_en,
+            'keywords' => $this->keywords_en,
+            'linkText' => $this->link_text_en,
         ];
     }
 }
