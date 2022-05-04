@@ -18,7 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\RequestBody(
  *         @OA\JsonContent(required={"email","password"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
- *             @OA\Property(property="password", type="string", minLength=6, example="password")
+ *             @OA\Property(property="password", type="string", minLength=6, example="password"),
+ *             @OA\Property(property="rememberMe", type="bool", example="false")
  *         ),
  *     ),
  *     @OA\Response(response=200, description="Ok",
@@ -42,7 +43,12 @@ class Login extends Controller
 {
     public function __invoke(LoginRequest $authLoginRequest, AuthService $authService): JsonResponse
     {
-        if (!$token = auth()->attempt($authLoginRequest->validated())) {
+        $ttl = config('jwt.ttl');
+        if ($authLoginRequest->get('rememberMe', false)) {
+            $ttl = config('jwt.remember-ttl');
+        }
+
+        if (!$token = auth()->setTTL($ttl)->attempt($authLoginRequest->only(['email', 'password']))) {
             return response()->json(['message' => 'Unauthorized.'], Response::HTTP_UNAUTHORIZED);
         }
 
