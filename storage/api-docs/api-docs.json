@@ -617,6 +617,54 @@
                 }
             }
         },
+        "/contests/{id}/game-logs": {
+            "get": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Get Contest Game Logs",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GameLogCollection"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/contests/history": {
             "get": {
                 "tags": [
@@ -1180,6 +1228,24 @@
                 },
                 "type": "object"
             },
+            "GameLogCollection": {
+                "title": "ContestCollection",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GameLogResource"
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                    }
+                },
+                "type": "object"
+            },
             "ActionPointResource": {
                 "title": "ActionPointResource",
                 "properties": {
@@ -1651,6 +1717,28 @@
                     },
                     "to": {
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "GameLogResource": {
+                "title": "GameLogResource",
+                "properties": {
+                    "playerId": {
+                        "type": "integer",
+                        "example": "321"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "example": "Malang Sarr"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "14.17"
+                    },
+                    "message": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
