@@ -10,12 +10,9 @@ class UserRepository
     /**
      * @throws ModelNotFoundException
      */
-    public function getUserById(int $userId): User
+    public function getUserById(int $id): User
     {
-        return User::query()
-            ->whereId($userId)
-            ->firstOrFail()
-            ;
+        return User::findOrFail($id);
     }
 
     /**

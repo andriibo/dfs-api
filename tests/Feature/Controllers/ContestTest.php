@@ -2,18 +2,9 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\ActionPoint;
 use App\Models\Contests\Contest;
-use App\Models\Contests\ContestActionPoint;
-use App\Models\Contests\ContestUnit;
-use App\Models\Contests\ContestUser;
-use App\Models\League;
-use App\Models\Soccer\SoccerPlayer;
-use App\Models\Soccer\SoccerUnit;
-use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Database\Seeders\ContestSeeder;
 use Illuminate\Testing\TestResponse;
-use Tests\CreatesUser;
 use Tests\TestCase;
 
 /**
@@ -22,9 +13,6 @@ use Tests\TestCase;
  */
 class ContestTest extends TestCase
 {
-    use DatabaseTransactions;
-    use CreatesUser;
-
     public function testContestsTypesEndpoint(): void
     {
         $response = $this->getJson('/api/v1/contests/types');
@@ -41,15 +29,15 @@ class ContestTest extends TestCase
 
     public function testContestsLobbyEndpoint(): void
     {
-        $this->createContests();
+        $this->seed(ContestSeeder::class);
         $response = $this->getJson('/api/v1/contests/lobby');
         $this->assertResponse($response);
     }
 
     public function testContestsUpcomingEndpoint(): void
     {
-        $this->createContests();
-        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
+        $this->seed(ContestSeeder::class);
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/upcoming', [
             'Authorization' => 'Bearer ' . $token,
@@ -59,8 +47,8 @@ class ContestTest extends TestCase
 
     public function testContestsLiveEndpoint(): void
     {
-        $this->createContests();
-        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
+        $this->seed(ContestSeeder::class);
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/live', [
             'Authorization' => 'Bearer ' . $token,
@@ -70,8 +58,8 @@ class ContestTest extends TestCase
 
     public function testContestsHistoryEndpoint(): void
     {
-        $this->createContests();
-        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
+        $this->seed(ContestSeeder::class);
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/contests/history', [
             'Authorization' => 'Bearer ' . $token,
@@ -81,35 +69,8 @@ class ContestTest extends TestCase
 
     public function testContestsShowEndpoint(): void
     {
-        $league = League::factory()
-            ->create()
-        ;
-
-        $user = User::factory()
-            ->create()
-        ;
-
-        $actionPoint = ActionPoint::factory()
-            ->create()
-        ;
-
-        $contest = Contest::factory()
-            ->for($league)
-            ->create()
-        ;
-
-        ContestActionPoint::factory()
-            ->for($contest)
-            ->for($actionPoint)
-            ->create()
-        ;
-
-        ContestUser::factory()
-            ->for($user)
-            ->for($contest)
-            ->create()
-        ;
-
+        $this->seed(ContestSeeder::class);
+        $contest = Contest::latest('id')->first();
         $endpoint = '/api/v1/contests/' . $contest->id;
         $response = $this->getJson($endpoint);
         $response->assertOk();
@@ -199,32 +160,9 @@ class ContestTest extends TestCase
 
     public function testContestPlayersEndpoint(): void
     {
-        $league = League::factory()
-            ->create()
-        ;
-
-        $contest = Contest::factory()
-            ->for($league)
-            ->create()
-        ;
-
-        $soccerPlayer = SoccerPlayer::factory()
-            ->create()
-        ;
-
-        $soccerUnit = SoccerUnit::factory()
-            ->for($soccerPlayer, 'player')
-            ->create()
-        ;
-
-        ContestUnit::factory()
-            ->for($soccerUnit)
-            ->for($contest)
-            ->create()
-        ;
-
-        $this->createUser();
-        $user = $this->userRepository->getUserByEmail('test@fantasysports.com');
+        $this->seed(ContestSeeder::class);
+        $contest = Contest::latest('id')->first();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
         $endpoint = "/api/v1/contests/{$contest->id}/players";
         $response = $this->getJson($endpoint, [
@@ -246,31 +184,6 @@ class ContestTest extends TestCase
                 ],
             ],
         ]);
-    }
-
-    private function createContests(): void
-    {
-        $league = League::factory()
-            ->create()
-        ;
-
-        $user = User::factory()
-            ->create()
-        ;
-
-        $contests = Contest::factory()
-            ->count(10)
-            ->for($league)
-            ->create()
-        ;
-
-        foreach ($contests as $contest) {
-            ContestUser::factory()
-                ->for($user)
-                ->for($contest)
-                ->create()
-            ;
-        }
     }
 
     private function assertResponse(TestResponse $response): void

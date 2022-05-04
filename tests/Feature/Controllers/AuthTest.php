@@ -5,14 +5,12 @@ namespace Tests\Feature\Controllers;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Testing\TestResponse;
-use Tests\CreatesUser;
 use Tests\TestCase;
 
 /**
@@ -21,9 +19,6 @@ use Tests\TestCase;
  */
 class AuthTest extends TestCase
 {
-    use DatabaseTransactions;
-    use CreatesUser;
-
     public function testAuthRegisterEndpoint(): void
     {
         $data = [
@@ -43,7 +38,7 @@ class AuthTest extends TestCase
 
     public function testAuthEmailVerifyEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = User::factory()->unverified()->create();
         $endpoint = URL::temporarySignedRoute(
             'verification.verify',
             Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
@@ -59,7 +54,7 @@ class AuthTest extends TestCase
 
     public function testAuthLoginEndpoint(): void
     {
-        $this->createUser();
+        $this->getVerifiedUser();
 
         $credentials = [
             'email' => 'test@fantasysports.com',
@@ -72,7 +67,7 @@ class AuthTest extends TestCase
 
     public function testAuthRefreshTokenEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
 
         $response = $this->postJson('/api/v1/auth/refresh/token', [], [
@@ -83,7 +78,7 @@ class AuthTest extends TestCase
 
     public function testAuthForgotPasswordEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $response = $this->postJson('/api/v1/auth/forgot/password', ['email' => $user->email]);
         $this->assertResponse($response);
 
@@ -92,7 +87,7 @@ class AuthTest extends TestCase
 
     public function testAuthResetPasswordEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = Password::broker()->createToken($user);
         $endpoint = "/api/v1/auth/reset/password?token={$token}&email={$user->email}";
 
@@ -106,7 +101,7 @@ class AuthTest extends TestCase
 
     public function testAuthEmailVerifyResendEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $response = $this->postJson('api/v1/auth/email/verify/resend', ['email' => $user->email]);
         $response->assertForbidden();
         $response->assertSee('message');
@@ -115,7 +110,7 @@ class AuthTest extends TestCase
 
     public function testAuthLogoutEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
 
         $response = $this->postJson('/api/v1/auth/logout', [], [

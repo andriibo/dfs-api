@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\TestResponse;
-use Tests\CreatesUser;
 use Tests\TestCase;
 
 /**
@@ -13,12 +11,9 @@ use Tests\TestCase;
  */
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
-    use CreatesUser;
-
     public function testUsersProfileEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
 
         $response = $this->getJson('/api/v1/users/profile', [
@@ -29,7 +24,7 @@ class UserTest extends TestCase
 
     public function testUsersBalanceEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
 
         $response = $this->getJson('/api/v1/users/balance', [
@@ -43,7 +38,7 @@ class UserTest extends TestCase
 
     public function testUsersUpdateEndpoint(): void
     {
-        $user = $this->createUser();
+        $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
 
         $data = [

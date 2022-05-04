@@ -34,15 +34,43 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'email' => 'test@fantasysports.com',
-            'email_verified_at' => $this->faker->dateTime(),
+            'email' => $this->faker->unique()->email(),
             'password' => bcrypt('password'),
             'access_token' => Str::random(100),
             'auth_key' => Str::random(100),
-            'username' => 'fantasysports',
+            'username' => $this->faker->unique()->word(),
             'fullname' => $this->faker->name(),
             'status' => $this->faker->randomElement(StatusEnum::values()),
             'balance' => $this->faker->randomFloat(2, 0, 10),
         ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return static
+     */
+    public function unverified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return static
+     */
+    public function verified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email' => 'test@fantasysports.com',
+                'email_verified_at' => $this->faker->dateTime(),
+            ];
+        });
     }
 }

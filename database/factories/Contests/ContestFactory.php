@@ -42,7 +42,7 @@ class ContestFactory extends Factory
             'type' => $this->faker->randomElement(TypeEnum::names()),
             'contest_type' => $this->faker->randomElement(ContestTypeEnum::values()),
             'game_type' => $this->faker->randomElement(GameTypeEnum::values()),
-            'title' => $this->faker->title,
+            'title' => $this->faker->name,
             'entry_fee_type' => $this->faker->randomElement(EntryFeeTypeEnum::values()),
             'prize_places' => [
                 [

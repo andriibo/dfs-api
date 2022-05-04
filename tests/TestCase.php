@@ -2,12 +2,17 @@
 
 namespace Tests;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Notification;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 abstract class TestCase extends BaseTestCase
 {
+    use DatabaseTransactions;
     use CreatesApplication;
 
     protected readonly UserRepository $userRepository;
@@ -24,5 +29,18 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         Notification::fake();
+    }
+
+    protected function getVerifiedUser(): User
+    {
+        return User::factory()
+            ->verified()
+            ->create()
+            ;
+    }
+
+    protected function getTokenForUser(JWTSubject $user): string
+    {
+        return JWTAuth::fromUser($user);
     }
 }

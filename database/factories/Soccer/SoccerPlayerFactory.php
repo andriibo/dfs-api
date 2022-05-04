@@ -36,7 +36,7 @@ class SoccerPlayerFactory extends Factory
     {
         return [
             'feed_type' => $this->faker->randomElement(FeedTypeEnum::names()),
-            'feed_id' => $this->faker->randomDigit(),
+            'feed_id' => $this->faker->unique()->numberBetween(100000),
             'sport_id' => $this->faker->randomElement(SportIdEnum::values()),
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,

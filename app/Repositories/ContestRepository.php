@@ -15,10 +15,7 @@ class ContestRepository
      */
     public function getContestById(int $contestId): Contest
     {
-        return Contest::query()
-            ->whereId($contestId)
-            ->firstOrFail()
-            ;
+        return Contest::findOrFail($contestId);
     }
 
     public function getContestsLobby(): LengthAwarePaginator

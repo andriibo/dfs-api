@@ -3,7 +3,6 @@
 namespace Tests\Feature\Controllers;
 
 use App\Models\StaticPage;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 /**
@@ -12,8 +11,6 @@ use Tests\TestCase;
  */
 class StaticPageTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function testStaticPagesShowEndpoint(): void
     {
         $staticPage = StaticPage::factory()
