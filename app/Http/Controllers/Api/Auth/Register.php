@@ -17,12 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(
- *         @OA\JsonContent(required={"email","password","passwordConfirmation","username","fullname"},
+ *         @OA\JsonContent(required={"email","password","passwordConfirmation","username","fullname","dob"},
  *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
  *             @OA\Property(property="password", type="string", minLength=6, example="password"),
  *             @OA\Property(property="passwordConfirmation", type="string", example="password"),
  *             @OA\Property(property="username", type="string", minLength=2, maxLength=50, example="john"),
- *             @OA\Property(property="fullname", type="string", minLength=2, maxLength=50, example="John Doe")
+ *             @OA\Property(property="fullname", type="string", minLength=2, maxLength=50, example="John Doe"),
+ *             @OA\Property(property="dob", type="string", format="date", example="1993-03-27")
  *         ),
  *     ),
  *     @OA\Response(response=201, ref="#/components/responses/201"),
