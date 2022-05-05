@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Models\League;
 use Database\Seeders\LeagueSeeder;
 use Tests\TestCase;
 
@@ -22,6 +23,25 @@ class LeagueTest extends TestCase
                     'id',
                     'name',
                     'alias',
+                ],
+            ],
+        ]);
+    }
+
+    public function testLeaguesSportConfigEndpoint(): void
+    {
+        $league = League::factory()->create();
+        $endpoint = "/api/v1/leagues/{$league->id}/sport-config";
+        $response = $this->getJson($endpoint);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'playersInTeam',
+                'positions' => [
+                    '*' => [
+                        'name',
+                        'alias',
+                    ],
                 ],
             ],
         ]);

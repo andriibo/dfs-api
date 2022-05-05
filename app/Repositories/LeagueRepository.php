@@ -8,9 +8,18 @@ use App\Enums\SportIdEnum;
 use App\Models\League;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LeagueRepository
 {
+    /**
+     * @throws ModelNotFoundException
+     */
+    public function getLeagueById(int $leagueId): League
+    {
+        return League::findOrFail($leagueId);
+    }
+
     /**
      * @return Collection|League[]
      */
