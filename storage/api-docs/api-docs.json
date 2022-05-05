@@ -1047,6 +1047,51 @@
                 }
             }
         },
+        "/leagues/{id}/sport-config": {
+            "get": {
+                "tags": [
+                    "Leagues"
+                ],
+                "summary": "Get Sport Config",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SportConfigResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/static-pages/{name}": {
             "get": {
                 "tags": [
@@ -1931,6 +1976,36 @@
                     },
                     "alias": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PositionResource": {
+                "title": "PositionResource",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Goalkeeper"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "example": "GK"
+                    }
+                },
+                "type": "object"
+            },
+            "SportConfigResource": {
+                "title": "SportConfigResource",
+                "properties": {
+                    "playersInTeam": {
+                        "type": "integer",
+                        "example": "11"
+                    },
+                    "positions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PositionResource"
+                        }
                     }
                 },
                 "type": "object"

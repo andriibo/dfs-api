@@ -4,11 +4,8 @@ namespace Tests\Unit;
 
 use App\Calculators\PrizePlaceCalculator;
 use App\Models\Contests\Contest;
-use App\Models\Contests\ContestUser;
-use App\Models\League;
 use App\Models\PrizePlace;
-use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Database\Seeders\ContestSeeder;
 use Tests\TestCase;
 
 /**
@@ -17,33 +14,14 @@ use Tests\TestCase;
  */
 class PrizePlaceCalculatorTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function testPrizePlace(): void
     {
-        $league = League::factory()
-            ->create()
-        ;
-
-        $user = User::factory()
-            ->create()
-        ;
-
-        $contest = Contest::factory()
-            ->for($league)
-            ->create()
-        ;
-
-        $contestUsers = ContestUser::factory()
-            ->count(1)
-            ->for($user)
-            ->for($contest)
-            ->create()
-        ;
+        $this->seed(ContestSeeder::class);
+        $contest = Contest::latest('id')->first();
 
         /* @var $prizePlaceCalculator PrizePlaceCalculator */
         $prizePlaceCalculator = resolve(PrizePlaceCalculator::class);
-        $prizes = $prizePlaceCalculator->handle($contest, $contestUsers);
+        $prizes = $prizePlaceCalculator->handle($contest, $contest->contestUsers);
 
         $this->assertIsArray($prizes);
         $this->assertNotEmpty($prizes);

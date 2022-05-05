@@ -38,7 +38,7 @@ class LeagueFactory extends Factory
             'alias' => $this->faker->unique()->text(5),
             'name' => $this->faker->title,
             'season' => $this->faker->year(),
-            'sport_id' => $this->faker->randomElement(SportIdEnum::values()),
+            'sport_id' => $this->faker->randomElement([SportIdEnum::soccer->value, SportIdEnum::cricket->value]),
             'is_enabled' => $this->faker->randomElement(IsEnabledEnum::values()),
             'date_updated' => $this->faker->dateTime(),
             'order' => 0,

@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\Leagues\Leagues;
+use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Users\Balance;
@@ -107,7 +108,10 @@ Route::prefix('v1')->group(function () {
      * #####  LEAGUES  #####
      * #####################
      */
-    Route::get('leagues', Leagues::class);
+    Route::prefix('leagues')->group(function (): void {
+        Route::get('', Leagues::class);
+        Route::get('{id}/sport-config', SportConfig::class);
+    });
 
     /*
      * ########################
