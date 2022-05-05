@@ -27,6 +27,7 @@ class AuthTest extends TestCase
             'passwordConfirmation' => 'password',
             'username' => 'fantasysports',
             'fullname' => 'John Doe',
+            'dob' => '1993-03-21',
         ];
 
         $response = $this->postJson('/api/v1/auth/register', $data);
