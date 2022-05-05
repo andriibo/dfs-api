@@ -1059,6 +1059,9 @@
                     },
                     {
                         "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "responses": {
