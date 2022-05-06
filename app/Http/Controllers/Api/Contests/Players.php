@@ -19,7 +19,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestDetailsResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestUnitResource")
  *             )
  *         )
  *     ),

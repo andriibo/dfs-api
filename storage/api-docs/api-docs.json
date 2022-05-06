@@ -841,7 +841,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/ContestDetailsResource"
+                                                "$ref": "#/components/schemas/ContestUnitResource"
                                             }
                                         }
                                     },
