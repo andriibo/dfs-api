@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Contests\Players;
 use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Upcoming;
+use App\Http\Controllers\Api\ContestUsers\OpponentUnits;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
@@ -89,6 +90,20 @@ Route::prefix('v1')->group(function () {
             Route::get('history', History::class);
             Route::get('{id}/players', Players::class);
             Route::get('{id}/game-logs', GameLogs::class);
+        });
+    });
+
+    /*
+     * ###########################
+     * #####  CONTEST USERS  #####
+     * ###########################
+     */
+    Route::prefix('contest-users')->group(function () {
+        Route::middleware('auth:api')->group(function (): void {
+            Route::get('{entryId}/opponent/{opponentId}/units', OpponentUnits::class)
+                ->where('entryId', '[0-9]+')
+                ->where('opponentId', '[0-9]+')
+            ;
         });
     });
 
