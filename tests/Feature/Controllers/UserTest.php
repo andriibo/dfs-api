@@ -53,6 +53,23 @@ class UserTest extends TestCase
         $this->assertProfileResponse($response);
     }
 
+    public function testUsersPasswordEndpoint(): void
+    {
+        $user = $this->getVerifiedUser();
+        $token = $this->getTokenForUser($user);
+        $data = [
+            'currentPassword' => 'password',
+            'password' => 'newpassword',
+            'passwordConfirmation' => 'newpassword',
+        ];
+        $response = $this->patchJson('/api/v1/users/password', $data, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $response->assertSee('message');
+        $this->assertIsString($response['message']);
+    }
+
     private function assertProfileResponse(TestResponse $response): void
     {
         $response->assertOk();
