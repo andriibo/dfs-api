@@ -8,15 +8,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="ContestUnitResource",
- *     @OA\Property(property="id", type="integer"),
- *     @OA\Property(property="playerId", type="integer"),
+ *     @OA\Property(property="id", type="integer", example="21"),
+ *     @OA\Property(property="playerId", type="integer", example="45"),
  *     @OA\Property(property="totalFantasyPointsPerGame", type="number", format="double", example="11.16"),
  *     @OA\Property(property="salary", type="number", format="double", example="5000.45"),
  *     @OA\Property(property="score", type="number", format="double", example="50.45"),
  *     @OA\Property(property="fullname", type="string", example="David Olatukunbo Alaba"),
- *     @OA\Property(property="position", type="integer"),
+ *     @OA\Property(property="position", type="integer", example="1"),
  *     @OA\Property(property="photo", type="string"),
- *     @OA\Property(property="teamId", type="number")
+ *     @OA\Property(property="teamId", type="number", example="34")
  * )
  */
 class ContestUnitResource extends JsonResource

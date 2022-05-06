@@ -51,6 +51,12 @@ class ContestSeeder extends Seeder
                 ->for($contest)
                 ->create()
             ;
+
+            ContestUser::factory()
+                ->for(User::factory()->create())
+                ->for($contest)
+                ->create()
+            ;
         }
     }
 }

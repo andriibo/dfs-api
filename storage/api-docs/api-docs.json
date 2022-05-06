@@ -627,6 +627,77 @@
                 }
             }
         },
+        "/contest-users/{entryId}/opponent/{opponentId}/units": {
+            "get": {
+                "tags": [
+                    "Contest Users"
+                ],
+                "summary": "Get Opponent Lineup",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "name": "entryId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "11"
+                        }
+                    },
+                    {
+                        "name": "opponentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "23"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OpponentUnitsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/contests/{id}/game-logs": {
             "get": {
                 "tags": [
@@ -1490,10 +1561,12 @@
                 "title": "ContestUnitResource",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "21"
                     },
                     "playerId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "45"
                     },
                     "totalFantasyPointsPerGame": {
                         "type": "number",
@@ -1515,13 +1588,54 @@
                         "example": "David Olatukunbo Alaba"
                     },
                     "position": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "1"
                     },
                     "photo": {
                         "type": "string"
                     },
                     "teamId": {
-                        "type": "number"
+                        "type": "number",
+                        "example": "34"
+                    }
+                },
+                "type": "object"
+            },
+            "OpponentUnitsResource": {
+                "title": "OpponentUnitsResource",
+                "properties": {
+                    "userId": {
+                        "type": "integer",
+                        "example": "57"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "Joe"
+                    },
+                    "budget": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "11.16"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "50.45"
+                    },
+                    "prize": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "25.15"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Title"
+                    },
+                    "units": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestUnitResource"
+                        }
                     }
                 },
                 "type": "object"
@@ -2461,6 +2575,10 @@
         {
             "name": "Contests",
             "description": "API Endpoints of Contests"
+        },
+        {
+            "name": "Contest Users",
+            "description": "API Endpoints of Contest Users"
         },
         {
             "name": "Transactions",
