@@ -12,6 +12,7 @@ class ResetPasswordRequest extends AbstractFormRequest
             'token' => 'required|string',
             'email' => 'required|email|max:50',
             'password' => 'required|confirmed|min:6',
+            'passwordConfirmation' => 'required',
         ];
     }
 }
