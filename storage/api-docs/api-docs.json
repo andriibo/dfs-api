@@ -669,7 +669,69 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/OpponentUnitsResource"
+                                                "$ref": "#/components/schemas/UnitsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/contest-users/{entryId}/units": {
+            "get": {
+                "tags": [
+                    "Contest Users"
+                ],
+                "summary": "Get Lineup",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "name": "entryId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "33"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UnitsResource"
                                             }
                                         }
                                     },
@@ -1684,8 +1746,8 @@
                 },
                 "type": "object"
             },
-            "OpponentUnitsResource": {
-                "title": "OpponentUnitsResource",
+            "UnitsResource": {
+                "title": "UnitsResource",
                 "properties": {
                     "userId": {
                         "type": "integer",

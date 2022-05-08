@@ -68,7 +68,6 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'email' => 'test@fantasysports.com',
                 'email_verified_at' => $this->faker->dateTime(),
             ];
         });

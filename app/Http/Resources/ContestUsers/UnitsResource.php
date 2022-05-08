@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Schema(
- *     title="OpponentUnitsResource",
+ *     title="UnitsResource",
  *     @OA\Property(property="userId", type="integer", example="57"),
  *     @OA\Property(property="username", type="string", example="Joe"),
  *     @OA\Property(property="budget", type="number", format="double", example="11.16"),
@@ -17,7 +17,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="units", type="array", @OA\Items(ref="#/components/schemas/ContestUnitResource"))
  * )
  */
-class OpponentUnitsResource extends JsonResource
+class UnitsResource extends JsonResource
 {
     public function toArray($request): array
     {

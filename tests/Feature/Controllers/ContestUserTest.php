@@ -4,6 +4,7 @@ namespace Tests\Feature\Controllers;
 
 use App\Models\Contests\ContestUser;
 use Database\Seeders\ContestSeeder;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 /**
@@ -12,18 +13,36 @@ use Tests\TestCase;
  */
 class ContestUserTest extends TestCase
 {
+    public function testContestUserLineupEndpoint(): void
+    {
+        $this->seed(ContestSeeder::class);
+        $contestUser = ContestUser::latest('id')->first();
+        $endpoint = "/api/v1/contest-users/{$contestUser->id}/units";
+        $token = $this->getTokenForUser($contestUser->user);
+        $response = $this->getJson($endpoint, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $this->assertResponse($response);
+    }
+
     public function testContestUserOpponentLineupEndpoint(): void
     {
         $this->seed(ContestSeeder::class);
         $contestUsers = ContestUser::query()->orderByDesc('id')->limit(2)->get();
-        $entryId = $contestUsers->first()->id;
-        $opponentId = $contestUsers->last()->id;
-        $endpoint = "/api/v1/contest-users/{$entryId}/opponent/{$opponentId}/units";
-        $user = $this->getVerifiedUser();
-        $token = $this->getTokenForUser($user);
+        $entryContestUser = $contestUsers->first();
+        $opponentContestUser = $contestUsers->last();
+        $endpoint = "/api/v1/contest-users/{$entryContestUser->id}/opponent/{$opponentContestUser->id}/units";
+        $token = $this->getTokenForUser($entryContestUser->user);
         $response = $this->getJson($endpoint, [
             'Authorization' => 'Bearer ' . $token,
         ]);
+        $response->assertOk();
+        $this->assertResponse($response);
+    }
+
+    private function assertResponse(TestResponse $response): void
+    {
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
