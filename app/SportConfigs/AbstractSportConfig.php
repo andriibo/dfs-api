@@ -10,5 +10,8 @@ class AbstractSportConfig
 
     public int $gameDuration = 7200;
 
+    /**
+     * @var PositionConfig[]
+     */
     public array $positions;
 }

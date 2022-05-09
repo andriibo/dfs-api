@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class ContestUserUnit extends Model
 {
+    public $timestamps = false;
     protected $table = 'contest_user_unit';
 
     protected $fillable = [

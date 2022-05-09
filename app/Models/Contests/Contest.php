@@ -2,6 +2,8 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\Contests\GameTypeEnum;
+use App\Enums\Contests\IsPrizeBankInPercents;
 use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\SuspendedEnum;
 use App\Enums\SportIdEnum;
@@ -234,6 +236,16 @@ class Contest extends Model
     public function isSuspended(): bool
     {
         return $this->suspended == SuspendedEnum::yes->value;
+    }
+
+    public function isPrizeBankInPercents(): bool
+    {
+        return $this->is_prize_in_percents == IsPrizeBankInPercents::yes->value;
+    }
+
+    public function isGameTypeSalary(): bool
+    {
+        return $this->game_type == GameTypeEnum::salary->value;
     }
 
     public function cricketGameSchedules(): BelongsToMany

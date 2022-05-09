@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Players;
 use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
+use App\Http\Controllers\Api\Contests\Units as ContestUnits;
 use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\ContestUsers\OpponentUnits;
 use App\Http\Controllers\Api\ContestUsers\Units;
@@ -91,8 +92,9 @@ Route::prefix('v1')->group(function () {
             Route::get('upcoming', Upcoming::class);
             Route::get('live', Live::class);
             Route::get('history', History::class);
-            Route::get('{id}/players', Players::class);
-            Route::get('{id}/game-logs', GameLogs::class);
+            Route::get('{id}/players', Players::class)->where('id', '[0-9]+');
+            Route::get('{id}/game-logs', GameLogs::class)->where('id', '[0-9]+');
+            Route::post('{id}/units', ContestUnits::class)->where('id', '[0-9]+');
         });
     });
 

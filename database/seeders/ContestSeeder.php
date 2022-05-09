@@ -26,25 +26,27 @@ class ContestSeeder extends Seeder
             ->create()
         ;
 
-        $players = SoccerPlayer::factory()->count(10)->create();
+        $players = SoccerPlayer::factory()->count(11)->create();
 
-        foreach ($contests as $key => $contest) {
+        foreach ($contests as $contest) {
             ContestActionPoint::factory()
                 ->for($contest)
                 ->for(ActionPoint::factory()->create())
                 ->create()
             ;
 
-            $soccerUnit = SoccerUnit::factory()
-                ->for($players[$key], 'player')
-                ->create()
-            ;
+            foreach ($players as $player) {
+                $soccerUnit = SoccerUnit::factory()
+                    ->for($player, 'player')
+                    ->create()
+                ;
 
-            ContestUnit::factory()
-                ->for($soccerUnit)
-                ->for($contest)
-                ->create()
-            ;
+                ContestUnit::factory()
+                    ->for($soccerUnit)
+                    ->for($contest)
+                    ->create()
+                ;
+            }
 
             ContestUser::factory()
                 ->for(User::factory()->verified()->create())

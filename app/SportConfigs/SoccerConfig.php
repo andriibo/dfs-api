@@ -23,8 +23,8 @@ class SoccerConfig extends AbstractSportConfig
                 'shortName' => 'FW',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
-                'minPlayersError' => 'At least {NUM} forwards must be selected',
-                'maxPlayersError' => 'Maximum {NUM} forwards can be selected',
+                'minPlayersError' => 'At least %s forwards must be selected',
+                'maxPlayersError' => 'Maximum %s forwards can be selected',
                 'allowedPositions' => [PositionConfig::SOCCER_FORWARD],
             ]),
             PositionConfig::SOCCER_MIDFIELD => new PositionConfig([
@@ -33,8 +33,8 @@ class SoccerConfig extends AbstractSportConfig
                 'shortName' => 'MD',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
-                'minPlayersError' => 'At least {NUM} midfields must be selected',
-                'maxPlayersError' => 'Maximum {NUM} midfields can be selected',
+                'minPlayersError' => 'At least %s midfields must be selected',
+                'maxPlayersError' => 'Maximum %s midfields can be selected',
                 'allowedPositions' => [PositionConfig::SOCCER_MIDFIELD],
             ]),
             PositionConfig::SOCCER_DEFENDER => new PositionConfig([
@@ -43,8 +43,8 @@ class SoccerConfig extends AbstractSportConfig
                 'shortName' => 'DF',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
-                'minPlayersError' => 'At least {NUM} defenders must be selected',
-                'maxPlayersError' => 'Maximum {NUM} defenders can be selected',
+                'minPlayersError' => 'At least %s defenders must be selected',
+                'maxPlayersError' => 'Maximum %s defenders can be selected',
                 'allowedPositions' => [PositionConfig::SOCCER_DEFENDER],
             ]),
         ];

@@ -5,10 +5,9 @@ namespace App\Calculators;
 use App\Enums\Contests\PrizeBankTypeEnum;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-class PrizePlaceCalculator
+class PrizePlaceCalculator extends AbstractCalculator
 {
     private array $prizePercents = [50, 30, 20];
     private int $placeFrom = 1;
@@ -70,22 +69,7 @@ class PrizePlaceCalculator
      */
     private function normalizePrizePlaces(Contest $contest): array
     {
-        $prizes = [];
-
-        foreach ($contest->prize_places as $item) {
-            if (!$item instanceof PrizePlace) {
-                $model = new PrizePlace();
-                $model->places = Arr::get($item, 'places');
-                $model->prize = Arr::get($item, 'prize');
-                $item = $model;
-            }
-            if ($contest->is_prize_in_percents) {
-                $item->prize = round($contest->prize_bank / 100 * $item->prize, 2);
-                $item->voucher = round($contest->prize_bank / 100 * $item->voucher, 2);
-            }
-            $prizes[] = $item;
-        }
-
+        $prizes = $this->loadPrizePlaces($contest);
         if ($contest->prize_bank_type == PrizeBankTypeEnum::topThree->value) {
             $topThree = [];
             foreach ($this->prizePercents as $prizePercent) {
