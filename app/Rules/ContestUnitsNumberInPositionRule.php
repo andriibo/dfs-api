@@ -17,12 +17,7 @@ class ContestUnitsNumberInPositionRule implements Rule
     public function passes($attribute, $value): bool
     {
         foreach ($this->sportConfig->positions as $position => $positionConfig) {
-            $count = 0;
-            foreach ($value as $unit) {
-                if ($position == Arr::get($unit, 'position')) {
-                    ++$count;
-                }
-            }
+            $count = $this->getCountByPosition($value, $position);
 
             if ($count < $positionConfig->minPlayers) {
                 $this->message = sprintf($positionConfig->minPlayersError, $positionConfig->minPlayers);
@@ -43,5 +38,17 @@ class ContestUnitsNumberInPositionRule implements Rule
     public function message(): string
     {
         return $this->message;
+    }
+
+    private function getCountByPosition(array $units, string|int $position): int
+    {
+        $count = 0;
+        foreach ($units as $unit) {
+            if ($position == Arr::get($unit, 'position')) {
+                ++$count;
+            }
+        }
+
+        return $count;
     }
 }
