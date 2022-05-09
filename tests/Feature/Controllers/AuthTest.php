@@ -55,10 +55,10 @@ class AuthTest extends TestCase
 
     public function testAuthLoginEndpoint(): void
     {
-        $this->getVerifiedUser();
+        $user = $this->getVerifiedUser();
 
         $credentials = [
-            'email' => 'test@fantasysports.com',
+            'email' => $user->email,
             'password' => 'password',
         ];
 
