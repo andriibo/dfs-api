@@ -24,14 +24,16 @@ class EnterContestService
         DB::beginTransaction();
 
         try {
+            $contestUsersCount = $contest->contestUsers()->count();
+            ++$contestUsersCount;
             $contestUser = $this->contestUserRepository->create([
                 'contest_id' => $contest->id,
                 'user_id' => $userId,
-                'title' => '#' . $contest->contestUsers()->count() + 1,
+                'title' => '#' . $contestUsersCount,
             ]);
 
             $this->createContestUserUnits($contestUser->id, $units);
-            $this->updatePrizeBank($contest);
+            $this->updatePrizeBank($contest, $contestUsersCount);
         } catch (\Throwable $e) {
             DB::rollback();
 
@@ -54,10 +56,10 @@ class EnterContestService
         }
     }
 
-    private function updatePrizeBank(Contest $contest): void
+    private function updatePrizeBank(Contest $contest, int $contestUsersCount): void
     {
         $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);
-        $prizeBank = $this->prizeBankCalculator->handle($contest, $contest->contestUsers()->count(), $fee);
+        $prizeBank = $this->prizeBankCalculator->handle($contest, $contestUsersCount, $fee);
         $contest->prize_bank = $prizeBank;
         $contest->save();
     }
