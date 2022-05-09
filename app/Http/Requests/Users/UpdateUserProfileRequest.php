@@ -4,6 +4,17 @@ namespace App\Http\Requests\Users;
 
 use App\Http\Requests\AbstractFormRequest;
 
+/**
+ * @OA\RequestBody(
+ *    request="UpdateUserProfileRequest",
+ *    @OA\JsonContent(required={"email","username","dob","fullname"},
+ *       @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
+ *       @OA\Property(property="username", type="string", minLength=6, example="john"),
+ *       @OA\Property(property="dob", type="string", format="date", example="1988-07-21"),
+ *       @OA\Property(property="fullname", type="string", example="John Doe")
+ *    )
+ * )
+ */
 class UpdateUserProfileRequest extends AbstractFormRequest
 {
     public function rules(): array

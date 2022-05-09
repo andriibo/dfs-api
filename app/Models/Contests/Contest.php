@@ -3,6 +3,7 @@
 namespace App\Models\Contests;
 
 use App\Enums\Contests\StatusEnum;
+use App\Enums\Contests\SuspendedEnum;
 use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
 use App\Models\Cricket\CricketGameSchedule;
@@ -223,6 +224,16 @@ class Contest extends Model
     public function isStatusClosed(): bool
     {
         return $this->status == StatusEnum::closed->value;
+    }
+
+    public function isStatusReady(): bool
+    {
+        return $this->status == StatusEnum::ready->value;
+    }
+
+    public function isSuspended(): bool
+    {
+        return $this->suspended == SuspendedEnum::yes->value;
     }
 
     public function cricketGameSchedules(): BelongsToMany

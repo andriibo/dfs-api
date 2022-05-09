@@ -15,13 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\RequestBody(
- *         @OA\JsonContent(required={"email","password"},
- *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
- *             @OA\Property(property="password", type="string", minLength=6, example="password"),
- *             @OA\Property(property="rememberMe", type="bool", example="false")
- *         ),
- *     ),
+ *     @OA\RequestBody(ref="#/components/requestBodies/LoginRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="object",

@@ -17,13 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\RequestBody(
- *         @OA\JsonContent(required={"currentPassword","password","passwordConfirmation"},
- *             @OA\Property(property="currentPassword", type="string", example="password"),
- *             @OA\Property(property="password", type="string", minLength=6, example="newpassword"),
- *             @OA\Property(property="passwordConfirmation", type="string", example="newpassword")
- *         ),
- *     ),
+ *     @OA\RequestBody(ref="#/components/requestBodies/ChangePasswordRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="Password successfully changed!")

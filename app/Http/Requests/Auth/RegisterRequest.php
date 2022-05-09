@@ -4,6 +4,19 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\AbstractFormRequest;
 
+/**
+ * @OA\RequestBody(
+ *    request="RegisterRequest",
+ *    @OA\JsonContent(required={"email","password","passwordConfirmation","username","fullname","dob"},
+ *        @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
+ *        @OA\Property(property="password", type="string", minLength=6, example="password"),
+ *        @OA\Property(property="passwordConfirmation", type="string", example="password"),
+ *        @OA\Property(property="username", type="string", minLength=2, maxLength=50, example="john"),
+ *        @OA\Property(property="fullname", type="string", minLength=2, maxLength=50, example="John Doe"),
+ *        @OA\Property(property="dob", type="string", format="date", example="1993-03-27")
+ *    )
+ * )
+ */
 class RegisterRequest extends AbstractFormRequest
 {
     public function rules(): array

@@ -15,11 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\RequestBody(
- *         @OA\JsonContent(required={"email"},
- *             @OA\Property(property="email", type="string", maxLength=50)
- *         ),
- *     ),
+ *     @OA\RequestBody(ref="#/components/requestBodies/ForgotPasswordRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="A reset email has been sent! Please check your email.")

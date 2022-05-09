@@ -19,12 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(name="token", required=true, in="query", @OA\Schema(type="string")),
  *     @OA\Parameter(name="email", required=true, in="query", @OA\Schema(type="string"), example="john@gmail.com"),
- *     @OA\RequestBody(
- *         @OA\JsonContent(required={"password","passwordConfirmation"},
- *             @OA\Property(property="password", type="string", maxLength=50, example="password2"),
- *             @OA\Property(property="passwordConfirmation", type="string", maxLength=50, example="password2")
- *         ),
- *     ),
+ *     @OA\RequestBody(ref="#/components/requestBodies/ResetPasswordRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="A reset email has been sent! Please check your email.")

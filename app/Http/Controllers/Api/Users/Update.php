@@ -16,14 +16,7 @@ use Illuminate\Http\JsonResponse;
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\RequestBody(
- *         @OA\JsonContent(required={"email","username","dob","fullname"},
- *             @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
- *             @OA\Property(property="username", type="string", minLength=6, example="john"),
- *             @OA\Property(property="dob", type="string", format="date", example="1988-07-21"),
- *             @OA\Property(property="fullname", type="string", example="John Doe")
- *         ),
- *     ),
+ *     @OA\RequestBody(ref="#/components/requestBodies/UpdateUserProfileRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
