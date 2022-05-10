@@ -6,12 +6,12 @@ use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use Illuminate\Support\Arr;
 
-trait LoadPrizePlaces
+trait PrizePlaces
 {
     /**
      * @return PrizePlace[]
      */
-    private function loadPrizePlaces(Contest $contest): array
+    private function handlePrizePlaces(Contest $contest): array
     {
         $prizePlaces = [];
 

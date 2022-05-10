@@ -6,7 +6,7 @@ use App\Models\Contests\Contest;
 
 class PrizeBankCalculator
 {
-    use LoadPrizePlaces;
+    use PrizePlaces;
 
     public function handle(Contest $contest, int $contestUsersCount, int|float|string $fee): float
     {
@@ -21,7 +21,7 @@ class PrizeBankCalculator
         }
 
         $bank = 0;
-        $prizePlaces = $this->loadPrizePlaces($contest);
+        $prizePlaces = $this->handlePrizePlaces($contest);
         foreach ($prizePlaces as $prizePlace) {
             $bank += $prizePlace->prize;
         }
