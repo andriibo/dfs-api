@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\ContestUnits;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contests\ContestDetailsResource;
+use App\Http\Resources\ContestUnits\ContestUnitDetailsResource;
 use App\Repositories\ContestUnitRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,6 +33,6 @@ class Show extends Controller
     {
         $contestUnit = $contestUnitRepository->getContestUnitById($contestUnitId);
 
-        return new ContestDetailsResource($contestUnit);
+        return new ContestUnitDetailsResource($contestUnit);
     }
 }
