@@ -71,7 +71,7 @@ class PrizePlaceCalculator
      */
     private function normalizePrizePlaces(Contest $contest): array
     {
-        $prizes = $this->handlePrizePlaces($contest);
+        $prizePlaces = $this->handlePrizePlaces($contest);
         if ($contest->prize_bank_type == PrizeBankTypeEnum::topThree->value) {
             $topThree = [];
             foreach ($this->prizePercents as $prizePercent) {
@@ -81,12 +81,12 @@ class PrizePlaceCalculator
                 $prizePlace->voucher = round($prizePlace->voucher / 100 * $prizePercent, 2);
                 $topThree[] = $prizePlace;
             }
-            $prizes = $topThree;
-        } elseif ($contest->prize_bank_type == PrizeBankTypeEnum::fiftyFifty->value && isset($prizes[0])) {
+            $prizePlaces = $topThree;
+        } elseif ($contest->prize_bank_type == PrizeBankTypeEnum::fiftyFifty->value && isset($prizePlaces[0])) {
             $places = $contest->contestUsers()->max('place');
-            $prizes[0]->places = $places > 1 ? floor($places / 2) : $places;
+            $prizePlaces[0]->places = $places > 1 ? floor($places / 2) : $places;
         }
 
-        return $prizes;
+        return $prizePlaces;
     }
 }
