@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 class PrizePlaceCalculator
 {
-    use PrizePlaces;
+    use ContestPrizePlacesCalculator;
 
     private array $prizePercents = [50, 30, 20];
     private int $placeFrom = 1;
@@ -71,7 +71,7 @@ class PrizePlaceCalculator
      */
     private function normalizePrizePlaces(Contest $contest): array
     {
-        $prizePlaces = $this->handlePrizePlaces($contest);
+        $prizePlaces = $this->calcPrizePlacesForContest($contest);
         if ($contest->prize_bank_type == PrizeBankTypeEnum::topThree->value) {
             $topThree = [];
             foreach ($this->prizePercents as $prizePercent) {
