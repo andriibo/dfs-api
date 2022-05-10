@@ -12,8 +12,8 @@ class UserInContestSpecification
 
     public function isSatisfiedBy(int $contestId, int $userId): bool
     {
-        $contestUser = $this->contestUserRepository->getByParams($userId, $contestId);
+        $contestUsers = $this->contestUserRepository->getByParams($userId, $contestId);
 
-        return !is_null($contestUser);
+        return (bool) $contestUsers->count();
     }
 }

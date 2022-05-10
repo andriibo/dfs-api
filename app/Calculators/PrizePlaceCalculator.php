@@ -5,11 +5,12 @@ namespace App\Calculators;
 use App\Enums\Contests\PrizeBankTypeEnum;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class PrizePlaceCalculator
 {
+    use ContestPrizePlacesCalculator;
+
     private array $prizePercents = [50, 30, 20];
     private int $placeFrom = 1;
     private int $placeTo = 0;
@@ -70,22 +71,7 @@ class PrizePlaceCalculator
      */
     private function normalizePrizePlaces(Contest $contest): array
     {
-        $prizes = [];
-
-        foreach ($contest->prize_places as $item) {
-            if (!$item instanceof PrizePlace) {
-                $model = new PrizePlace();
-                $model->places = Arr::get($item, 'places');
-                $model->prize = Arr::get($item, 'prize');
-                $item = $model;
-            }
-            if ($contest->is_prize_in_percents) {
-                $item->prize = round($contest->prize_bank / 100 * $item->prize, 2);
-                $item->voucher = round($contest->prize_bank / 100 * $item->voucher, 2);
-            }
-            $prizes[] = $item;
-        }
-
+        $prizePlaces = $this->calcPrizePlacesForContest($contest);
         if ($contest->prize_bank_type == PrizeBankTypeEnum::topThree->value) {
             $topThree = [];
             foreach ($this->prizePercents as $prizePercent) {
@@ -95,12 +81,12 @@ class PrizePlaceCalculator
                 $prizePlace->voucher = round($prizePlace->voucher / 100 * $prizePercent, 2);
                 $topThree[] = $prizePlace;
             }
-            $prizes = $topThree;
-        } elseif ($contest->prize_bank_type == PrizeBankTypeEnum::fiftyFifty->value && isset($prizes[0])) {
+            $prizePlaces = $topThree;
+        } elseif ($contest->prize_bank_type == PrizeBankTypeEnum::fiftyFifty->value && isset($prizePlaces[0])) {
             $places = $contest->contestUsers()->max('place');
-            $prizes[0]->places = $places > 1 ? floor($places / 2) : $places;
+            $prizePlaces[0]->places = $places > 1 ? floor($places / 2) : $places;
         }
 
-        return $prizes;
+        return $prizePlaces;
     }
 }

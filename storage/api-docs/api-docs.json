@@ -36,22 +36,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "maxLength": 50
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/ForgotPasswordRequest"
                 },
                 "responses": {
                     "200": {
@@ -106,33 +91,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "john@gmail.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "minLength": 6,
-                                        "example": "password"
-                                    },
-                                    "rememberMe": {
-                                        "type": "boolean",
-                                        "example": "false"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/LoginRequest"
                 },
                 "responses": {
                     "200": {
@@ -316,54 +275,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password",
-                                    "passwordConfirmation",
-                                    "username",
-                                    "fullname",
-                                    "dob"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "john@gmail.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "minLength": 6,
-                                        "example": "password"
-                                    },
-                                    "passwordConfirmation": {
-                                        "type": "string",
-                                        "example": "password"
-                                    },
-                                    "username": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "minLength": 2,
-                                        "example": "john"
-                                    },
-                                    "fullname": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "minLength": 2,
-                                        "example": "John Doe"
-                                    },
-                                    "dob": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "1993-03-27"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/RegisterRequest"
                 },
                 "responses": {
                     "201": {
@@ -416,29 +328,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "password",
-                                    "passwordConfirmation"
-                                ],
-                                "properties": {
-                                    "password": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "password2"
-                                    },
-                                    "passwordConfirmation": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "password2"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/ResetPasswordRequest"
                 },
                 "responses": {
                     "200": {
@@ -568,23 +458,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "john@gmail.com"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/VerifyResendRequest"
                 },
                 "responses": {
                     "200": {
@@ -1093,6 +967,63 @@
                 }
             }
         },
+        "/contests/{id}/units": {
+            "post": {
+                "tags": [
+                    "Contests"
+                ],
+                "summary": "Create Contest Units",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/UnitsRequest"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/contests/upcoming": {
             "get": {
                 "tags": [
@@ -1417,33 +1348,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "currentPassword",
-                                    "password",
-                                    "passwordConfirmation"
-                                ],
-                                "properties": {
-                                    "currentPassword": {
-                                        "type": "string",
-                                        "example": "password"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "minLength": 6,
-                                        "example": "newpassword"
-                                    },
-                                    "passwordConfirmation": {
-                                        "type": "string",
-                                        "example": "newpassword"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/ChangePasswordRequest"
                 },
                 "responses": {
                     "200": {
@@ -1551,40 +1456,7 @@
                     }
                 ],
                 "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "username",
-                                    "dob",
-                                    "fullname"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "maxLength": 50,
-                                        "example": "john@gmail.com"
-                                    },
-                                    "username": {
-                                        "type": "string",
-                                        "minLength": 6,
-                                        "example": "john"
-                                    },
-                                    "dob": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "1988-07-21"
-                                    },
-                                    "fullname": {
-                                        "type": "string",
-                                        "example": "John Doe"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/UpdateUserProfileRequest"
                 },
                 "responses": {
                     "200": {
@@ -2692,6 +2564,249 @@
                 "schema": {
                     "type": "string",
                     "example": "12qs850keo23"
+                }
+            }
+        },
+        "requestBodies": {
+            "ForgotPasswordRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "email"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "maxLength": 50
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "LoginRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "email",
+                                "password"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "john@gmail.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "minLength": 6,
+                                    "example": "password"
+                                },
+                                "rememberMe": {
+                                    "type": "boolean",
+                                    "example": "false"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "RegisterRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "email",
+                                "password",
+                                "passwordConfirmation",
+                                "username",
+                                "fullname",
+                                "dob"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "john@gmail.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "minLength": 6,
+                                    "example": "password"
+                                },
+                                "passwordConfirmation": {
+                                    "type": "string",
+                                    "example": "password"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "minLength": 2,
+                                    "example": "john"
+                                },
+                                "fullname": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "minLength": 2,
+                                    "example": "John Doe"
+                                },
+                                "dob": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "1993-03-27"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "ResetPasswordRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "password",
+                                "passwordConfirmation"
+                            ],
+                            "properties": {
+                                "password": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "password2"
+                                },
+                                "passwordConfirmation": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "password2"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "VerifyResendRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "email"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "john@gmail.com"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "UnitsRequest": {
+                "description": "Contest Units request body",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "units"
+                            ],
+                            "properties": {
+                                "units": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "id",
+                                            "position"
+                                        ],
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": "23"
+                                            },
+                                            "position": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "ChangePasswordRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "currentPassword",
+                                "password",
+                                "passwordConfirmation"
+                            ],
+                            "properties": {
+                                "currentPassword": {
+                                    "type": "string",
+                                    "example": "password"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "minLength": 6,
+                                    "example": "newpassword"
+                                },
+                                "passwordConfirmation": {
+                                    "type": "string",
+                                    "example": "newpassword"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "UpdateUserProfileRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "email",
+                                "username",
+                                "dob",
+                                "fullname"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "maxLength": 50,
+                                    "example": "john@gmail.com"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "minLength": 6,
+                                    "example": "john"
+                                },
+                                "dob": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "1988-07-21"
+                                },
+                                "fullname": {
+                                    "type": "string",
+                                    "example": "John Doe"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
                 }
             }
         },

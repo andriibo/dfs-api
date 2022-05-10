@@ -41,7 +41,7 @@ class UserFactory extends Factory
             'username' => $this->faker->unique()->word(),
             'fullname' => $this->faker->name(),
             'status' => $this->faker->randomElement(StatusEnum::values()),
-            'balance' => $this->faker->randomFloat(2, 0, 10),
+            'balance' => $this->faker->randomFloat(2, 100, 1000),
         ];
     }
 

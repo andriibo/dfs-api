@@ -46,4 +46,13 @@ class LeagueFactory extends Factory
             'recently_enabled' => $this->faker->randomElement(RecentlyEnabledEnum::values()),
         ];
     }
+
+    public function soccer()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'sport_id' => SportIdEnum::soccer->value,
+            ];
+        });
+    }
 }
