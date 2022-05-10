@@ -4,6 +4,7 @@ namespace App\Models\Contests;
 
 use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\SuspendedEnum;
+use App\Enums\IsEnabledEnum;
 use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
 use App\Models\Cricket\CricketGameSchedule;
@@ -263,6 +264,6 @@ class Contest extends Model
             (new ContestActionPoint())->getTable(),
             'contest_id',
             'action_points_id'
-        );
+        )->where('is_enabled', IsEnabledEnum::isEnabled);
     }
 }
