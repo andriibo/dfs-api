@@ -7,8 +7,10 @@ use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use Illuminate\Support\Collection;
 
-class PrizePlaceCalculator extends AbstractCalculator
+class PrizePlaceCalculator
 {
+    use LoadPrizePlaces;
+
     private array $prizePercents = [50, 30, 20];
     private int $placeFrom = 1;
     private int $placeTo = 0;
