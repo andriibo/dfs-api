@@ -541,10 +541,7 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestUserDetailsResource"
-                                            }
+                                            "$ref": "#/components/schemas/ContestUserDetailsResource"
                                         }
                                     },
                                     "type": "object"
@@ -603,10 +600,7 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestUserDetailsResource"
-                                            }
+                                            "$ref": "#/components/schemas/ContestUserDetailsResource"
                                         }
                                     },
                                     "type": "object"
@@ -1264,6 +1258,59 @@
                     },
                     "429": {
                         "$ref": "#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get User Transactions",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TransactionResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -2188,6 +2235,57 @@
                     "alias": {
                         "type": "string",
                         "example": "WAT"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionResource": {
+                "title": "TransactionResource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "12"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "230.41"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    "type": {
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            10,
+                            11,
+                            12
+                        ]
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2022-04-01 12:00:05"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2022-04-02 11:59:41"
                     }
                 },
                 "type": "object"

@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
+use App\Http\Controllers\Api\Transactions\Transactions;
 use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\ChangePassword;
 use App\Http\Controllers\Api\Users\Show as Profile;
@@ -120,8 +121,9 @@ Route::prefix('v1')->group(function () {
      * ########################
      */
     Route::prefix('transactions')->group(function (): void {
-        Route::middleware(['throttle:6,1', 'auth:api'])->group(function (): void {
-            Route::get('daily-bonus', DailyBonus::class);
+        Route::middleware('auth:api')->group(function (): void {
+            Route::get('', Transactions::class);
+            Route::middleware('throttle:6,1')->get('daily-bonus', DailyBonus::class);
         });
     });
 
