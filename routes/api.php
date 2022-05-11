@@ -17,8 +17,8 @@ use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
 use App\Http\Controllers\Api\Contests\Units as ContestUnits;
 use App\Http\Controllers\Api\Contests\Upcoming;
-use App\Http\Controllers\Api\ContestUsers\OpponentUnits;
-use App\Http\Controllers\Api\ContestUsers\Units;
+use App\Http\Controllers\Api\ContestUsers\Opponent;
+use App\Http\Controllers\Api\ContestUsers\Show as ContestUserShow;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
@@ -105,11 +105,11 @@ Route::prefix('v1')->group(function () {
      */
     Route::prefix('contest-users')->group(function () {
         Route::middleware(['auth:api', 'contest.user.access'])->group(function (): void {
-            Route::get('{entryId}/opponent/{opponentId}/units', OpponentUnits::class)
+            Route::get('{entryId}/opponent/{opponentId}', Opponent::class)
                 ->where('entryId', '[0-9]+')
                 ->where('opponentId', '[0-9]+')
             ;
-            Route::get('{entryId}/units', Units::class)->where('entryId', '[0-9]+')
+            Route::get('{entryId}', ContestUserShow::class)->where('entryId', '[0-9]+')
             ;
         });
     });

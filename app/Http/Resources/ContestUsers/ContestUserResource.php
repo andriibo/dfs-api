@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Contests;
+namespace App\Http\Resources\ContestUsers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

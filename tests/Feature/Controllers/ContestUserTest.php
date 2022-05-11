@@ -17,7 +17,7 @@ class ContestUserTest extends TestCase
     {
         $this->seed(ContestSeeder::class);
         $contestUser = ContestUser::latest('id')->first();
-        $endpoint = "/api/v1/contest-users/{$contestUser->id}/units";
+        $endpoint = "/api/v1/contest-users/{$contestUser->id}";
         $token = $this->getTokenForUser($contestUser->user);
         $response = $this->getJson($endpoint, [
             'Authorization' => 'Bearer ' . $token,
@@ -32,7 +32,7 @@ class ContestUserTest extends TestCase
         $contestUsers = ContestUser::query()->orderByDesc('id')->limit(2)->get();
         $entryContestUser = $contestUsers->first();
         $opponentContestUser = $contestUsers->last();
-        $endpoint = "/api/v1/contest-users/{$entryContestUser->id}/opponent/{$opponentContestUser->id}/units";
+        $endpoint = "/api/v1/contest-users/{$entryContestUser->id}/opponent/{$opponentContestUser->id}";
         $token = $this->getTokenForUser($entryContestUser->user);
         $response = $this->getJson($endpoint, [
             'Authorization' => 'Bearer ' . $token,
@@ -59,9 +59,12 @@ class ContestUserTest extends TestCase
                         'salary',
                         'score',
                         'fullname',
-                        'position',
                         'photo',
                         'teamId',
+                        'position' => [
+                            'name',
+                            'alias',
+                        ],
                     ],
                 ],
             ],

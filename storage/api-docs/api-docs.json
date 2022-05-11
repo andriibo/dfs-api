@@ -501,7 +501,7 @@
                 }
             }
         },
-        "/contest-users/{entryId}/opponent/{opponentId}/units": {
+        "/contest-users/{entryId}/opponent/{opponentId}": {
             "get": {
                 "tags": [
                     "Contest Users"
@@ -543,7 +543,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/UnitsResource"
+                                                "$ref": "#/components/schemas/ContestUserDetailsResource"
                                             }
                                         }
                                     },
@@ -572,7 +572,7 @@
                 ]
             }
         },
-        "/contest-users/{entryId}/units": {
+        "/contest-users/{entryId}": {
             "get": {
                 "tags": [
                     "Contest Users"
@@ -605,7 +605,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/UnitsResource"
+                                                "$ref": "#/components/schemas/ContestUserDetailsResource"
                                             }
                                         }
                                     },
@@ -1604,22 +1604,21 @@
                         "type": "string",
                         "example": "David Olatukunbo Alaba"
                     },
-                    "position": {
-                        "type": "integer",
-                        "example": "1"
-                    },
                     "photo": {
                         "type": "string"
                     },
                     "teamId": {
                         "type": "number",
                         "example": "34"
+                    },
+                    "position": {
+                        "$ref": "#/components/schemas/PositionResource"
                     }
                 },
                 "type": "object"
             },
-            "UnitsResource": {
-                "title": "UnitsResource",
+            "ContestUserDetailsResource": {
+                "title": "ContestUserResource",
                 "properties": {
                     "userId": {
                         "type": "integer",
@@ -1653,6 +1652,57 @@
                         "items": {
                             "$ref": "#/components/schemas/ContestUnitResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "ContestUserResource": {
+                "title": "ContestUserResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "fantasysports"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "budget": {
+                        "type": "integer",
+                        "example": "1350"
+                    },
+                    "date": {
+                        "type": "integer",
+                        "example": "1650112441"
+                    },
+                    "isWinner": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    "place": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "prize": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "140.56"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "23.12"
                     }
                 },
                 "type": "object"
@@ -1959,57 +2009,6 @@
                             "H2H",
                             "Custom"
                         ]
-                    }
-                },
-                "type": "object"
-            },
-            "ContestUserResource": {
-                "title": "ContestUserResource",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "userId": {
-                        "type": "integer"
-                    },
-                    "username": {
-                        "type": "string",
-                        "example": "fantasysports"
-                    },
-                    "avatar": {
-                        "type": "string"
-                    },
-                    "budget": {
-                        "type": "integer",
-                        "example": "1350"
-                    },
-                    "date": {
-                        "type": "integer",
-                        "example": "1650112441"
-                    },
-                    "isWinner": {
-                        "type": "integer",
-                        "enum": [
-                            0,
-                            1
-                        ]
-                    },
-                    "place": {
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "prize": {
-                        "type": "number",
-                        "format": "double",
-                        "example": "140.56"
-                    },
-                    "score": {
-                        "type": "number",
-                        "format": "double",
-                        "example": "23.12"
                     }
                 },
                 "type": "object"

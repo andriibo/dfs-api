@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\ContestUsers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ContestUsers\UnitsResource;
+use App\Http\Resources\ContestUsers\ContestUserDetailsResource;
 use App\Repositories\ContestUserRepository;
 use App\Specifications\CanSeeOpponentUnitsSpecification;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Get(
- *     path="/contest-users/{entryId}/opponent/{opponentId}/units",
+ *     path="/contest-users/{entryId}/opponent/{opponentId}",
  *     summary="Get Opponent Lineup",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/UnitsResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestUserDetailsResource")
  *             )
  *         )
  *     ),
@@ -33,7 +33,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class OpponentUnits extends Controller
+class Opponent extends Controller
 {
     public function __invoke(
         int $entryId,
@@ -48,6 +48,6 @@ class OpponentUnits extends Controller
             return response()->json(['message' => "You are not allowed to see opponent's lineup"], Response::HTTP_FORBIDDEN);
         }
 
-        return new UnitsResource($opponentContestUser);
+        return new ContestUserDetailsResource($opponentContestUser);
     }
 }

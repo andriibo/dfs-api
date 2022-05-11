@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api\ContestUsers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ContestUsers\UnitsResource;
+use App\Http\Resources\ContestUsers\ContestUserDetailsResource;
 use App\Repositories\ContestUserRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Get(
- *     path="/contest-users/{entryId}/units",
+ *     path="/contest-users/{entryId}",
  *     summary="Get Lineup",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
@@ -19,7 +19,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/UnitsResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestUserDetailsResource")
  *             )
  *         )
  *     ),
@@ -29,7 +29,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class Units extends Controller
+class Show extends Controller
 {
     public function __invoke(
         int $entryId,
@@ -37,6 +37,6 @@ class Units extends Controller
     ): JsonResource {
         $entryContestUser = $contestUserRepository->getById($entryId);
 
-        return new UnitsResource($entryContestUser);
+        return new ContestUserDetailsResource($entryContestUser);
     }
 }

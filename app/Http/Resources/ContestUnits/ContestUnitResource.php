@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\ContestUnits;
 
+use App\Factories\SportConfigFactory;
+use App\Http\Resources\Leagues\PositionResource;
 use App\Services\UnitService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,9 +16,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="salary", type="number", format="double", example="5000.45"),
  *     @OA\Property(property="score", type="number", format="double", example="50.45"),
  *     @OA\Property(property="fullname", type="string", example="David Olatukunbo Alaba"),
- *     @OA\Property(property="position", type="integer", example="1"),
  *     @OA\Property(property="photo", type="string"),
- *     @OA\Property(property="teamId", type="number", example="34")
+ *     @OA\Property(property="teamId", type="number", example="34"),
+ *     @OA\Property(property="position", ref="#/components/schemas/PositionResource")
  * )
  */
 class ContestUnitResource extends JsonResource
@@ -26,6 +28,7 @@ class ContestUnitResource extends JsonResource
         /* @var $unitService UnitService */
         $unitService = resolve(UnitService::class);
         $unit = $unitService->getUnit($this->resource);
+        $sportConfig = SportConfigFactory::getConfig($this->sport_id);
 
         return [
             'id' => $this->id,
@@ -34,9 +37,9 @@ class ContestUnitResource extends JsonResource
             'salary' => $this->salary,
             'score' => $this->score,
             'fullname' => $unit->player->getFullName(),
-            'position' => $unit->position,
             'photo' => $unit->player->photo?->getFileUrl(),
             'teamId' => $this->team_id,
+            'position' => new PositionResource($sportConfig->positions[$unit->position] ?? null),
         ];
     }
 }
