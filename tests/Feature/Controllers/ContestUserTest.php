@@ -13,7 +13,7 @@ use Tests\TestCase;
  */
 class ContestUserTest extends TestCase
 {
-    public function testContestUsersLineupEndpoint(): void
+    public function testContestUsersShowEndpoint(): void
     {
         $this->seed(ContestSeeder::class);
         $contestUser = ContestUser::latest('id')->first();
