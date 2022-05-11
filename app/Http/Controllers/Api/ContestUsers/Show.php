@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Get(
  *     path="/contest-users/{entryId}",
- *     summary="Get Lineup",
+ *     summary="Get Contest User",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),

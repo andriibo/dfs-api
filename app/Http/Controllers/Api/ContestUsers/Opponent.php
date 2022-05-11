@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @OA\Get(
  *     path="/contest-users/{entryId}/opponent/{opponentId}",
- *     summary="Get Opponent Lineup",
+ *     summary="Get Opponent Contest Unser",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
