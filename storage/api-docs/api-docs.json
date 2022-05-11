@@ -506,7 +506,7 @@
                 "tags": [
                     "Contest Users"
                 ],
-                "summary": "Get Opponent Lineup",
+                "summary": "Get Opponent Contest Unser",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
@@ -577,7 +577,7 @@
                 "tags": [
                     "Contest Users"
                 ],
-                "summary": "Get Lineup",
+                "summary": "Get Contest User",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
