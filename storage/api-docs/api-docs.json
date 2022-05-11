@@ -2219,16 +2219,24 @@
                         "nullable": true
                     },
                     "countryId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "favTeamId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "favPlayerId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "languageId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "receiveNewsletters": {
                         "type": "integer",
@@ -2245,7 +2253,9 @@
                         ]
                     },
                     "avatarId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "isEmailConfirmed": {
                         "type": "integer",
@@ -2255,7 +2265,9 @@
                         ]
                     },
                     "invitedByUser": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "null",
+                        "nullable": true
                     },
                     "isSham": {
                         "type": "integer",
