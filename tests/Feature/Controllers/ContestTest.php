@@ -159,7 +159,7 @@ class ContestTest extends TestCase
         ]);
     }
 
-    public function testContestPlayersEndpoint(): void
+    public function testContestsPlayersEndpoint(): void
     {
         $this->seed(ContestSeeder::class);
         $contest = Contest::latest('id')->first();
@@ -187,7 +187,7 @@ class ContestTest extends TestCase
         ]);
     }
 
-    public function testContestUnitsEndpoint(): void
+    public function testContestsUnitsEndpoint(): void
     {
         $this->seed(SoccerLineupSeeder::class);
         $contest = Contest::latest('id')->first();

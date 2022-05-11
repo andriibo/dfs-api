@@ -13,7 +13,7 @@ use Tests\TestCase;
  */
 class ContestUserTest extends TestCase
 {
-    public function testContestUserLineupEndpoint(): void
+    public function testContestUsersLineupEndpoint(): void
     {
         $this->seed(ContestSeeder::class);
         $contestUser = ContestUser::latest('id')->first();
@@ -26,7 +26,7 @@ class ContestUserTest extends TestCase
         $this->assertResponse($response);
     }
 
-    public function testContestUserOpponentLineupEndpoint(): void
+    public function testContestUsersOpponentLineupEndpoint(): void
     {
         $this->seed(ContestSeeder::class);
         $contestUsers = ContestUser::query()->orderByDesc('id')->limit(2)->get();
