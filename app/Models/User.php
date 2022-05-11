@@ -8,8 +8,10 @@ use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -29,8 +31,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property null|string                                           $remember_token
  * @property string                                                $username
  * @property string                                                $fullname
- * @property int                                                   $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
- * @property null|int                                              $parent_affiliate_id   Refers to affiliate.id
+ * @property int                                                   $status                  0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
+ * @property null|int                                              $parent_affiliate_id     Refers to affiliate.id
  * @property Carbon                                                $updated_at
  * @property Carbon                                                $created_at
  * @property int                                                   $is_deleted
@@ -49,6 +51,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property null|FileUpload                                       $avatar
  * @property DatabaseNotification[]|DatabaseNotificationCollection $notifications
  * @property null|int                                              $notifications_count
+ * @property Collection|UserTransaction[]                          $userTransactions
+ * @property null|int                                              $user_transactions_count
  *
  * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
@@ -127,6 +131,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function avatar(): BelongsTo
     {
         return $this->belongsTo(FileUpload::class);
+    }
+
+    public function userTransactions(): HasMany
+    {
+        return $this->hasMany(UserTransaction::class);
     }
 
     /**

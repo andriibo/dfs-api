@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\UserTransactions\TypeEnum;
 use App\Models\Contests\ContestUser;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -25,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property User                 $user
  * @property null|UserTransaction $parent
  *
+ * @method static UserFactory factory(...$parameters)
  * @method static Builder|UserTransaction newModelQuery()
  * @method static Builder|UserTransaction newQuery()
  * @method static Builder|UserTransaction query()
@@ -42,6 +46,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class UserTransaction extends Model
 {
+    use HasFactory;
+
     protected $table = 'user_transaction';
 
     protected $fillable = [
@@ -69,5 +75,15 @@ class UserTransaction extends Model
     public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function isTypeWithdraw(): bool
+    {
+        return $this->type == TypeEnum::withdraw->value;
+    }
+
+    public function isTypeContestEnter(): bool
+    {
+        return $this->type == TypeEnum::contestEnter->value;
     }
 }

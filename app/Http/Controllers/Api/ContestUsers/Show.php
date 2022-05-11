@@ -18,9 +18,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Parameter(name="entryId", required=true, in="path", @OA\Schema(type="integer", example="33")),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestUserDetailsResource")
- *             )
+ *             @OA\Property(property="data", ref="#/components/schemas/ContestUserDetailsResource")
  *         )
  *     ),
  *     @OA\Response(response=403, ref="#/components/responses/403"),

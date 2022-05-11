@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ContestSeeder::class,
             LeagueSeeder::class,
+            TransactionSeeder::class,
         ]);
     }
 }
