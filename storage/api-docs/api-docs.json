@@ -2196,6 +2196,10 @@
             "ProfileResource": {
                 "title": "ProfileResource",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "12"
+                    },
                     "username": {
                         "type": "string",
                         "example": "fantasysports"

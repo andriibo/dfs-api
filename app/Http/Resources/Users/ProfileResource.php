@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="ProfileResource",
+ *     @OA\Property(property="id", type="integer", example="12"),
  *     @OA\Property(property="username", type="string", example="fantasysports"),
  *     @OA\Property(property="email", type="string", example="test@fantasysports.com"),
  *     @OA\Property(property="fullname", type="string", example="john Doe"),
@@ -31,6 +32,7 @@ class ProfileResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
             'fullname' => $this->fullname,
