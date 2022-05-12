@@ -106,11 +106,11 @@ Route::prefix('v1')->group(function () {
      */
     Route::prefix('contest-users')->group(function () {
         Route::middleware(['auth:api', 'contest.user.access'])->group(function (): void {
-            Route::get('{entryId}/opponent/{opponentId}', Opponent::class)
-                ->where('entryId', '[0-9]+')
+            Route::get('{id}/opponent/{opponentId}', Opponent::class)
+                ->where('id', '[0-9]+')
                 ->where('opponentId', '[0-9]+')
             ;
-            Route::get('{entryId}', ContestUserShow::class)->where('entryId', '[0-9]+')
+            Route::get('{id}', ContestUserShow::class)->where('entryId', '[0-9]+')
             ;
         });
     });
