@@ -100,7 +100,7 @@ class ContestTest extends TestCase
                 'name',
                 'numEntries',
                 'numUsers',
-                'users' => [
+                'contestUsers' => [
                     '*' => [
                         'id',
                         'title',
@@ -227,7 +227,7 @@ class ContestTest extends TestCase
                 'name',
                 'numEntries',
                 'numUsers',
-                'entries' => [
+                'contestUsers' => [
                     '*' => [
                         'id',
                         'title',
@@ -275,7 +275,7 @@ class ContestTest extends TestCase
                     'name',
                     'numEntries',
                     'numUsers',
-                    'entries' => [
+                    'contestUsers' => [
                         '*' => [
                             'id',
                             'title',

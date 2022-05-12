@@ -32,7 +32,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="suspended", type="integer", enum={0,1}),
  *     @OA\Property(property="numEntries", type="integer", example="1"),
  *     @OA\Property(property="numUsers", type="integer", example="1"),
- *     @OA\Property(property="entries", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource"))
+ *     @OA\Property(property="contestUsers", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource"))
  * )
  */
 class ContestResource extends JsonResource
@@ -66,7 +66,7 @@ class ContestResource extends JsonResource
             'name' => $this->title,
             'numEntries' => count($this->contestUsers),
             'numUsers' => count($this->contestUsers),
-            'entries' => ContestUserResource::collection($this->contestUsers),
+            'contestUsers' => ContestUserResource::collection($this->contestUsers),
         ];
     }
 }
