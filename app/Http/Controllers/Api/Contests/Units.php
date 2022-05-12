@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *     path="/contests/{id}/units",
  *     summary="Create Contest Units",
  *     tags={"Contests"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
