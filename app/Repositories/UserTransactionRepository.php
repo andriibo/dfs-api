@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\UserTransaction;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserTransactionRepository
 {
@@ -18,5 +19,14 @@ class UserTransactionRepository
     public function create(array $attributes = []): UserTransaction
     {
         return UserTransaction::create($attributes);
+    }
+
+    public function getTransactionsByUserId(int $userId): LengthAwarePaginator
+    {
+        return UserTransaction::query()
+            ->where('user_id', $userId)
+            ->orderByDesc('created_at')
+            ->jsonPaginate()
+            ;
     }
 }

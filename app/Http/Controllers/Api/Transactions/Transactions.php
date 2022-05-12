@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Transactions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Transactions\TransactionResource;
+use App\Repositories\UserTransactionRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -15,10 +16,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Response(response=200, description="Ok",
- *         @OA\JsonContent(type="object",
- *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/TransactionResource")
- *             )
+ *         @OA\JsonContent(
+ *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/TransactionResource")),
+ *             @OA\Property(property="links", ref="#/components/schemas/PaginationSchemaOA/properties/links"),
+ *             @OA\Property(property="meta", ref="#/components/schemas/PaginationSchemaOA/properties/meta")
  *         )
  *     ),
  *     @OA\Response(response=401, ref="#/components/responses/401"),
@@ -29,9 +30,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Transactions extends Controller
 {
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(UserTransactionRepository $userTransactionRepository): AnonymousResourceCollection
     {
-        $userTransactions = auth()->user()?->userTransactions;
+        $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id);
 
         return TransactionResource::collection($userTransactions);
     }

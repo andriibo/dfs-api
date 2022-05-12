@@ -654,7 +654,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/GameLogCollection"
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/GameLogResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -702,7 +716,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ContestCollection"
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -750,7 +778,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ContestCollection"
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -798,7 +840,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ContestCollection"
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -1041,7 +1097,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ContestCollection"
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -1296,6 +1366,12 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/TransactionResource"
                                             }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
                                         }
                                     },
                                     "type": "object"
@@ -1547,42 +1623,6 @@
     },
     "components": {
         "schemas": {
-            "ContestCollection": {
-                "title": "ContestCollection",
-                "properties": {
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ContestResource"
-                        }
-                    },
-                    "links": {
-                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                    },
-                    "meta": {
-                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                    }
-                },
-                "type": "object"
-            },
-            "GameLogCollection": {
-                "title": "ContestCollection",
-                "properties": {
-                    "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/GameLogResource"
-                        }
-                    },
-                    "links": {
-                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                    },
-                    "meta": {
-                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                    }
-                },
-                "type": "object"
-            },
             "ActionPointResource": {
                 "title": "ActionPointResource",
                 "properties": {
