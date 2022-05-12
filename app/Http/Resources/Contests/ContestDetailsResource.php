@@ -35,7 +35,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="suspended", type="integer", enum={0,1}),
  *     @OA\Property(property="numEntries", type="integer", example="1"),
  *     @OA\Property(property="numUsers", type="integer", example="1"),
- *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource")),
+ *     @OA\Property(property="contestUsers", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource")),
  *     @OA\Property(property="games", type="array", @OA\Items(ref="#/components/schemas/GameScheduleResource")),
  *     @OA\Property(property="prizes", type="array", @OA\Items(ref="#/components/schemas/PrizePlaceResource")),
  *     @OA\Property(property="scoring", type="array", @OA\Items(ref="#/components/schemas/ActionPointResource"))
@@ -74,7 +74,7 @@ class ContestDetailsResource extends JsonResource
             'name' => $this->title,
             'numEntries' => count($this->contestUsers),
             'numUsers' => count($this->contestUsers),
-            'users' => ContestUserResource::collection($this->contestUsers),
+            'contestUsers' => ContestUserResource::collection($this->contestUsers),
             'games' => GameScheduleResource::collection($gameScheduleService->getGameSchedules($this->resource)),
             'prizes' => PrizePlaceResource::collection($contestService->getPrizePlaces($this->resource)),
             'scoring' => ActionPointResource::collection($this->actionPoints),

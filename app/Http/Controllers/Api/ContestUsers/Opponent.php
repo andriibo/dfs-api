@@ -12,13 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Get(
- *     path="/contest-users/{entryId}/opponent/{opponentId}",
+ *     path="/contest-users/{id}/opponent/{opponentId}",
  *     summary="Get Opponent Contest Unser",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\Parameter(name="entryId", required=true, in="path", @OA\Schema(type="integer", example="11")),
+ *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Parameter(name="opponentId", required=true, in="path", @OA\Schema(type="integer", example="23")),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

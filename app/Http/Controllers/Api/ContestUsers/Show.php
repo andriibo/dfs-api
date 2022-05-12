@@ -9,13 +9,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Get(
- *     path="/contest-users/{entryId}",
+ *     path="/contest-users/{id}",
  *     summary="Get Contest User",
  *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\Parameter(name="entryId", required=true, in="path", @OA\Schema(type="integer", example="33")),
+ *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", ref="#/components/schemas/ContestUserDetailsResource")

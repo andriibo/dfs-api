@@ -15,8 +15,8 @@ class ContestUserAccess
 
     public function handle(Request $request, Closure $next): mixed
     {
-        $entryId = $this->getEntryId($request);
-        $entryContestUser = $this->contestUserRepository->getById($entryId);
+        $contestUserId = $this->getContestUserId($request);
+        $entryContestUser = $this->contestUserRepository->getById($contestUserId);
 
         if ($request->user()->id !== $entryContestUser->user_id) {
             return response()->json(['message' => 'You are not allowed to see this lineup.'], Response::HTTP_FORBIDDEN);
@@ -26,12 +26,12 @@ class ContestUserAccess
     }
 
     /** @throws \Exception */
-    protected function getEntryId(Request $request): int
+    private function getContestUserId(Request $request): int
     {
-        if (!($entryId = $request->route('entryId'))) {
-            throw new \Exception('Missing entryId');
+        if (!($contestUserId = $request->route('id'))) {
+            throw new \Exception('Missing id');
         }
 
-        return (int) $entryId;
+        return (int) $contestUserId;
     }
 }
