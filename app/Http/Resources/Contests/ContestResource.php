@@ -30,8 +30,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="customPrizeBank", type="number", format="double", example="71.23"),
  *     @OA\Property(property="maxPrizeBank", type="number", format="double", example="300.99"),
  *     @OA\Property(property="suspended", type="integer", enum={0,1}),
- *     @OA\Property(property="numEntries", type="integer", example="1"),
- *     @OA\Property(property="numUsers", type="integer", example="1"),
  *     @OA\Property(property="contestUsers", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource"))
  * )
  */
@@ -64,8 +62,6 @@ class ContestResource extends JsonResource
             'maxPrizeBank' => $contestService->getMaxPrizeBank($this->resource),
             'suspended' => $this->suspended,
             'name' => $this->title,
-            'numEntries' => count($this->contestUsers),
-            'numUsers' => count($this->contestUsers),
             'contestUsers' => ContestUserResource::collection($this->contestUsers),
         ];
     }

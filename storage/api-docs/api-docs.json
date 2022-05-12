@@ -1863,14 +1863,6 @@
                             1
                         ]
                     },
-                    "numEntries": {
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "numUsers": {
-                        "type": "integer",
-                        "example": "1"
-                    },
                     "contestUsers": {
                         "type": "array",
                         "items": {
@@ -2012,15 +2004,7 @@
                             1
                         ]
                     },
-                    "numEntries": {
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "numUsers": {
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "entries": {
+                    "contestUsers": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ContestUserResource"

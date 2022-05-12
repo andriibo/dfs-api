@@ -98,8 +98,6 @@ class ContestTest extends TestCase
                 'maxPrizeBank',
                 'suspended',
                 'name',
-                'numEntries',
-                'numUsers',
                 'contestUsers' => [
                     '*' => [
                         'id',
@@ -225,8 +223,6 @@ class ContestTest extends TestCase
                 'maxPrizeBank',
                 'suspended',
                 'name',
-                'numEntries',
-                'numUsers',
                 'contestUsers' => [
                     '*' => [
                         'id',
@@ -273,8 +269,6 @@ class ContestTest extends TestCase
                     'maxPrizeBank',
                     'suspended',
                     'name',
-                    'numEntries',
-                    'numUsers',
                     'contestUsers' => [
                         '*' => [
                             'id',
