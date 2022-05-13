@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\IsEnabledEnum;
 use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -33,9 +34,18 @@ class ActionPointFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'sport_id' => $this->faker->randomElement(SportIdEnum::values()),
+            'name' => $this->faker->unique()->randomElement([
+                'one',
+                'two',
+                'three',
+                'four',
+                'five',
+                'six',
+                'seven',
+            ]),
+            'sport_id' => SportIdEnum::soccer,
             'values' => '{}',
+            'is_enabled' => IsEnabledEnum::isEnabled,
             'title' => $this->faker->title,
             'alias' => $this->faker->unique()->text(5),
             'game_log_template' => $this->faker->text(200),
