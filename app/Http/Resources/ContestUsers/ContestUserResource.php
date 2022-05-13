@@ -39,8 +39,8 @@ class ContestUserResource extends JsonResource
         ];
     }
 
-    private function getBudget(): int
+    private function getBudget(): float
     {
-        return (int) $this->contestUnits()->sum('salary');
+        return (float) $this->contestUnits()->sum('salary');
     }
 }
