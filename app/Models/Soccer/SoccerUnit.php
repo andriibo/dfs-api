@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property null|SoccerPlayer            $player
  * @property Collection|SoccerUnitStats[] $unitStats
  * @property null|int                     $unit_stats_count
+ * @property null|SoccerUnitStats         $totalUnitStats
  *
  * @method static SoccerUnitFactory factory(...$parameters)
  * @method static Builder|SoccerUnit newModelQuery()
@@ -41,8 +42,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|SoccerUnit whereUnitId($value)
  * @method static Builder|SoccerUnit whereUnitType($value)
  * @mixin Eloquent
- *
- * @property null|\App\Models\Soccer\SoccerUnitStats $totalUnitStats
  */
 class SoccerUnit extends Model
 {
@@ -70,13 +69,11 @@ class SoccerUnit extends Model
 
     public function unitStats(): HasMany
     {
-        return $this->hasMany(SoccerUnitStats::class);
+        return $this->hasMany(SoccerUnitStats::class, 'unit_id');
     }
 
-    public function totalUnitStats(): BelongsTo
+    public function totalUnitStats(): ?SoccerUnitStats
     {
-        return $this->belongsTo(SoccerUnitStats::class)
-            ->whereNull('game_id')
-        ;
+        return $this->unitStats->whereNull('game_id')->first();
     }
 }

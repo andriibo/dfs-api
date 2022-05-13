@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Exceptions\NextGameScheduleForTeamServiceException;
-use App\Models\Contests\Contest;
+use App\Models\Contests\ContestUnit;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\Soccer\SoccerGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
@@ -21,14 +21,14 @@ class NextGameScheduleForTeamService
     /**
      * @throws NextGameScheduleForTeamServiceException
      */
-    public function handle(Contest $contest, int $teamId): null|SoccerGameSchedule|CricketGameSchedule
+    public function handle(ContestUnit $contestUnit): null|SoccerGameSchedule|CricketGameSchedule
     {
-        if ($contest->isSportSoccer()) {
-            return $this->soccerGameScheduleRepository->getNextGameSchedule($contest->id, $teamId);
+        if ($contestUnit->isSportSoccer()) {
+            return $this->soccerGameScheduleRepository->getNextGameSchedule($contestUnit->contest_id, $contestUnit->team_id);
         }
 
-        if ($contest->isSportCricket()) {
-            return $this->cricketGameScheduleRepository->getNextGameSchedule($contest->id, $teamId);
+        if ($contestUnit->isSportCricket()) {
+            return $this->cricketGameScheduleRepository->getNextGameSchedule($contestUnit->contest_id, $contestUnit->team_id);
         }
 
         throw new NextGameScheduleForTeamServiceException('Could not find game schedule for this sport', Response::HTTP_NOT_FOUND);

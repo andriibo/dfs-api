@@ -18,7 +18,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestUnitResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestUnitDetailsResource")
  *             )
  *         )
  *     ),

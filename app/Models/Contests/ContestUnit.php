@@ -3,7 +3,9 @@
 namespace App\Models\Contests;
 
 use App\Enums\SportIdEnum;
+use App\Models\Cricket\CricketTeam;
 use App\Models\Cricket\CricketUnit;
+use App\Models\Soccer\SoccerTeam;
 use App\Models\Soccer\SoccerUnit;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Contests\ContestUnitFactory;
@@ -30,6 +32,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Contest          $contest
  * @property null|CricketUnit $cricketUnit
  * @property null|SoccerUnit  $soccerUnit
+ * @property null|CricketTeam $cricketTeam
+ * @property null|SoccerTeam  $soccerTeam
  *
  * @method static ContestUnitFactory factory(...$parameters)
  * @method static Builder|ContestUnit newModelQuery()
@@ -99,6 +103,22 @@ class ContestUnit extends Model
         return $this->belongsTo(
             SoccerUnit::class,
             'unit_id',
+        );
+    }
+
+    public function cricketTeam(): BelongsTo
+    {
+        return $this->belongsTo(
+            CricketTeam::class,
+            'team_id',
+        );
+    }
+
+    public function soccerTeam(): BelongsTo
+    {
+        return $this->belongsTo(
+            SoccerTeam::class,
+            'team_id',
         );
     }
 }

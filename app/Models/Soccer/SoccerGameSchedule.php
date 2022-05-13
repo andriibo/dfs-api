@@ -4,8 +4,10 @@ namespace App\Models\Soccer;
 
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\Soccer\SoccerGameScheduleFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Collection|SoccerGameLog[] $gameLogs
  * @property null|int                   $game_logs_count
  *
+ * @method static SoccerGameScheduleFactory factory(...$parameters)
  * @method static Builder|SoccerGameSchedule newModelQuery()
  * @method static Builder|SoccerGameSchedule newQuery()
  * @method static Builder|SoccerGameSchedule query()
@@ -58,6 +61,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class SoccerGameSchedule extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     protected $table = 'game_schedule';

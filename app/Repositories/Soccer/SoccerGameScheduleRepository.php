@@ -5,6 +5,7 @@ namespace App\Repositories\Soccer;
 use App\Enums\SportIdEnum;
 use App\Models\Soccer\SoccerGameSchedule;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class SoccerGameScheduleRepository
 {
@@ -29,7 +30,7 @@ class SoccerGameScheduleRepository
             ->where('contest_game.sport_id', SportIdEnum::soccer)
             ->where('game_schedule.home_team_id', $teamId)
             ->orWhere('game_schedule.away_team_id', $teamId)
-            ->where('game_schedule.game_date', '>', date('Y-m-d H:i:s'))
+            ->where('game_schedule.game_date', '>', DB::raw('NOW()'))
             ->orderBy('game_schedule.game_date')
             ->first()
             ;

@@ -1,21 +1,22 @@
 <?php
 
-namespace Database\Factories\Contests;
+namespace Database\Factories\Soccer;
 
-use App\Models\Contests\ContestUnit;
+use App\Enums\Soccer\GameSchedules\IsSalaryAvailableEnum;
+use App\Models\Soccer\SoccerGameSchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory
  */
-class ContestUnitFactory extends Factory
+class SoccerGameScheduleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ContestUnit::class;
+    protected $model = SoccerGameSchedule::class;
 
     /**
      * The number of models that should be generated.
@@ -32,9 +33,9 @@ class ContestUnitFactory extends Factory
     public function definition(): array
     {
         return [
-            'salary' => $this->faker->randomFloat(2, 0, 10),
-            'fantasy_points_per_game' => $this->faker->randomFloat(2, 0, 10),
-            'fantasy_points' => $this->faker->randomFloat(2, 0, 10),
+            'feed_id' => $this->faker->unique()->numberBetween(100000),
+            'game_date' => $this->faker->dateTimeBetween('+1 week', '+1 month'),
+            'is_salary_available' => $this->faker->randomElement(IsSalaryAvailableEnum::values()),
         ];
     }
 }

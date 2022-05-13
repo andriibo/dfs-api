@@ -20,7 +20,7 @@ class SoccerUnitStatsRepository
             ->where('game_schedule.is_fake', IsFakeEnum::no)
             ->orderByDesc('game_schedule.game_date')
             ->limit($limit)
-            ->all()
+            ->get()
         ;
     }
 }

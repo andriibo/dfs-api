@@ -4,7 +4,9 @@ namespace App\Models\Soccer;
 
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\Soccer\SoccerTeamFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -22,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $feed_type
  * @property League $league
  *
+ * @method static SoccerTeamFactory factory(...$parameters)
  * @method static Builder|SoccerTeam newModelQuery()
  * @method static Builder|SoccerTeam newQuery()
  * @method static Builder|SoccerTeam query()
@@ -38,6 +41,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class SoccerTeam extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
+
     protected $table = 'team';
 
     protected $fillable = [

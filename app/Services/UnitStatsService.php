@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Exceptions\TeamServiceException;
+use App\Exceptions\UnitStatsServiceException;
 use App\Models\Contests\ContestUnit;
-use App\Repositories\Cricket\CricketTeamRepository;
+use App\Repositories\Cricket\CricketUnitStatsRepository;
 use App\Repositories\Soccer\SoccerUnitStatsRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +13,12 @@ class UnitStatsService
 {
     public function __construct(
         private readonly SoccerUnitStatsRepository $soccerUnitStatsRepository,
-        private readonly CricketTeamRepository $cricketTeamRepository
+        private readonly CricketUnitStatsRepository $cricketUnitStatsRepository
     ) {
     }
 
     /**
-     * @throws TeamServiceException
+     * @throws UnitStatsServiceException
      */
     public function getStats(ContestUnit $contestUnit, ?int $limit = null): Collection
     {
@@ -27,9 +27,9 @@ class UnitStatsService
         }
 
         if ($contestUnit->isSportCricket()) {
-            return $this->cricketTeamRepository->getTeamById($contestUnit->team_id);
+            return $this->cricketUnitStatsRepository->getUnitStatsByUnitId($contestUnit->unit_id, $limit);
         }
 
-        throw new TeamServiceException('Could not find team for this sport', Response::HTTP_NOT_FOUND);
+        throw new UnitStatsServiceException('Could not unit stats for this sport', Response::HTTP_NOT_FOUND);
     }
 }

@@ -25,8 +25,8 @@ class ContestUserDetailsResource extends JsonResource
             'userId' => $this->user_id,
             'username' => $this->user->username,
             'budget' => (float) $this->contestUnits()->sum('salary'),
-            'score' => $this->team_score,
-            'prize' => $this->prize,
+            'score' => (float) $this->team_score,
+            'prize' => (float) $this->prize,
             'title' => $this->title,
             'units' => ContestUnitResource::collection($this->contestUnits),
         ];

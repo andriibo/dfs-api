@@ -3,7 +3,9 @@
 namespace App\Models\Soccer;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\Soccer\SoccerUnitStatsFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -23,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property null|SoccerTeam         $team
  * @property SoccerUnit              $unit
  *
+ * @method static SoccerUnitStatsFactory factory(...$parameters)
  * @method static Builder|SoccerUnitStats newModelQuery()
  * @method static Builder|SoccerUnitStats newQuery()
  * @method static Builder|SoccerUnitStats query()
@@ -38,6 +41,8 @@ use Illuminate\Support\Carbon;
  */
 class SoccerUnitStats extends Model
 {
+    use HasFactory;
+
     protected $table = 'unit_stats';
 
     protected $fillable = [

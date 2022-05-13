@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="TeamResource",
- *     @OA\Property(property="id", type="integer"),
+ *     @OA\Property(property="id", type="integer", example="3"),
  *     @OA\Property(property="name", type="string", example="Watford"),
  *     @OA\Property(property="alias", type="string", example="WAT")
  * )

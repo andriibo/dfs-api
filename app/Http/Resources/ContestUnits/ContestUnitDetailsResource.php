@@ -5,6 +5,15 @@ namespace App\Http\Resources\ContestUnits;
 use App\Factories\SportConfigFactory;
 use App\Helpers\UnitStatsHelper;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
+use App\Http\Resources\Leagues\PositionResource;
+use App\Http\Resources\Teams\TeamResource;
+use App\Http\Resources\UnitStats\StatsResource;
+use App\Models\Cricket\CricketGameSchedule;
+use App\Models\Cricket\CricketTeam;
+use App\Models\Cricket\CricketUnit;
+use App\Models\Soccer\SoccerGameSchedule;
+use App\Models\Soccer\SoccerTeam;
+use App\Models\Soccer\SoccerUnit;
 use App\Services\NextGameScheduleForTeamService;
 use App\Services\TeamService;
 use App\Services\UnitService;
@@ -15,56 +24,89 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @OA\Schema(
  *     title="ContestUnitDetailsResource",
  *     @OA\Property(property="id", type="integer", example="21"),
- *     @OA\Property(property="playerId", type="integer", example="45"),
- *     @OA\Property(property="totalFantasyPointsPerGame", type="number", format="double", example="11.16"),
- *     @OA\Property(property="salary", type="number", format="double", example="5000.45"),
- *     @OA\Property(property="score", type="number", format="double", example="50.45"),
  *     @OA\Property(property="fullname", type="string", example="David Olatukunbo Alaba"),
- *     @OA\Property(property="position", type="integer", example="1"),
  *     @OA\Property(property="photo", type="string"),
- *     @OA\Property(property="teamId", type="number", example="34")
+ *     @OA\Property(property="salary", type="number", format="double", example="5000.45"),
+ *     @OA\Property(property="totalFantasyPoints", type="number", format="double", example="15.06"),
+ *     @OA\Property(property="totalFantasyPointsPerGame", type="number", format="double", example="11.16"),
+ *     @OA\Property(property="position", ref="#/components/schemas/PositionResource"),
+ *     @OA\Property(property="team", ref="#/components/schemas/TeamResource"),
+ *     @OA\Property(property="nextGameSchedule", ref="#/components/schemas/GameScheduleResource"),
+ *     @OA\Property(property="lastGameStats", type="array", @OA\Items(ref="#/components/schemas/StatsResource")),
+ *     @OA\Property(property="lastFiveGamesStats", type="array", @OA\Items(ref="#/components/schemas/StatsResource")),
+ *     @OA\Property(property="totalStats", type="array", @OA\Items(ref="#/components/schemas/StatsResource"))
  * )
  */
 class ContestUnitDetailsResource extends JsonResource
 {
-    public function __construct($resource)
-    {
-        parent::__construct($resource);
-    }
-
     public function toArray($request): array
     {
-        /* @var $unitService UnitService
-        * @var $teamService TeamService
-        * @var $nextGameScheduleForTeam NextGameScheduleForTeamService  */
-        $unitService = resolve(UnitService::class);
-        $teamService = resolve(TeamService::class);
-        $nextGameScheduleForTeam = resolve(NextGameScheduleForTeamService::class);
-        $unit = $unitService->getUnit($this->resource);
-        $totalUnitStats = $unit->totalUnitStats();
-        $lastFiveGamesUnitStats = $this->getLastFiveUnitStats();
-        $team = $teamService->getTeam($this->resource);
+        $unit = $this->getUnit();
+        $team = $this->getTeam();
+        $nextGameScheduleForTeam = $this->getNextGameSchedule();
         $sportConfig = SportConfigFactory::getConfig($this->sport_id);
-        $totalStats = $totalUnitStats ? $totalUnitStats->stats : [];
+        [$totalStats, $lastFiveGamesStats, $lastGameStats] = $this->getStats($unit);
 
         return [
             'id' => $this->id,
-            'totalFantasyPointsPerGame' => $unit->player->total_fantasy_points_per_game,
-            'totalFantasyPoints' => $unit->player->total_fantasy_points,
-            'salary' => $unit->player->salary,
             'fullname' => $unit->player->getFullName(),
-            'position' => $sportConfig->positions[$unit->position] ?? null,
             'photo' => $unit->player->photo?->getFileUrl(),
-            'team' => $team->name,
-            'nextGameSchedule' => new GameScheduleResource($nextGameScheduleForTeam->handle($this->contest_id, $this->team_id)),
-            'totalStats' => UnitStatsHelper::mapStats($totalStats, $this->contest->actionPoints),
+            'salary' => (float) $unit->player->salary,
+            'totalFantasyPoints' => (float) $unit->player->total_fantasy_points,
+            'totalFantasyPointsPerGame' => (float) $unit->player->total_fantasy_points_per_game,
+            'position' => new PositionResource($sportConfig->positions[$unit->position] ?? null),
+            'team' => new TeamResource($team),
+            'nextGameSchedule' => new GameScheduleResource($nextGameScheduleForTeam),
+            'lastGameStats' => StatsResource::collection($lastGameStats),
+            'lastFiveGamesStats' => StatsResource::collection($lastFiveGamesStats),
+            'totalStats' => StatsResource::collection($totalStats),
         ];
     }
 
-    private function getLastFiveUnitStats()
+    private function getStats(SoccerUnit|CricketUnit $unit): array
     {
+        $totalUnitStats = $unit->totalUnitStats();
+        $totalStats = $totalUnitStats
+            ? UnitStatsHelper::mapStats($totalUnitStats->stats, $this->contest->actionPoints)
+            : [];
         /* @var $unitStatsService UnitStatsService */
         $unitStatsService = resolve(UnitStatsService::class);
-        $lastFiveUnitStats = $unitStatsService->getStats($this->resource, 5);
+
+        $lastFiveGamesUnitStats = $unitStatsService->getStats($this->resource, 5);
+        $lastGameUnitStats = $lastFiveGamesUnitStats->first();
+        $lastFiveGamesUnitStats = $lastFiveGamesUnitStats->pluck('stats')->toArray();
+        $lastFiveGamesUnitStats = UnitStatsHelper::sumStats($lastFiveGamesUnitStats);
+        $lastFiveGamesStats = UnitStatsHelper::mapStats($lastFiveGamesUnitStats, $this->contest->actionPoints);
+        $lastGameStats = UnitStatsHelper::mapStats($lastGameUnitStats->stats, $this->contest->actionPoints);
+
+        return [
+            $totalStats,
+            $lastFiveGamesStats,
+            $lastGameStats,
+        ];
+    }
+
+    private function getTeam(): CricketTeam|SoccerTeam
+    {
+        /* @var $teamService TeamService */
+        $teamService = resolve(TeamService::class);
+
+        return $teamService->getTeam($this->resource);
+    }
+
+    private function getUnit(): CricketUnit|SoccerUnit
+    {
+        /* @var $unitService UnitService */
+        $unitService = resolve(UnitService::class);
+
+        return $unitService->getUnit($this->resource);
+    }
+
+    private function getNextGameSchedule(): null|SoccerGameSchedule|CricketGameSchedule
+    {
+        /* @var $nextGameScheduleForTeam NextGameScheduleForTeamService */
+        $nextGameScheduleForTeam = resolve(NextGameScheduleForTeamService::class);
+
+        return $nextGameScheduleForTeam->handle($this->resource);
     }
 }

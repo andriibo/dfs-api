@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="GameScheduleResource",
- *     @OA\Property(property="id", type="integer"),
+ *     @OA\Property(property="id", type="integer", example="2"),
  *     @OA\Property(property="startDate", type="integer", example="1650122541"),
  *     @OA\Property(property="awayTeamScore", type="number", format="double", example="21.16"),
  *     @OA\Property(property="homeTeamScore", type="number", format="double", example="14.71"),
