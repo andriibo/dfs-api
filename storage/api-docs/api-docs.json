@@ -36,7 +36,22 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/ForgotPasswordRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -91,7 +106,33 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/LoginRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "john@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "password"
+                                    },
+                                    "rememberMe": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -275,7 +316,54 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/RegisterRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "passwordConfirmation",
+                                    "username",
+                                    "fullname",
+                                    "dob"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "john@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "password"
+                                    },
+                                    "passwordConfirmation": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "minLength": 2,
+                                        "example": "john"
+                                    },
+                                    "fullname": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "minLength": 2,
+                                        "example": "John Doe"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1993-03-27"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "201": {
@@ -328,7 +416,29 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/ResetPasswordRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "password",
+                                    "passwordConfirmation"
+                                ],
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "password2"
+                                    },
+                                    "passwordConfirmation": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "password2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -458,7 +568,23 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/VerifyResendRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "john@gmail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -501,12 +627,12 @@
                 }
             }
         },
-        "/contest-users/{id}/opponent/{opponentId}": {
+        "/contest-users/{entryId}/opponent/{opponentId}/units": {
             "get": {
                 "tags": [
                     "Contest Users"
                 ],
-                "summary": "Get Opponent Contest Unser",
+                "summary": "Get Opponent Lineup",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
@@ -515,7 +641,13 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/id"
+                        "name": "entryId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "11"
+                        }
                     },
                     {
                         "name": "opponentId",
@@ -535,7 +667,10 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/ContestUserDetailsResource"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UnitsResource"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -563,12 +698,12 @@
                 ]
             }
         },
-        "/contest-users/{id}": {
+        "/contest-users/{entryId}/units": {
             "get": {
                 "tags": [
                     "Contest Users"
                 ],
-                "summary": "Get Contest User",
+                "summary": "Get Lineup",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
@@ -577,7 +712,13 @@
                         "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "$ref": "#/components/parameters/id"
+                        "name": "entryId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "33"
+                        }
                     }
                 ],
                 "responses": {
@@ -588,7 +729,10 @@
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/ContestUserDetailsResource"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UnitsResource"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -642,21 +786,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/GameLogResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/GameLogCollection"
                                 }
                             }
                         }
@@ -704,27 +834,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -763,27 +882,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -822,24 +930,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -996,68 +1093,6 @@
                 }
             }
         },
-        "/contests/{id}/units": {
-            "post": {
-                "tags": [
-                    "Contests"
-                ],
-                "summary": "Create Contest Units",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Accept"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Content-Type"
-                    },
-                    {
-                        "$ref": "#/components/parameters/id"
-                    }
-                ],
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/UnitsRequest"
-                },
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
-                    },
-                    "405": {
-                        "$ref": "#/components/responses/405"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/500"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/contests/upcoming": {
             "get": {
                 "tags": [
@@ -1081,27 +1116,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/ContestResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ContestCollection"
                                 }
                             }
                         }
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -1149,6 +1173,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -1298,67 +1325,14 @@
                     "403": {
                         "$ref": "#/components/responses/403"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
                     "429": {
                         "$ref": "#/components/responses/429"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/500"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/transactions": {
-            "get": {
-                "tags": [
-                    "Transactions"
-                ],
-                "summary": "Get User Transactions",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Accept"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Content-Type"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/TransactionResource"
-                                            }
-                                        },
-                                        "links": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
-                                        },
-                                        "meta": {
-                                            "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "405": {
-                        "$ref": "#/components/responses/405"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -1411,6 +1385,9 @@
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
@@ -1440,7 +1417,33 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/ChangePasswordRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "currentPassword",
+                                    "password",
+                                    "passwordConfirmation"
+                                ],
+                                "properties": {
+                                    "currentPassword": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "newpassword"
+                                    },
+                                    "passwordConfirmation": {
+                                        "type": "string",
+                                        "example": "newpassword"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -1464,6 +1467,9 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -1515,6 +1521,9 @@
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
@@ -1542,7 +1551,40 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/UpdateUserProfileRequest"
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "username",
+                                    "dob",
+                                    "fullname"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "john@gmail.com"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "john"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1988-07-21"
+                                    },
+                                    "fullname": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
                 },
                 "responses": {
                     "200": {
@@ -1566,6 +1608,9 @@
                     "401": {
                         "$ref": "#/components/responses/401"
                     },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
@@ -1583,6 +1628,42 @@
     },
     "components": {
         "schemas": {
+            "ContestCollection": {
+                "title": "ContestCollection",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContestResource"
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                    }
+                },
+                "type": "object"
+            },
+            "GameLogCollection": {
+                "title": "ContestCollection",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GameLogResource"
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/PaginationSchemaOA/properties/meta"
+                    }
+                },
+                "type": "object"
+            },
             "ActionPointResource": {
                 "title": "ActionPointResource",
                 "properties": {
@@ -1651,21 +1732,22 @@
                         "type": "string",
                         "example": "David Olatukunbo Alaba"
                     },
+                    "position": {
+                        "type": "integer",
+                        "example": "1"
+                    },
                     "photo": {
                         "type": "string"
                     },
                     "teamId": {
                         "type": "number",
                         "example": "34"
-                    },
-                    "position": {
-                        "$ref": "#/components/schemas/PositionResource"
                     }
                 },
                 "type": "object"
             },
-            "ContestUserDetailsResource": {
-                "title": "ContestUserResource",
+            "UnitsResource": {
+                "title": "UnitsResource",
                 "properties": {
                     "userId": {
                         "type": "integer",
@@ -1699,57 +1781,6 @@
                         "items": {
                             "$ref": "#/components/schemas/ContestUnitResource"
                         }
-                    }
-                },
-                "type": "object"
-            },
-            "ContestUserResource": {
-                "title": "ContestUserResource",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "userId": {
-                        "type": "integer"
-                    },
-                    "username": {
-                        "type": "string",
-                        "example": "fantasysports"
-                    },
-                    "avatar": {
-                        "type": "string"
-                    },
-                    "budget": {
-                        "type": "integer",
-                        "example": "1350"
-                    },
-                    "date": {
-                        "type": "integer",
-                        "example": "1650112441"
-                    },
-                    "isWinner": {
-                        "type": "integer",
-                        "enum": [
-                            0,
-                            1
-                        ]
-                    },
-                    "place": {
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "prize": {
-                        "type": "number",
-                        "format": "double",
-                        "example": "140.56"
-                    },
-                    "score": {
-                        "type": "number",
-                        "format": "double",
-                        "example": "23.12"
                     }
                 },
                 "type": "object"
@@ -1868,7 +1899,15 @@
                             1
                         ]
                     },
-                    "contestUsers": {
+                    "numEntries": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "numUsers": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "users": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ContestUserResource"
@@ -2009,7 +2048,15 @@
                             1
                         ]
                     },
-                    "contestUsers": {
+                    "numEntries": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "numUsers": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "entries": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ContestUserResource"
@@ -2040,6 +2087,57 @@
                             "H2H",
                             "Custom"
                         ]
+                    }
+                },
+                "type": "object"
+            },
+            "ContestUserResource": {
+                "title": "ContestUserResource",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "fantasysports"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "budget": {
+                        "type": "integer",
+                        "example": "1350"
+                    },
+                    "date": {
+                        "type": "integer",
+                        "example": "1650112441"
+                    },
+                    "isWinner": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    "place": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "prize": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "140.56"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "23.12"
                     }
                 },
                 "type": "object"
@@ -2223,64 +2321,9 @@
                 },
                 "type": "object"
             },
-            "TransactionResource": {
-                "title": "TransactionResource",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": "12"
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double",
-                        "example": "230.41"
-                    },
-                    "status": {
-                        "type": "integer",
-                        "enum": [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5
-                        ]
-                    },
-                    "type": {
-                        "type": "integer",
-                        "enum": [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9,
-                            10,
-                            11,
-                            12
-                        ]
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "example": "2022-04-01 12:00:05"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "example": "2022-04-02 11:59:41"
-                    }
-                },
-                "type": "object"
-            },
             "ProfileResource": {
                 "title": "ProfileResource",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": "12"
-                    },
                     "username": {
                         "type": "string",
                         "example": "fantasysports"
@@ -2304,24 +2347,16 @@
                         "nullable": true
                     },
                     "countryId": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "favTeamId": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "favPlayerId": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "languageId": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "receiveNewsletters": {
                         "type": "integer",
@@ -2338,9 +2373,7 @@
                         ]
                     },
                     "avatarId": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "isEmailConfirmed": {
                         "type": "integer",
@@ -2350,9 +2383,7 @@
                         ]
                     },
                     "invitedByUser": {
-                        "type": "integer",
-                        "example": "null",
-                        "nullable": true
+                        "type": "integer"
                     },
                     "isSham": {
                         "type": "integer",
@@ -2661,249 +2692,6 @@
                 "schema": {
                     "type": "string",
                     "example": "12qs850keo23"
-                }
-            }
-        },
-        "requestBodies": {
-            "ForgotPasswordRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "email"
-                            ],
-                            "properties": {
-                                "email": {
-                                    "type": "string",
-                                    "maxLength": 50
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "LoginRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "email",
-                                "password"
-                            ],
-                            "properties": {
-                                "email": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "john@gmail.com"
-                                },
-                                "password": {
-                                    "type": "string",
-                                    "minLength": 6,
-                                    "example": "password"
-                                },
-                                "rememberMe": {
-                                    "type": "boolean",
-                                    "example": "false"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "RegisterRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "email",
-                                "password",
-                                "passwordConfirmation",
-                                "username",
-                                "fullname",
-                                "dob"
-                            ],
-                            "properties": {
-                                "email": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "john@gmail.com"
-                                },
-                                "password": {
-                                    "type": "string",
-                                    "minLength": 6,
-                                    "example": "password"
-                                },
-                                "passwordConfirmation": {
-                                    "type": "string",
-                                    "example": "password"
-                                },
-                                "username": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "minLength": 2,
-                                    "example": "john"
-                                },
-                                "fullname": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "minLength": 2,
-                                    "example": "John Doe"
-                                },
-                                "dob": {
-                                    "type": "string",
-                                    "format": "date",
-                                    "example": "1993-03-27"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "ResetPasswordRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "password",
-                                "passwordConfirmation"
-                            ],
-                            "properties": {
-                                "password": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "password2"
-                                },
-                                "passwordConfirmation": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "password2"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "VerifyResendRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "email"
-                            ],
-                            "properties": {
-                                "email": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "john@gmail.com"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "UnitsRequest": {
-                "description": "Contest Units request body",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "units"
-                            ],
-                            "properties": {
-                                "units": {
-                                    "type": "array",
-                                    "items": {
-                                        "required": [
-                                            "id",
-                                            "position"
-                                        ],
-                                        "properties": {
-                                            "id": {
-                                                "type": "integer",
-                                                "example": "23"
-                                            },
-                                            "position": {
-                                                "type": "integer",
-                                                "example": "1"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "ChangePasswordRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "currentPassword",
-                                "password",
-                                "passwordConfirmation"
-                            ],
-                            "properties": {
-                                "currentPassword": {
-                                    "type": "string",
-                                    "example": "password"
-                                },
-                                "password": {
-                                    "type": "string",
-                                    "minLength": 6,
-                                    "example": "newpassword"
-                                },
-                                "passwordConfirmation": {
-                                    "type": "string",
-                                    "example": "newpassword"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "UpdateUserProfileRequest": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "email",
-                                "username",
-                                "dob",
-                                "fullname"
-                            ],
-                            "properties": {
-                                "email": {
-                                    "type": "string",
-                                    "maxLength": 50,
-                                    "example": "john@gmail.com"
-                                },
-                                "username": {
-                                    "type": "string",
-                                    "minLength": 6,
-                                    "example": "john"
-                                },
-                                "dob": {
-                                    "type": "string",
-                                    "format": "date",
-                                    "example": "1988-07-21"
-                                },
-                                "fullname": {
-                                    "type": "string",
-                                    "example": "John Doe"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
                 }
             }
         },
