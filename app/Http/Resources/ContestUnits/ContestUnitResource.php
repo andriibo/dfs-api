@@ -33,7 +33,7 @@ class ContestUnitResource extends JsonResource
         return [
             'id' => $this->id,
             'playerId' => $unit->player->id,
-            'totalFantasyPointsPerGame' => $unit->player->total_fantasy_points_per_game,
+            'totalFantasyPointsPerGame' => (float) $unit->player->total_fantasy_points_per_game,
             'salary' => (float) $this->salary,
             'score' => (float) $this->score,
             'fullname' => $unit->player->getFullName(),

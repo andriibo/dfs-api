@@ -501,6 +501,54 @@
                 }
             }
         },
+        "/contest-units/{id}": {
+            "get": {
+                "tags": [
+                    "Contest Units"
+                ],
+                "summary": "Get Contest Unit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ContestUnitDetailsResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/contest-users/{id}/opponent/{opponentId}": {
             "get": {
                 "tags": [
@@ -1621,6 +1669,65 @@
                 },
                 "type": "object"
             },
+            "ContestUnitDetailsResource": {
+                "title": "ContestUnitDetailsResource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "21"
+                    },
+                    "fullname": {
+                        "type": "string",
+                        "example": "David Olatukunbo Alaba"
+                    },
+                    "photo": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "5000.45"
+                    },
+                    "totalFantasyPoints": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "15.06"
+                    },
+                    "totalFantasyPointsPerGame": {
+                        "type": "number",
+                        "format": "double",
+                        "example": "11.16"
+                    },
+                    "position": {
+                        "$ref": "#/components/schemas/PositionResource"
+                    },
+                    "team": {
+                        "$ref": "#/components/schemas/TeamResource"
+                    },
+                    "nextGameSchedule": {
+                        "$ref": "#/components/schemas/GameScheduleResource"
+                    },
+                    "lastGameStats": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StatsResource"
+                        }
+                    },
+                    "lastFiveGamesStats": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StatsResource"
+                        }
+                    },
+                    "totalStats": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StatsResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "ContestUnitResource": {
                 "title": "ContestUnitResource",
                 "properties": {
@@ -2110,7 +2217,8 @@
                 "title": "GameScheduleResource",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "2"
                     },
                     "startDate": {
                         "type": "integer",
@@ -2210,7 +2318,8 @@
                 "title": "TeamResource",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "3"
                     },
                     "name": {
                         "type": "string",
@@ -2270,6 +2379,24 @@
                     "updatedAt": {
                         "type": "string",
                         "example": "2022-04-02 11:59:41"
+                    }
+                },
+                "type": "object"
+            },
+            "StatsResource": {
+                "title": "StatsResource",
+                "properties": {
+                    "alias": {
+                        "type": "string",
+                        "example": "GP"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Games Played"
+                    },
+                    "value": {
+                        "type": "integer",
+                        "example": "9"
                     }
                 },
                 "type": "object"
@@ -2936,6 +3063,10 @@
         {
             "name": "Contest Users",
             "description": "API Endpoints of Contest Users"
+        },
+        {
+            "name": "Contest Units",
+            "description": "API Endpoints of Contest Units"
         },
         {
             "name": "Transactions",

@@ -2,28 +2,39 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\SportIdEnum;
+use App\Models\Cricket\CricketGameSchedule;
+use App\Models\Soccer\SoccerGameSchedule;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\Contests\ContestGameFactory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Contests\ContestGame.
  *
- * @property int     $contest_id
- * @property int     $game_id
- * @property int     $sport_id   1 - Soccer; 2 - Football, 3 - Cricket
- * @property Contest $contest
+ * @property int                      $contest_id
+ * @property int                      $game_id
+ * @property int                      $sport_id            1 - Soccer; 2 - Football, 3 - Cricket
+ * @property Contest                  $contest
+ * @property null|CricketGameSchedule $cricketGameSchedule
+ * @property null|SoccerGameSchedule  $soccerGameSchedule
  *
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame query()
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereContestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereGameId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContestGame whereSportId($value)
+ * @method static ContestGameFactory factory(...$parameters)
+ * @method static Builder|ContestGame newModelQuery()
+ * @method static Builder|ContestGame newQuery()
+ * @method static Builder|ContestGame query()
+ * @method static Builder|ContestGame whereContestId($value)
+ * @method static Builder|ContestGame whereGameId($value)
+ * @method static Builder|ContestGame whereSportId($value)
  * @mixin Eloquent
  */
 class ContestGame extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     protected $table = 'contest_game';
@@ -37,5 +48,31 @@ class ContestGame extends Model
     public function contest(): BelongsTo
     {
         return $this->belongsTo(Contest::class);
+    }
+
+    public function cricketGameSchedule(): BelongsTo
+    {
+        return $this->belongsTo(
+            CricketGameSchedule::class,
+            'game_id',
+        );
+    }
+
+    public function soccerGameSchedule(): BelongsTo
+    {
+        return $this->belongsTo(
+            SoccerGameSchedule::class,
+            'game_id',
+        );
+    }
+
+    public function isSportSoccer(): bool
+    {
+        return $this->sport_id == SportIdEnum::soccer->value;
+    }
+
+    public function isSportCricket(): bool
+    {
+        return $this->sport_id == SportIdEnum::cricket->value;
     }
 }
