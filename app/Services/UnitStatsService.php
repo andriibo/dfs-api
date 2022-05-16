@@ -7,7 +7,7 @@ use App\Models\Contests\ContestUnit;
 use App\Repositories\Cricket\CricketUnitStatsRepository;
 use App\Repositories\Soccer\SoccerUnitStatsRepository;
 use Illuminate\Database\Eloquent\Collection;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class UnitStatsService
 {

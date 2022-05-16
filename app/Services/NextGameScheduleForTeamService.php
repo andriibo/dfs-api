@@ -8,7 +8,7 @@ use App\Models\Cricket\CricketGameSchedule;
 use App\Models\Soccer\SoccerGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
 use App\Repositories\Soccer\SoccerGameScheduleRepository;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class NextGameScheduleForTeamService
 {

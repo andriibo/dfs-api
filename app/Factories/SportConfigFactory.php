@@ -7,7 +7,7 @@ use App\Exceptions\SportConfigFactoryException;
 use App\SportConfigs\AbstractSportConfig;
 use App\SportConfigs\CricketConfig;
 use App\SportConfigs\SoccerConfig;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class SportConfigFactory
 {

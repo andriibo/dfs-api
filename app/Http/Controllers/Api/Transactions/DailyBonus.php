@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Transactions\CreateDailyBonusDepositService;
 use App\Services\Users\UpdateBalanceService;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 /**
  * @OA\Get(

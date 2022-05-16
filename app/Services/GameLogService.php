@@ -7,7 +7,7 @@ use App\Models\Contests\Contest;
 use App\Repositories\Cricket\CricketGameLogRepository;
 use App\Repositories\Soccer\SoccerGameLogRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class GameLogService
 {

@@ -8,7 +8,7 @@ use App\Models\Cricket\CricketTeam;
 use App\Models\Soccer\SoccerTeam;
 use App\Repositories\Cricket\CricketTeamRepository;
 use App\Repositories\Soccer\SoccerTeamRepository;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class TeamService
 {

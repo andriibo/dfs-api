@@ -7,9 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="ContestUserResource",
- *     @OA\Property(property="id", type="integer"),
+ *     @OA\Property(property="id", type="integer", example="3"),
  *     @OA\Property(property="title", type="string"),
- *     @OA\Property(property="userId", type="integer"),
+ *     @OA\Property(property="userId", type="integer", example="7"),
  *     @OA\Property(property="username", type="string", example="fantasysports"),
  *     @OA\Property(property="avatar", type="string"),
  *     @OA\Property(property="budget", type="integer", example="1350"),

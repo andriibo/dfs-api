@@ -8,7 +8,7 @@ use App\Repositories\ContestUserRepository;
 use App\Specifications\CanSeeOpponentUnitsSpecification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 /**
  * @OA\Get(

@@ -9,7 +9,7 @@ use App\Services\GameLogService;
 use App\Specifications\UserInContestSpecification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 /**
  * @OA\Get(

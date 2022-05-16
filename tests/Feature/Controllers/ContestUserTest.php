@@ -61,21 +61,6 @@ class ContestUserTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
         ]);
         $response->assertCreated();
-        $response->assertJsonStructure([
-            'data' => [
-                'id',
-                'title',
-                'userId',
-                'username',
-                'avatar',
-                'budget',
-                'date',
-                'isWinner',
-                'place',
-                'prize',
-                'score',
-            ],
-        ]);
     }
 
     private function assertResponse(TestResponse $response): void

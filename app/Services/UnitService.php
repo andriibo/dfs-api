@@ -8,7 +8,7 @@ use App\Models\Cricket\CricketUnit;
 use App\Models\Soccer\SoccerUnit;
 use App\Repositories\Cricket\CricketUnitRepository;
 use App\Repositories\Soccer\SoccerUnitRepository;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class UnitService
 {
