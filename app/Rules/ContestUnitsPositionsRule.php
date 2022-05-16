@@ -28,8 +28,8 @@ class ContestUnitsPositionsRule implements Rule
                 throw new \Exception('Unexpected unit');
             }
             $unit = $unitService->getUnit($contestUnit);
-            $contestUnitPosition = $unit->position;
-            $positionConfig = $positions[$contestUnitPosition];
+            $unitPosition = $unit->position;
+            $positionConfig = $positions[$unitPosition];
             if (!in_array($position, $positionConfig->allowedPositions)) {
                 // unit is picked for wrong position
                 return false;

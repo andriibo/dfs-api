@@ -6,7 +6,6 @@ use App\Factories\SportConfigFactory;
 use App\Http\Requests\AbstractFormRequest;
 use App\Repositories\ContestRepository;
 use App\Rules\ContestUnitsBelongsToContestRule;
-use App\Rules\ContestUnitsFormatRule;
 use App\Rules\ContestUnitsInTeamRule;
 use App\Rules\ContestUnitsNumberInPositionRule;
 use App\Rules\ContestUnitsPositionsRule;
@@ -39,7 +38,6 @@ class UnitsRequest extends AbstractFormRequest
             'units' => [
                 'present',
                 'array',
-                new ContestUnitsFormatRule(),
                 new ContestUnitsBelongsToContestRule($contest),
                 new ContestUnitsPositionsRule($contest, $sportConfig),
                 new ContestUnitsUniqueRule(),
@@ -47,6 +45,8 @@ class UnitsRequest extends AbstractFormRequest
                 new ContestUnitsSalaryRule($contest),
                 new ContestUnitsNumberInPositionRule($sportConfig),
             ],
+            'units.*.id' => 'required|integer',
+            'units.*.position' => 'required|integer',
         ];
     }
 }

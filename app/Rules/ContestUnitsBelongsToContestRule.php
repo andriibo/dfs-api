@@ -23,6 +23,6 @@ class ContestUnitsBelongsToContestRule implements Rule
 
     public function message(): string
     {
-        return 'Picked players do not belong to this contest.';
+        return 'Picked units do not belong to this contest.';
     }
 }
