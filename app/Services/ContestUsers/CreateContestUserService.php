@@ -5,7 +5,7 @@ namespace App\Services\ContestUsers;
 use App\Calculators\PrizeBankCalculator;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestUserRepository;
-use App\Repositories\ContestUserUnitRepository;
+use App\Services\ContestUserUnits\CreateContestUserUnitsService;
 use App\Services\SitePreferenceService;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ class CreateContestUserService
 {
     public function __construct(
         private readonly ContestUserRepository $contestUserRepository,
-        private readonly ContestUserUnitRepository $contestUserUnitRepository,
+        private readonly CreateContestUserUnitsService $createContestUserUnitsService,
         private readonly SitePreferenceService $sitePreferenceService,
         private readonly PrizeBankCalculator $prizeBankCalculator
     ) {
@@ -32,28 +32,13 @@ class CreateContestUserService
                 'title' => '#' . $contestUsersCount,
             ]);
 
-            $this->createContestUserUnits($contestUser->id, $units);
+            $this->createContestUserUnitsService->handle($contestUser->id, $units);
             $this->updatePrizeBank($contest, $contestUsersCount);
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();
 
             throw $e;
-        }
-    }
-
-    private function createContestUserUnits(int $contestUserId, array $units): void
-    {
-        foreach ($units as $index => $unit) {
-            $contestUnitId = $unit['id'];
-            $position = $unit['position'];
-
-            $this->contestUserUnitRepository->create([
-                'contest_user_id' => $contestUserId,
-                'contest_unit_id' => $contestUnitId,
-                'position' => $position,
-                'order' => $index,
-            ]);
         }
     }
 

@@ -6,8 +6,8 @@ use App\Models\Contests\ContestUserUnit;
 
 class ContestUserUnitRepository
 {
-    public function create(array $attributes = []): ContestUserUnit
+    public function updateOrCreate(array $attributes, array $values = []): ContestUserUnit
     {
-        return ContestUserUnit::create($attributes);
+        return ContestUserUnit::updateOrCreate($attributes, $values);
     }
 }
