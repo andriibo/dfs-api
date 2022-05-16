@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUser;
 use Database\Seeders\ContestSeeder;
+use Database\Seeders\SoccerLineupSeeder;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -39,6 +41,66 @@ class ContestUserTest extends TestCase
         ]);
         $response->assertOk();
         $this->assertResponse($response);
+    }
+
+    public function testContestUsersCreateEndpoint(): void
+    {
+        $this->seed(SoccerLineupSeeder::class);
+        $contest = Contest::latest('id')->first();
+        $user = $this->getVerifiedUser();
+        $token = $this->getTokenForUser($user);
+        $data = [
+            'contestId' => $contest->id,
+            'units' => [],
+        ];
+        foreach ($contest->contestUnits as $contestUnit) {
+            $data['units'][] = ['id' => $contestUnit->id, 'position' => $contestUnit->soccerUnit->position];
+        }
+
+        $response = $this->postJson('/api/v1/contest-users', $data, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'status',
+                'type',
+                'contestType',
+                'expectedPayout',
+                'isPrizeInPercents',
+                'maxEntries',
+                'maxUsers',
+                'minUsers',
+                'leagueId',
+                'startDate',
+                'endDate',
+                'details',
+                'entryFee',
+                'salaryCap',
+                'prizeBank',
+                'prizeBankType',
+                'customPrizeBank',
+                'maxPrizeBank',
+                'suspended',
+                'name',
+                'contestUsers' => [
+                    '*' => [
+                        'id',
+                        'title',
+                        'userId',
+                        'username',
+                        'avatar',
+                        'budget',
+                        'date',
+                        'isWinner',
+                        'place',
+                        'prize',
+                        'score',
+                    ],
+                ],
+            ],
+        ]);
     }
 
     private function assertResponse(TestResponse $response): void

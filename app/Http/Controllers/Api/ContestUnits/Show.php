@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     path="/contest-units/{id}",
  *     summary="Get Contest Unit",
  *     tags={"Contest Units"},
+ *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),

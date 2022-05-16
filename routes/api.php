@@ -15,9 +15,9 @@ use App\Http\Controllers\Api\Contests\Lobby;
 use App\Http\Controllers\Api\Contests\Players;
 use App\Http\Controllers\Api\Contests\Show as ContestShow;
 use App\Http\Controllers\Api\Contests\Types;
-use App\Http\Controllers\Api\Contests\Units as ContestUnits;
 use App\Http\Controllers\Api\Contests\Upcoming;
 use App\Http\Controllers\Api\ContestUnits\Show as ContestUnitShow;
+use App\Http\Controllers\Api\ContestUsers\Create as CreateContestUser;
 use App\Http\Controllers\Api\ContestUsers\Opponent;
 use App\Http\Controllers\Api\ContestUsers\Show as ContestUserShow;
 use App\Http\Controllers\Api\Leagues\Leagues;
@@ -94,7 +94,6 @@ Route::prefix('v1')->group(function () {
             Route::get('history', History::class);
             Route::get('{id}/players', Players::class)->where('id', '[0-9]+');
             Route::get('{id}/game-logs', GameLogs::class)->where('id', '[0-9]+');
-            Route::post('{id}/units', ContestUnits::class)->where('id', '[0-9]+');
         });
     });
 
@@ -103,12 +102,15 @@ Route::prefix('v1')->group(function () {
      * #####  CONTEST USERS  #####
      * ###########################
      */
-    Route::prefix('contest-users')->middleware(['auth:api', 'contest.user.access'])->group(function () {
-        Route::get('{id}/opponent/{opponentId}', Opponent::class)
-            ->where('id', '[0-9]+')
-            ->where('opponentId', '[0-9]+')
-        ;
-        Route::get('{id}', ContestUserShow::class)->where('id', '[0-9]+');
+    Route::prefix('contest-users')->middleware('auth:api')->group(function () {
+        Route::post('', CreateContestUser::class);
+        Route::middleware('contest.user.access')->group(function (): void {
+            Route::get('{id}/opponent/{opponentId}', Opponent::class)
+                ->where('id', '[0-9]+')
+                ->where('opponentId', '[0-9]+')
+            ;
+            Route::get('{id}', ContestUserShow::class)->where('id', '[0-9]+');
+        });
     });
 
     /*

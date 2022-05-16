@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Contests;
+namespace App\Http\Controllers\Api\ContestUsers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contests\UnitsRequest;
+use App\Http\Requests\ContestUsers\CreateContestUserRequest;
 use App\Http\Resources\Contests\ContestResource;
 use App\Repositories\ContestRepository;
 use App\Services\Contests\EnterContestService;
@@ -16,14 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Post(
- *     path="/contests/{id}/units",
- *     summary="Create Contest Units",
- *     tags={"Contests"},
+ *     path="/contest-users",
+ *     summary="Create Contest User",
+ *     tags={"Contest Users"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
- *     @OA\Parameter(ref="#/components/parameters/id"),
- *     @OA\RequestBody(ref="#/components/requestBodies/UnitsRequest"),
+ *     @OA\RequestBody(ref="#/components/requestBodies/CreateContestUserRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
@@ -38,18 +37,17 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class Units extends Controller
+class Create extends Controller
 {
     public function __invoke(
-        int $contestId,
-        UnitsRequest $unitsRequest,
+        CreateContestUserRequest $createContestUserRequest,
         ContestRepository $contestRepository,
         ContestCanBeEnteredSpecification $contestCanBeEnteredSpecification,
         UserReachedContestEntryLimitSpecification $userReachedContestEntryLimitSpecification,
         UserCanPaySpecification $userCanPaySpecification,
         EnterContestService $enterContestService
     ): JsonResponse|JsonResource {
-        $contest = $contestRepository->getContestById($contestId);
+        $contest = $contestRepository->getContestById($createContestUserRequest->input('contestId'));
         $user = auth()->user();
 
         if (!$contestCanBeEnteredSpecification->isSatisfiedBy($contest)) {
@@ -64,7 +62,7 @@ class Units extends Controller
             return response()->json(['message' => 'Not enough funds to pay entry fee.'], Response::HTTP_FORBIDDEN);
         }
 
-        $enterContestService->handle($contest, $user->id, $unitsRequest->input('units', []));
+        $enterContestService->handle($contest, $user->id, $createContestUserRequest->input('units', []));
 
         return new ContestResource($contest);
     }

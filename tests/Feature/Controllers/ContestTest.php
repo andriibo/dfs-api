@@ -4,7 +4,6 @@ namespace Tests\Feature\Controllers;
 
 use App\Models\Contests\Contest;
 use Database\Seeders\ContestSeeder;
-use Database\Seeders\SoccerLineupSeeder;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -180,63 +179,6 @@ class ContestTest extends TestCase
                     'position',
                     'photo',
                     'teamId',
-                ],
-            ],
-        ]);
-    }
-
-    public function testContestsUnitsEndpoint(): void
-    {
-        $this->seed(SoccerLineupSeeder::class);
-        $contest = Contest::latest('id')->first();
-        $user = $this->getVerifiedUser();
-        $token = $this->getTokenForUser($user);
-        $units = [];
-        foreach ($contest->contestUnits as $contestUnit) {
-            $units[] = ['id' => $contestUnit->id, 'position' => $contestUnit->soccerUnit->position];
-        }
-        $endpoint = "/api/v1/contests/{$contest->id}/units";
-        $response = $this->postJson($endpoint, ['units' => $units], [
-            'Authorization' => 'Bearer ' . $token,
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                'id',
-                'status',
-                'type',
-                'contestType',
-                'expectedPayout',
-                'isPrizeInPercents',
-                'maxEntries',
-                'maxUsers',
-                'minUsers',
-                'leagueId',
-                'startDate',
-                'endDate',
-                'details',
-                'entryFee',
-                'salaryCap',
-                'prizeBank',
-                'prizeBankType',
-                'customPrizeBank',
-                'maxPrizeBank',
-                'suspended',
-                'name',
-                'contestUsers' => [
-                    '*' => [
-                        'id',
-                        'title',
-                        'userId',
-                        'username',
-                        'avatar',
-                        'budget',
-                        'date',
-                        'isWinner',
-                        'place',
-                        'prize',
-                        'score',
-                    ],
                 ],
             ],
         ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Contests;
+namespace App\Http\Requests\ContestUsers;
 
 use App\Factories\SportConfigFactory;
 use App\Http\Requests\AbstractFormRequest;
@@ -14,9 +14,10 @@ use App\Rules\ContestUnitsUniqueRule;
 
 /**
  * @OA\RequestBody(
- *    request="UnitsRequest",
- *    description="Contest Units request body",
- *    @OA\JsonContent(required={"units"},
+ *    request="CreateContestUserRequest",
+ *    description="Contest User request body",
+ *    @OA\JsonContent(required={"contestId", "units"},
+ *      @OA\Property(property="contestId", type="integer", example="5"),
  *      @OA\Property(property="units", type="array",
  *          @OA\Items(required={"id","position"},
  *              @OA\Property(property="id", type="integer", example="23"),
@@ -26,15 +27,16 @@ use App\Rules\ContestUnitsUniqueRule;
  *    )
  * )
  */
-class UnitsRequest extends AbstractFormRequest
+class CreateContestUserRequest extends AbstractFormRequest
 {
     public function rules(): array
     {
         $contestRepository = new ContestRepository();
-        $contest = $contestRepository->getContestById($this->route('id'));
+        $contest = $contestRepository->getContestById($this->input('contestId'));
         $sportConfig = SportConfigFactory::getConfig($contest->league->sport_id);
 
         return [
+            'contestId' => 'required|integer|exists:contest,id',
             'units' => [
                 'present',
                 'array',
