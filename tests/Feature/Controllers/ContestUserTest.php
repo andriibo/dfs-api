@@ -60,52 +60,26 @@ class ContestUserTest extends TestCase
         $response = $this->postJson('/api/v1/contest-users', $data, [
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $response->assertJsonStructure([
             'data' => [
                 'id',
-                'status',
-                'type',
-                'contestType',
-                'expectedPayout',
-                'isPrizeInPercents',
-                'maxEntries',
-                'maxUsers',
-                'minUsers',
-                'leagueId',
-                'startDate',
-                'endDate',
-                'details',
-                'entryFee',
-                'salaryCap',
-                'prizeBank',
-                'prizeBankType',
-                'customPrizeBank',
-                'maxPrizeBank',
-                'suspended',
-                'name',
-                'contestUsers' => [
-                    '*' => [
-                        'id',
-                        'title',
-                        'userId',
-                        'username',
-                        'avatar',
-                        'budget',
-                        'date',
-                        'isWinner',
-                        'place',
-                        'prize',
-                        'score',
-                    ],
-                ],
+                'title',
+                'userId',
+                'username',
+                'avatar',
+                'budget',
+                'date',
+                'isWinner',
+                'place',
+                'prize',
+                'score',
             ],
         ]);
     }
 
     private function assertResponse(TestResponse $response): void
     {
-        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 'userId',

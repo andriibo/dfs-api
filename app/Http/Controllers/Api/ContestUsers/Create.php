@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\ContestUsers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContestUsers\CreateContestUserRequest;
-use App\Http\Resources\Contests\ContestResource;
+use App\Http\Resources\ContestUsers\ContestUserResource;
 use App\Repositories\ContestRepository;
 use App\Services\Contests\EnterContestService;
 use App\Specifications\ContestCanBeEnteredSpecification;
@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(ref="#/components/requestBodies/CreateContestUserRequest"),
- *     @OA\Response(response=200, description="Ok",
+ *     @OA\Response(response=201, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array",
- *                 @OA\Items(ref="#/components/schemas/ContestResource")
+ *                 @OA\Items(ref="#/components/schemas/ContestUserResource")
  *             )
  *         )
  *     ),
@@ -62,8 +62,8 @@ class Create extends Controller
             return response()->json(['message' => 'Not enough funds to pay entry fee.'], Response::HTTP_FORBIDDEN);
         }
 
-        $enterContestService->handle($contest, $user->id, $createContestUserRequest->input('units', []));
+        $contestUser = $enterContestService->handle($contest, $user->id, $createContestUserRequest->input('units', []));
 
-        return new ContestResource($contest);
+        return new ContestUserResource($contestUser);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services\Contests;
 
 use App\Calculators\PrizeBankCalculator;
 use App\Models\Contests\Contest;
+use App\Models\Contests\ContestUser;
 use App\Repositories\ContestUserRepository;
 use App\Repositories\ContestUserUnitRepository;
 use App\Services\SitePreferenceService;
@@ -19,7 +20,7 @@ class EnterContestService
     ) {
     }
 
-    public function handle(Contest $contest, int $userId, array $units): void
+    public function handle(Contest $contest, int $userId, array $units): ContestUser
     {
         DB::beginTransaction();
 
@@ -34,6 +35,9 @@ class EnterContestService
 
             $this->createContestUserUnits($contestUser->id, $units);
             $this->updatePrizeBank($contest, $contestUsersCount);
+            DB::commit();
+
+            return $contestUser;
         } catch (\Throwable $e) {
             DB::rollback();
 
