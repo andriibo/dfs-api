@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContestUsers\CreateContestUserRequest;
 use App\Http\Resources\ContestUsers\ContestUserResource;
 use App\Repositories\ContestRepository;
-use App\Services\Contests\EnterContestService;
+use App\Services\ContestUsers\CreateContestUserService;
 use App\Specifications\ContestCanBeEnteredSpecification;
 use App\Specifications\UserCanPaySpecification;
 use App\Specifications\UserReachedContestEntryLimitSpecification;
@@ -45,7 +45,7 @@ class Create extends Controller
         ContestCanBeEnteredSpecification $contestCanBeEnteredSpecification,
         UserReachedContestEntryLimitSpecification $userReachedContestEntryLimitSpecification,
         UserCanPaySpecification $userCanPaySpecification,
-        EnterContestService $enterContestService
+        CreateContestUserService $createContestUserService
     ): JsonResponse|JsonResource {
         $contest = $contestRepository->getContestById($createContestUserRequest->input('contestId'));
         $user = auth()->user();
@@ -62,7 +62,7 @@ class Create extends Controller
             return response()->json(['message' => 'Not enough funds to pay entry fee.'], Response::HTTP_FORBIDDEN);
         }
 
-        $contestUser = $enterContestService->handle($contest, $user->id, $createContestUserRequest->input('units', []));
+        $contestUser = $createContestUserService->handle($contest, $user->id, $createContestUserRequest->input('units', []));
 
         return new ContestUserResource($contestUser);
     }

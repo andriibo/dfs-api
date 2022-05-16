@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Contests;
+namespace App\Services\ContestUsers;
 
 use App\Calculators\PrizeBankCalculator;
 use App\Models\Contests\Contest;
@@ -10,7 +10,7 @@ use App\Repositories\ContestUserUnitRepository;
 use App\Services\SitePreferenceService;
 use Illuminate\Support\Facades\DB;
 
-class EnterContestService
+class CreateContestUserService
 {
     public function __construct(
         private readonly ContestUserRepository $contestUserRepository,
