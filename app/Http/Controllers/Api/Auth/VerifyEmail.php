@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Events\UserActivatedEvent;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -41,7 +41,7 @@ class VerifyEmail extends Controller
         }
 
         if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
+            event(new UserActivatedEvent($user));
         }
 
         return response()->json(['message' => 'You have successfully verified your email address.']);
