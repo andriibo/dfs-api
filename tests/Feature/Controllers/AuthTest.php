@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Events\UserActivatedEvent;
+use App\Listeners\UserActivatedListener;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
@@ -48,7 +51,8 @@ class AuthTest extends TestCase
                 'hash' => sha1($user->email),
             ]
         );
-
+        Event::fake();
+        Event::assertListening(UserActivatedEvent::class, UserActivatedListener::class);
         $response = $this->getJson($endpoint);
         $this->assertResponse($response);
     }
