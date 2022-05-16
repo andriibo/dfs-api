@@ -554,7 +554,7 @@
                 "tags": [
                     "Contest Users"
                 ],
-                "summary": "Get Opponent Contest Unser",
+                "summary": "Get Opponent Contest User",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Accept"
