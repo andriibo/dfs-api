@@ -63,6 +63,25 @@ class ContestUserTest extends TestCase
         $response->assertCreated();
     }
 
+    public function testContestUsersUpdateEndpoint(): void
+    {
+        $this->seed(SoccerLineupSeeder::class);
+        $contestUser = ContestUser::latest('id')->first();
+        $token = $this->getTokenForUser($contestUser->user);
+        $data = [
+            'units' => [],
+        ];
+        foreach ($contestUser->contest->contestUnits as $contestUnit) {
+            $data['units'][] = ['id' => $contestUnit->id, 'position' => $contestUnit->soccerUnit->position];
+        }
+        $endpoint = "/api/v1/contest-users/{$contestUser->id}";
+        $response = $this->putJson($endpoint, $data, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $this->assertResponse($response);
+    }
+
     private function assertResponse(TestResponse $response): void
     {
         $response->assertJsonStructure([

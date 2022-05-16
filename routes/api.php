@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\ContestUnits\Show as ContestUnitShow;
 use App\Http\Controllers\Api\ContestUsers\Create as CreateContestUser;
 use App\Http\Controllers\Api\ContestUsers\Opponent;
 use App\Http\Controllers\Api\ContestUsers\Show as ContestUserShow;
+use App\Http\Controllers\Api\ContestUsers\Update as ContestUserUpdate;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
@@ -110,6 +111,7 @@ Route::prefix('v1')->group(function () {
                 ->where('opponentId', '[0-9]+')
             ;
             Route::get('{id}', ContestUserShow::class)->where('id', '[0-9]+');
+            Route::put('{id}', ContestUserUpdate::class)->where('id', '[0-9]+');
         });
     });
 
