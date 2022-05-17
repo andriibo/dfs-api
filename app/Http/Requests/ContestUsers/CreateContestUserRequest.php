@@ -21,7 +21,7 @@ use App\Rules\ContestUnitsUniqueRule;
  *      @OA\Property(property="units", type="array",
  *          @OA\Items(required={"id","position"},
  *              @OA\Property(property="id", type="integer", example="23"),
- *              @OA\Property(property="position", type="integer", example="1")
+ *              @OA\Property(property="position", type="string", example="Goalkeeper")
  *          )
  *      )
  *    )
@@ -48,7 +48,7 @@ class CreateContestUserRequest extends AbstractFormRequest
                 new ContestUnitsNumberInPositionRule($sportConfig),
             ],
             'units.*.id' => 'required|integer',
-            'units.*.position' => 'required|integer',
+            'units.*.position' => 'required|string',
         ];
     }
 }

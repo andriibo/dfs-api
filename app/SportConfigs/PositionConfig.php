@@ -4,10 +4,10 @@ namespace App\SportConfigs;
 
 class PositionConfig
 {
-    public const SOCCER_GOALKEEPER = 1;
-    public const SOCCER_FORWARD = 2;
-    public const SOCCER_MIDFIELD = 3;
-    public const SOCCER_DEFENDER = 4;
+    public const SOCCER_GOALKEEPER = 'Goalkeeper';
+    public const SOCCER_FORWARD = 'Forward';
+    public const SOCCER_MIDFIELD = 'Midfield';
+    public const SOCCER_DEFENDER = 'Defender';
 
     public const CRICKET_BOWLER = 'Bowler';
     public const CRICKET_BATSMAN = 'Batsman';

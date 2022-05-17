@@ -40,7 +40,7 @@ class ContestUnitsNumberInPositionRule implements Rule
         return $this->message;
     }
 
-    private function getCountByPosition(array $units, string|int $position): int
+    private function getCountByPosition(array $units, string $position): int
     {
         $count = 0;
         foreach ($units as $unit) {
