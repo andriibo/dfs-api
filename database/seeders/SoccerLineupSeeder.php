@@ -50,14 +50,14 @@ class SoccerLineupSeeder extends Seeder
         $countPlayers = $sportConfig->playersInTeam;
         $i = 0;
         do {
-            foreach ($sportConfig->positions as $id => $position) {
+            foreach ($sportConfig->positions as $name => $position) {
                 if ($i == $countPlayers) {
                     return;
                 }
                 if ($position->maxPlayers > round($i / $countPositions)) {
                     $soccerPlayer = SoccerPlayer::factory()->create();
                     $soccerUnit = SoccerUnit::factory()
-                        ->position($id)
+                        ->position($name)
                         ->for($soccerPlayer, 'player')
                         ->create()
                     ;

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int         $contest_user_id
  * @property int         $contest_unit_id
  * @property int         $order
- * @property int         $position
+ * @property string      $position
  * @property ContestUnit $contestUnit
  * @property ContestUser $contestUser
  *
