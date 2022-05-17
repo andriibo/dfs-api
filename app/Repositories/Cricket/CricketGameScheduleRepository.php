@@ -25,10 +25,10 @@ class CricketGameScheduleRepository
     public function getNextGameSchedule(int $teamId): ?CricketGameSchedule
     {
         return CricketGameSchedule::query()
-            ->where('cricket_game_schedule.home_team_id', $teamId)
-            ->orWhere('cricket_game_schedule.away_team_id', $teamId)
-            ->where('cricket_game_schedule.game_date', '>', DB::raw('NOW()'))
-            ->orderBy('cricket_game_schedule.game_date')
+            ->where('home_team_id', $teamId)
+            ->orWhere('away_team_id', $teamId)
+            ->where('game_date', '>', DB::raw('NOW()'))
+            ->orderBy('game_date')
             ->first()
             ;
     }

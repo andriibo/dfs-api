@@ -25,10 +25,10 @@ class SoccerGameScheduleRepository
     public function getNextGameSchedule(int $teamId): ?SoccerGameSchedule
     {
         return SoccerGameSchedule::query()
-            ->where('game_schedule.home_team_id', $teamId)
-            ->orWhere('game_schedule.away_team_id', $teamId)
-            ->where('game_schedule.game_date', '>', DB::raw('NOW()'))
-            ->orderBy('game_schedule.game_date')
+            ->where('home_team_id', $teamId)
+            ->orWhere('away_team_id', $teamId)
+            ->where('game_date', '>', DB::raw('NOW()'))
+            ->orderBy('game_date')
             ->first()
             ;
     }
