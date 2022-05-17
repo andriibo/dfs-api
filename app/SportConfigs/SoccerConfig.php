@@ -9,7 +9,7 @@ class SoccerConfig extends AbstractSportConfig
         $this->positions = [
             PositionConfig::SOCCER_GOALKEEPER => new PositionConfig([
                 'id' => 'gk',
-                'name' => 'Goalkeeper',
+                'name' => PositionConfig::SOCCER_GOALKEEPER,
                 'shortName' => 'GK',
                 'minPlayers' => 1,
                 'maxPlayers' => 1,
@@ -19,7 +19,7 @@ class SoccerConfig extends AbstractSportConfig
             ]),
             PositionConfig::SOCCER_FORWARD => new PositionConfig([
                 'id' => 'fw',
-                'name' => 'Forward',
+                'name' => PositionConfig::SOCCER_FORWARD,
                 'shortName' => 'FW',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -29,7 +29,7 @@ class SoccerConfig extends AbstractSportConfig
             ]),
             PositionConfig::SOCCER_MIDFIELD => new PositionConfig([
                 'id' => 'md',
-                'name' => 'Midfield',
+                'name' => PositionConfig::SOCCER_MIDFIELD,
                 'shortName' => 'MD',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -39,7 +39,7 @@ class SoccerConfig extends AbstractSportConfig
             ]),
             PositionConfig::SOCCER_DEFENDER => new PositionConfig([
                 'id' => 'df',
-                'name' => 'Defender',
+                'name' => PositionConfig::SOCCER_DEFENDER,
                 'shortName' => 'DF',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,

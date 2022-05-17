@@ -17,7 +17,7 @@ class SportConfigResource extends JsonResource
     {
         return [
             'playersInTeam' => $this->playersInTeam,
-            'positions' => PositionResource::collection($this->positions),
+            'positions' => PositionResource::collection(array_values($this->positions)),
         ];
     }
 }

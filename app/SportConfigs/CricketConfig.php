@@ -9,7 +9,7 @@ class CricketConfig extends AbstractSportConfig
         $this->positions = [
             PositionConfig::CRICKET_BOWLER => new PositionConfig([
                 'id' => 'bw',
-                'name' => 'Bowler',
+                'name' => PositionConfig::CRICKET_BOWLER,
                 'shortName' => 'BW',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -19,7 +19,7 @@ class CricketConfig extends AbstractSportConfig
             ]),
             PositionConfig::CRICKET_BATSMAN => new PositionConfig([
                 'id' => 'ba',
-                'name' => 'Batsman',
+                'name' => PositionConfig::CRICKET_BATSMAN,
                 'shortName' => 'BT',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -29,7 +29,7 @@ class CricketConfig extends AbstractSportConfig
             ]),
             PositionConfig::CRICKET_BATTING_ALLROUNDER => new PositionConfig([
                 'id' => 'bta',
-                'name' => 'Batting Allrounder',
+                'name' => PositionConfig::CRICKET_BATTING_ALLROUNDER,
                 'shortName' => 'BTA',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -39,7 +39,7 @@ class CricketConfig extends AbstractSportConfig
             ]),
             PositionConfig::CRICKET_BOWLING_ALLROUNDER => new PositionConfig([
                 'id' => 'bwa',
-                'name' => 'Bowling Allrounder',
+                'name' => PositionConfig::CRICKET_BOWLING_ALLROUNDER,
                 'shortName' => 'BA',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
@@ -49,7 +49,7 @@ class CricketConfig extends AbstractSportConfig
             ]),
             PositionConfig::CRICKET_WICKETKEEPER_BATSMAN => new PositionConfig([
                 'id' => 'wi',
-                'name' => 'Wicketkeeper Batsman',
+                'name' => PositionConfig::CRICKET_WICKETKEEPER_BATSMAN,
                 'shortName' => 'WB',
                 'minPlayers' => 2,
                 'maxPlayers' => 5,
