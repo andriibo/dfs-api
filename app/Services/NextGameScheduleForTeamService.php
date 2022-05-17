@@ -24,11 +24,11 @@ class NextGameScheduleForTeamService
     public function handle(ContestUnit $contestUnit): null|SoccerGameSchedule|CricketGameSchedule
     {
         if ($contestUnit->isSportSoccer()) {
-            return $this->soccerGameScheduleRepository->getNextGameSchedule($contestUnit->contest_id, $contestUnit->team_id);
+            return $this->soccerGameScheduleRepository->getNextGameSchedule($contestUnit->team_id);
         }
 
         if ($contestUnit->isSportCricket()) {
-            return $this->cricketGameScheduleRepository->getNextGameSchedule($contestUnit->contest_id, $contestUnit->team_id);
+            return $this->cricketGameScheduleRepository->getNextGameSchedule($contestUnit->team_id);
         }
 
         throw new NextGameScheduleForTeamServiceException('Could not find game schedule for this sport', Response::HTTP_NOT_FOUND);
