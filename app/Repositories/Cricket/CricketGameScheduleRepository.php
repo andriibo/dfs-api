@@ -22,7 +22,7 @@ class CricketGameScheduleRepository
         ;
     }
 
-    public function getNextGameSchedule(int $contestId, int $teamId): ?CricketGameSchedule
+    public function getNextGameSchedule(int $teamId): ?CricketGameSchedule
     {
         return CricketGameSchedule::query()
             ->where('cricket_game_schedule.home_team_id', $teamId)
