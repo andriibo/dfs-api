@@ -4,6 +4,7 @@ namespace App\Repositories\Soccer;
 
 use App\Enums\SportIdEnum;
 use App\Models\Soccer\SoccerGameSchedule;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -25,8 +26,11 @@ class SoccerGameScheduleRepository
     public function getNextGameSchedule(int $teamId): ?SoccerGameSchedule
     {
         return SoccerGameSchedule::query()
-            ->where('home_team_id', $teamId)
-            ->orWhere('away_team_id', $teamId)
+            ->where(function (Builder $query) use ($teamId) {
+                $query->where('home_team_id', $teamId)
+                    ->orWhere('away_team_id', $teamId)
+                ;
+            })
             ->where('game_date', '>', DB::raw('NOW()'))
             ->orderBy('game_date')
             ->first()
