@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\UserTransactions\TypeEnum;
 use App\Models\UserTransaction;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -11,7 +12,17 @@ class UserTransactionRepository
     {
         return UserTransaction::query()
             ->where('user_id', $userId)
+            ->where('type', TypeEnum::dailyBonus)
             ->whereDay('created_at', date('d'))
+            ->first()
+            ;
+    }
+
+    public function getActivationBonusDepositByUserId(int $userId): ?UserTransaction
+    {
+        return UserTransaction::query()
+            ->where('user_id', $userId)
+            ->where('type', TypeEnum::activationBonus)
             ->first()
             ;
     }
