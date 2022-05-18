@@ -12,8 +12,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="amount", type="number", format="double", example="230.41"),
  *     @OA\Property(property="status", type="integer", enum={0,1,2,3,4,5}, description="0 - New, 1 - Success, 2 - Declined, 3 - Cancelled, 4 - Returned, 5 - Approved"),
  *     @OA\Property(property="type", type="integer", enum={1,2,3,4,5,6,7,8,9,10,11,12}, description="1 - Deposit, 2 - Withdraw, 3 - Enter Contest, 4 - Win Contest, 5 - Contest Cancelled, 6 - Leave Contest, 7 - Promo Code, 8 - Threshold, 9 - Deposit Bonus, 10 - Affiliate Profit, 11 - Activation Bonus, 12 - Daily Bonus"),
- *     @OA\Property(property="createdAt", type="string", example="1650112441"),
- *     @OA\Property(property="updatedAt", type="string", example="1650112441")
+ *     @OA\Property(property="createdAt", type="integer", example="1650112441"),
+ *     @OA\Property(property="updatedAt", type="integer", example="1650112441")
  * )
  */
 class TransactionResource extends JsonResource
