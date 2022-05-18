@@ -23,6 +23,7 @@ class LeagueTest extends TestCase
                     'id',
                     'name',
                     'alias',
+                    'sportId',
                 ],
             ],
         ]);
