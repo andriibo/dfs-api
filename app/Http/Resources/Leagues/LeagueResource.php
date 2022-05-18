@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="id", type="integer", example="3"),
  *     @OA\Property(property="name", type="string", example="England - Premier League"),
  *     @OA\Property(property="alias", type="string", example="EPL"),
- *     @OA\Property(property="sportId", type="integer", enum={1,2,3}),
+ *     @OA\Property(property="sportId", type="integer", enum={1,2,3}, description="1 - Soccer, 2- Football, 3 - Cricket")
  * )
  */
 class LeagueResource extends JsonResource

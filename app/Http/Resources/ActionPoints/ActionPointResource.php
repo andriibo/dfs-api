@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     title="ActionPointResource",
  *     @OA\Property(property="id", type="integer"),
  *     @OA\Property(property="name", type="string", example="goal"),
- *     @OA\Property(property="sportId", type="integer", enum={1,2,3}),
+ *     @OA\Property(property="sportId", type="integer", enum={1,2,3}, description="1 - Soccer, 2- Football, 3 - Cricket"),
  *     @OA\Property(property="alias", type="string", example="G"),
  *     @OA\Property(property="gameLogTemplate", type="string", example="Goal"),
  *     @OA\Property(property="values", type="object", example={"1":"10","2":"7","3":"30","4":"4"})
