@@ -12,7 +12,7 @@ class ContestCanBeEnteredSpecification
             return false;
         }
 
-        if (!($contest->isStatusReady() && $contest->isSuspended())) {
+        if (!$contest->isStatusReady() && $contest->isSuspended()) {
             return false;
         }
 
