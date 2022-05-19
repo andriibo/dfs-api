@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\UserActivatedEvent;
+use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -21,6 +22,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserActivatedEvent::class => [
             UserActivatedListener::class,
+            SendEmailWelcomeListener::class,
         ],
     ];
 
