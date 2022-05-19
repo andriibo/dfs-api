@@ -32,7 +32,7 @@ class CreateContestUserService
                 'title' => '#' . $contestUsersCount,
             ]);
 
-            $this->createContestUserUnitsService->handle($contestUser->id, $units);
+            $this->createContestUserUnitsService->handle($contestUser, $units);
             $this->updatePrizeBank($contest, $contestUsersCount);
             DB::commit();
         } catch (\Throwable $e) {

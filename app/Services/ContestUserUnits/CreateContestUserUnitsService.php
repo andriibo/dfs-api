@@ -2,27 +2,22 @@
 
 namespace App\Services\ContestUserUnits;
 
-use App\Repositories\ContestUserUnitRepository;
+use App\Models\Contests\ContestUser;
 
 class CreateContestUserUnitsService
 {
-    public function __construct(private readonly ContestUserUnitRepository $contestUserUnitRepository)
+    public function handle(ContestUser $contestUser, array $units): void
     {
-    }
-
-    public function handle(int $contestUserId, array $units): void
-    {
+        $data = [];
         foreach ($units as $index => $unit) {
             $contestUnitId = $unit['id'];
             $position = $unit['position'];
-
-            $this->contestUserUnitRepository->updateOrCreate([
-                'contest_user_id' => $contestUserId,
+            $data[] = [
                 'contest_unit_id' => $contestUnitId,
-            ], [
                 'position' => $position,
                 'order' => $index,
-            ]);
+            ];
         }
+        $contestUser->contestUnits()->sync($data);
     }
 }
