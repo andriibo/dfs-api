@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
+use App\Notifications\SendEmailWelcomeNotification;
 use App\Notifications\VerifyEmailNotification;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\UserFactory;
@@ -161,5 +162,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function sendEmailWelcomeNotification(): void
+    {
+        $this->notify(new SendEmailWelcomeNotification($this->username));
     }
 }
