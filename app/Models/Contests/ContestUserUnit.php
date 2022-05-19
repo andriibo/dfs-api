@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * App\Models\Contests\ContestUserUnit.
  *
+ * @property int         $id
  * @property int         $contest_user_id
  * @property int         $contest_unit_id
  * @property int         $order
