@@ -40,8 +40,8 @@ class Update extends Controller
         ContestUserRepository $contestUserRepository,
         CreateContestUserUnitsService $createContestUserUnitsService
     ): JsonResource {
+        $createContestUserUnitsService->handle($contestUserId, $updateContestUserRequest->input('units', []));
         $contestUser = $contestUserRepository->getById($contestUserId);
-        $createContestUserUnitsService->handle($contestUser->id, $updateContestUserRequest->input('units', []));
 
         return new ContestUserDetailsResource($contestUser);
     }
