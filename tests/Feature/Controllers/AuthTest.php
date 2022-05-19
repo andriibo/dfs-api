@@ -3,6 +3,7 @@
 namespace Tests\Feature\Controllers;
 
 use App\Events\UserActivatedEvent;
+use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
@@ -53,6 +54,7 @@ class AuthTest extends TestCase
         );
         Event::fake();
         Event::assertListening(UserActivatedEvent::class, UserActivatedListener::class);
+        Event::assertListening(UserActivatedEvent::class, SendEmailWelcomeListener::class);
         $response = $this->getJson($endpoint);
         $this->assertResponse($response);
     }
