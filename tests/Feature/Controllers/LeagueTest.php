@@ -42,6 +42,8 @@ class LeagueTest extends TestCase
                     '*' => [
                         'name',
                         'alias',
+                        'minPlayers',
+                        'maxPlayers',
                     ],
                 ],
             ],

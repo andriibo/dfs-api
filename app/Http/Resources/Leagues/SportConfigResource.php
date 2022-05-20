@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @OA\Schema(
  *     title="SportConfigResource",
  *     @OA\Property(property="playersInTeam", type="integer", example="11"),
- *     @OA\Property(property="positions", type="array", @OA\Items(ref="#/components/schemas/PositionResource"))
+ *     @OA\Property(property="positions", type="array", @OA\Items(ref="#/components/schemas/PositionDetailsResource"))
  * )
  */
 class SportConfigResource extends JsonResource
@@ -17,7 +17,7 @@ class SportConfigResource extends JsonResource
     {
         return [
             'playersInTeam' => $this->playersInTeam,
-            'positions' => PositionResource::collection(array_values($this->positions)),
+            'positions' => PositionDetailsResource::collection(array_values($this->positions)),
         ];
     }
 }
