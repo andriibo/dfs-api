@@ -176,9 +176,10 @@ class ContestTest extends TestCase
                     'salary',
                     'score',
                     'fullname',
-                    'position',
                     'photo',
                     'teamId',
+                    'sportId',
+                    'position',
                 ],
             ],
         ]);

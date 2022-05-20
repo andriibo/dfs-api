@@ -91,6 +91,7 @@ class SoccerLineupSeeder extends Seeder
                     ;
 
                     ContestUnit::factory()
+                        ->soccer()
                         ->for($soccerTeam, 'soccerTeam')
                         ->for($soccerUnit)
                         ->for($contest)

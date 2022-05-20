@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|ContestUserUnit query()
  * @method static Builder|ContestUserUnit whereContestUnitId($value)
  * @method static Builder|ContestUserUnit whereContestUserId($value)
+ * @method static Builder|ContestUserUnit whereId($value)
  * @method static Builder|ContestUserUnit whereOrder($value)
  * @method static Builder|ContestUserUnit wherePosition($value)
  * @mixin Eloquent
