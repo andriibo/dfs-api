@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api\Leagues;
 
-use App\Enums\SportIdEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Leagues\LeagueResource;
-use App\Services\LeagueService;
+use App\Repositories\LeagueRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -28,9 +27,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Leagues extends Controller
 {
-    public function __invoke(LeagueService $leagueService): AnonymousResourceCollection
+    public function __invoke(LeagueRepository $leagueRepository): AnonymousResourceCollection
     {
-        $leagues = $leagueService->getListBySportId(SportIdEnum::soccer);
+        $leagues = $leagueRepository->getLeagues();
 
         return LeagueResource::collection($leagues);
     }
