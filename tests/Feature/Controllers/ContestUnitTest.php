@@ -31,6 +31,7 @@ class ContestUnitTest extends TestCase
                 'salary',
                 'totalFantasyPoints',
                 'totalFantasyPointsPerGame',
+                'sportId',
                 'position' => [
                     'name',
                     'alias',

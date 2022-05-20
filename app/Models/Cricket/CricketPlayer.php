@@ -78,7 +78,7 @@ class CricketPlayer extends Model
 
     public function getFullName(): string
     {
-        $name = array_filter([
+        $name = array_unique([
             $this->first_name,
             $this->last_name,
         ]);

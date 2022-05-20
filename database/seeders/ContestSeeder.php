@@ -43,6 +43,7 @@ class ContestSeeder extends Seeder
             ;
 
             ContestUnit::factory()
+                ->soccer()
                 ->for(SoccerTeam::factory()->for($league)->create(), 'soccerTeam')
                 ->for($soccerUnit)
                 ->for($contest)

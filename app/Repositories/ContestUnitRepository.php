@@ -20,7 +20,11 @@ class ContestUnitRepository
     public function getContestUnitsByContestId(int $contestId): Collection
     {
         return ContestUnit::query()
-            ->whereContestId($contestId)
+            ->select('contest_unit.*')
+            ->join('contest', 'contest.id', '=', 'contest_unit.contest_id')
+            ->join('league', 'league.id', '=', 'contest.league_id')
+            ->where('contest_unit.contest_id', $contestId)
+            ->where('contest_unit.sport_id', '<>', 'league.sport_id')
             ->get()
             ;
     }
