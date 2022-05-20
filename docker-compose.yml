@@ -13,7 +13,7 @@ services:
       - db
 
   mailhog:
-    image: mailhog/mailhog:latest
+    image: ${MAILHOG_IMAGE:-mailhog/mailhog:latest}
     container_name: ${FANTASYSPORTS_MAILHOG_NAME:-fantasysports-mailhog}
     restart: always
     environment:
