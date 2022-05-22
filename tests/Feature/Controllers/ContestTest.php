@@ -85,7 +85,6 @@ class ContestTest extends TestCase
                 'maxEntries',
                 'maxUsers',
                 'minUsers',
-                'leagueId',
                 'startDate',
                 'endDate',
                 'details',
@@ -97,6 +96,12 @@ class ContestTest extends TestCase
                 'maxPrizeBank',
                 'suspended',
                 'name',
+                'league' => [
+                    'id',
+                    'name',
+                    'alias',
+                    'sportId',
+                ],
                 'contestUsers' => [
                     '*' => [
                         'id',

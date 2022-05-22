@@ -5,6 +5,7 @@ namespace App\Http\Resources\Contests;
 use App\Http\Resources\ActionPoints\ActionPointResource;
 use App\Http\Resources\ContestUsers\ContestUserResource;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
+use App\Http\Resources\Leagues\LeagueResource;
 use App\Services\ContestService;
 use App\Services\GameScheduleService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,7 +23,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="maxEntries", type="integer", example="12"),
  *     @OA\Property(property="maxUsers", type="integer", example="12"),
  *     @OA\Property(property="minUsers", type="integer", example="1"),
- *     @OA\Property(property="leagueId", type="integer", example="5"),
  *     @OA\Property(property="startDate", type="integer", example="1650112441"),
  *     @OA\Property(property="endDate", type="integer", example="1650122541"),
  *     @OA\Property(property="details", type="string"),
@@ -33,6 +33,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="customPrizeBank", type="number", format="double", example="71.23"),
  *     @OA\Property(property="maxPrizeBank", type="number", format="double", example="300.99"),
  *     @OA\Property(property="suspended", type="integer", enum={0,1}),
+ *     @OA\Property(property="league", ref="#/components/schemas/LeagueResource"),
  *     @OA\Property(property="contestUsers", type="array", @OA\Items(ref="#/components/schemas/ContestUserResource")),
  *     @OA\Property(property="games", type="array", @OA\Items(ref="#/components/schemas/GameScheduleResource")),
  *     @OA\Property(property="prizes", type="array", @OA\Items(ref="#/components/schemas/PrizePlaceResource")),
@@ -58,7 +59,6 @@ class ContestDetailsResource extends JsonResource
             'maxEntries' => $this->entry_limit,
             'maxUsers' => $this->max_users,
             'minUsers' => $this->min_users,
-            'leagueId' => $this->league_id,
             'startDate' => strtotime($this->start_date),
             'endDate' => strtotime($this->end_date),
             'details' => $this->details,
@@ -70,6 +70,7 @@ class ContestDetailsResource extends JsonResource
             'maxPrizeBank' => $contestService->getMaxPrizeBank($this->resource),
             'suspended' => $this->suspended,
             'name' => $this->title,
+            'league' => new LeagueResource($this->league),
             'contestUsers' => ContestUserResource::collection($this->contestUsers),
             'games' => GameScheduleResource::collection($gameScheduleService->getGameSchedules($this->resource)),
             'prizes' => PrizePlaceResource::collection($contestService->getPrizePlaces($this->resource)),
