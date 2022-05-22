@@ -13,7 +13,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *     title="ContestDetailsResource",
- *     @OA\Property(property="id", type="integer"),
+ *     @OA\Property(property="id", type="integer", example="3"),
  *     @OA\Property(property="name", type="string", example="Test Contest"),
  *     @OA\Property(property="status", type="integer", enum={1,2,3,4,5}, description="1 - Ready, 2 - Started, 3 - Finished, 4 - Closed, 5 - Cancelled"),
  *     @OA\Property(property="type", type="string", enum={"admin","user","template"}),
