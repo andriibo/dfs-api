@@ -65,11 +65,11 @@ class SoccerUnitStats extends Model
 
     public function unit(): BelongsTo
     {
-        return $this->belongsTo(SoccerUnit::class, 'unit_id');
+        return $this->belongsTo(SoccerUnit::class);
     }
 
     public function team(): BelongsTo
     {
-        return $this->belongsTo(SoccerTeam::class, 'team_id');
+        return $this->belongsTo(SoccerTeam::class);
     }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  *
  * @property int                      $id
  * @property null|int                 $game_schedule_id
- * @property int                      $player_id
+ * @property int                      $unit_id
  * @property null|int                 $team_id
  * @property array                    $raw_stats
  * @property null|Carbon              $created_at
@@ -28,9 +28,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereCreatedAt($value)
  * @method static Builder|CricketUnitStats whereGameScheduleId($value)
  * @method static Builder|CricketUnitStats whereId($value)
- * @method static Builder|CricketUnitStats wherePlayerId($value)
  * @method static Builder|CricketUnitStats whereRawStats($value)
  * @method static Builder|CricketUnitStats whereTeamId($value)
+ * @method static Builder|CricketUnitStats whereUnitId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)
  * @mixin Eloquent
  */
@@ -56,11 +56,11 @@ class CricketUnitStats extends Model
 
     public function unit(): BelongsTo
     {
-        return $this->belongsTo(CricketUnit::class, 'player_id');
+        return $this->belongsTo(CricketUnit::class);
     }
 
     public function team(): BelongsTo
     {
-        return $this->belongsTo(CricketTeam::class, 'team_id');
+        return $this->belongsTo(CricketTeam::class);
     }
 }

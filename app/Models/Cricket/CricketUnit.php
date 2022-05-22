@@ -72,6 +72,6 @@ class CricketUnit extends Model
 
     public function totalUnitStats(): ?CricketUnitStats
     {
-        return $this->unitStats->whereNull('game_id')->first();
+        return $this->unitStats->whereNull('game_schedule_id')->first();
     }
 }
