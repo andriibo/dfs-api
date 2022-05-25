@@ -2,30 +2,18 @@ version: '3.7'
 services:
   api:
     build: ./docker/php
-    container_name: fantasysports-api
     restart: always
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    ports:
-      - ${APP_PORT}:8000
     external_links:
       - db
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: fantasysports-mailhog
     restart: always
     environment:
       - MH_STORAGE=maildir
       - MH_MAILDIR_PATH=maildir
     volumes:
       - ./mailhog:/home/mailhog
-    ports:
-      - ${MAIL_PORT}:1025
-      - ${MAIL_HOG_PORT}:8025
-
-networks:
-  default:
-    name: fantasysports-network
-    external: true
