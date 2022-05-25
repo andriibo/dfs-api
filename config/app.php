@@ -55,6 +55,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'force_https' => env('APP_FORCE_HTTPS', false),
+
     'front_url' => env('FRONT_URL', 'http://fantasysports-url.com'),
 
     'asset_url' => env('ASSET_URL'),
