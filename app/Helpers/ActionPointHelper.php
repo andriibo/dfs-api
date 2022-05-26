@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 
 class ActionPointHelper
 {
-    public static function getScore(int $gameLogValue, array $actionPointValues, int $unitPosition): float
+    public static function getScore(int $gameLogValue, array $actionPointValues, string $unitPosition): float
     {
         $unitValue = Arr::get($actionPointValues, $unitPosition, 0);
 
