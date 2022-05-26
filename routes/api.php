@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Transactions\Transactions;
+use App\Http\Controllers\Api\Users\Avatar;
 use App\Http\Controllers\Api\Users\Balance;
 use App\Http\Controllers\Api\Users\ChangePassword;
 use App\Http\Controllers\Api\Users\Show as Profile;
@@ -78,6 +79,7 @@ Route::prefix('v1')->group(function () {
         Route::get('balance', Balance::class);
         Route::put('profile', ProfileUpdate::class);
         Route::patch('password', ChangePassword::class);
+        Route::post('avatar', Avatar::class);
     });
 
     /*
