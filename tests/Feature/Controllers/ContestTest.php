@@ -190,6 +190,29 @@ class ContestTest extends TestCase
         ]);
     }
 
+    public function testContestsGameLogsEndpoint(): void
+    {
+        $this->seed(ContestSeeder::class);
+        $contest = Contest::latest('id')->first();
+        $user = $contest->contestUsers()->first()->user;
+        $token = $this->getTokenForUser($user);
+        $endpoint = "/api/v1/contests/{$contest->id}/game-logs";
+        $response = $this->getJson($endpoint, [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'playerId',
+                    'playerName',
+                    'score',
+                    'message',
+                ],
+            ],
+        ]);
+    }
+
     private function assertResponse(TestResponse $response): void
     {
         $response->assertOk();
