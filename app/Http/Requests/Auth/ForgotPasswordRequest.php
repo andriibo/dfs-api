@@ -7,6 +7,7 @@ use App\Http\Requests\AbstractFormRequest;
 /**
  * @OA\RequestBody(
  *    request="ForgotPasswordRequest",
+ *    required=true,
  *    @OA\JsonContent(required={"email"},
  *        @OA\Property(property="email", type="string", maxLength=50)
  *    )

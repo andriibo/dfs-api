@@ -7,6 +7,7 @@ use App\Http\Requests\AbstractFormRequest;
 /**
  * @OA\RequestBody(
  *    request="RegisterRequest",
+ *    required=true,
  *    @OA\JsonContent(required={"email","password","passwordConfirmation","username","fullname","dob"},
  *        @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
  *        @OA\Property(property="password", type="string", minLength=6, example="password"),

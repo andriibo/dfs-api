@@ -15,7 +15,7 @@ use App\Rules\ContestUnitsUniqueRule;
 /**
  * @OA\RequestBody(
  *    request="CreateContestUserRequest",
- *    description="Contest User request body",
+ *    required=true,
  *    @OA\JsonContent(required={"contestId", "units"},
  *      @OA\Property(property="contestId", type="integer", example="5"),
  *      @OA\Property(property="units", type="array",

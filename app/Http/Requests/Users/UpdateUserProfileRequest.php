@@ -7,6 +7,7 @@ use App\Http\Requests\AbstractFormRequest;
 /**
  * @OA\RequestBody(
  *    request="UpdateUserProfileRequest",
+ *    required=true,
  *    @OA\JsonContent(required={"email","username","dob","fullname"},
  *       @OA\Property(property="email", type="string", maxLength=50, example="john@gmail.com"),
  *       @OA\Property(property="username", type="string", minLength=6, example="john"),

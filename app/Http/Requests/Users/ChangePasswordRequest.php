@@ -7,6 +7,7 @@ use App\Http\Requests\AbstractFormRequest;
 /**
  * @OA\RequestBody(
  *    request="ChangePasswordRequest",
+ *    required=true,
  *    @OA\JsonContent(required={"currentPassword","password","passwordConfirmation"},
  *       @OA\Property(property="currentPassword", type="string", example="password"),
  *       @OA\Property(property="password", type="string", minLength=6, example="newpassword"),
