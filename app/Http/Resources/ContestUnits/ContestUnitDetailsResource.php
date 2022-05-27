@@ -79,7 +79,7 @@ class ContestUnitDetailsResource extends JsonResource
         $lastFiveGamesUnitStats = $lastFiveGamesUnitStats->pluck('stats')->toArray();
         $lastFiveGamesUnitStats = UnitStatsHelper::sumStats($lastFiveGamesUnitStats);
         $lastFiveGamesStats = UnitStatsHelper::mapStats($lastFiveGamesUnitStats, $this->contest->actionPoints);
-        $lastGameStats = UnitStatsHelper::mapStats($lastGameUnitStats->stats, $this->contest->actionPoints);
+        $lastGameStats = UnitStatsHelper::mapStats($lastGameUnitStats->stats ?? [], $this->contest->actionPoints);
 
         return [
             $totalStats,
