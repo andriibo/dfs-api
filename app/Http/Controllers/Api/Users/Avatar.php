@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UpdateUserAvatarRequest;
+use App\Services\Users\UpdateAvatarService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 /**
  * @OA\Post(
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Storage;
  *             @OA\Property(property="message", type="string", example="Image uploaded successfully!")
  *         )
  *     ),
+ *     @OA\Response(response=400, ref="#/components/responses/400"),
  *     @OA\Response(response=401, ref="#/components/responses/401"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
@@ -28,12 +30,16 @@ use Illuminate\Support\Facades\Storage;
  */
 class Avatar extends Controller
 {
-    public function __invoke(UpdateUserAvatarRequest $updateUserAvatarRequest): JsonResponse
-    {
+    public function __invoke(
+        UpdateUserAvatarRequest $updateUserAvatarRequest,
+        UpdateAvatarService $updateAvatarService
+    ): JsonResponse {
+        $user = auth()->user();
         $file = $updateUserAvatarRequest->file('image');
-        $name = time() . $file->getClientOriginalName();
-        $filePath = 'images/' . $name;
-        Storage::disk('s3')->put($filePath, file_get_contents($file));
+
+        if (!$updateAvatarService->handle($user, $file)) {
+            return response()->json(['message' => 'Bad request.'], Response::HTTP_BAD_REQUEST);
+        }
 
         return response()->json(['message' => 'Image uploaded successfully!']);
     }

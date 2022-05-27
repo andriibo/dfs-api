@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Controllers;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -70,6 +72,21 @@ class UserTest extends TestCase
         $this->assertIsString($response['message']);
     }
 
+    public function testUsersAvatarEndpoint(): void
+    {
+        Storage::fake('avatars');
+        $user = $this->getVerifiedUser();
+        $token = $this->getTokenForUser($user);
+        $response = $this->postJson('/api/v1/users/avatar', [
+            'image' => UploadedFile::fake()->image('avatar.png'),
+        ], [
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertOk();
+        $response->assertSee('message');
+        $this->assertIsString($response['message']);
+    }
+
     private function assertProfileResponse(TestResponse $response): void
     {
         $response->assertOk();
@@ -87,7 +104,7 @@ class UserTest extends TestCase
                 'languageId',
                 'receiveNewsletters',
                 'receiveNotifications',
-                'avatarId',
+                'avatar',
                 'isEmailConfirmed',
                 'invitedByUser',
                 'isSham',

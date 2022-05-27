@@ -11,7 +11,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
@@ -45,11 +44,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property null|int                                              $language_id
  * @property int                                                   $receive_newsletters
  * @property int                                                   $receive_notifications
- * @property null|int                                              $avatar_id
+ * @property null|string                                           $avatar
  * @property int                                                   $is_email_confirmed
  * @property null|int                                              $invited_by_user
  * @property int                                                   $is_sham
- * @property null|FileUpload                                       $avatar
  * @property DatabaseNotification[]|DatabaseNotificationCollection $notifications
  * @property null|int                                              $notifications_count
  * @property Collection|UserTransaction[]                          $userTransactions
@@ -112,7 +110,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'language_id',
         'receive_newsletters',
         'receive_notifications',
-        'avatar_id',
+        'avatar',
         'is_email_confirmed',
         'invited_by_user',
         'is_sham',
@@ -128,11 +126,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function avatar(): BelongsTo
-    {
-        return $this->belongsTo(FileUpload::class);
-    }
 
     public function userTransactions(): HasMany
     {

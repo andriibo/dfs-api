@@ -29,7 +29,7 @@ class ContestUserResource extends JsonResource
             'title' => $this->title,
             'userId' => $this->user_id,
             'username' => $this->user->username,
-            'avatar' => $this->user->avatar?->getFileUrl(),
+            'avatar' => $this->user->avatar,
             'budget' => $this->getBudget(),
             'date' => strtotime($this->created_at),
             'isWinner' => $this->is_winner,
