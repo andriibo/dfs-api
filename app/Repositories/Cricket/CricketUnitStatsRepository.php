@@ -14,9 +14,9 @@ class CricketUnitStatsRepository
     public function getUnitStatsByUnitId(int $unitId, ?int $limit = null): Collection
     {
         return CricketUnitStats::query()
-            ->join('cricket_game_schedule', 'game_schedule.id', '=', 'cricket_unit_stats.game_id')
+            ->join('cricket_game_schedule', 'game_schedule.id', '=', 'cricket_unit_stats.game_schedule_id')
             ->where('cricket_unit_stats.unit_id', $unitId)
-            ->whereNotNull('cricket_unit_stats.game_id')
+            ->whereNotNull('cricket_unit_stats.game_schedule_id')
             ->where('cricket_game_schedule.is_fake', IsFakeEnum::no)
             ->orderByDesc('game_schedule.game_date')
             ->limit($limit)
