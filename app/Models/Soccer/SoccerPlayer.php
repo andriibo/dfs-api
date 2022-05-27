@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int         $sport_id
  * @property string      $first_name
  * @property string      $last_name
- * @property null|string $photo_id
+ * @property null|string $photo
  * @property string      $injury_status
  * @property null|string $salary
  * @property null|string $auto_salary
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|SoccerPlayer whereId($value)
  * @method static Builder|SoccerPlayer whereInjuryStatus($value)
  * @method static Builder|SoccerPlayer whereLastName($value)
- * @method static Builder|SoccerPlayer wherePhotoId($value)
+ * @method static Builder|SoccerPlayer wherePhoto($value)
  * @method static Builder|SoccerPlayer whereSalary($value)
  * @method static Builder|SoccerPlayer whereSportId($value)
  * @method static Builder|SoccerPlayer whereTotalFantasyPoints($value)
