@@ -3,7 +3,6 @@
 namespace App\Http\Resources\ContestUnits;
 
 use App\Factories\SportConfigFactory;
-use App\Helpers\FileHelper;
 use App\Helpers\UnitStatsHelper;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
 use App\Http\Resources\Leagues\PositionResource;
@@ -52,7 +51,7 @@ class ContestUnitDetailsResource extends JsonResource
         return [
             'id' => $this->id,
             'fullname' => $unit->player->getFullName(),
-            'photo' => FileHelper::getPublicUrl($unit->player->photo),
+            'photo' => $unit->player->photo,
             'salary' => (float) $unit->player->salary,
             'totalFantasyPoints' => (float) $unit->player->total_fantasy_points,
             'totalFantasyPointsPerGame' => (float) $unit->player->total_fantasy_points_per_game,
