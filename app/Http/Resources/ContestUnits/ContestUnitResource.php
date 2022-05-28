@@ -3,6 +3,7 @@
 namespace App\Http\Resources\ContestUnits;
 
 use App\Factories\SportConfigFactory;
+use App\Helpers\FileHelper;
 use App\Http\Resources\Leagues\PositionResource;
 use App\Services\UnitService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -38,7 +39,7 @@ class ContestUnitResource extends JsonResource
             'salary' => (float) $this->salary,
             'score' => (float) $this->score,
             'fullname' => $unit->player->getFullName(),
-            'photo' => $unit->player->photo?->getFileUrl(),
+            'photo' => FileHelper::getPublicUrl($unit->player->photo),
             'teamId' => $this->team_id,
             'sportId' => $this->sport_id,
             'position' => new PositionResource($sportConfig->positions[$unit->position] ?? null),
