@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Laravel\Socialite\Facades\Socialite;
 
 /**
@@ -12,7 +12,13 @@ use Laravel\Socialite\Facades\Socialite;
  *     summary="Redirect to Provider",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/provider"),
- *     @OA\Response(response=200, description="Ok"),
+ *     @OA\Response(response=200, description="Ok",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="data",
+ *                 @OA\Property(property="targetUrl", type="string"),
+ *             )
+ *         )
+ *     ),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
@@ -20,8 +26,10 @@ use Laravel\Socialite\Facades\Socialite;
  */
 class ProviderRedirect extends Controller
 {
-    public function __invoke(string $provider): RedirectResponse
+    public function __invoke(string $provider): JsonResponse
     {
-        return Socialite::driver($provider)->stateless()->redirect();
+        $targetUrl = Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+
+        return response()->json(['data' => ['targetUrl' => $targetUrl]]);
     }
 }

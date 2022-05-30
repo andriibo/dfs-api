@@ -16,7 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="data", type="object",
+ *             @OA\Property(property="data",
  *                 @OA\Property(property="accessToken", type="string"),
  *                 @OA\Property(property="tokenType", type="string", example="bearer"),
  *                 @OA\Property(property="expiresIn", type="integer", example="3600")
