@@ -12,6 +12,7 @@ use Laravel\Socialite\Facades\Socialite;
  * @OA\Get(
  *     path="/auth/{provider}/callback",
  *     summary="Google Callback",
+ *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

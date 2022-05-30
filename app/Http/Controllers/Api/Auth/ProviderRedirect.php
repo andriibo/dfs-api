@@ -10,6 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
  * @OA\Get(
  *     path="/auth/{provider}/redirect",
  *     summary="Redirect to Provider",
+ *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok"),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
