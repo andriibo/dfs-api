@@ -37,6 +37,12 @@ namespace App\OA;
  *    in="path",
  *    @OA\Schema(type="string", example="12qs850keo23")
  * )
+ * @OA\Parameter(
+ *    name="provider",
+ *    required=true,
+ *    in="path",
+ *    @OA\Schema(type="string", enum={"google","facebook"})
+ * )
  */
 class ParametersOA
 {
