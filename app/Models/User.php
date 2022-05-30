@@ -58,7 +58,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
  * @method static Builder|User whereAccessToken($value)
- * @method static Builder|User whereAvatarId($value)
+ * @method static Builder|User whereAvatar($value)
  * @method static Builder|User whereAuthKey($value)
  * @method static Builder|User whereBalance($value)
  * @method static Builder|User whereCountryId($value)

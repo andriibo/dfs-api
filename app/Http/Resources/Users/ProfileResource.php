@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Users;
 
+use App\Helpers\FileHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -19,7 +20,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="languageId", type="integer", nullable=true, example="null"),
  *     @OA\Property(property="receiveNewsletters", type="integer", enum={0,1}),
  *     @OA\Property(property="receiveNotifications", type="integer", enum={0,1}),
- *     @OA\Property(property="avatarId", type="integer", nullable=true, example="null"),
+ *     @OA\Property(property="avatar", type="string", nullable=true, example="null"),
  *     @OA\Property(property="isEmailConfirmed", type="integer", enum={0,1}),
  *     @OA\Property(property="invitedByUser", type="integer", nullable=true, example="null"),
  *     @OA\Property(property="isSham", type="integer", enum={0,1}),
@@ -44,7 +45,7 @@ class ProfileResource extends JsonResource
             'languageId' => $this->language_id,
             'receiveNewsletters' => $this->receive_newsletters,
             'receiveNotifications' => $this->receive_notifications,
-            'avatarId' => $this->avatar_id,
+            'avatar' => FileHelper::getPublicUrl($this->avatar),
             'isEmailConfirmed' => $this->is_email_confirmed,
             'invitedByUser' => $this->invited_by_user,
             'isSham' => $this->is_sham,
