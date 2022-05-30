@@ -8,7 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 /**
  * @OA\Get(
- *     path="/auth/{provider}/redirect",
+ *     path="/auth/{provider}",
  *     summary="Redirect to Provider",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/provider"),
@@ -24,7 +24,7 @@ use Laravel\Socialite\Facades\Socialite;
  *     @OA\Response(response=500, ref="#/components/responses/500")
  * )
  */
-class ProviderRedirect extends Controller
+class Provider extends Controller
 {
     public function __invoke(string $provider): JsonResponse
     {

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Services\AuthService;
+use App\Services\SocialiteService;
 use Illuminate\Http\JsonResponse;
-use Laravel\Socialite\Facades\Socialite;
 
 /**
  * @OA\Get(
@@ -23,6 +22,7 @@ use Laravel\Socialite\Facades\Socialite;
  *             )
  *         )
  *     ),
+ *     @OA\Response(response=400, ref="#/components/responses/400"),
  *     @OA\Response(response=404, ref="#/components/responses/404"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
  *     @OA\Response(response=500, ref="#/components/responses/500")
@@ -30,16 +30,12 @@ use Laravel\Socialite\Facades\Socialite;
  */
 class ProviderCallback extends Controller
 {
-    public function __invoke(string $provider, AuthService $authService): JsonResponse
-    {
-        $googleUser = Socialite::driver($provider)->stateless()->user();
-
-        $user = User::updateOrCreate([
-            'username' => $googleUser->name,
-            'email' => $googleUser->email,
-        ]);
-
-        $token = auth()->login($user);
+    public function __invoke(
+        string $provider,
+        SocialiteService $socialiteService,
+        AuthService $authService
+    ): JsonResponse {
+        $token = $socialiteService->handle($provider);
 
         return response()->json(['data' => $authService->createNewToken($token)]);
     }

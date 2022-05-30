@@ -3,8 +3,8 @@
 use App\Http\Controllers\Api\Auth\ForgotPassword;
 use App\Http\Controllers\Api\Auth\Login;
 use App\Http\Controllers\Api\Auth\Logout;
+use App\Http\Controllers\Api\Auth\Provider;
 use App\Http\Controllers\Api\Auth\ProviderCallback;
-use App\Http\Controllers\Api\Auth\ProviderRedirect;
 use App\Http\Controllers\Api\Auth\RefreshToken;
 use App\Http\Controllers\Api\Auth\Register;
 use App\Http\Controllers\Api\Auth\ResetPassword;
@@ -58,8 +58,8 @@ Route::prefix('v1')->group(function () {
             Route::post('login', Login::class);
             Route::post('forgot/password', ForgotPassword::class);
             Route::post('reset/password', ResetPassword::class)->name('password.reset');
-            Route::get('{provider}/redirect', ProviderRedirect::class);
-            Route::get('{provider}/callback', ProviderCallback::class);
+            Route::get('{provider}', Provider::class)->where('provider', 'google|faceebok');
+            Route::get('{provider}/callback', ProviderCallback::class)->where('provider', 'google|faceebok');
         });
         Route::middleware(['signed'])->group(function (): void {
             Route::get('/email/verify/{id}/{hash}', VerifyEmail::class)->name('verification.verify');

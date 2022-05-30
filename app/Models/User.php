@@ -31,8 +31,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property null|string                                           $remember_token
  * @property string                                                $username
  * @property string                                                $fullname
- * @property int                                                   $status                  0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
- * @property null|int                                              $parent_affiliate_id     Refers to affiliate.id
+ * @property int                                                   $status                     0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
+ * @property null|int                                              $parent_affiliate_id        Refers to affiliate.id
  * @property Carbon                                                $updated_at
  * @property Carbon                                                $created_at
  * @property int                                                   $is_deleted
@@ -52,6 +52,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property null|int                                              $notifications_count
  * @property Collection|UserTransaction[]                          $userTransactions
  * @property null|int                                              $user_transactions_count
+ * @property Collection|UserSocialAccount[]                        $userSocialAccounts
+ * @property null|int                                              $user_social_accounts_count
  *
  * @method static UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
@@ -130,6 +132,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function userTransactions(): HasMany
     {
         return $this->hasMany(UserTransaction::class);
+    }
+
+    public function userSocialAccounts(): HasMany
+    {
+        return $this->hasMany(UserSocialAccount::class);
     }
 
     /**
