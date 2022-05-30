@@ -15,7 +15,7 @@ class UserRepository
         return User::findOrFail($id);
     }
 
-    public function getUserByEmail(string $email): User
+    public function getUserByEmail(string $email): ?User
     {
         return User::query()
             ->whereEmail($email)
