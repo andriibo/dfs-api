@@ -25,11 +25,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property int                                                   $id
  * @property string                                                $email
  * @property null|string                                           $email_verified_at
- * @property string                                                $password
+ * @property null|string                                           $password
  * @property string                                                $access_token
  * @property string                                                $auth_key
  * @property null|string                                           $remember_token
- * @property string                                                $username
+ * @property null|string                                           $username
  * @property string                                                $fullname
  * @property int                                                   $status                     0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
  * @property null|int                                              $parent_affiliate_id        Refers to affiliate.id
