@@ -22,6 +22,8 @@ class ProviderRedirect extends Controller
 {
     public function __invoke(string $provider): JsonResponse
     {
-        return Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+        $targetUrl = Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+
+        return response()->json(['data' => ['targetUrl' => $targetUrl]]);
     }
 }
