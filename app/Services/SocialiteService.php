@@ -52,12 +52,12 @@ class SocialiteService
 
             $file = FileHelper::createFromUrl($socialUser->getAvatar());
             $this->updateAvatarService->handle($user, $file);
-
-            $user->userSocialAccounts()->create([
-                'provider_id' => $socialUser->getId(),
-                'provider_name' => $provider,
-            ]);
         }
+
+        $user->userSocialAccounts()->create([
+            'provider_id' => $socialUser->getId(),
+            'provider_name' => $provider,
+        ]);
 
         return $user;
     }
