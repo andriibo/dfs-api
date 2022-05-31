@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
+use Laravel\Socialite\Facades\Socialite;
 use Tests\TestCase;
 
 /**
@@ -125,6 +127,41 @@ class AuthTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
         ]);
         $this->assertResponse($response);
+    }
+
+    public function testAuthProviderEndpoint(): void
+    {
+        $response = $this->getJson('/api/v1/auth/google');
+        $response->assertOk();
+        $response->assertSee('data');
+        $this->assertIsArray($response['data']);
+        $data = $response['data'];
+        $this->assertArrayHasKey('targetUrl', $data);
+    }
+
+    public function testAuthProviderCallbackEndpoint(): void
+    {
+        \Mockery::getConfiguration()->allowMockingNonExistentMethods();
+        $abstractUser = \Mockery::mock('Laravel\Socialite\Two\User');
+        $abstractUser->shouldReceive('getId')
+            ->andReturn(rand())
+            ->shouldReceive('getName')
+            ->andReturn(Str::random(10))
+            ->shouldReceive('getEmail')
+            ->andReturn(Str::random(10) . '@gmail.com')
+            ->shouldReceive('getNickname')
+            ->andReturn(Str::random(10))
+            ->shouldReceive('getAvatar')
+            ->andReturn('https://picsum.photos/200')
+        ;
+
+        $provider = \Mockery::mock('Laravel\Socialite\Contracts\Provider');
+        $provider->shouldReceive('stateless')->andReturn($provider);
+        $provider->shouldReceive('user')->andReturn($abstractUser);
+
+        Socialite::shouldReceive('driver')->with('google')->andReturn($provider);
+        $response = $this->getJson('/api/v1/auth/google/callback');
+        $this->assertResponseWithToken($response);
     }
 
     private function assertResponse(TestResponse $response): void
