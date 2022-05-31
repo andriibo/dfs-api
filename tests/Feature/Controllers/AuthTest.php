@@ -3,6 +3,8 @@
 namespace Tests\Feature\Controllers;
 
 use App\Events\UserActivatedEvent;
+use App\Events\UserOAuthActivatedEvent;
+use App\Listeners\SendEmailPasswordListener;
 use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
 use App\Models\User;
@@ -158,8 +160,13 @@ class AuthTest extends TestCase
         $provider = \Mockery::mock('Laravel\Socialite\Contracts\Provider');
         $provider->shouldReceive('stateless')->andReturn($provider);
         $provider->shouldReceive('user')->andReturn($abstractUser);
-
         Socialite::shouldReceive('driver')->with('google')->andReturn($provider);
+
+        Event::fake();
+        Event::assertListening(UserOAuthActivatedEvent::class, UserActivatedListener::class);
+        Event::assertListening(UserOAuthActivatedEvent::class, SendEmailPasswordListener::class);
+        Event::assertListening(UserOAuthActivatedEvent::class, SendEmailWelcomeListener::class);
+
         $response = $this->getJson('/api/v1/auth/google/callback');
         $this->assertResponseWithToken($response);
     }

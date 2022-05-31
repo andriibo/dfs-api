@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @OA\Post(
@@ -30,7 +31,7 @@ class Register extends Controller
     {
         $user = User::create(array_merge(
             $authRegisterRequest->validated(),
-            ['password' => bcrypt($authRegisterRequest->password)]
+            ['password' => Hash::make($authRegisterRequest->password)]
         ));
 
         event(new Registered($user));
