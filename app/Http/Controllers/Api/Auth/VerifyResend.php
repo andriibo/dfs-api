@@ -35,6 +35,11 @@ class VerifyResend extends Controller
     public function __invoke(VerifyResendRequest $verifyResendRequest, UserRepository $userRepository): JsonResponse
     {
         $user = $userRepository->getUserByEmail($verifyResendRequest->email);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], Response::HTTP_NOT_FOUND);
+        }
+
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Account already verified.'], Response::HTTP_FORBIDDEN);
         }

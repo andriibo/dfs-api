@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  * @property null|int                 $game_schedule_id
  * @property int                      $unit_id
  * @property null|int                 $team_id
- * @property array                    $raw_stats
+ * @property array                    $stats
  * @property null|Carbon              $created_at
  * @property null|Carbon              $updated_at
  * @property null|CricketGameSchedule $gameSchedule
@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereCreatedAt($value)
  * @method static Builder|CricketUnitStats whereGameScheduleId($value)
  * @method static Builder|CricketUnitStats whereId($value)
- * @method static Builder|CricketUnitStats whereRawStats($value)
+ * @method static Builder|CricketUnitStats whereStats($value)
  * @method static Builder|CricketUnitStats whereTeamId($value)
  * @method static Builder|CricketUnitStats whereUnitId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)
@@ -42,7 +42,7 @@ class CricketUnitStats extends Model
         'game_schedule_id',
         'unit_id',
         'team_id',
-        'raw_stats',
+        'stats',
     ];
 
     protected $casts = [

@@ -18,7 +18,7 @@ use Illuminate\Http\Response;
  *     @OA\RequestBody(ref="#/components/requestBodies/LoginRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="data", type="object",
+ *             @OA\Property(property="data",
  *                 @OA\Property(property="accessToken", type="string"),
  *                 @OA\Property(property="tokenType", type="string", example="bearer"),
  *                 @OA\Property(property="expiresIn", type="integer", example="3600")

@@ -15,14 +15,16 @@ class UserRepository
         return User::findOrFail($id);
     }
 
-    /**
-     * @throws ModelNotFoundException
-     */
-    public function getUserByEmail(string $email): User
+    public function getUserByEmail(string $email): ?User
     {
         return User::query()
             ->whereEmail($email)
-            ->firstOrFail()
+            ->first()
         ;
+    }
+
+    public function create(array $attributes = []): User
+    {
+        return User::create($attributes);
     }
 }
