@@ -13,6 +13,7 @@ class SendEmailPasswordListener
         $password = Str::random(8);
         $event->user->password = Hash::make($password);
         if ($event->user->save()) {
+            $event->user->markEmailAsVerified();
             $event->user->sendEmailPasswordNotification($password);
         }
     }
