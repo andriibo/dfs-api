@@ -9,7 +9,7 @@ use Laravel\Socialite\Facades\Socialite;
 /**
  * @OA\Get(
  *     path="/auth/{provider}",
- *     summary="Redirect to Provider",
+ *     summary="Redirect to OAuth Provider",
  *     tags={"Auth"},
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok",
