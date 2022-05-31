@@ -58,8 +58,8 @@ Route::prefix('v1')->group(function () {
             Route::post('login', Login::class);
             Route::post('forgot/password', ForgotPassword::class);
             Route::post('reset/password', ResetPassword::class)->name('password.reset');
-            Route::get('{provider}', Provider::class)->where('provider', 'google|faceebok');
-            Route::get('{provider}/callback', ProviderCallback::class)->where('provider', 'google|faceebok');
+            Route::get('{provider}', Provider::class)->where('provider', 'google|facebook');
+            Route::get('{provider}/callback', ProviderCallback::class)->where('provider', 'google|facebook');
         });
         Route::middleware(['signed'])->group(function (): void {
             Route::get('/email/verify/{id}/{hash}', VerifyEmail::class)->name('verification.verify');
