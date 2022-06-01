@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\UserTransactions\TypeEnum;
 use App\Models\Contests\ContestUser;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -75,6 +76,16 @@ class UserTransaction extends Model
     public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function scopeDateStart(Builder $query, ?string $date): Builder
+    {
+        return $query->where('updated_at', '>=', Carbon::parse($date));
+    }
+
+    public function scopeDateEnd(Builder $query, ?string $date): Builder
+    {
+        return $query->where('updated_at', '<=', Carbon::parse($date));
     }
 
     public function isTypeWithdraw(): bool

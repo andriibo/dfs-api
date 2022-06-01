@@ -8,7 +8,7 @@ namespace App\OA;
  *    in="query",
  *    style="deepObject",
  *    explode=true,
- *    @OA\Schema(type="object",
+ *    @OA\Schema(
  *       @OA\Property(property="number", type="integer", minimum=1, example="1"),
  *       @OA\Property(property="size", type="integer", minimum=1, maximum=100, example="10")
  *    )

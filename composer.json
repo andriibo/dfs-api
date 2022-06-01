@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-json-api-paginate": "^1.11",
+        "spatie/laravel-query-builder": "^5.0",
         "tymon/jwt-auth": "*"
     },
     "require-dev": {
