@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\UserActivatedEvent;
+use App\Events\UserOAuthActivatedEvent;
+use App\Listeners\SendEmailPasswordListener;
 use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
 use Illuminate\Auth\Events\Registered;
@@ -22,6 +24,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserActivatedEvent::class => [
             UserActivatedListener::class,
+            SendEmailWelcomeListener::class,
+        ],
+        UserOAuthActivatedEvent::class => [
+            UserActivatedListener::class,
+            SendEmailPasswordListener::class,
             SendEmailWelcomeListener::class,
         ],
     ];

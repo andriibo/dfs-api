@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Events\UserActivatedEvent;
+use App\Events\UserOAuthActivatedEvent;
 use App\Exceptions\SocialiteServiceException;
 use App\Helpers\FileHelper;
 use App\Models\User;
@@ -53,7 +53,7 @@ class SocialiteService
 
             $file = FileHelper::createFromUrl($socialUser->getAvatar());
             $this->updateAvatarService->handle($user, $file);
-            event(new UserActivatedEvent($user));
+            event(new UserOAuthActivatedEvent($user));
         }
 
         $user->userSocialAccounts()->create([
