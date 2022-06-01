@@ -23,6 +23,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *             @OA\Property(property="meta", ref="#/components/schemas/PaginationSchemaOA/properties/meta")
  *         )
  *     ),
+ *     @OA\Response(response=400, ref="#/components/responses/400"),
  *     @OA\Response(response=401, ref="#/components/responses/401"),
  *     @OA\Response(response=405, ref="#/components/responses/405"),
  *     @OA\Response(response=500, ref="#/components/responses/500")

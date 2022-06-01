@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Enums\UserTransactions\TypeEnum;
 use App\Models\UserTransaction;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserTransactionRepository
 {
@@ -34,7 +36,12 @@ class UserTransactionRepository
 
     public function getTransactionsByUserId(int $userId): LengthAwarePaginator
     {
-        return UserTransaction::query()
+        return QueryBuilder::for(UserTransaction::class)
+            ->allowedFilters([
+                'type',
+                AllowedFilter::scope('date_start'),
+                AllowedFilter::scope('date_end'),
+            ])
             ->where('user_id', $userId)
             ->orderByDesc('created_at')
             ->jsonPaginate()
