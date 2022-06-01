@@ -16,6 +16,13 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
+ *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
+ *        @OA\Schema(
+ *          @OA\Property(property="type", type="integer", example="4"),
+ *          @OA\Property(property="date_start", type="string", example="2022-02-24"),
+ *          @OA\Property(property="date_end", type="string", example="2022-02-27")
+ *        )
+ *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/TransactionResource")),
