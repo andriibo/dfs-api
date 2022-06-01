@@ -46,7 +46,7 @@ class CricketUnitStats extends Model
     ];
 
     protected $casts = [
-        'raw_stats' => 'array',
+        'stats' => 'array',
     ];
 
     public function gameSchedule(): BelongsTo
