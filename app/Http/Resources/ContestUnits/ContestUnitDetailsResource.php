@@ -53,7 +53,7 @@ class ContestUnitDetailsResource extends JsonResource
             'id' => $this->id,
             'fullname' => $unit->player->getFullName(),
             'photo' => FileHelper::getPublicUrl($unit->player->photo),
-            'salary' => (float) $this->salary,
+            'salary' => (float) $unit->player->salary,
             'totalFantasyPoints' => (float) $unit->player->total_fantasy_points,
             'totalFantasyPointsPerGame' => (float) $unit->player->total_fantasy_points_per_game,
             'sportId' => $this->sport_id,
