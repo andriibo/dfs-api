@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\ContestUsers;
 
+use App\Helpers\DateHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -13,7 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="username", type="string", example="fantasysports"),
  *     @OA\Property(property="avatar", type="string"),
  *     @OA\Property(property="budget", type="integer", example="1350"),
- *     @OA\Property(property="date", type="integer", example="1650112441"),
+ *     @OA\Property(property="date", type="integer", example="1650112441000"),
  *     @OA\Property(property="isWinner", type="integer", enum={0,1}),
  *     @OA\Property(property="place", type="integer", example="1"),
  *     @OA\Property(property="prize", type="number", format="double", example="140.56"),
@@ -31,7 +32,7 @@ class ContestUserResource extends JsonResource
             'username' => $this->user->username,
             'avatar' => $this->user->avatar,
             'budget' => $this->getBudget(),
-            'date' => strtotime($this->created_at),
+            'date' => DateHelper::dateFormatMs($this->created_at),
             'isWinner' => $this->is_winner,
             'place' => $this->place,
             'prize' => (float) $this->prize,
