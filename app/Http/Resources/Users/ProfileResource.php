@@ -21,7 +21,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="languageId", type="integer", nullable=true, example="null"),
  *     @OA\Property(property="receiveNewsletters", type="integer", enum={0,1}),
  *     @OA\Property(property="receiveNotifications", type="integer", enum={0,1}),
- *     @OA\Property(property="avatar", type="string", nullable=true, example="null"),
+ *     @OA\Property(property="avatar", type="string", nullable=true, example=null),
  *     @OA\Property(property="isEmailConfirmed", type="integer", enum={0,1}),
  *     @OA\Property(property="invitedByUser", type="integer", nullable=true, example="null"),
  *     @OA\Property(property="isSham", type="integer", enum={0,1}),
