@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Contests;
 
+use App\Helpers\DateHelper;
 use App\Http\Resources\ContestUsers\ContestUserResource;
 use App\Http\Resources\Leagues\LeagueResource;
 use App\Services\ContestService;
@@ -20,8 +21,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     @OA\Property(property="maxEntries", type="integer", example="12"),
  *     @OA\Property(property="maxUsers", type="integer", example="12"),
  *     @OA\Property(property="minUsers", type="integer", example="1"),
- *     @OA\Property(property="startDate", type="integer", example="1650112441"),
- *     @OA\Property(property="endDate", type="integer", example="1650122541"),
+ *     @OA\Property(property="startDate", type="integer", example="1650112441000"),
+ *     @OA\Property(property="endDate", type="integer", example="1650122541000"),
  *     @OA\Property(property="details", type="string"),
  *     @OA\Property(property="entryFee", type="number", format="double", example="11.87"),
  *     @OA\Property(property="salaryCap", type="integer", example="7000"),
@@ -51,8 +52,8 @@ class ContestResource extends JsonResource
             'maxEntries' => $this->entry_limit,
             'maxUsers' => $this->max_users,
             'minUsers' => $this->min_users,
-            'startDate' => strtotime($this->start_date),
-            'endDate' => strtotime($this->end_date),
+            'startDate' => DateHelper::dateFormatMs($this->start_date),
+            'endDate' => DateHelper::dateFormatMs($this->end_date),
             'details' => $this->details,
             'entryFee' => (float) $this->entry_fee,
             'salaryCap' => $this->salary_cap,
