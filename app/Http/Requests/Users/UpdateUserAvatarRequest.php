@@ -21,7 +21,7 @@ class UpdateUserAvatarRequest extends AbstractFormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|mimes:png,jpg,gif|max:10485760',
+            'image' => 'required|mimes:png,jpg,gif,svg|max:10485760',
         ];
     }
 }
