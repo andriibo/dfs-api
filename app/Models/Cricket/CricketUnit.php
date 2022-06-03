@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property null|string                   $position
  * @property null|string                   $salary
  * @property null|string                   $auto_salary
- * @property null|string                   $total_fantasy_points
- * @property null|string                   $total_fantasy_points_per_game
+ * @property null|string                   $fantasy_points
+ * @property null|string                   $fantasy_points_per_game
  * @property CricketPlayer                 $player
  * @property CricketTeam                   $team
  * @property null|CricketUnitStats         $totalUnitStats
@@ -30,13 +30,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|CricketUnit newQuery()
  * @method static Builder|CricketUnit query()
  * @method static Builder|CricketUnit whereAutoSalary($value)
+ * @method static Builder|CricketUnit whereFantasyPoints($value)
+ * @method static Builder|CricketUnit whereFantasyPointsPerGame($value)
  * @method static Builder|CricketUnit whereId($value)
  * @method static Builder|CricketUnit wherePosition($value)
  * @method static Builder|CricketUnit wherePlayerId($value)
  * @method static Builder|CricketUnit whereSalary($value)
  * @method static Builder|CricketUnit whereTeamId($value)
- * @method static Builder|CricketUnit whereTotalFantasyPoints($value)
- * @method static Builder|CricketUnit whereTotalFantasyPointsPerGame($value)
  * @mixin Eloquent
  */
 class CricketUnit extends Model
@@ -51,8 +51,8 @@ class CricketUnit extends Model
         'position',
         'salary',
         'auto_salary',
-        'total_fantasy_points',
-        'total_fantasy_points_per_game',
+        'fantasy_points',
+        'fantasy_points_per_game',
     ];
 
     public function team(): BelongsTo
