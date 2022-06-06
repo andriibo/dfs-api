@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\UserTransactions\TypeEnum;
 use App\Models\UserTransaction;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -15,7 +16,7 @@ class UserTransactionRepository
         return UserTransaction::query()
             ->where('user_id', $userId)
             ->where('type', TypeEnum::dailyBonus)
-            ->whereDay('created_at', date('d'))
+            ->where('created_at', Carbon::today())
             ->first()
             ;
     }
