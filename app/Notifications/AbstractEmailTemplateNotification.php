@@ -4,9 +4,10 @@ namespace App\Notifications;
 
 use App\Repositories\EmailTemplateRepository;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-abstract class AbstractEmailTemplateNotification
+abstract class AbstractEmailTemplateNotification extends Notification
 {
     protected string $templateName;
 
