@@ -16,7 +16,7 @@ class UserTransactionRepository
         return UserTransaction::query()
             ->where('user_id', $userId)
             ->where('type', TypeEnum::dailyBonus)
-            ->where('created_at', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->first()
             ;
     }
