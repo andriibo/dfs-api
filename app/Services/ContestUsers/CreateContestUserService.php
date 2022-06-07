@@ -3,8 +3,12 @@
 namespace App\Services\ContestUsers;
 
 use App\Calculators\PrizeBankCalculator;
+use App\Enums\UserTransactions\StatusEnum;
+use App\Enums\UserTransactions\TypeEnum;
 use App\Models\Contests\Contest;
+use App\Models\Contests\ContestUser;
 use App\Repositories\ContestUserRepository;
+use App\Repositories\UserTransactionRepository;
 use App\Services\ContestUserUnits\CreateContestUserUnitsService;
 use App\Services\SitePreferenceService;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +19,8 @@ class CreateContestUserService
         private readonly ContestUserRepository $contestUserRepository,
         private readonly CreateContestUserUnitsService $createContestUserUnitsService,
         private readonly SitePreferenceService $sitePreferenceService,
-        private readonly PrizeBankCalculator $prizeBankCalculator
+        private readonly PrizeBankCalculator $prizeBankCalculator,
+        private readonly UserTransactionRepository $userTransactionRepository
     ) {
     }
 
@@ -33,6 +38,7 @@ class CreateContestUserService
             ]);
 
             $this->createContestUserUnitsService->handle($contestUser, $units);
+            $this->enterContestTransaction($contestUser);
             $this->updatePrizeBank($contest, $contestUsersCount);
             DB::commit();
         } catch (\Throwable $e) {
@@ -48,5 +54,16 @@ class CreateContestUserService
         $prizeBank = $this->prizeBankCalculator->handle($contest, $contestUsersCount, $fee);
         $contest->prize_bank = $prizeBank;
         $contest->save();
+    }
+
+    private function enterContestTransaction(ContestUser $contestUser): void
+    {
+        $this->userTransactionRepository->create([
+            'user_id' => $contestUser->user_id,
+            'subject_id' => $contestUser->id,
+            'amount' => $contestUser->contest->entry_fee,
+            'type' => TypeEnum::contestEnter,
+            'status' => StatusEnum::success,
+        ]);
     }
 }
