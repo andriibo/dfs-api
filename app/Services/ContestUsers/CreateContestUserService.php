@@ -11,6 +11,7 @@ use App\Repositories\ContestUserRepository;
 use App\Repositories\UserTransactionRepository;
 use App\Services\ContestUserUnits\CreateContestUserUnitsService;
 use App\Services\SitePreferenceService;
+use App\Services\Users\UpdateBalanceService;
 use Illuminate\Support\Facades\DB;
 
 class CreateContestUserService
@@ -20,7 +21,8 @@ class CreateContestUserService
         private readonly CreateContestUserUnitsService $createContestUserUnitsService,
         private readonly SitePreferenceService $sitePreferenceService,
         private readonly PrizeBankCalculator $prizeBankCalculator,
-        private readonly UserTransactionRepository $userTransactionRepository
+        private readonly UserTransactionRepository $userTransactionRepository,
+        private readonly UpdateBalanceService $updateBalanceService
     ) {
     }
 
@@ -58,12 +60,16 @@ class CreateContestUserService
 
     private function enterContestTransaction(ContestUser $contestUser): void
     {
-        $this->userTransactionRepository->create([
+        $userTransaction = $this->userTransactionRepository->create([
             'user_id' => $contestUser->user_id,
             'subject_id' => $contestUser->id,
             'amount' => $contestUser->contest->entry_fee,
             'type' => TypeEnum::contestEnter,
             'status' => StatusEnum::success,
         ]);
+
+        if ($userTransaction) {
+            $this->updateBalanceService->updateBalance($contestUser->user, -$userTransaction->amount);
+        }
     }
 }
