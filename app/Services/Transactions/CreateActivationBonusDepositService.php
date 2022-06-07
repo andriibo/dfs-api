@@ -6,12 +6,14 @@ use App\Enums\UserTransactions\StatusEnum;
 use App\Enums\UserTransactions\TypeEnum;
 use App\Repositories\UserTransactionRepository;
 use App\Services\SitePreferenceService;
+use App\Services\Users\UpdateBalanceService;
 
 class CreateActivationBonusDepositService
 {
     public function __construct(
         private readonly UserTransactionRepository $userTransactionRepository,
-        private readonly SitePreferenceService $sitePreferenceService
+        private readonly SitePreferenceService $sitePreferenceService,
+        private readonly UpdateBalanceService $updateBalanceService
     ) {
     }
 
@@ -25,11 +27,16 @@ class CreateActivationBonusDepositService
 
         $activationBonusDeposit = $this->sitePreferenceService->getSettingByName('activation_bonus_deposit');
 
-        $this->userTransactionRepository->create([
+        $userTransaction = $this->userTransactionRepository->create([
             'user_id' => $userId,
+            'subject_id' => $userId,
             'amount' => $activationBonusDeposit,
             'type' => TypeEnum::activationBonus,
             'status' => StatusEnum::approved,
         ]);
+
+        if ($userTransaction) {
+            $this->updateBalanceService->updateBalance($userTransaction->user, $userTransaction->amount);
+        }
     }
 }

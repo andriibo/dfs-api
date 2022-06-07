@@ -12,7 +12,7 @@ class UpdateBalanceService
     public function updateBalance(Authenticatable $user, float $amount): bool
     {
         if (!($user->balance + $amount) < 0) {
-            throw new \InvalidArgumentException('Balance cannot be less than 0');
+            throw new \InvalidArgumentException('Balance cannot be less than 0.');
         }
 
         $user->balance += $amount;
