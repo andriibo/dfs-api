@@ -22,7 +22,7 @@ trait ContestPrizePlacesCalculator
                 $model->prize = Arr::get($item, 'prize');
                 $item = $model;
             }
-            if ($contest->is_prize_in_percents) {
+            if ($contest->isPrizeBankInPercents()) {
                 $item->prize = round($contest->prize_bank / 100 * $item->prize, 2);
                 $item->voucher = round($contest->prize_bank / 100 * $item->voucher, 2);
             }

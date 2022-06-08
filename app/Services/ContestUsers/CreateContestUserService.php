@@ -40,7 +40,9 @@ class CreateContestUserService
             ]);
 
             $this->createContestUserUnitsService->handle($contestUser, $units);
-            $this->enterContestTransaction($contestUser);
+            if ($contestUser->contest->entry_fee > 0) {
+                $this->enterContestTransaction($contestUser);
+            }
             $this->updatePrizeBank($contest, $contestUsersCount);
             DB::commit();
         } catch (\Throwable $e) {

@@ -39,7 +39,7 @@ class ContestService
             return round($contest->prize_bank, 2);
         }
 
-        if ($contest->is_prize_in_percents) {
+        if ($contest->isPrizeBankInPercents()) {
             $bank = $contest->max_users * $contest->entry_fee;
             $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);
 

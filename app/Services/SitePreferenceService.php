@@ -11,13 +11,13 @@ class SitePreferenceService
     {
     }
 
-    public function getSiteFee(int|float|null $companyTake, string $type): int|float|string
+    public function getSiteFee(int|float|null $companyTake, string $contestType): int|float|string
     {
         if (null !== $companyTake) {
             return $companyTake;
         }
 
-        return (TypeEnum::user->name === $type)
+        return (TypeEnum::user->name === $contestType)
             ? $this->getSettingByName('user_contest_site_fee')
             : $this->getSettingByName('site_fee');
     }
