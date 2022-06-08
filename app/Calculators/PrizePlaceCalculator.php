@@ -2,7 +2,6 @@
 
 namespace App\Calculators;
 
-use App\Enums\Contests\PrizeBankTypeEnum;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use Illuminate\Support\Collection;
@@ -72,19 +71,21 @@ class PrizePlaceCalculator
     private function normalizePrizePlaces(Contest $contest): array
     {
         $prizePlaces = $this->calcPrizePlacesForContest($contest);
-        if ($contest->prize_bank_type == PrizeBankTypeEnum::topThree->value) {
+        $prize = $prizePlaces[0] ?? null;
+        if ($contest->isPrizeBankTypeTopThree()) {
             $topThree = [];
             foreach ($this->prizePercents as $prizePercent) {
                 $prizePlace = new PrizePlace();
                 $prizePlace->places = 1;
-                $prizePlace->prize = round($prizePlace->prize / 100 * $prizePercent, 2);
-                $prizePlace->voucher = round($prizePlace->voucher / 100 * $prizePercent, 2);
+                $prizePlace->prize = round($prize->prize / 100 * $prizePercent, 2);
+                $prizePlace->voucher = round($prize->voucher / 100 * $prizePercent, 2);
+
                 $topThree[] = $prizePlace;
             }
             $prizePlaces = $topThree;
-        } elseif ($contest->prize_bank_type == PrizeBankTypeEnum::fiftyFifty->value && isset($prizePlaces[0])) {
+        } elseif ($contest->isPrizeBankTypeFiftyFifty() && !is_null($prize)) {
             $places = $contest->contestUsers()->max('place');
-            $prizePlaces[0]->places = $places > 1 ? floor($places / 2) : $places;
+            $prize->places = $places > 1 ? floor($places / 2) : $places;
         }
 
         return $prizePlaces;
