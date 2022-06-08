@@ -35,14 +35,18 @@ class ContestService
 
     public function getMaxPrizeBank(Contest $contest): float
     {
-        if (null !== $contest->custom_prize_bank || $contest->is_prize_in_percents == 0) {
+        if (null !== $contest->custom_prize_bank) {
             return round($contest->prize_bank, 2);
         }
 
-        $bank = $contest->max_users * $contest->entry_fee;
-        $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);
+        if ($contest->is_prize_in_percents) {
+            $bank = $contest->max_users * $contest->entry_fee;
+            $fee = $this->sitePreferenceService->getSiteFee($contest->company_take, $contest->type);
 
-        return $bank - $bank / 100 * $fee;
+            return $bank - $bank / 100 * $fee;
+        }
+
+        return round($contest->prize_bank, 2);
     }
 
     /**
