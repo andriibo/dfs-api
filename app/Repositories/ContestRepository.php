@@ -21,7 +21,7 @@ class ContestRepository
     public function getContestsLobby(): LengthAwarePaginator
     {
         return Contest::query()
-            ->whereIn('status', [StatusEnum::ready, StatusEnum::started])
+            ->where('status', StatusEnum::ready)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
