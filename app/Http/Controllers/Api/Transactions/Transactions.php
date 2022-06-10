@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Transactions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Transactions\TransactionResource;
 use App\Repositories\UserTransactionRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -38,7 +39,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Transactions extends Controller
 {
-    public function __invoke(UserTransactionRepository $userTransactionRepository): AnonymousResourceCollection
+    public function __invoke(GetCollectionQuery $getCollectionQuery, UserTransactionRepository $userTransactionRepository): AnonymousResourceCollection
     {
         $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id);
 

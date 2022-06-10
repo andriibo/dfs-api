@@ -4,16 +4,6 @@ namespace App\OA;
 
 /**
  * @OA\Parameter(
- *    name="page",
- *    in="query",
- *    style="deepObject",
- *    explode=true,
- *    @OA\Schema(
- *       @OA\Property(property="number", type="integer", minimum=1, example="1"),
- *       @OA\Property(property="size", type="integer", minimum=1, maximum=100, example="10")
- *    )
- * ),
- * @OA\Parameter(
  *    name="Accept",
  *    in="header",
  *    description="Accept header",

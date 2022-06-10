@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Contests\ContestResource;
 use App\Repositories\ContestRepository;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -30,7 +31,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class History extends Controller
 {
-    public function __invoke(ContestRepository $contestRepository): ResourceCollection
+    public function __invoke(GetCollectionQuery $getCollectionQuery, ContestRepository $contestRepository): ResourceCollection
     {
         $contests = $contestRepository->getContestsHistory(auth()->user()->id);
 

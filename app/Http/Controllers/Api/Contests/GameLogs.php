@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Contests;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\GameLogs\GameLogResource;
 use App\Repositories\ContestRepository;
 use App\Services\GameLogService;
@@ -38,6 +39,7 @@ class GameLogs extends Controller
 {
     public function __invoke(
         int $contestId,
+        GetCollectionQuery $getCollectionQuery,
         GameLogService $gameLogService,
         ContestRepository $contestRepository,
         UserInContestSpecification $userInContestSpecification
