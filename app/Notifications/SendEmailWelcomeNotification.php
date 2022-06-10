@@ -6,7 +6,7 @@ class SendEmailWelcomeNotification extends AbstractEmailTemplateNotification
 {
     protected string $templateName = 'welcomeNewUser';
 
-    public function __construct(private readonly string $username)
+    public function __construct(private readonly ?string $username)
     {
         parent::__construct();
     }
