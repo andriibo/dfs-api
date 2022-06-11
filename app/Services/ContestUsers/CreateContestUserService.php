@@ -5,6 +5,7 @@ namespace App\Services\ContestUsers;
 use App\Calculators\PrizeBankCalculator;
 use App\Enums\UserTransactions\StatusEnum;
 use App\Enums\UserTransactions\TypeEnum;
+use App\Events\ContestUpdatedEvent;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUser;
 use App\Repositories\ContestUserRepository;
@@ -44,6 +45,7 @@ class CreateContestUserService
                 $this->enterContestTransaction($contestUser);
             }
             $this->updatePrizeBank($contest, $contestUsersCount);
+            event(new ContestUpdatedEvent($contest));
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();
