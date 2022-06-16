@@ -52,6 +52,12 @@ class Login extends Controller
             ], Response::HTTP_FORBIDDEN);
         }
 
+        if (!auth()->user()->isActive()) {
+            return response()->json([
+                'error' => 'Your account has been blocked.',
+            ], Response::HTTP_FORBIDDEN);
+        }
+
         return response()->json(['data' => $authService->createNewToken($token)]);
     }
 }

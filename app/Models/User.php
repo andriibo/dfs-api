@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Users\StatusEnum;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\SendEmailPasswordNotification;
 use App\Notifications\SendEmailWelcomeNotification;
@@ -138,6 +139,19 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function userSocialAccounts(): HasMany
     {
         return $this->hasMany(UserSocialAccount::class);
+    }
+
+    public function markEmailAsVerified(): bool
+    {
+        return $this->forceFill([
+            'email_verified_at' => $this->freshTimestamp(),
+            'status' => StatusEnum::active,
+        ])->save();
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status == StatusEnum::active->value;
     }
 
     /**
