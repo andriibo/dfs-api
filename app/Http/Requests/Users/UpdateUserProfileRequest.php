@@ -23,7 +23,7 @@ class UpdateUserProfileRequest extends AbstractFormRequest
         return [
             'email' => 'required|email|unique:user,id,' . $this->id . '|max:50',
             'username' => 'required|string|unique:user,id' . $this->id . '|between:2,50',
-            'dob' => 'required|date_format:Y-m-d',
+            'dob' => 'required|date_format:Y-m-d|before:-18 years',
             'fullname' => 'required|string|between:2,50',
         ];
     }
