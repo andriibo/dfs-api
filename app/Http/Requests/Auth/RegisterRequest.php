@@ -28,7 +28,7 @@ class RegisterRequest extends AbstractFormRequest
             'email' => 'required|email|unique:user|max:50',
             'password' => 'required|confirmed|string|min:6',
             'passwordConfirmation' => 'required',
-            'dob' => 'required|date_format:Y-m-d',
+            'dob' => 'required|date_format:Y-m-d|before:-18 years',
         ];
     }
 }
