@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ContestUpdatedEvent;
 use App\Events\UserActivatedEvent;
 use App\Events\UserOAuthActivatedEvent;
+use App\Listeners\ContestUpdatedListener;
 use App\Listeners\SendEmailPasswordListener;
 use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
@@ -30,6 +32,9 @@ class EventServiceProvider extends ServiceProvider
             UserActivatedListener::class,
             SendEmailPasswordListener::class,
             SendEmailWelcomeListener::class,
+        ],
+        ContestUpdatedEvent::class => [
+            ContestUpdatedListener::class,
         ],
     ];
 

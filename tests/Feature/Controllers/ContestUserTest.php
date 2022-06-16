@@ -2,10 +2,13 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Events\ContestUpdatedEvent;
+use App\Listeners\ContestUpdatedListener;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUser;
 use Database\Seeders\ContestSeeder;
 use Database\Seeders\SoccerLineupSeeder;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -56,6 +59,9 @@ class ContestUserTest extends TestCase
         foreach ($contest->contestUnits as $contestUnit) {
             $data['units'][] = ['id' => $contestUnit->id, 'position' => $contestUnit->soccerUnit->position];
         }
+
+        Event::fake();
+        Event::assertListening(ContestUpdatedEvent::class, ContestUpdatedListener::class);
 
         $response = $this->postJson('/api/v1/contest-users', $data, [
             'Authorization' => 'Bearer ' . $token,
