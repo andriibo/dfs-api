@@ -69,6 +69,7 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => $this->faker->dateTime(),
+                'status' => StatusEnum::active,
             ];
         });
     }
