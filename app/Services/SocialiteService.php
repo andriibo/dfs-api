@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\Users\StatusEnum;
 use App\Events\UserOAuthActivatedEvent;
 use App\Exceptions\SocialiteServiceException;
 use App\Helpers\FileHelper;
@@ -49,6 +50,7 @@ class SocialiteService
                 'email' => $socialUser->getEmail(),
                 'username' => $socialUser->getNickname(),
                 'fullname' => $socialUser->getName(),
+                'status' => StatusEnum::active,
             ]);
 
             $file = FileHelper::createFromUrl($socialUser->getAvatar());
