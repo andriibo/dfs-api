@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Enums\Contests\StatusEnum;
+use App\Enums\Contests\SuspendedEnum;
 use App\Models\Contests\Contest;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,6 +23,7 @@ class ContestRepository
     {
         return Contest::query()
             ->where('status', StatusEnum::ready)
+            ->where('suspended', SuspendedEnum::no)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
@@ -31,6 +33,7 @@ class ContestRepository
     {
         return Contest::query()
             ->where('status', StatusEnum::ready)
+            ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
@@ -43,6 +46,7 @@ class ContestRepository
     {
         return Contest::query()
             ->where('status', StatusEnum::started)
+            ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
@@ -55,6 +59,7 @@ class ContestRepository
     {
         return Contest::query()
             ->where('status', StatusEnum::closed)
+            ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
