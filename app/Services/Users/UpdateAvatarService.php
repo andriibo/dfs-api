@@ -15,7 +15,7 @@ class UpdateAvatarService
             $storage->delete($user->avatar);
         }
 
-        $name = time() . $file->getClientOriginalName();
+        $name = md5(time() . rand(0, 1000)) . $file->getClientOriginalName();
         $filePath = 'users/' . $name;
         if ($storage->put($filePath, file_get_contents($file))) {
             $user->avatar = $filePath;
