@@ -38,7 +38,7 @@ class ProfileResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'fullname' => $this->fullname,
-            'balance' => $this->balance,
+            'balance' => (float) $this->balance,
             'dob' => !is_null($this->dob) ? DateHelper::dateFormatMs($this->dob) : null,
             'countryId' => $this->country_id,
             'favTeamId' => $this->fav_team_id,

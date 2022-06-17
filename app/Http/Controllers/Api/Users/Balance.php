@@ -29,6 +29,6 @@ class Balance extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        return response()->json(['data' => ['balance' => auth()->user()->balance]]);
+        return response()->json(['data' => ['balance' => (float) auth()->user()->balance]]);
     }
 }
