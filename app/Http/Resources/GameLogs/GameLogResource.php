@@ -3,6 +3,7 @@
 namespace App\Http\Resources\GameLogs;
 
 use App\Helpers\ActionPointHelper;
+use App\Services\GetContestActionPointService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -18,11 +19,16 @@ class GameLogResource extends JsonResource
 {
     public function toArray($request): array
     {
+        /* @var $getContestActionPointService GetContestActionPointService */
+        $getContestActionPointService = resolve(GetContestActionPointService::class);
+        $contestId = $request->route('id');
+        $actionPoint = $getContestActionPointService->handle($contestId, $this->action_point_id);
+
         return [
             'playerId' => $this->unit->player->id,
             'playerName' => $this->unit->player->getFullName(),
-            'score' => ActionPointHelper::getScore($this->value, $this->actionPoint->values, $this->unit->position),
-            'message' => $this->actionPoint->game_log_template,
+            'score' => ActionPointHelper::getScore($this->value, $actionPoint->values, $this->unit->position),
+            'message' => $actionPoint->game_log_template,
         ];
     }
 }

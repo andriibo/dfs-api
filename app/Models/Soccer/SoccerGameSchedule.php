@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Soccer\SoccerGameSchedule.
@@ -25,12 +26,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int                        $is_data_confirmed
  * @property int                        $home_team_score
  * @property int                        $away_team_score
- * @property string                     $date_updated
  * @property int                        $is_fake
  * @property int                        $is_salary_available
  * @property null|string                $starting_lineup
  * @property string                     $feed_type
  * @property int                        $latest_game_log_id
+ * @property null|Carbon                $updated_at
+ * @property null|Carbon                $created_at
  * @property SoccerTeam                 $awayTeam
  * @property SoccerTeam                 $homeTeam
  * @property League                     $league
@@ -43,7 +45,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|SoccerGameSchedule query()
  * @method static Builder|SoccerGameSchedule whereAwayTeamId($value)
  * @method static Builder|SoccerGameSchedule whereAwayTeamScore($value)
- * @method static Builder|SoccerGameSchedule whereDateUpdated($value)
+ * @method static Builder|SoccerGameSchedule whereCreatedAt($value)
  * @method static Builder|SoccerGameSchedule whereFeedId($value)
  * @method static Builder|SoccerGameSchedule whereFeedType($value)
  * @method static Builder|SoccerGameSchedule whereGameDate($value)
@@ -57,13 +59,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|SoccerGameSchedule whereLatestGameLogId($value)
  * @method static Builder|SoccerGameSchedule whereLeagueId($value)
  * @method static Builder|SoccerGameSchedule whereStartingLineup($value)
+ * @method static Builder|SoccerGameSchedule whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class SoccerGameSchedule extends Model
 {
     use HasFactory;
-
-    public $timestamps = false;
 
     protected $table = 'game_schedule';
 
@@ -77,7 +78,6 @@ class SoccerGameSchedule extends Model
         'is_data_confirmed',
         'home_team_score',
         'away_team_score',
-        'date_updated',
         'is_fake',
         'is_salary_available',
         'starting_lineup',
