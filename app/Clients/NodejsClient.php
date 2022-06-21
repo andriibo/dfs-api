@@ -35,6 +35,50 @@ class NodejsClient
         $this->sendRequest($url, $formParams);
     }
 
+    public function sendGameLogsUpdatePush(array $data, int $contestId): void
+    {
+        $url = $this->apiUrl . '/contest/' . $contestId;
+        $formParams = [
+            'type' => self::CONTEST_GAME_LOG_UPDATED,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendContestUnitsUpdatePush(array $data, int $contestId): void
+    {
+        $url = $this->apiUrl . '/contest/' . $contestId;
+        $formParams = [
+            'type' => self::CONTEST_UNITS_UPDATED,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendContestUsersUpdatePush(array $data, int $contestId): void
+    {
+        $url = $this->apiUrl . '/contest/' . $contestId;
+        $formParams = [
+            'type' => self::CONTEST_USERS_UPDATED,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendGameSchedulesUpdatePush(array $data, int $contestId): void
+    {
+        $url = $this->apiUrl . '/contest/' . $contestId;
+        $formParams = [
+            'type' => self::CONTEST_GAMES_UPDATED,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
     /**
      * @throws NodejsClientException
      */

@@ -61,6 +61,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Static Pages",
  *     description="API Endpoints of Static Pages"
  * )
+ * @OA\Tag(
+ *     name="Sockets",
+ *     description="API Endpoints of Sockets"
+ * )
  */
 class Controller extends BaseController
 {
