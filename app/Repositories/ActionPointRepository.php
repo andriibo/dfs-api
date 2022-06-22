@@ -12,7 +12,7 @@ class ActionPointRepository
     /**
      * @return ActionPoint[]|Collection
      */
-    public function getActionPoints(int $contestId)
+    public function getActionPoints(int $contestId): Collection
     {
         return ActionPoint::query()
             ->select('action_points.*', 'contest_action_points.values as values')
