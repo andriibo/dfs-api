@@ -6,8 +6,8 @@ use App\Exceptions\UnitStatsServiceException;
 use App\Models\Contests\ContestUnit;
 use App\Repositories\Cricket\CricketUnitStatsRepository;
 use App\Repositories\Soccer\SoccerUnitStatsRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 
 class UnitStatsService
 {

@@ -8,8 +8,8 @@ use App\Models\Cricket\CricketGameSchedule;
 use App\Models\Soccer\SoccerGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
 use App\Repositories\Soccer\SoccerGameScheduleRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 
 class GameScheduleService
 {

@@ -4,7 +4,7 @@ namespace App\Repositories\Soccer;
 
 use App\Enums\IsFakeEnum;
 use App\Models\Soccer\SoccerUnitStats;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class SoccerUnitStatsRepository
 {

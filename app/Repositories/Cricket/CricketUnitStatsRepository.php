@@ -4,7 +4,7 @@ namespace App\Repositories\Cricket;
 
 use App\Enums\IsFakeEnum;
 use App\Models\Cricket\CricketUnitStats;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class CricketUnitStatsRepository
 {

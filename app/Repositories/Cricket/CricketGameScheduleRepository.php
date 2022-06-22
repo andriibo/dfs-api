@@ -5,7 +5,7 @@ namespace App\Repositories\Cricket;
 use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketGameSchedule;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CricketGameScheduleRepository

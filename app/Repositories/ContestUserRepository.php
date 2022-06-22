@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Contests\ContestUser;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 
 class ContestUserRepository
 {
