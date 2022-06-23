@@ -2,21 +2,27 @@
 
 namespace App\Services\Users;
 
+use App\Events\UserBalanceUpdatedEvent;
+use App\Exceptions\UpdateBalanceServiceException;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class UpdateBalanceService
 {
     /**
-     * @throws \InvalidArgumentException
+     * @throws UpdateBalanceServiceException
      */
-    public function updateBalance(Authenticatable $user, float $amount): bool
+    public function updateBalance(Authenticatable $user, float $amount): void
     {
         if (!($user->balance + $amount) < 0) {
-            throw new \InvalidArgumentException('Balance cannot be less than 0.');
+            throw new UpdateBalanceServiceException('Balance cannot be less than 0.');
         }
 
         $user->balance += $amount;
 
-        return $user->save();
+        if (!$user->save()) {
+            throw new UpdateBalanceServiceException('Can\'t update user balance');
+        }
+
+        event(new UserBalanceUpdatedEvent($user->id));
     }
 }

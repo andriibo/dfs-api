@@ -3,7 +3,9 @@
 namespace Tests\Feature\Controllers;
 
 use App\Events\ContestUpdatedEvent;
+use App\Events\UserBalanceUpdatedEvent;
 use App\Listeners\ContestUpdatedListener;
+use App\Listeners\UserBalanceUpdatedListener;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUser;
 use Database\Seeders\ContestSeeder;
@@ -62,6 +64,7 @@ class ContestUserTest extends TestCase
 
         Event::fake();
         Event::assertListening(ContestUpdatedEvent::class, ContestUpdatedListener::class);
+        Event::assertListening(UserBalanceUpdatedEvent::class, UserBalanceUpdatedListener::class);
 
         $response = $this->postJson('/api/v1/contest-users', $data, [
             'Authorization' => 'Bearer ' . $token,

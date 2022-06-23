@@ -14,6 +14,7 @@ class NodejsClient
     private const CONTEST_GAMES_UPDATED = 'game-update';
     private const CONTEST_USERS_UPDATED = 'users-update';
     private const CONTEST_UNITS_UPDATED = 'units-update';
+    private const USER_BALANCE_UPDATED = 'user-balance-updated';
 
     private ?string $apiUrl;
     private Client $client;
@@ -41,6 +42,16 @@ class NodejsClient
         $formParams = [
             'type' => self::CONTEST_GAME_LOG_UPDATED,
             'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendUserBalanceUpdatePush(int $userId): void
+    {
+        $url = $this->apiUrl . '/users/' . $userId;
+        $formParams = [
+            'type' => self::USER_BALANCE_UPDATED,
         ];
 
         $this->sendRequest($url, $formParams);
