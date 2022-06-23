@@ -12,6 +12,6 @@ class UserBalanceUpdatedListener
 
     public function handle(UserBalanceUpdatedEvent $event): void
     {
-        PushUserBalanceUpdatedJob::dispatch($event->userId);
+        PushUserBalanceUpdatedJob::dispatch($event->user);
     }
 }

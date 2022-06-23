@@ -3,7 +3,9 @@
 namespace App\Jobs;
 
 use App\Clients\NodejsClient;
+use App\Http\Resources\Users\BalanceResource;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,15 +16,16 @@ class PushUserBalanceUpdatedJob implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
 
-    public function __construct(private readonly int $userId)
+    public function __construct(private readonly Authenticatable $user)
     {
     }
 
     public function handle(): void
     {
         try {
+            $resource = new BalanceResource($this->user);
             $nodejsClient = new NodejsClient();
-            $nodejsClient->sendUserBalanceUpdatePush($this->userId);
+            $nodejsClient->sendUserBalanceUpdatePush($resource->jsonSerialize(), $this->user->id);
         } catch (\Throwable $e) {
             throw $e;
         }

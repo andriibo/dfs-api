@@ -47,11 +47,12 @@ class NodejsClient
         $this->sendRequest($url, $formParams);
     }
 
-    public function sendUserBalanceUpdatePush(int $userId): void
+    public function sendUserBalanceUpdatePush(array $data, int $userId): void
     {
         $url = $this->apiUrl . '/users/' . $userId;
         $formParams = [
             'type' => self::USER_BALANCE_UPDATED,
+            'payload' => $data,
         ];
 
         $this->sendRequest($url, $formParams);
