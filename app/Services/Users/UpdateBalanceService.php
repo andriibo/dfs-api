@@ -23,6 +23,6 @@ class UpdateBalanceService
             throw new UpdateBalanceServiceException('Can\'t update user balance');
         }
 
-        event(new UserBalanceUpdatedEvent($user->id));
+        event(new UserBalanceUpdatedEvent($user));
     }
 }
