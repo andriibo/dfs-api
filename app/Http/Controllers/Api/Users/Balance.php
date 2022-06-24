@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Users\BalanceResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @OA\Get(
@@ -15,8 +16,8 @@ use Illuminate\Http\JsonResponse;
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
- *             @OA\Property(property="data",
- *                 @OA\Property(property="balance", type="number", format="double", example="100.23")
+ *             @OA\Property(property="data", type="array",
+ *                 @OA\Items(ref="#/components/schemas/BalanceResource")
  *             )
  *         )
  *     ),
@@ -27,8 +28,8 @@ use Illuminate\Http\JsonResponse;
  */
 class Balance extends Controller
 {
-    public function __invoke(): JsonResponse
+    public function __invoke(): JsonResource
     {
-        return response()->json(['data' => ['balance' => (float) auth()->user()->balance]]);
+        return new BalanceResource(auth()->user());
     }
 }
