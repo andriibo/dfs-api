@@ -8,6 +8,7 @@ services:
       - ./:/var/www/html
     external_links:
       - db
+
   queue:
     build: ./docker/php
     restart: always
