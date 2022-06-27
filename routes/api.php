@@ -99,13 +99,13 @@ Route::prefix('v1')->group(function () {
     Route::prefix('contests')->group(function () {
         Route::get('{id}', ContestShow::class)->where('id', '[0-9]+');
         Route::get('types', Types::class);
-        Route::get('lobby', Lobby::class);
+        Route::get('lobby', Lobby::class)->middleware('pagination.camelCase');
         Route::middleware('auth:api')->group(function (): void {
-            Route::get('upcoming', Upcoming::class);
-            Route::get('live', Live::class);
-            Route::get('history', History::class);
+            Route::get('upcoming', Upcoming::class)->middleware('pagination.camelCase');
+            Route::get('live', Live::class)->middleware('pagination.camelCase');
+            Route::get('history', History::class)->middleware('pagination.camelCase');
             Route::get('{id}/players', Players::class)->where('id', '[0-9]+');
-            Route::get('{id}/game-logs', GameLogs::class)->where('id', '[0-9]+');
+            Route::get('{id}/game-logs', GameLogs::class)->where('id', '[0-9]+')->middleware('pagination.camelCase');
         });
     });
 
@@ -142,7 +142,7 @@ Route::prefix('v1')->group(function () {
      * ########################
      */
     Route::prefix('transactions')->middleware('auth:api')->group(function (): void {
-        Route::get('', Transactions::class);
+        Route::get('', Transactions::class)->middleware('pagination.camelCase');
         Route::middleware('throttle:6,1')->get('daily-bonus', DailyBonus::class);
     });
 
