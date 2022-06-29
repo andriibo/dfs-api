@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Clients\NodejsClient;
-use App\Http\Resources\Contests\ContestResource;
+use App\Http\Resources\Contests\ContestDetailsResource;
 use App\Models\Contests\Contest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,7 +23,7 @@ class PushContestUpdatedJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            $resource = new ContestResource($this->contest);
+            $resource = new ContestDetailsResource($this->contest);
             $nodejsClient = new NodejsClient();
             $nodejsClient->sendContestUpdatePush($resource->jsonSerialize());
         } catch (\Throwable $e) {
