@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UserTransactions\TypeEnum;
+use App\Events\UserTransactionCreatedEvent;
 use App\Models\Contests\ContestUser;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
@@ -96,5 +97,12 @@ class UserTransaction extends Model
     public function isTypeContestEnter(): bool
     {
         return $this->type == TypeEnum::contestEnter->value;
+    }
+
+    protected static function booted()
+    {
+        static::created(function (UserTransaction $userTransaction) {
+            event(new UserTransactionCreatedEvent($userTransaction));
+        });
     }
 }

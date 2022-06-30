@@ -269,9 +269,9 @@ class ContestTest extends TestCase
                 'next',
             ],
             'meta' => [
-                'current_page',
+                'currentPage',
                 'from',
-                'last_page',
+                'lastPage',
                 'links' => [
                     '*' => [
                         'url',
@@ -280,7 +280,7 @@ class ContestTest extends TestCase
                     ],
                 ],
                 'path',
-                'per_page',
+                'perPage',
                 'to',
                 'total',
             ],
