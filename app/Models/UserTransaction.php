@@ -52,6 +52,10 @@ class UserTransaction extends Model
 
     protected $table = 'user_transaction';
 
+    protected $dispatchesEvents = [
+        'created' => UserTransactionCreatedEvent::class,
+    ];
+
     protected $fillable = [
         'user_id',
         'subject_id',
@@ -97,12 +101,5 @@ class UserTransaction extends Model
     public function isTypeContestEnter(): bool
     {
         return $this->type == TypeEnum::contestEnter->value;
-    }
-
-    protected static function booted()
-    {
-        static::created(function (UserTransaction $userTransaction) {
-            event(new UserTransactionCreatedEvent($userTransaction));
-        });
     }
 }

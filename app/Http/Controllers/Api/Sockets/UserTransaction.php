@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 /**
  * @OA\Get(
  *     path="/sockets/{id}/user-transaction",
- *     summary="Send `user-transaction-added` event",
+ *     summary="Send `user-transaction-created` event",
  *     tags={"Sockets"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),

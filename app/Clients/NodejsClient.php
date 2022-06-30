@@ -15,7 +15,7 @@ class NodejsClient
     private const CONTEST_USERS_UPDATED = 'users-update';
     private const CONTEST_UNITS_UPDATED = 'units-update';
     private const USER_BALANCE_UPDATED = 'user-balance-updated';
-    private const USER_TRANSACTION_ADDED = 'user-transaction-added';
+    private const USER_TRANSACTION_CREATED = 'user-transaction-created';
 
     private ?string $apiUrl;
     private Client $client;
@@ -63,7 +63,7 @@ class NodejsClient
     {
         $url = $this->apiUrl . '/user-transactions/' . $userId;
         $formParams = [
-            'type' => self::USER_TRANSACTION_ADDED,
+            'type' => self::USER_TRANSACTION_CREATED,
             'payload' => $data,
         ];
 
