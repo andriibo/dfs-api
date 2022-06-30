@@ -90,7 +90,7 @@ class UserTransaction extends Model
 
     public function scopeDateEnd(Builder $query, ?string $date): Builder
     {
-        return $query->where('updated_at', '<=', Carbon::parse($date));
+        return $query->where('updated_at', '<=', Carbon::parse($date)->endOfDay());
     }
 
     public function isTypeWithdraw(): bool
