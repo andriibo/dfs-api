@@ -7,13 +7,17 @@ use App\Events\ContestUpdatedEvent;
 use App\Events\ContestUsersUpdatedEvent;
 use App\Events\GameLogsUpdatedEvent;
 use App\Events\GameSchedulesUpdatedEvent;
+use App\Events\UserTransactionCreatedEvent;
 use App\Listeners\ContestUnitsUpdatedListener;
 use App\Listeners\ContestUpdatedListener;
 use App\Listeners\ContestUsersUpdatedListener;
 use App\Listeners\GameLogsUpdatedListener;
 use App\Listeners\GameSchedulesUpdatedListener;
+use App\Listeners\UserTransactionCreatedListener;
 use App\Models\Contests\Contest;
+use App\Models\UserTransaction;
 use Database\Seeders\ContestSeeder;
+use Database\Seeders\TransactionSeeder;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -59,6 +63,22 @@ class SocketTest extends TestCase
         $token = $this->getTokenForUser($user);
         Event::fake();
         Event::assertListening(ContestUsersUpdatedEvent::class, ContestUsersUpdatedListener::class);
+        $response = $this->getJson($endpoint, [
+            'Accept' => 'application/vnd.api+json',
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $response->assertCreated();
+    }
+
+    public function testUserTransactionEndpoint(): void
+    {
+        $this->seed(TransactionSeeder::class);
+        $userTransaction = UserTransaction::latest('id')->first();
+        $endpoint = '/api/v1/sockets/' . $userTransaction->id . '/user-transaction';
+        $user = $this->getVerifiedUser();
+        $token = $this->getTokenForUser($user);
+        Event::fake();
+        Event::assertListening(UserTransactionCreatedEvent::class, UserTransactionCreatedListener::class);
         $response = $this->getJson($endpoint, [
             'Accept' => 'application/vnd.api+json',
             'Authorization' => 'Bearer ' . $token,
