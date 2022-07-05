@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 /**
  * @OA\Get(
  *     path="/sockets/user-transactions/{id}",
- *     summary="Room `users/{id}/transaction`",
+ *     summary="Room `users/{id}/transactions`",
  *     tags={"Sockets"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
