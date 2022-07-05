@@ -10,8 +10,8 @@ use Illuminate\Http\Response;
 
 /**
  * @OA\Get(
- *     path="/sockets/{id}/contest-units",
- *     summary="Send `units-update` event",
+ *     path="/sockets/contests/{id}/players",
+ *     summary="Send `contests/{id}/players` event",
  *     tags={"Sockets"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),

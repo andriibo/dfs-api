@@ -4,17 +4,13 @@ namespace App\Providers;
 
 use App\Events\ContestUnitsUpdatedEvent;
 use App\Events\ContestUpdatedEvent;
-use App\Events\ContestUsersUpdatedEvent;
 use App\Events\GameLogsUpdatedEvent;
-use App\Events\GameSchedulesUpdatedEvent;
 use App\Events\UserActivatedEvent;
 use App\Events\UserBalanceUpdatedEvent;
 use App\Events\UserOAuthActivatedEvent;
 use App\Listeners\ContestUnitsUpdatedListener;
 use App\Listeners\ContestUpdatedListener;
-use App\Listeners\ContestUsersUpdatedListener;
 use App\Listeners\GameLogsUpdatedListener;
-use App\Listeners\GameSchedulesUpdatedListener;
 use App\Listeners\SendEmailPasswordListener;
 use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
@@ -48,12 +44,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         ContestUnitsUpdatedEvent::class => [
             ContestUnitsUpdatedListener::class,
-        ],
-        ContestUsersUpdatedEvent::class => [
-            ContestUsersUpdatedListener::class,
-        ],
-        GameSchedulesUpdatedEvent::class => [
-            GameSchedulesUpdatedListener::class,
         ],
         GameLogsUpdatedEvent::class => [
             GameLogsUpdatedListener::class,

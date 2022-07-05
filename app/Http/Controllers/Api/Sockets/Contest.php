@@ -10,8 +10,8 @@ use Illuminate\Http\Response;
 
 /**
  * @OA\Get(
- *     path="/sockets/{id}/contest",
- *     summary="Send `contest-update` event",
+ *     path="/sockets/contests/{id}",
+ *     summary="Send `contest` event",
  *     tags={"Sockets"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),

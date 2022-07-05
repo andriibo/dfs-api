@@ -26,10 +26,8 @@ use App\Http\Controllers\Api\ContestUsers\Update as ContestUserUpdate;
 use App\Http\Controllers\Api\Leagues\Leagues;
 use App\Http\Controllers\Api\Leagues\SportConfig;
 use App\Http\Controllers\Api\Sockets\Contest as SocketContest;
-use App\Http\Controllers\Api\Sockets\ContestUnits as SocketContestUnits;
-use App\Http\Controllers\Api\Sockets\ContestUsers as SocketContestUsers;
+use App\Http\Controllers\Api\Sockets\ContestUnits as SocketContestPlayers;
 use App\Http\Controllers\Api\Sockets\GameLogs as SocketGameLogs;
-use App\Http\Controllers\Api\Sockets\GameSchedules as SocketGameSchedules;
 use App\Http\Controllers\Api\Sockets\UserBalance as SocketUserBalance;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
@@ -170,13 +168,11 @@ Route::prefix('v1')->group(function () {
      * #####################
      */
     Route::prefix('sockets')->group(function () {
-        Route::get('{id}/contest', SocketContest::class)->where('id', '[0-9]+');
+        Route::get('contests/{id}', SocketContest::class)->where('id', '[0-9]+');
         Route::middleware('auth:api')->group(function (): void {
-            Route::get('{id}/game-logs', SocketGameLogs::class)->where('id', '[0-9]+');
-            Route::get('{id}/game-schedules', SocketGameSchedules::class)->where('id', '[0-9]+');
-            Route::get('{id}/contest-users', SocketContestUsers::class)->where('id', '[0-9]+');
-            Route::get('{id}/contest-units', SocketContestUnits::class)->where('id', '[0-9]+');
-            Route::get('{id}/user-balance', SocketUserBalance::class)->where('id', '[0-9]+');
+            Route::get('contests/{id}/game-logs', SocketGameLogs::class)->where('id', '[0-9]+');
+            Route::get('contests/{id}/players', SocketContestPlayers::class)->where('id', '[0-9]+');
+            Route::get('users/{id}/balance', SocketUserBalance::class)->where('id', '[0-9]+');
         });
     });
 });
