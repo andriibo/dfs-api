@@ -30,6 +30,12 @@ class NodejsClient
         $this->sendRequest($url, $data);
     }
 
+    public function sendContestUnitsUpdatePush(array $data, int $contestId): void
+    {
+        $url = sprintf($this->apiUrl . self::CONTEST_PLAYERS_ENDPOINT, $contestId);
+        $this->sendRequest($url, $data);
+    }
+
     public function sendGameLogsUpdatePush(array $data, int $contestId): void
     {
         $url = sprintf($this->apiUrl . self::CONTEST_GAME_LOGS_ENDPOINT, $contestId);
@@ -45,12 +51,6 @@ class NodejsClient
     public function sendUserTransactionCreatedPush(array $data, int $userId): void
     {
         $url = sprintf($this->apiUrl . self::USER_TRANSACTION_ENDPOINT, $userId);
-        $this->sendRequest($url, $data);
-    }
-
-    public function sendContestUnitsUpdatePush(array $data, int $contestId): void
-    {
-        $url = sprintf($this->apiUrl . self::CONTEST_PLAYERS_ENDPOINT, $contestId);
         $this->sendRequest($url, $data);
     }
 
