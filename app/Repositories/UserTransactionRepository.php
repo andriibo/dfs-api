@@ -6,11 +6,20 @@ use App\Enums\UserTransactions\TypeEnum;
 use App\Models\UserTransaction;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserTransactionRepository
 {
+    /**
+     * @throws ModelNotFoundException
+     */
+    public function getById(int $userTransactionId): UserTransaction
+    {
+        return UserTransaction::findOrFail($userTransactionId);
+    }
+
     public function getDailyBonusDepositByUserId(int $userId): ?UserTransaction
     {
         return UserTransaction::query()

@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 /**
  * @OA\Get(
  *     path="/sockets/contests/{id}",
- *     summary="Send `contest` event",
+ *     summary="Room `contest`",
  *     tags={"Sockets"},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),

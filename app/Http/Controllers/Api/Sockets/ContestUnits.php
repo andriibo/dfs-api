@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 /**
  * @OA\Get(
  *     path="/sockets/contests/{id}/players",
- *     summary="Send `contests/{id}/players` event",
+ *     summary="Room `contests/{id}/players`",
  *     tags={"Sockets"},
  *     security={ {"bearerAuth" : {} }},
  *     @OA\Parameter(ref="#/components/parameters/Accept"),

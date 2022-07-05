@@ -7,7 +7,7 @@ use App\Models\UserTransaction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TransactionSeeder extends Seeder
+class UserTransactionSeeder extends Seeder
 {
     use WithoutModelEvents;
 

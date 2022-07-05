@@ -10,9 +10,10 @@ use GuzzleHttp\RequestOptions;
 class NodejsClient
 {
     private const CONTEST_ENDPOINT = '/contest';
-    private const CONTEST_GAME_LOGS_ENDPOINT = '/contests/%/game-logs';
-    private const CONTEST_PLAYERS_ENDPOINT = '/contests/%/players';
-    private const USER_BALANCE_ENDPOINT = '/users/%/balance';
+    private const CONTEST_GAME_LOGS_ENDPOINT = '/contests/%s/game-logs';
+    private const CONTEST_PLAYERS_ENDPOINT = '/contests/%s/players';
+    private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
+    private const USER_TRANSACTION_ENDPOINT = '/users/%s/transaction';
 
     private ?string $apiUrl;
     private Client $client;
@@ -38,6 +39,12 @@ class NodejsClient
     public function sendUserBalanceUpdatePush(array $data, int $userId): void
     {
         $url = sprintf($this->apiUrl . self::USER_BALANCE_ENDPOINT, $userId);
+        $this->sendRequest($url, $data);
+    }
+
+    public function sendUserTransactionCreatedPush(array $data, int $userId): void
+    {
+        $url = sprintf($this->apiUrl . self::USER_TRANSACTION_ENDPOINT, $userId);
         $this->sendRequest($url, $data);
     }
 

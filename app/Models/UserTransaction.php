@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UserTransactions\TypeEnum;
+use App\Events\UserTransactionCreatedEvent;
 use App\Models\Contests\ContestUser;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
@@ -50,6 +51,10 @@ class UserTransaction extends Model
     use HasFactory;
 
     protected $table = 'user_transaction';
+
+    protected $dispatchesEvents = [
+        'created' => UserTransactionCreatedEvent::class,
+    ];
 
     protected $fillable = [
         'user_id',

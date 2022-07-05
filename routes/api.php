@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\Sockets\Contest as SocketContest;
 use App\Http\Controllers\Api\Sockets\ContestUnits as SocketContestPlayers;
 use App\Http\Controllers\Api\Sockets\GameLogs as SocketGameLogs;
 use App\Http\Controllers\Api\Sockets\UserBalance as SocketUserBalance;
+use App\Http\Controllers\Api\Sockets\UserTransaction as SocketUserTransaction;
 use App\Http\Controllers\Api\StaticPages\Show as StaticPageShow;
 use App\Http\Controllers\Api\Transactions\DailyBonus;
 use App\Http\Controllers\Api\Transactions\Transactions;
@@ -173,6 +174,7 @@ Route::prefix('v1')->group(function () {
             Route::get('contests/{id}/game-logs', SocketGameLogs::class)->where('id', '[0-9]+');
             Route::get('contests/{id}/players', SocketContestPlayers::class)->where('id', '[0-9]+');
             Route::get('users/{id}/balance', SocketUserBalance::class)->where('id', '[0-9]+');
+            Route::get('user-transactions/{id}', SocketUserTransaction::class)->where('id', '[0-9]+');
         });
     });
 });

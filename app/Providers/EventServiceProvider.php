@@ -8,6 +8,7 @@ use App\Events\GameLogsUpdatedEvent;
 use App\Events\UserActivatedEvent;
 use App\Events\UserBalanceUpdatedEvent;
 use App\Events\UserOAuthActivatedEvent;
+use App\Events\UserTransactionCreatedEvent;
 use App\Listeners\ContestUnitsUpdatedListener;
 use App\Listeners\ContestUpdatedListener;
 use App\Listeners\GameLogsUpdatedListener;
@@ -15,6 +16,7 @@ use App\Listeners\SendEmailPasswordListener;
 use App\Listeners\SendEmailWelcomeListener;
 use App\Listeners\UserActivatedListener;
 use App\Listeners\UserBalanceUpdatedListener;
+use App\Listeners\UserTransactionCreatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -50,6 +52,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserBalanceUpdatedEvent::class => [
             UserBalanceUpdatedListener::class,
+        ],
+        UserTransactionCreatedEvent::class => [
+            UserTransactionCreatedListener::class,
         ],
     ];
 
