@@ -25,4 +25,4 @@ RUN usermod --non-unique --uid 1000 www-data \
 
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ['php-fpm']
