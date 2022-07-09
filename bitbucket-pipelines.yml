@@ -16,6 +16,7 @@ definitions:
                 git fetch --prune &&
                 git checkout $BITBUCKET_BRANCH &&
                 git pull &&
+                cd ../docker &&
                 docker-compose exec -T api composer install &&
                 docker-compose exec -T api composer check-build &&
                 docker-compose exec -T api php artisan down &&
