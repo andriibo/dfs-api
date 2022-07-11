@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Leagues;
 
-use App\Factories\SportConfigFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Leagues\SportConfigResource;
 use App\Repositories\LeagueRepository;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Factories\SportConfigFactory;
 use App\Models\ActionPoint;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestActionPoint;
@@ -16,6 +15,7 @@ use App\Models\Soccer\SoccerTeam;
 use App\Models\Soccer\SoccerUnit;
 use App\Models\Soccer\SoccerUnitStats;
 use App\Models\User;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

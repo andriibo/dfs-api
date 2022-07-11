@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use App\Models\Contests\Contest;
 use App\Services\UnitService;
-use App\SportConfigs\AbstractSportConfig;
+use FantasySports\SportConfig\Classes\AbstractSportConfig;
 use Illuminate\Contracts\Validation\Rule;
 
 class ContestUnitsPositionsRule implements Rule
