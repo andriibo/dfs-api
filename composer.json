@@ -15,7 +15,7 @@
         "spatie/laravel-json-api-paginate": "^1.11",
         "spatie/laravel-query-builder": "^5.0",
         "tymon/jwt-auth": "*",
-        "fantasysports/sportconfig": "1.0.2"
+        "fantasysports/sportconfig": "1.0.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
