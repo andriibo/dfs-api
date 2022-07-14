@@ -33,6 +33,11 @@ namespace App\OA;
  *    in="path",
  *    @OA\Schema(type="string", enum={"google","facebook"})
  * )
+ * @OA\Parameter(
+ *    name="sort",
+ *    in="path",
+ *    @OA\Schema(type="string", enum={"title-{asc/desc}","salaryCap-{asc/desc}", "entries-{asc/desc}", "entryFee-{asc/desc}", "prizeBank-{asc/desc}", "startDate-{asc/desc}"})
+ * )
  */
 class ParametersOA
 {

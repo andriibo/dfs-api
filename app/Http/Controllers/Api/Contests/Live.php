@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Contests;
 
+use App\Filters\ContestQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Contests\ContestResource;
@@ -17,6 +18,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
+ *     @OA\Parameter(ref="#/components/parameters/sort"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/ContestResource")),
@@ -32,9 +34,12 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class Live extends Controller
 {
-    public function __invoke(GetCollectionQuery $getCollectionQuery, ContestRepository $contestRepository): ResourceCollection
-    {
-        $contests = $contestRepository->getContestsLive(auth()->user()->id);
+    public function __invoke(
+        GetCollectionQuery $getCollectionQuery,
+        ContestQueryFilter $contestQueryFilter,
+        ContestRepository $contestRepository
+    ): ResourceCollection {
+        $contests = $contestRepository->getContestsLive(auth()->user()->id, $contestQueryFilter);
 
         return ContestResource::collection($contests);
     }
