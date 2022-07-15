@@ -34,9 +34,14 @@ namespace App\OA;
  *    @OA\Schema(type="string", enum={"google","facebook"})
  * )
  * @OA\Parameter(
- *    name="sort",
+ *    name="contest-sort",
  *    in="path",
  *    @OA\Schema(type="string", enum={"title-{asc/desc}","salaryCap-{asc/desc}", "entries-{asc/desc}", "entryFee-{asc/desc}", "prizeBank-{asc/desc}", "startDate-{asc/desc}"})
+ * )
+ * @OA\Parameter(
+ *    name="user-transaction-sort",
+ *    in="path",
+ *    @OA\Schema(type="string", enum={"createdAt-{asc/desc}","updatedAt-{asc/desc}""})
  * )
  */
 class ParametersOA

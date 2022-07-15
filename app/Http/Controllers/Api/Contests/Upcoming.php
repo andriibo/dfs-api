@@ -18,7 +18,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     @OA\Parameter(ref="#/components/parameters/sort"),
+ *     @OA\Parameter(ref="#/components/parameters/contest-sort"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/ContestResource")),

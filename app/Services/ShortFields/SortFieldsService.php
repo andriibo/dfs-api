@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\ShortFields;
 
 use App\Dto\FilterSortDto;
 use App\Mappers\FilterSortMapper;
 use Exception;
 
-class ContestSortFieldsService
+abstract class SortFieldsService
 {
     private const ORDER_ASC = 'asc';
     private const ORDER_DESC = 'desc';
@@ -37,17 +37,7 @@ class ContestSortFieldsService
         return $this->filterSortMapper->map($sortField, $sortOrder);
     }
 
-    private function getSortFields(): array
-    {
-        return [
-            'title' => 'title',
-            'salaryCap' => 'salary_cap',
-            'entries' => 'entries',
-            'entryFee' => 'entry_fee',
-            'prizeBank' => 'prize_bank',
-            'startDate' => 'start_date',
-        ];
-    }
+    abstract protected function getSortFields(): array;
 
     private function getSortOrders(): array
     {

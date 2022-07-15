@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Transactions;
 
+use App\Filters\UserTransactionQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Transactions\TransactionResource;
@@ -17,6 +18,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
+ *     @OA\Parameter(ref="#/components/parameters/user-transaction-sort"),
  *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
  *        @OA\Schema(
  *          @OA\Property(property="type", type="integer", example="4"),
@@ -40,9 +42,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Transactions extends Controller
 {
-    public function __invoke(GetCollectionQuery $getCollectionQuery, UserTransactionRepository $userTransactionRepository): AnonymousResourceCollection
-    {
-        $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id);
+    public function __invoke(
+        GetCollectionQuery $getCollectionQuery,
+        UserTransactionQueryFilter $userTransactionQueryFilter,
+        UserTransactionRepository $userTransactionRepository
+    ): AnonymousResourceCollection {
+        $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id, $userTransactionQueryFilter);
 
         return TransactionResource::collection($userTransactions);
     }
