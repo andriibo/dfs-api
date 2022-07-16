@@ -2,8 +2,8 @@
 
 namespace App\Filters;
 
+use App\Exceptions\SortFieldsServiceException;
 use App\Services\ShortFields\ContestSortFieldsService;
-use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -11,13 +11,13 @@ final class ContestQueryFilter extends QueryFilter
 {
     public function __construct(
         Request $request,
-        private readonly ContestSortFieldsService $contestSortFieldsService = new ContestSortFieldsService()
+        private readonly ContestSortFieldsService $contestSortFieldsService
     ) {
         parent::__construct($request);
     }
 
     /**
-     * @throws Exception
+     * @throws SortFieldsServiceException
      */
     public function sort(string $sort): Builder
     {

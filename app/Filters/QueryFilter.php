@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 
 abstract class QueryFilter
 {
-    protected Request $request;
     protected Builder $builder;
 
-    public function __construct(Request $request)
+    public function __construct(private readonly Request $request)
     {
-        $this->request = $request;
     }
 
     public function apply(Builder $builder): Builder

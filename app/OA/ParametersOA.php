@@ -36,12 +36,12 @@ namespace App\OA;
  * @OA\Parameter(
  *    name="contest-sort",
  *    in="path",
- *    @OA\Schema(type="string", enum={"title-{asc/desc}","salaryCap-{asc/desc}", "entries-{asc/desc}", "entryFee-{asc/desc}", "prizeBank-{asc/desc}", "startDate-{asc/desc}"})
+ *    @OA\Schema(type="string", enum={"(-)title","(-)salaryCap", "(-)entries", "(-)entryFee", "(-)prizeBank", "(-)startDate"})
  * )
  * @OA\Parameter(
  *    name="user-transaction-sort",
  *    in="path",
- *    @OA\Schema(type="string", enum={"createdAt-{asc/desc}","updatedAt-{asc/desc}""})
+ *    @OA\Schema(type="string", enum={"(-)createdAt","(-)updatedAt"})
  * )
  */
 class ParametersOA

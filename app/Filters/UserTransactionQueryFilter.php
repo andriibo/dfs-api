@@ -2,8 +2,8 @@
 
 namespace App\Filters;
 
+use App\Exceptions\SortFieldsServiceException;
 use App\Services\ShortFields\UserTransactionSortFieldsService;
-use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ final class UserTransactionQueryFilter extends QueryFilter
     }
 
     /**
-     * @throws Exception
+     * @throws SortFieldsServiceException
      */
     public function sort(string $sort): Builder
     {
