@@ -3,35 +3,40 @@
 namespace App\Services;
 
 use App\Dto\FilterSortDto;
+use App\Exceptions\ContestSortFieldsServiceException;
 use App\Mappers\FilterSortMapper;
-use Exception;
 
 class ContestSortFieldsService
 {
     private const ORDER_ASC = 'asc';
     private const ORDER_DESC = 'desc';
 
+    private const ORDER_DESC_REQUEST = '-';
+
     public function __construct(private readonly FilterSortMapper $filterSortMapper = new FilterSortMapper())
     {
     }
 
     /**
-     * @throws Exception
+     * @throws ContestSortFieldsServiceException
      */
     public function prepareSortString(string $sortString): FilterSortDto
     {
-        $preparedSortString = explode('-', $sortString);
+        $preparedSortString = $sortString;
 
-        if (isset($preparedSortString[0], $this->getSortFields()[$preparedSortString[0]])) {
-            $sortField = $this->getSortFields()[$preparedSortString[0]];
+        if ($sortString[0] === self::ORDER_DESC_REQUEST) {
+            $sortOrder = self::ORDER_DESC;
+            $preparedSortString = ltrim($preparedSortString, self::ORDER_DESC_REQUEST);
+        } else {
+            $sortOrder = self::ORDER_ASC;
         }
 
-        if (isset($preparedSortString[1]) && in_array($preparedSortString[1], $this->getSortOrders())) {
-            $sortOrder = $preparedSortString[1];
+        if (isset($this->getSortFields()[$preparedSortString])) {
+            $sortField = $this->getSortFields()[$preparedSortString];
         }
 
         if (!isset($sortField) || !isset($sortOrder)) {
-            throw new Exception('Invalid filter sort params.');
+            throw new ContestSortFieldsServiceException('Invalid filter sort params.');
         }
 
         return $this->filterSortMapper->map($sortField, $sortOrder);
@@ -47,10 +52,5 @@ class ContestSortFieldsService
             'prizeBank' => 'prize_bank',
             'startDate' => 'start_date',
         ];
-    }
-
-    private function getSortOrders(): array
-    {
-        return [self::ORDER_ASC, self::ORDER_DESC];
     }
 }

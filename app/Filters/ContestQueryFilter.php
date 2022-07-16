@@ -2,21 +2,19 @@
 
 namespace App\Filters;
 
+use App\Exceptions\ContestSortFieldsServiceException;
 use App\Services\ContestSortFieldsService;
-use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ContestQueryFilter
 {
-    protected Request $request;
-    protected Builder $builder;
+    private Builder $builder;
 
     public function __construct(
-        Request $request,
-        private readonly ContestSortFieldsService $contestSortFieldsService = new ContestSortFieldsService()
+        private readonly Request $request,
+        private readonly ContestSortFieldsService $contestSortFieldsService
     ) {
-        $this->request = $request;
     }
 
     public function apply(Builder $builder): Builder
@@ -38,7 +36,7 @@ class ContestQueryFilter
     }
 
     /**
-     * @throws Exception
+     * @throws ContestSortFieldsServiceException
      */
     public function sort(string $sort): Builder
     {
@@ -53,7 +51,7 @@ class ContestQueryFilter
         return $this->builder->orderBy($sortField, $filterSortDto->sortOrder);
     }
 
-    protected function isNotEmptyValue($value, $method): bool
+    private function isNotEmptyValue($value, $method): bool
     {
         return !empty($value);
     }

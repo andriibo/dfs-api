@@ -36,7 +36,7 @@ namespace App\OA;
  * @OA\Parameter(
  *    name="sort",
  *    in="path",
- *    @OA\Schema(type="string", enum={"title-{asc/desc}","salaryCap-{asc/desc}", "entries-{asc/desc}", "entryFee-{asc/desc}", "prizeBank-{asc/desc}", "startDate-{asc/desc}"})
+ *    @OA\Schema(type="string", enum={"(-)title","(-)salaryCap", "(-)entries", "(-)entryFee", "(-)prizeBank", "(-)startDate"})
  * )
  */
 class ParametersOA
