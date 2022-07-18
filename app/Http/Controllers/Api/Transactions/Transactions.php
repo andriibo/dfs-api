@@ -15,10 +15,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     summary="Get User Transactions",
  *     tags={"Transactions"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     @OA\Parameter(ref="#/components/parameters/user-transaction-sort"),
+ *     @OA\Parameter(ref="#/components/parameters/userTransactionSort"),
  *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
  *        @OA\Schema(
  *          @OA\Property(property="type", type="integer", example="4"),

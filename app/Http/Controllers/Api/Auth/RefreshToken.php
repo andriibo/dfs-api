@@ -12,8 +12,8 @@ use Illuminate\Http\JsonResponse;
  *     summary="Refresh token",
  *     tags={"Auth"},
  *     security={{"bearerAuth":{}}},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data",

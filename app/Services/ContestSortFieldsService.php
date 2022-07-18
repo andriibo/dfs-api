@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ShortFields;
+namespace App\Services;
 
 class ContestSortFieldsService extends SortFieldsService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ShortFields;
+namespace App\Services;
 
 use App\Dto\FilterSortDto;
 use App\Exceptions\SortFieldsServiceException;

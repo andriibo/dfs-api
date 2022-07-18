@@ -3,7 +3,7 @@
 namespace App\Filters;
 
 use App\Exceptions\SortFieldsServiceException;
-use App\Services\ShortFields\ContestSortFieldsService;
+use App\Services\ContestSortFieldsService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
