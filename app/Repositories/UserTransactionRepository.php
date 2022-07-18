@@ -13,6 +13,10 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UserTransactionRepository
 {
+    public function __construct(private readonly UserTransactionQueryFilter $userTransactionQueryFilter)
+    {
+    }
+
     /**
      * @throws ModelNotFoundException
      */
@@ -45,10 +49,8 @@ class UserTransactionRepository
         return UserTransaction::create($attributes);
     }
 
-    public function getTransactionsByUserId(
-        int $userId,
-        UserTransactionQueryFilter $userTransactionQueryFilter
-    ): LengthAwarePaginator {
+    public function getTransactionsByUserId(int $userId): LengthAwarePaginator
+    {
         return QueryBuilder::for(UserTransaction::class)
             ->allowedFilters([
                 'type',
@@ -56,7 +58,7 @@ class UserTransactionRepository
                 AllowedFilter::scope('date_end'),
             ])
             ->where('user_id', $userId)
-            ->filter($userTransactionQueryFilter)
+            ->filter($this->userTransactionQueryFilter)
             ->orderByDesc('created_at')
             ->jsonPaginate()
             ;

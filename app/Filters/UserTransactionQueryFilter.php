@@ -11,7 +11,7 @@ final class UserTransactionQueryFilter extends QueryFilter
 {
     public function __construct(
         Request $request,
-        private readonly UserTransactionSortFieldsService $userTransactionSortFieldsService = new UserTransactionSortFieldsService()
+        private readonly UserTransactionSortFieldsService $userTransactionSortFieldsService
     ) {
         parent::__construct($request);
     }

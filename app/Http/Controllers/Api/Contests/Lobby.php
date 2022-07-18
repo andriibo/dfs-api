@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Contests;
 
-use App\Filters\ContestQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Contests\ContestResource;
@@ -34,10 +33,9 @@ class Lobby extends Controller
 {
     public function __invoke(
         GetCollectionQuery $getCollectionQuery,
-        ContestQueryFilter $contestQueryFilter,
         ContestRepository $contestRepository
     ): ResourceCollection {
-        $contests = $contestRepository->getContestsLobby($contestQueryFilter);
+        $contests = $contestRepository->getContestsLobby();
 
         return ContestResource::collection($contests);
     }

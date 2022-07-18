@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Transactions;
 
-use App\Filters\UserTransactionQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Transactions\TransactionResource;
@@ -44,10 +43,9 @@ class Transactions extends Controller
 {
     public function __invoke(
         GetCollectionQuery $getCollectionQuery,
-        UserTransactionQueryFilter $userTransactionQueryFilter,
         UserTransactionRepository $userTransactionRepository
     ): AnonymousResourceCollection {
-        $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id, $userTransactionQueryFilter);
+        $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id);
 
         return TransactionResource::collection($userTransactions);
     }
