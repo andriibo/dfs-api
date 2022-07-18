@@ -13,7 +13,7 @@ class ContestSortFieldsService
 
     private const ORDER_DESC_REQUEST = '-';
 
-    public function __construct(private readonly FilterSortMapper $filterSortMapper = new FilterSortMapper())
+    public function __construct(private readonly FilterSortMapper $filterSortMapper)
     {
     }
 
