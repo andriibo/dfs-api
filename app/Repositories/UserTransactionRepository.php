@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Enums\UserTransactions\TypeEnum;
+use App\Filters\UserTransactionQueryFilter;
 use App\Models\UserTransaction;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -12,6 +13,10 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UserTransactionRepository
 {
+    public function __construct(private readonly UserTransactionQueryFilter $userTransactionQueryFilter)
+    {
+    }
+
     /**
      * @throws ModelNotFoundException
      */
@@ -53,6 +58,7 @@ class UserTransactionRepository
                 AllowedFilter::scope('date_end'),
             ])
             ->where('user_id', $userId)
+            ->filter($this->userTransactionQueryFilter)
             ->orderByDesc('created_at')
             ->jsonPaginate()
             ;

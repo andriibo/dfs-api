@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\SuspendedEnum;
+use App\Filters\ContestQueryFilter;
 use App\Models\Contests\Contest;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,6 +12,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContestRepository
 {
+    public function __construct(private readonly ContestQueryFilter $contestQueryFilter)
+    {
+    }
+
     /**
      * @throws ModelNotFoundException
      */
@@ -24,6 +29,7 @@ class ContestRepository
         return Contest::query()
             ->where('status', StatusEnum::ready)
             ->where('suspended', SuspendedEnum::no)
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
@@ -37,6 +43,7 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
@@ -50,6 +57,7 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
@@ -63,6 +71,7 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;

@@ -14,9 +14,10 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     summary="Get Contests Upcoming",
  *     tags={"Contests"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
+ *     @OA\Parameter(ref="#/components/parameters/contestSort"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/ContestResource")),
@@ -32,8 +33,10 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class Upcoming extends Controller
 {
-    public function __invoke(GetCollectionQuery $getCollectionQuery, ContestRepository $contestRepository): ResourceCollection
-    {
+    public function __invoke(
+        GetCollectionQuery $getCollectionQuery,
+        ContestRepository $contestRepository
+    ): ResourceCollection {
         $contests = $contestRepository->getContestsUpcoming(auth()->user()->id);
 
         return ContestResource::collection($contests);

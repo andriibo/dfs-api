@@ -12,8 +12,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     path="/static-pages/{name}",
  *     summary="Get Static Page",
  *     tags={"Static Pages"},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(name="name", required=true, in="path", @OA\Schema(type="string", example="faq")),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

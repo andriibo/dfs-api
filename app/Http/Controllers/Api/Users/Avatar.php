@@ -14,8 +14,8 @@ use Illuminate\Http\Response;
  *     summary="Update User Avatar",
  *     tags={"Users"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(name="Content-Type", in="header", description="Content-Type header", @OA\Schema(type="string", example="multipart/form-data")),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(name="сontentType", in="header", description="сontentType header", @OA\Schema(type="string", example="multipart/form-data")),
  *     @OA\RequestBody(ref="#/components/requestBodies/UpdateUserAvatarRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

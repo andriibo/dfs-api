@@ -9,6 +9,7 @@ use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\SuspendedEnum;
 use App\Enums\IsEnabledEnum;
 use App\Enums\SportIdEnum;
+use App\Filters\ContestQueryFilter;
 use App\Models\ActionPoint;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\League;
@@ -288,5 +289,10 @@ class Contest extends Model
             'contest_id',
             'action_points_id'
         )->where('is_enabled', IsEnabledEnum::isEnabled);
+    }
+
+    public function scopeFilter(Builder $query, ContestQueryFilter $filter): Builder
+    {
+        return $filter->apply($query);
     }
 }
