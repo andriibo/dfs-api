@@ -4,13 +4,13 @@ namespace App\OA;
 
 /**
  * @OA\Parameter(
- *    name="Accept",
+ *    name="accept",
  *    in="header",
  *    description="Accept header",
  *    @OA\Schema(type="string", example="application/vnd.api+json")
  * )
  * @OA\Parameter(
- *    name="Content-Type",
+ *    name="сontentType",
  *    in="header",
  *    description="Content-Type header",
  *    @OA\Schema(type="string", example="application/vnd.api+json")
@@ -34,9 +34,16 @@ namespace App\OA;
  *    @OA\Schema(type="string", enum={"google","facebook"})
  * )
  * @OA\Parameter(
- *    name="sort",
+ *    name="contestSort",
+ *    description="Use 'sort' key",
  *    in="path",
  *    @OA\Schema(type="string", enum={"(-)title","(-)salaryCap", "(-)entries", "(-)entryFee", "(-)prizeBank", "(-)startDate"})
+ * )
+ * @OA\Parameter(
+ *    name="userTransactionSort",
+ *    description="Use 'sort' key",
+ *    in="path",
+ *    @OA\Schema(type="string", enum={"(-)createdAt","(-)updatedAt"})
  * )
  */
 class ParametersOA

@@ -14,8 +14,8 @@ use Illuminate\Http\Response;
  *     summary="Get Daily Bonus",
  *     tags={"Transactions"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="You have successfully received daily bonus!")

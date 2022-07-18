@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContestRepository
 {
+    public function __construct(private readonly ContestQueryFilter $contestQueryFilter)
+    {
+    }
+
     /**
      * @throws ModelNotFoundException
      */
@@ -20,18 +24,18 @@ class ContestRepository
         return Contest::findOrFail($contestId);
     }
 
-    public function getContestsLobby(ContestQueryFilter $contestQueryFilter): LengthAwarePaginator
+    public function getContestsLobby(): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::ready)
             ->where('suspended', SuspendedEnum::no)
-            ->filter($contestQueryFilter)
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
     }
 
-    public function getContestsUpcoming(int $userId, ContestQueryFilter $contestQueryFilter): LengthAwarePaginator
+    public function getContestsUpcoming(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::ready)
@@ -39,13 +43,13 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
-            ->filter($contestQueryFilter)
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
     }
 
-    public function getContestsLive(int $userId, ContestQueryFilter $contestQueryFilter): LengthAwarePaginator
+    public function getContestsLive(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::started)
@@ -53,13 +57,13 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
-            ->filter($contestQueryFilter)
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;
     }
 
-    public function getContestsHistory(int $userId, ContestQueryFilter $contestQueryFilter): LengthAwarePaginator
+    public function getContestsHistory(int $userId): LengthAwarePaginator
     {
         return Contest::query()
             ->where('status', StatusEnum::closed)
@@ -67,7 +71,7 @@ class ContestRepository
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
             })
-            ->filter($contestQueryFilter)
+            ->filter($this->contestQueryFilter)
             ->orderBy('start_date')
             ->jsonPaginate()
         ;

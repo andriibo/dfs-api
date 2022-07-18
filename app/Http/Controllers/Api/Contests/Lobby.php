@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Contests;
 
-use App\Filters\ContestQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceQuery\GetCollectionQuery;
 use App\Http\Resources\Contests\ContestResource;
@@ -14,10 +13,10 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     path="/contests/lobby",
  *     summary="Get Contests Lobby",
  *     tags={"Contests"},
- *     @OA\Parameter(ref="#/components/parameters/Accept"),
- *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
+ *     @OA\Parameter(ref="#/components/parameters/accept"),
+ *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     OA\Parameter(ref="#/components/parameters/sort"),
+ *     @OA\Parameter(ref="#/components/parameters/contestSort"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/ContestResource")),
@@ -34,10 +33,9 @@ class Lobby extends Controller
 {
     public function __invoke(
         GetCollectionQuery $getCollectionQuery,
-        ContestQueryFilter $contestQueryFilter,
         ContestRepository $contestRepository
     ): ResourceCollection {
-        $contests = $contestRepository->getContestsLobby($contestQueryFilter);
+        $contests = $contestRepository->getContestsLobby();
 
         return ContestResource::collection($contests);
     }
