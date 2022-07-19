@@ -31,7 +31,8 @@ class CreateContestUserRequest extends AbstractFormRequest
 {
     public function rules(): array
     {
-        $contestRepository = new ContestRepository();
+        /* @var $contestRepository ContestRepository */
+        $contestRepository = resolve(ContestRepository::class);
         $contest = $contestRepository->getContestById($this->input('contestId'));
         $sportConfig = SportConfigFactory::getConfig($contest->league->sport_id);
 
