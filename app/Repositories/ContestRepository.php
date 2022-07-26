@@ -66,7 +66,7 @@ class ContestRepository
     public function getContestsHistory(int $userId): LengthAwarePaginator
     {
         return Contest::query()
-            ->where('status', StatusEnum::closed)
+            ->whereIn('status', [StatusEnum::closed, StatusEnum::finished])
             ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
                 $query->where('user_id', $userId);
