@@ -17,7 +17,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/accept"),
  *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     @OA\Parameter(name="sort", in="query", style="deepObject", explode=true, @OA\Schema(type="string", enum={"createdAt","-createdAt","updatedAt","-updatedAt"})),
+ *     @OA\Parameter(name="sort", in="query", style="deepObject", explode=true, @OA\Schema(type="string", enum={"type","-type","status","-status","amount","-amount","createdAt","-createdAt","updatedAt","-updatedAt"})),
  *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
  *        @OA\Schema(
  *          @OA\Property(property="type", type="integer", example="4"),
