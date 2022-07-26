@@ -33,18 +33,6 @@ namespace App\OA;
  *    in="path",
  *    @OA\Schema(type="string", enum={"google","facebook"})
  * )
- * @OA\Parameter(
- *    name="contestSort",
- *    description="Use 'sort' key",
- *    in="path",
- *    @OA\Schema(type="string", enum={"(-)title","(-)salaryCap", "(-)entries", "(-)entryFee", "(-)prizeBank", "(-)startDate"})
- * )
- * @OA\Parameter(
- *    name="userTransactionSort",
- *    description="Use 'sort' key",
- *    in="path",
- *    @OA\Schema(type="string", enum={"(-)createdAt","(-)updatedAt"})
- * )
  */
 class ParametersOA
 {

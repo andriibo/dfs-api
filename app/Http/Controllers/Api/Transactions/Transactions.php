@@ -17,12 +17,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/accept"),
  *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     @OA\Parameter(ref="#/components/parameters/userTransactionSort"),
+ *     @OA\Parameter(name="sort", in="query", style="deepObject", explode=true, @OA\Schema(type="string", enum={"createdAt","-createdAt","updatedAt","-updatedAt"})),
  *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
  *        @OA\Schema(
  *          @OA\Property(property="type", type="integer", example="4"),
- *          @OA\Property(property="date_start", type="string", example="2022-02-24"),
- *          @OA\Property(property="date_end", type="string", example="2022-02-27")
+ *          @OA\Property(property="dateStart", type="string", example="2022-02-24"),
+ *          @OA\Property(property="dateEnd", type="string", example="2022-02-27")
  *        )
  *     ),
  *     @OA\Response(response=200, description="Ok",

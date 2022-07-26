@@ -196,6 +196,38 @@ class Contest extends Model
         'prize_places' => 'array',
     ];
 
+    public function scopeLeagueId(Builder $query, int $leagueId): Builder
+    {
+        return $query->where('league_id', $leagueId);
+    }
+
+    public function scopeContestType(Builder $query, string $contestType): Builder
+    {
+        return $query->where('contest_type', $contestType);
+    }
+
+    public function scopeEntryFee(Builder $query, string $entryFee): Builder
+    {
+        if (substr_count($entryFee, '-')) {
+            $values = explode('-', $entryFee);
+
+            return $query
+                ->where('entry_fee', '>=', $values[0])
+                ->where('entry_fee', '<=', end($values))
+            ;
+        }
+
+        return $query->where('entry_fee', $entryFee);
+    }
+
+    public function scopeSportId(Builder $query, int $sportId): Builder
+    {
+        return $query
+            ->join('league', 'league.id', '=', 'contest.league_id')
+            ->where('league.sport_id', $sportId)
+        ;
+    }
+
     public function isSportSoccer(): bool
     {
         return $this->league?->sport_id == SportIdEnum::soccer->value;

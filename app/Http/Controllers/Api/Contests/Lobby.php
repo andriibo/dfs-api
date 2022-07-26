@@ -16,7 +16,15 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/accept"),
  *     @OA\Parameter(ref="#/components/parameters/сontentType"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
- *     @OA\Parameter(ref="#/components/parameters/contestSort"),
+ *     @OA\Parameter(name="sort", in="query", style="deepObject", explode=true, @OA\Schema(type="string", enum={"title","-title","salaryCap","-salaryCap","entries","-entries","entryFee","-entryFee","prizeBank","-prizeBank","startDate","-startDate"})),
+ *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
+ *       @OA\Schema(
+ *         @OA\Property(property="sportId", type="integer", enum={1,2,3}, description="1 - Soccer, 2- Football, 3 - Cricket"),
+ *         @OA\Property(property="contestType", type="string", enum={"fifty-fifty","head-to-head","multiplier","wta","top-three","custom"}),
+ *         @OA\Property(property="leagueId", type="integer", example="54"),
+ *         @OA\Property(property="entryFee", type="string", example="50-100"),
+ *       )
+ *     ),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
  *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/ContestResource")),

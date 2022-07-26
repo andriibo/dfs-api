@@ -54,8 +54,8 @@ class UserTransactionRepository
         return QueryBuilder::for(UserTransaction::class)
             ->allowedFilters([
                 'type',
-                AllowedFilter::scope('date_start'),
-                AllowedFilter::scope('date_end'),
+                AllowedFilter::scope('dateStart'),
+                AllowedFilter::scope('dateEnd'),
             ])
             ->where('user_id', $userId)
             ->filter($this->userTransactionQueryFilter)
