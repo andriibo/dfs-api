@@ -4,13 +4,13 @@ namespace App\OA;
 
 /**
  * @OA\Parameter(
- *    name="accept",
+ *    name="Accept",
  *    in="header",
  *    description="Accept header",
  *    @OA\Schema(type="string", example="application/vnd.api+json")
  * )
  * @OA\Parameter(
- *    name="сontentType",
+ *    name="Content-Type",
  *    in="header",
  *    description="Content-Type header",
  *    @OA\Schema(type="string", example="application/vnd.api+json")

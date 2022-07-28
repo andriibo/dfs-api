@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Hash;
  *     summary="Change User Password",
  *     tags={"Users"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/accept"),
- *     @OA\Parameter(ref="#/components/parameters/сontentType"),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(ref="#/components/requestBodies/ChangePasswordRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

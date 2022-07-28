@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Password;
  *     path="/auth/forgot/password",
  *     summary="Forgot Password",
  *     tags={"Auth"},
- *     @OA\Parameter(ref="#/components/parameters/accept"),
- *     @OA\Parameter(ref="#/components/parameters/сontentType"),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(ref="#/components/requestBodies/ForgotPasswordRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

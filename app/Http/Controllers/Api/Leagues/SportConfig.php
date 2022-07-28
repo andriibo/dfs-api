@@ -13,8 +13,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     path="/leagues/{id}/sport-config",
  *     summary="Get Sport Config",
  *     tags={"Leagues"},
- *     @OA\Parameter(ref="#/components/parameters/accept"),
- *     @OA\Parameter(ref="#/components/parameters/сontentType"),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/id"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

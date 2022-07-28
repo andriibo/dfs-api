@@ -14,8 +14,8 @@ use Illuminate\Http\JsonResponse;
  *     summary="Update User Profile",
  *     tags={"Users"},
  *     security={ {"bearerAuth" : {} }},
- *     @OA\Parameter(ref="#/components/parameters/accept"),
- *     @OA\Parameter(ref="#/components/parameters/сontentType"),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(ref="#/components/requestBodies/UpdateUserProfileRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

@@ -13,8 +13,8 @@ use Illuminate\Http\Response;
  *     path="/auth/login",
  *     summary="Login",
  *     tags={"Auth"},
- *     @OA\Parameter(ref="#/components/parameters/accept"),
- *     @OA\Parameter(ref="#/components/parameters/сontentType"),
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\RequestBody(ref="#/components/requestBodies/LoginRequest"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(
