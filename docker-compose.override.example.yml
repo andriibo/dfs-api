@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  api:
+    container_name: fantasysports-api
+    ports:
+      - ${APP_PORT}:8000
+
+  mailhog:
+    container_name: fantasysports-mailhog
+    ports:
+      - ${MAIL_PORT}:1025
+      - ${MAIL_HOG_PORT}:8025
+
+networks:
+  default:
+    name: fantasysports-network
+    external: true

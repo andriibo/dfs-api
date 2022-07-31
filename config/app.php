@@ -55,6 +55,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'force_https' => env('APP_FORCE_HTTPS', false),
+
+    'front_url' => env('FRONT_URL', 'http://fantasysports-url.com'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*
@@ -174,6 +178,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Spatie\JsonApiPaginate\JsonApiPaginateServiceProvider::class,
     ],
 
     /*
@@ -188,6 +194,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         // ...
     ])->toArray(),
 ];
