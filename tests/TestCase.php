@@ -15,6 +15,8 @@ abstract class TestCase extends BaseTestCase
     use DatabaseTransactions;
     use CreatesApplication;
 
+    public $mockConsoleOutput = false;
+
     protected readonly UserRepository $userRepository;
 
     public function __construct(?string $name = null, array $data = [], $dataName = '')
