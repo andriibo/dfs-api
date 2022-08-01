@@ -267,7 +267,7 @@ class Contest extends Model
             CricketGameSchedule::class,
             (new ContestGame())->getTable(),
             'contest_id',
-            'game_id'
+            'game_schedule_id'
         )->wherePivot('sport_id', SportIdEnum::cricket);
     }
 
@@ -277,7 +277,7 @@ class Contest extends Model
             SoccerGameSchedule::class,
             (new ContestGame())->getTable(),
             'contest_id',
-            'game_id'
+            'game_schedule_id'
         )->wherePivot('sport_id', SportIdEnum::soccer);
     }
 
