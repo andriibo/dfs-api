@@ -24,7 +24,6 @@ definitions:
                 docker-compose exec -T api php artisan config:cache &&
                 docker-compose exec -T api php artisan route:cache &&
                 docker-compose exec -T api php artisan l5-swagger:generate &&
-                docker-compose exec -T api php artisan migrate &&
                 docker-compose exec -T api php artisan up &&
                 docker-compose exec -T api php artisan test
 pipelines:
