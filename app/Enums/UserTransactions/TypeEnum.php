@@ -26,8 +26,6 @@ enum TypeEnum: int
 
     case depositBonus = 9;
 
-    case affiliateProfit = 10;
-
     case activationBonus = 11;
 
     case dailyBonus = 12;

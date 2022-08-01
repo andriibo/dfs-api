@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $bonus_drip
  * @property int    $template_days_ahead
  * @property int    $referral_bonus_percent
- * @property string $affiliate_contest_percent
  * @property string $activation_bonus_deposit
  * @property string $daily_bonus_deposit
  *
@@ -32,7 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|SitePreference newQuery()
  * @method static Builder|SitePreference query()
  * @method static Builder|SitePreference whereActivationBonusDeposit($value)
- * @method static Builder|SitePreference whereAffiliateContestPercent($value)
  * @method static Builder|SitePreference whereBonusBalancePercent($value)
  * @method static Builder|SitePreference whereBonusDrip($value)
  * @method static Builder|SitePreference whereBonusTransactionPercent($value)
@@ -72,7 +70,6 @@ class SitePreference extends Model
         'bonus_drip',
         'template_days_ahead',
         'referral_bonus_percent',
-        'affiliate_contest_percent',
         'activation_bonus_deposit',
         'daily_bonus_deposit',
     ];
