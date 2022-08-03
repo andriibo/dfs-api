@@ -11,7 +11,7 @@ class CricketGameLogRepository
     public function getGameLogsByContestId(int $contestId): LengthAwarePaginator
     {
         return CricketGameLog::query()
-            ->join('contest_game', 'cricket_game_log.game_schedule_id', '=', 'contest_game.game_id')
+            ->join('contest_game', 'cricket_game_log.game_schedule_id', '=', 'contest_game.game_schedule_id')
             ->where('contest_game.contest_id', $contestId)
             ->where('contest_game.sport_id', SportIdEnum::cricket)
             ->orderBy('id', 'desc')
