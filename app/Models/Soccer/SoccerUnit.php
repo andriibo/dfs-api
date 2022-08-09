@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property int                          $id
  * @property int                          $unit_id
- * @property string                       $unit_type
  * @property null|string                  $position
  * @property null|string                  $salary
  * @property null|string                  $auto_salary
@@ -53,7 +52,6 @@ class SoccerUnit extends Model
 
     protected $fillable = [
         'unit_id',
-        'unit_type',
         'position',
         'salary',
         'auto_salary',
