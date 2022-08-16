@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\ConvertPaginationToCamelCase;
+use App\Http\Middleware\SendExceptionToSlackMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\JsonResponseMiddleware::class,
+            SendExceptionToSlackMiddleware::class,
         ],
     ];
 
