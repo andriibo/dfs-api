@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Jobs\SendExceptionToSlackJob;
+use App\Jobs\NotifyInSlackJob;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class SendExceptionToSlackMiddleware
 
         if (!empty($response->exception) && $response->getStatusCode() === Response::HTTP_INTERNAL_SERVER_ERROR) {
             $location = $response->exception->getFile() . ':' . $response->exception->getLine();
-            SendExceptionToSlackJob::dispatch($location, $response->exception->getMessage());
+            NotifyInSlackJob::dispatch($location, $response->exception->getMessage());
         }
 
         return $response;
