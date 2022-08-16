@@ -3,7 +3,6 @@
 namespace Database\Factories\Soccer;
 
 use App\Enums\Soccer\Units\PositionEnum;
-use App\Enums\Soccer\Units\UnitType;
 use App\Models\Soccer\SoccerUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -34,7 +33,6 @@ class SoccerUnitFactory extends Factory
     public function definition(): array
     {
         return [
-            'unit_type' => UnitType::player->name,
             'position' => $this->faker->randomElement(PositionEnum::values()),
             'salary' => $this->faker->randomFloat(2, 0, 10),
             'auto_salary' => $this->faker->randomFloat(2, 0, 10),
