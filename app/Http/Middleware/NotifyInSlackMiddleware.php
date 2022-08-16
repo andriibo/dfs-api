@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class SendExceptionToSlackMiddleware
+class NotifyInSlackMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
