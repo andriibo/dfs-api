@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Services\SendSlackNotificationService;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
@@ -28,6 +30,13 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    public function __construct(
+        Container $container,
+        private readonly SendSlackNotificationService $sendSlackNotificationService
+    ) {
+        parent::__construct($container);
+    }
+
     /**
      * Register the exception handling callbacks for the application.
      */
@@ -39,6 +48,11 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
+        if ($e->getCode() === Response::HTTP_INTERNAL_SERVER_ERROR) {
+            $location = $e->getFile() . ':' . $e->getLine();
+            $this->sendSlackNotificationService->handle($e->getMessage(), $location);
+        }
+
         if ($e instanceof ModelNotFoundException && $request->wantsJson()) {
             return response()->json([
                 'error' => 'Resource not found.',
