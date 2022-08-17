@@ -13,16 +13,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * App\Models\Soccer\SoccerTeam.
  *
- * @property int    $id
- * @property string $feed_id
- * @property int    $league_id
- * @property string $name
- * @property string $nickname
- * @property string $alias
- * @property int    $country_id
- * @property int    $logo_id
- * @property string $feed_type
- * @property League $league
+ * @property int         $id
+ * @property string      $feed_id
+ * @property int         $league_id
+ * @property string      $name
+ * @property string      $nickname
+ * @property string      $alias
+ * @property int         $country_id
+ * @property null|string $logo
+ * @property string      $feed_type
+ * @property League      $league
  *
  * @method static SoccerTeamFactory factory(...$parameters)
  * @method static Builder|SoccerTeam newModelQuery()
