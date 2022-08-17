@@ -48,7 +48,7 @@ class SoccerUnit extends Model
 
     public $timestamps = false;
 
-    protected $table = 'unit';
+    protected $table = 'soccer_unit';
 
     protected $fillable = [
         'unit_id',

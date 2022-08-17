@@ -42,7 +42,7 @@ class SoccerGameLog extends Model
 {
     use HasFactory;
 
-    protected $table = 'game_log';
+    protected $table = 'soccer_game_log';
 
     protected $fillable = [
         'game_id',

@@ -45,7 +45,7 @@ class SoccerTeam extends Model
 
     public $timestamps = false;
 
-    protected $table = 'team';
+    protected $table = 'soccer_team';
 
     protected $fillable = [
         'feed_id',
