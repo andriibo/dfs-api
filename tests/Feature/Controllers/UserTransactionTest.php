@@ -4,7 +4,7 @@ namespace Tests\Feature\Controllers;
 
 use App\Events\UserBalanceUpdatedEvent;
 use App\Listeners\UserBalanceUpdatedListener;
-use Database\Seeders\TransactionSeeder;
+use Database\Seeders\UserTransactionSeeder;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -12,11 +12,11 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-class TransactionTest extends TestCase
+class UserTransactionTest extends TestCase
 {
-    public function testTransactionsEndpoint(): void
+    public function testUserTransactionsEndpoint(): void
     {
-        $this->seed(TransactionSeeder::class);
+        $this->seed(UserTransactionSeeder::class);
         $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);
         $response = $this->getJson('/api/v1/transactions', [
@@ -36,7 +36,7 @@ class TransactionTest extends TestCase
         ]);
     }
 
-    public function testTransactionsDailyBonusEndpoint(): void
+    public function testUserTransactionsDailyBonusEndpoint(): void
     {
         $user = $this->getVerifiedUser();
         $token = $this->getTokenForUser($user);

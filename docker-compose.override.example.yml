@@ -5,9 +5,6 @@ services:
     ports:
       - ${APP_PORT}:8000
 
-  queue:
-    container_name: fantasysports-queue
-
   mailhog:
     container_name: fantasysports-mailhog
     ports:

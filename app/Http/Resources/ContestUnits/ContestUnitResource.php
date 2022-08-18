@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\ContestUnits;
 
-use App\Factories\SportConfigFactory;
 use App\Helpers\FileHelper;
 use App\Http\Resources\Leagues\PositionResource;
 use App\Services\UnitService;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

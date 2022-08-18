@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\UserTransactions\TypeEnum;
+use App\Events\UserTransactionCreatedEvent;
+use App\Filters\UserTransactionQueryFilter;
 use App\Models\Contests\ContestUser;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
@@ -51,6 +53,10 @@ class UserTransaction extends Model
 
     protected $table = 'user_transaction';
 
+    protected $dispatchesEvents = [
+        'created' => UserTransactionCreatedEvent::class,
+    ];
+
     protected $fillable = [
         'user_id',
         'subject_id',
@@ -96,5 +102,10 @@ class UserTransaction extends Model
     public function isTypeContestEnter(): bool
     {
         return $this->type == TypeEnum::contestEnter->value;
+    }
+
+    public function scopeFilter(Builder $query, UserTransactionQueryFilter $filter): Builder
+    {
+        return $filter->apply($query);
     }
 }

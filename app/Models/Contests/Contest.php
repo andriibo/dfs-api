@@ -9,6 +9,7 @@ use App\Enums\Contests\StatusEnum;
 use App\Enums\Contests\SuspendedEnum;
 use App\Enums\IsEnabledEnum;
 use App\Enums\SportIdEnum;
+use App\Filters\ContestQueryFilter;
 use App\Models\ActionPoint;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\League;
@@ -195,6 +196,38 @@ class Contest extends Model
         'prize_places' => 'array',
     ];
 
+    public function scopeLeagueId(Builder $query, int $leagueId): Builder
+    {
+        return $query->where('league_id', $leagueId);
+    }
+
+    public function scopeContestType(Builder $query, string $contestType): Builder
+    {
+        return $query->where('contest_type', $contestType);
+    }
+
+    public function scopeEntryFee(Builder $query, string $entryFee): Builder
+    {
+        if (substr_count($entryFee, '-')) {
+            $values = explode('-', $entryFee);
+
+            return $query
+                ->where('entry_fee', '>=', $values[0])
+                ->where('entry_fee', '<=', end($values))
+            ;
+        }
+
+        return $query->where('entry_fee', $entryFee);
+    }
+
+    public function scopeSportId(Builder $query, int $sportId): Builder
+    {
+        return $query
+            ->join('league', 'league.id', '=', 'contest.league_id')
+            ->where('league.sport_id', $sportId)
+        ;
+    }
+
     public function isSportSoccer(): bool
     {
         return $this->league?->sport_id == SportIdEnum::soccer->value;
@@ -266,7 +299,7 @@ class Contest extends Model
             CricketGameSchedule::class,
             (new ContestGame())->getTable(),
             'contest_id',
-            'game_id'
+            'game_schedule_id'
         )->wherePivot('sport_id', SportIdEnum::cricket);
     }
 
@@ -276,7 +309,7 @@ class Contest extends Model
             SoccerGameSchedule::class,
             (new ContestGame())->getTable(),
             'contest_id',
-            'game_id'
+            'game_schedule_id'
         )->wherePivot('sport_id', SportIdEnum::soccer);
     }
 
@@ -288,5 +321,10 @@ class Contest extends Model
             'contest_id',
             'action_points_id'
         )->where('is_enabled', IsEnabledEnum::isEnabled);
+    }
+
+    public function scopeFilter(Builder $query, ContestQueryFilter $filter): Builder
+    {
+        return $filter->apply($query);
     }
 }

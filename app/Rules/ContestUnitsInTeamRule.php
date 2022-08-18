@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\SportConfigs\AbstractSportConfig;
+use FantasySports\SportConfig\Classes\AbstractSportConfig;
 use Illuminate\Contracts\Validation\Rule;
 
 class ContestUnitsInTeamRule implements Rule

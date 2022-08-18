@@ -11,6 +11,8 @@ use Laravel\Socialite\Facades\Socialite;
  *     path="/auth/{provider}",
  *     summary="Redirect to OAuth Provider",
  *     tags={"Auth"},
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

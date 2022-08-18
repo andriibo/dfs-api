@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\ContestUnits;
 
-use App\Factories\SportConfigFactory;
 use App\Helpers\FileHelper;
 use App\Helpers\UnitStatsHelper;
 use App\Http\Resources\GameSchedules\GameScheduleResource;
@@ -19,6 +18,7 @@ use App\Services\NextGameScheduleForTeamService;
 use App\Services\TeamService;
 use App\Services\UnitService;
 use App\Services\UnitStatsService;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

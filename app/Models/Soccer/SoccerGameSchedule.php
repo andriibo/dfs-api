@@ -29,6 +29,7 @@ use Illuminate\Support\Carbon;
  * @property int                        $is_fake
  * @property int                        $is_salary_available
  * @property null|string                $starting_lineup
+ * @property null|string                $status
  * @property string                     $feed_type
  * @property int                        $latest_game_log_id
  * @property null|Carbon                $updated_at
@@ -76,6 +77,7 @@ class SoccerGameSchedule extends Model
         'game_date',
         'has_final_box',
         'is_data_confirmed',
+        'status',
         'home_team_score',
         'away_team_score',
         'is_fake',

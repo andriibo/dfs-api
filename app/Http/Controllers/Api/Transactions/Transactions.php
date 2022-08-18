@@ -17,11 +17,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  *     @OA\Parameter(ref="#/components/parameters/Accept"),
  *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/page"),
+ *     @OA\Parameter(name="sort", in="query", style="deepObject", explode=true, @OA\Schema(type="string", enum={"type","-type","status","-status","amount","-amount","createdAt","-createdAt","updatedAt","-updatedAt"})),
  *     @OA\Parameter(name="filter", in="query", style="deepObject", explode=true,
  *        @OA\Schema(
  *          @OA\Property(property="type", type="integer", example="4"),
- *          @OA\Property(property="date_start", type="string", example="2022-02-24"),
- *          @OA\Property(property="date_end", type="string", example="2022-02-27")
+ *          @OA\Property(property="dateStart", type="string", example="2022-02-24"),
+ *          @OA\Property(property="dateEnd", type="string", example="2022-02-27")
  *        )
  *     ),
  *     @OA\Response(response=200, description="Ok",
@@ -40,8 +41,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class Transactions extends Controller
 {
-    public function __invoke(GetCollectionQuery $getCollectionQuery, UserTransactionRepository $userTransactionRepository): AnonymousResourceCollection
-    {
+    public function __invoke(
+        GetCollectionQuery $getCollectionQuery,
+        UserTransactionRepository $userTransactionRepository
+    ): AnonymousResourceCollection {
         $userTransactions = $userTransactionRepository->getTransactionsByUserId(auth()->user()->id);
 
         return TransactionResource::collection($userTransactions);

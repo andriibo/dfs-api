@@ -12,6 +12,8 @@ use Illuminate\Http\JsonResponse;
  *     path="/auth/{provider}/callback",
  *     summary="OAuth Provider Callback",
  *     tags={"Auth"},
+ *     @OA\Parameter(ref="#/components/parameters/Accept"),
+ *     @OA\Parameter(ref="#/components/parameters/Content-Type"),
  *     @OA\Parameter(ref="#/components/parameters/provider"),
  *     @OA\Response(response=200, description="Ok",
  *         @OA\JsonContent(

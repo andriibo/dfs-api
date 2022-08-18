@@ -1,20 +1,13 @@
 version: '3.7'
 services:
   api:
-    build: ./docker/php
+    build: ./docker
     restart: always
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
     external_links:
       - db
-
-  queue:
-    build: ./docker/php
-    restart: always
-    command: php artisan queue:work
-    volumes:
-      - ./:/var/www/html
 
   mailhog:
     image: mailhog/mailhog:latest

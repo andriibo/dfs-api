@@ -17,7 +17,7 @@ RUN yes | pecl install xdebug
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 RUN docker-php-ext-enable xdebug
 
-COPY ./php.ini $PHP_INI_DIR
+COPY php.ini $PHP_INI_DIR
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

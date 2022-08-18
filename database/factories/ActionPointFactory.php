@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Enums\IsEnabledEnum;
 use App\Enums\SportIdEnum;
 use App\Models\ActionPoint;
-use App\SportConfigs\PositionConfig;
+use FantasySports\SportConfig\Consts\SoccerPosionConst;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -46,10 +46,10 @@ class ActionPointFactory extends Factory
             ]),
             'sport_id' => SportIdEnum::soccer,
             'values' => [
-                PositionConfig::SOCCER_GOALKEEPER => 1,
-                PositionConfig::SOCCER_FORWARD => 2,
-                PositionConfig::SOCCER_MIDFIELD => 3,
-                PositionConfig::SOCCER_DEFENDER => 4,
+                SoccerPosionConst::GOALKEEPER => 1,
+                SoccerPosionConst::FORWARD => 2,
+                SoccerPosionConst::MIDFIELD => 3,
+                SoccerPosionConst::DEFENDER => 4,
             ],
             'is_enabled' => IsEnabledEnum::isEnabled,
             'title' => $this->faker->title,

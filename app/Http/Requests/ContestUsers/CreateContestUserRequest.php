@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\ContestUsers;
 
-use App\Factories\SportConfigFactory;
 use App\Http\Requests\AbstractFormRequest;
 use App\Repositories\ContestRepository;
 use App\Rules\ContestUnitsBelongsToContestRule;
@@ -11,6 +10,7 @@ use App\Rules\ContestUnitsNumberInPositionRule;
 use App\Rules\ContestUnitsPositionsRule;
 use App\Rules\ContestUnitsSalaryRule;
 use App\Rules\ContestUnitsUniqueRule;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 
 /**
  * @OA\RequestBody(
@@ -31,7 +31,8 @@ class CreateContestUserRequest extends AbstractFormRequest
 {
     public function rules(): array
     {
-        $contestRepository = new ContestRepository();
+        /* @var $contestRepository ContestRepository */
+        $contestRepository = resolve(ContestRepository::class);
         $contest = $contestRepository->getContestById($this->input('contestId'));
         $sportConfig = SportConfigFactory::getConfig($contest->league->sport_id);
 
