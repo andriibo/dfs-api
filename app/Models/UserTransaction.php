@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int                  $user_id
  * @property null|int             $subject_id
  * @property null|int             $parent_id
- * @property int                  $type        1 - TYPE_DEPOSIT; 2 - TYPE_WITHDRAW; 3 - TYPE_CONTEST_ENTER; 4 - TYPE_CONTEST_WIN; 5 - TYPE_CONTEST_CANCEL; 6 - TYPE_CONTEST_LEAVE; 7 - TYPE_PROMO_CODE; 8 - TYPE_THRESHOLD; 9 - TYPE_DEPOSIT_BONUS; 10 - TYPE_AFFILIATE_PROFIT; 11 - TYPE_ACTIVATION_BONUS; 12 - TYPE_DAILY_BONUS
+ * @property int                  $type        1 - TYPE_DEPOSIT; 2 - TYPE_WITHDRAW; 3 - TYPE_CONTEST_ENTER; 4 - TYPE_CONTEST_WIN; 5 - TYPE_CONTEST_CANCEL; 6 - TYPE_CONTEST_LEAVE; 7 - TYPE_PROMO_CODE; 8 - TYPE_THRESHOLD; 9 - TYPE_DEPOSIT_BONUS; 11 - TYPE_ACTIVATION_BONUS; 12 - TYPE_DAILY_BONUS
  * @property int                  $status      0 - STATUS_NEW; 1 - STATUS_SUCCESS; 2 - STATUS_DECLINED; 3 - STATUS_CANCELLED; 4 - STATUS_RETURNED_BONUS
  * @property string               $amount
  * @property null|string          $note

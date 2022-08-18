@@ -14,11 +14,11 @@ class SoccerUnitStatsRepository
     public function getUnitStatsByUnitId(int $unitId, ?int $limit = null): Collection
     {
         return SoccerUnitStats::query()
-            ->join('game_schedule', 'game_schedule.id', '=', 'unit_stats.game_id')
-            ->where('unit_stats.unit_id', $unitId)
-            ->whereNotNull('unit_stats.game_id')
-            ->where('game_schedule.is_fake', IsFakeEnum::no)
-            ->orderByDesc('game_schedule.game_date')
+            ->join('soccer_game_schedule', 'soccer_game_schedule.id', '=', 'soccer_unit_stats.game_id')
+            ->where('soccer_unit_stats.unit_id', $unitId)
+            ->whereNotNull('soccer_unit_stats.game_id')
+            ->where('soccer_game_schedule.is_fake', IsFakeEnum::no)
+            ->orderByDesc('soccer_game_schedule.game_date')
             ->limit($limit)
             ->get()
         ;

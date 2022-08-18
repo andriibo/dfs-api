@@ -67,7 +67,7 @@ class SoccerGameSchedule extends Model
 {
     use HasFactory;
 
-    protected $table = 'game_schedule';
+    protected $table = 'soccer_game_schedule';
 
     protected $fillable = [
         'feed_id',
