@@ -2,14 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Clients\NodejsClient;
-use App\Http\Resources\GameLogs\GameLogResource;
+use App\Mappers\Nodejs\GameLogMapper;
 use App\Models\Contests\Contest;
+use App\Models\Cricket\CricketGameLog;
+use App\Models\Soccer\SoccerGameLog;
 use App\Services\GameLogService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use NodeJsClient\Services\SendGameLogsUpdateService;
 
 class PushGameLogsUpdatedJob implements ShouldQueue
 {
@@ -23,15 +25,20 @@ class PushGameLogsUpdatedJob implements ShouldQueue
 
     public function handle(): void
     {
-        try {
-            /* @var $gameLogService GameLogService */
-            $gameLogService = resolve(GameLogService::class);
-            $gameLogs = $gameLogService->getGameLogs($this->contest);
-            $collection = GameLogResource::collection($gameLogs);
-            $nodejsClient = new NodejsClient();
-            $nodejsClient->sendGameLogsUpdatePush($collection->jsonSerialize(), $this->contest->id);
-        } catch (\Throwable $e) {
-            throw $e;
-        }
+        /* @var GameLogMapper $gameLogMapper */
+        $gameLogMapper = resolve(GameLogMapper::class);
+        /* @var $gameLogService GameLogService */
+        $gameLogService = resolve(GameLogService::class);
+        /* @var SendGameLogsUpdateService $sendGameLogsUpdateService $ */
+        $sendGameLogsUpdateService = resolve(SendGameLogsUpdateService::class);
+        $gameLogList = $gameLogService->getGameLogs($this->contest);
+        $contestId = $this->contest->id;
+        $gameLogs = [];
+
+        array_map(function (SoccerGameLog|CricketGameLog $gameLog) use (&$gameLogs, $gameLogMapper, $contestId) {
+            $gameLogs[] = $gameLogMapper->map($gameLog, $contestId);
+        }, $gameLogList);
+
+        $sendGameLogsUpdateService->handle($gameLogs, $contestId);
     }
 }
