@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * App\Models\Contests\ContestGame.
  *
  * @property int                      $contest_id
- * @property int                      $game_id
+ * @property int                      $game_schedule_id
  * @property int                      $sport_id            1 - Soccer; 2 - Football, 3 - Cricket
  * @property Contest                  $contest
  * @property null|CricketGameSchedule $cricketGameSchedule
@@ -41,7 +41,7 @@ class ContestGame extends Model
 
     protected $fillable = [
         'contest_id',
-        'game_id',
+        'game_schedule_id',
         'sport_id',
     ];
 
@@ -54,7 +54,7 @@ class ContestGame extends Model
     {
         return $this->belongsTo(
             CricketGameSchedule::class,
-            'game_id',
+            'game_schedule_id',
         );
     }
 
@@ -62,7 +62,7 @@ class ContestGame extends Model
     {
         return $this->belongsTo(
             SoccerGameSchedule::class,
-            'game_id',
+            'game_schedule_id',
         );
     }
 
