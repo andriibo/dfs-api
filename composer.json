@@ -8,7 +8,7 @@
         "php": "^8.1",
         "archtechx/enums": "^0.2.0",
         "fantasysports/pusher": "0.2",
-        "fantasysports/sportconfig": "1.0.3",
+        "fantasysports/sportconfig": "1.0.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/socialite": "^5.5",
