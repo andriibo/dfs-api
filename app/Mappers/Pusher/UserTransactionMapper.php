@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Helpers\DateHelper;
 use App\Helpers\UserTransactionHelper;
 use App\Models\UserTransaction;
-use NodeJsClient\Dto\UserTransactionDto;
+use Pusher\Dto\UserTransactionDto;
 
 class UserTransactionMapper
 {

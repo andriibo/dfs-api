@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Mappers\Nodejs\UserBalanceMapper;
+use App\Mappers\Pusher\UserBalanceMapper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use NodeJsClient\Services\SendUserBalanceUpdateService;
+use Pusher\Services\SendUserBalanceUpdateService;
 
 class PushUserBalanceUpdatedJob implements ShouldQueue
 {

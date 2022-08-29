@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-use NodeJsClient\Dto\UserBalanceDto;
+use Pusher\Dto\UserBalanceDto;
 
 class UserBalanceMapper
 {

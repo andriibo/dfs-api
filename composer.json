@@ -7,6 +7,8 @@
     "require": {
         "php": "^8.1",
         "archtechx/enums": "^0.2.0",
+        "fantasysports/pusher": "0.2",
+        "fantasysports/sportconfig": "1.0.3",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/socialite": "^5.5",
@@ -14,9 +16,8 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-json-api-paginate": "^1.11",
         "spatie/laravel-query-builder": "^5.0",
-        "tymon/jwt-auth": "*",
-        "fantasysports/sportconfig": "1.0.3",
-        "spatie/laravel-slack-alerts": "^1.1"
+        "spatie/laravel-slack-alerts": "^1.1",
+        "tymon/jwt-auth": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
@@ -33,6 +34,10 @@
         "vimeo/psalm": "^4.22"
     },
     "repositories": [
+        {
+            "type": "git",
+            "url":  "https://bitbucket.org/WicketGamingTeam/pusher.git"
+        },
         {
             "type": "git",
             "url":  "https://bitbucket.org/WicketGamingTeam/sportconfig.git"

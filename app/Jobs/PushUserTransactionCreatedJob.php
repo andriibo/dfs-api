@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Mappers\Nodejs\UserTransactionMapper;
+use App\Mappers\Pusher\UserTransactionMapper;
 use App\Models\UserTransaction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use NodeJsClient\Services\SendUserTransactionCreatedPushService;
+use Pusher\Services\SendUserTransactionCreatedPushService;
 
 class PushUserTransactionCreatedJob implements ShouldQueue
 {

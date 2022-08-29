@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d33029335e6e031e83da1a032a88f826",
+    "content-hash": "7164c1376d27d598c73437bd2722fab0",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -623,6 +623,27 @@
                 }
             ],
             "time": "2021-10-11T09:18:27+00:00"
+        },
+        {
+            "name": "fantasysports/pusher",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/WicketGamingTeam/pusher.git",
+                "reference": "f3efb2846482f8ad1afc7d21622db5e5ff878362"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "php": ">=7.4.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Pusher\\": "src/"
+                }
+            },
+            "description": "Pusher for Fantasy Sports",
+            "time": "2022-08-29T07:34:01+00:00"
         },
         {
             "name": "fantasysports/sportconfig",
