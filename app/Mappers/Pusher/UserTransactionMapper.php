@@ -15,7 +15,7 @@ class UserTransactionMapper
 
         $userTransactionDto->id = $userTransaction->id;
         $userTransactionDto->amount = UserTransactionHelper::getAmount($userTransaction);
-        $userTransactionDto->status = $userTransaction->status;
+        $userTransactionDto->status = $userTransaction->status->value;
         $userTransactionDto->createdAt = DateHelper::dateFormatMs($userTransaction->created_at);
         $userTransactionDto->updatedAt = DateHelper::dateFormatMs($userTransaction->created_at);
 
