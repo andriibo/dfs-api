@@ -33,7 +33,7 @@ pipelines:
           <<: *deploy
           deployment: development
           name: deploy to dev
-    deploy-to-aws:
+    deploy-to-stage:
       - step:
           <<: *deploy
           deployment: stage
