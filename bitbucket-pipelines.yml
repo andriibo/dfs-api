@@ -3,7 +3,7 @@ image: atlassian/default-image:3
 definitions:
   steps:
     - step: &deploy
-        name: deploy_aws
+        name: deploy
         script:
           - pipe: atlassian/ssh-run:0.4.0
             variables:
@@ -28,29 +28,29 @@ definitions:
                 docker-compose exec -T api php artisan test
 pipelines:
   custom:
-    deploy-to-dev-aws:
+    deploy-to-dev:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
-    deploy-to-stage-aws:
+          deployment: development
+          name: deploy to dev
+    deploy-to-aws:
       - step:
           <<: *deploy
-          deployment: aws_stage
-          name: deploy to aws stage
+          deployment: stage
+          name: deploy to stage
   branches:
     develop:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
     master:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
     '{release/*}':
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
