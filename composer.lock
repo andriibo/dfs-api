@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16dc571389ee85e35ed61dde4dfb6383",
+    "content-hash": "04fdee793230b81a66d9ceb231d799c6",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -629,8 +629,8 @@
             "version": "1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://bitbucket.org/WicketGamingTeam/sportconfig.git",
-                "reference": "d48763e0fcaffb0f9ff96e14681285ced8fcdf0b"
+                "url": "https://bitbucket.org/abnk/sportconfig.git",
+                "reference": "6de8869fc961e28261c3bba904f90bed4b018f84"
             },
             "require": {
                 "php": ">=7.3.0"
@@ -648,7 +648,7 @@
             "keywords": [
                 "dfs"
             ],
-            "time": "2022-08-23T15:55:38+00:00"
+            "time": "2022-12-21T13:40:34+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -11974,5 +11974,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
