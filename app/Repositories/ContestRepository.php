@@ -29,6 +29,7 @@ class ContestRepository
     public function getContestsLobby(): LengthAwarePaginator
     {
         return QueryBuilder::for(Contest::class)
+            ->select('contest.*')
             ->where('status', StatusEnum::ready)
             ->where('suspended', SuspendedEnum::no)
             ->allowedFilters([
@@ -46,6 +47,7 @@ class ContestRepository
     public function getContestsUpcoming(int $userId): LengthAwarePaginator
     {
         return QueryBuilder::for(Contest::class)
+            ->select('contest.*')
             ->where('status', StatusEnum::ready)
             ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
@@ -66,6 +68,7 @@ class ContestRepository
     public function getContestsLive(int $userId): LengthAwarePaginator
     {
         return QueryBuilder::for(Contest::class)
+            ->select('contest.*')
             ->where('status', StatusEnum::started)
             ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
@@ -86,6 +89,7 @@ class ContestRepository
     public function getContestsHistory(int $userId): LengthAwarePaginator
     {
         return QueryBuilder::for(Contest::class)
+            ->select('contest.*')
             ->whereIn('status', [StatusEnum::closed, StatusEnum::finished])
             ->where('suspended', SuspendedEnum::no)
             ->whereHas('contestUsers', function (Builder $query) use ($userId) {
